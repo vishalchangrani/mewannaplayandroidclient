@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector  xmlns:android="http://schemas.android.com/apk/res/android"  >
+	<item android:drawable="@drawable/arrow_right_double" android:layout_marginRight = "10dip"      android:state_empty="true" />
+	<item android:drawable="@drawable/arrow_down_double48" 
+		android:state_expanded="true" />
+	<item android:drawable="@drawable/round_right_arrow" android:layout_marginRight = "10dip"    />
+</selector>
