@@ -97,14 +97,6 @@ public class MapViewActivity extends MapActivity {
             }
         });
 
-        Button searchImageButton = (Button) findViewById(R.id.ImageSearchButton01);
-        searchImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSearchPopUp();
-            }
-        });
-
     }
 
     public class MyOnItemSelectedListener implements OnItemSelectedListener {
