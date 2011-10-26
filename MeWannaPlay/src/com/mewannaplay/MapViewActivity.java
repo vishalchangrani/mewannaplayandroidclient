@@ -1,25 +1,22 @@
 
 package com.mewannaplay;
 
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapView;
-import com.mewannaplay.view.MapLocationViewer;
-import com.services.BackgroundWebSerive;
-import com.services.MWPBgWebSerive;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -37,8 +34,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
+import com.mewannaplay.view.MapLocationViewer;
+import com.services.BackgroundWebSerive;
+import com.services.MWPBgWebSerive;
 
 public class MapViewActivity extends MapActivity {
 
@@ -57,7 +58,11 @@ public class MapViewActivity extends MapActivity {
 
     @Override
     public void onCreate(Bundle icicle) {
-        activity = this;
+    	
+    	  final Account account = new Account("anonymous", Constants.ACCOUNT_TYPE);
+    	ContentResolver.requestSync(account, "com.mewannaplay.providers.TennisCourtProvider", new Bundle());
+
+    	activity = this;
         super.onCreate(icicle);
 
         setContentView(R.layout.mapviewlayout);

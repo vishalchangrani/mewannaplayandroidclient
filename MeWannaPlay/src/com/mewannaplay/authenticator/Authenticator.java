@@ -62,8 +62,8 @@ class Authenticator extends AbstractAccountAuthenticator {
     	AccountManager mAccountManager = AccountManager.get(mContext);
     	   mAccountManager.addAccountExplicitly(account, "", null);
            // Set contacts sync for this account.
-  //         ContentResolver.setSyncAutomatically(account,
-   //            "com.mewannaplay.providers.TennisCourtProvider", true);
+           ContentResolver.setSyncAutomatically(account,
+              "com.mewannaplay.providers.TennisCourtProvider", true);
     	 final Bundle result = new Bundle();
          result.putString(AccountManager.KEY_ACCOUNT_NAME, "anonymous");
          result.putString(AccountManager.KEY_ACCOUNT_TYPE,
