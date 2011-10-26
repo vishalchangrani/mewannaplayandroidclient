@@ -20,6 +20,7 @@ public class DatabaseHelper {
     private final SQLiteStatement insertStmt;
     private static final String INSERT = "insert into "
             + CITY_LIST_TABLE_NAME + "(name) values (?)";
+    
 
     public DatabaseHelper(Context context) {
         this.context = context;
