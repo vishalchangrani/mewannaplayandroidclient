@@ -175,15 +175,15 @@ public class MapViewActivity extends MapActivity {
 
         // Binding ..this block can also start service if not started already
         Intent bindIntent = new Intent(this, BackgroundWebSerive.class);
-        bindService(bindIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+     //   bindService(bindIntent, serviceConnection, Context.BIND_AUTO_CREATE);
         // Register Broadcast Receiver
-        IntentFilter filter = new IntentFilter(BackgroundWebSerive.WEB_INTENT_FILTER);
-        registerReceiver(myReceiver, filter);
+    //    IntentFilter filter = new IntentFilter(BackgroundWebSerive.WEB_INTENT_FILTER);
+    //    registerReceiver(myReceiver, filter);
     }
 
     private void getCourtListOnMap() {
         Log.e("MeWannaPlay", "getCourtListOnMap 1 ");
-        Intent service = new Intent(this, MWPBgWebSerive.class);
+       /* Intent service = new Intent(this, MWPBgWebSerive.class);
         service.putExtra(MWPBgWebSerive.EXTRAS_CALLER_ID, "getCourtListOnMap");
         service.putExtra(
                 MWPBgWebSerive.EXTRAS_URL,
@@ -198,7 +198,7 @@ public class MapViewActivity extends MapActivity {
         bindService(bindIntent, serviceConnection1, Context.BIND_AUTO_CREATE);
         // Register Broadcast Receiver
         IntentFilter filter = new IntentFilter(MWPBgWebSerive.WEB_INTENT_FILTER1);
-        registerReceiver(myReceiver1, filter);
+        registerReceiver(myReceiver1, filter); */
     }
 
     private void bindList() {

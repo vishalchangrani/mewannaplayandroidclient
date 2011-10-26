@@ -34,7 +34,7 @@ public class MapLocationViewer extends LinearLayout {
         @Override
         public void gotLocation(final Location location) {
             // Got the location!
-            Log.e("MeWannaPlay", "MyCurrentLocation  gotLocation ");
+          /*  Log.e("MeWannaPlay", "MyCurrentLocation  gotLocation ");
             curLatitude = location.getLatitude();
             curLongitude = location.getLongitude();
             Log.e("MeWannaPlay", "MyCurrentLocation  curLatitude " + curLatitude);
@@ -48,7 +48,7 @@ public class MapLocationViewer extends LinearLayout {
 
             Toast.makeText(getContext(),
                     "The location is " + location.toString(), Toast.LENGTH_LONG)
-                    .show();
+                    .show(); */
 
         };
     };
