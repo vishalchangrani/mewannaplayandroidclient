@@ -1,22 +1,19 @@
 package com.mewannaplay.test.providers;
 
+import static com.mewannaplay.providers.ProviderContract.*;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.net.Uri;
 import android.test.ProviderTestCase2;
 
-import com.mewannaplay.providers.DatabaseHelper;
+import com.mewannaplay.providers.ProviderContract.TennisCourts;
 import com.mewannaplay.providers.TennisCourtProvider;
 
 public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvider> {
 
-	public static final Uri AUTHORITY_URI = Uri.parse("content://"+TennisCourtProvider.AUTHORITY);
-    public static final Uri CONTENT_URI = Uri.withAppendedPath(
-            AUTHORITY_URI, DatabaseHelper.TENNIS_COURT_TABLE_NAME);
     
 	public TennisCourtProviderTest() {
-		super(TennisCourtProvider.class, TennisCourtProvider.AUTHORITY);		
+		super(TennisCourtProvider.class, AUTHORITY);		
 	}
 	
 	@Override
@@ -27,7 +24,7 @@ public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvid
 
 	 public void testCreate() {
 	        ContentResolver cr = getMockContentResolver();
-	        Cursor cursor = cr.query(CONTENT_URI, null, null, null, null);
+	        Cursor cursor = cr.query(TennisCourts.CONTENT_URI, null, null, null, null);
 	        assertNotNull(cursor);
 	        assertEquals(0, cursor.getCount());
 	 }
@@ -56,9 +53,9 @@ public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvid
 		 cotentValues2.put("tennis_name","tennis court 2");
 		 cotentValues2.put("message_count",1);
 		 cotentValues[1] = cotentValues2;
-		 int count = cr.bulkInsert(CONTENT_URI, cotentValues);
+		 int count = cr.bulkInsert(TennisCourts.CONTENT_URI, cotentValues);
 		 assertEquals(2,count);
-		 Cursor cursor = cr.query(CONTENT_URI, null, null, null, null);
+		 Cursor cursor = cr.query(TennisCourts.CONTENT_URI, null, null, null, null);
 		 assertNotNull(cursor);
 	     assertEquals(2, cursor.getCount());
 	     cursor.moveToFirst();
