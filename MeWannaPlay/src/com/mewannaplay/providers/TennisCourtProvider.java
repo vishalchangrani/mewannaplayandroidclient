@@ -2,11 +2,11 @@
 package com.mewannaplay.providers;
 
 import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_TABLE_NAME;
+import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
 
 import java.util.HashMap;
 
 import android.content.ContentProvider;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -16,6 +16,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
 
+import com.mewannaplay.providers.ProviderContract.TennisCourts;
+
 /**
  * @author Vishal Changrani
  *
@@ -24,8 +26,6 @@ public class TennisCourtProvider extends ContentProvider {
 
     private static final String TAG = "TennisCourtProvider";
 
-    public static final String AUTHORITY = "com.mewannaplay.providers.TennisCourtProvider";
-
     private static final UriMatcher sUriMatcher;
 
     public static HashMap<String, String> tennisCourtProjectMap;
@@ -33,7 +33,7 @@ public class TennisCourtProvider extends ContentProvider {
     private DatabaseHelper dbHelper;
     
     private final static int TENNISCOURTS = 1;
-    public static final String TENNIS_COURTS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.tenniscourts";
+    
     
 
     @Override
@@ -57,7 +57,7 @@ public class TennisCourtProvider extends ContentProvider {
     public String getType(Uri uri) {
         switch (sUriMatcher.match(uri)) {
             case TENNISCOURTS:
-                return TENNIS_COURTS_CONTENT_TYPE;
+                return TennisCourts.TENNIS_COURTS_CONTENT_TYPE;
 
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
