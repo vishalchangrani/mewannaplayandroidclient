@@ -101,10 +101,10 @@ public class TennisCourtProvider extends ContentProvider {
 
 				for (ContentValues contentValues : values) {
 					insert.bindLong(1, contentValues.getAsInteger("id"));
-					insert.bindString(2,
-							contentValues.getAsString("tennis_latitude"));
-					insert.bindString(3,
-							contentValues.getAsString("tennis_longitude"));
+					insert.bindDouble(2,
+							contentValues.getAsFloat("tennis_latitude"));
+					insert.bindDouble(3,
+							contentValues.getAsFloat("tennis_longitude"));
 					insert.bindLong(4,
 							contentValues.getAsInteger("tennis_subcourts"));
 					insert.bindLong(5, contentValues.getAsInteger("occupied"));

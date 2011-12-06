@@ -28,5 +28,13 @@ public class Constants {
      */
     public static final String AUTHTOKEN_TYPE =
         "com.example.android.samplesync";
+    
+    public static final String BASE_URL =
+            "http://api.mewannaplay.com/V1/";
+    public static final String GET_ALL_TENNISCOURTS =
+            BASE_URL+"tenniscourts";
+    public static final String GET_TENNISCOURT_DETAILS =
+    		BASE_URL+"tenniscourtdetails/id/";
+   
 
 }

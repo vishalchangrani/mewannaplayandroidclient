@@ -1,8 +1,8 @@
 
 package com.services;
 
+import com.mewannaplay.client.RestClient;
 import com.net.RequestMethods;
-import com.net.RestClient;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -61,7 +61,7 @@ public class BackgroundWebSerive extends IntentService implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() {/*
         Log.e("MeWannaPlay", "run 1 ");
 
         boolean getCityListForSpinner1 = meWannaPlayCallerId.equals("getCityListForSpinner");
@@ -115,7 +115,7 @@ public class BackgroundWebSerive extends IntentService implements Runnable {
                 e.printStackTrace();
             }
         }
-    }
+    */}
 
     private void broadCast(boolean success, String message, String meWPCallerId) {
         Log.e("MeWannaPlay", "broadCast");
