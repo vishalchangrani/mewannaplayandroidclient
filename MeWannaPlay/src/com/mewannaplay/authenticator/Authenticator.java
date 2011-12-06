@@ -173,8 +173,9 @@ class Authenticator extends AbstractAccountAuthenticator {
      * Validates user's password on the server
      */
     private boolean onlineConfirmPassword(String username, String password) {
-        return NetworkUtilities.authenticate(username, password,
-            null/* Handler */, null/* Context */);
+       // return NetworkUtilities.authenticate(username, password,
+       //     null/* Handler */, null/* Context */);
+    	return false;
     }
 
     /**

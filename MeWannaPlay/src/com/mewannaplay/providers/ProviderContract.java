@@ -17,7 +17,7 @@ public final class ProviderContract
 	public static final String AUTHORITY = "com.mewannaplay.providers.TennisCourtProvider";
 	public static final Uri AUTHORITY_URI = Uri.parse("content://"+AUTHORITY);
 	
-	//One BaseColumn implementation for each table we will be storing 
+	//One BaseColumn implementation for each table 
 	//Each implementation has content_uri to access the table, content_types and table columns and more.
 	public final static class TennisCourts implements BaseColumns {
 	

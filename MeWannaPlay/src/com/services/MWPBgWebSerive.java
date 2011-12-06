@@ -1,8 +1,8 @@
 
 package com.services;
 
+import com.mewannaplay.client.RestClient;
 import com.net.RequestMethods;
-import com.net.RestClient;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -62,7 +62,7 @@ public class MWPBgWebSerive extends IntentService implements Runnable {
 
     @Override
     public void run() {
-        Log.e("MeWannaPlay", "run 1 ");
+ /*       Log.e("MeWannaPlay", "run 1 ");
 
         boolean getCityListForSpinner1 = meWannaPlayCallerId.equals("getCityListForSpinner");
         if (getCityListForSpinner1) {
@@ -114,7 +114,7 @@ public class MWPBgWebSerive extends IntentService implements Runnable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     private void broadCast(boolean success, String message, String meWPCallerId) {
