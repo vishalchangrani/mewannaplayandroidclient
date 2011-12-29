@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+/**
+ * Splash screen
+ * @author vishal
+ *
+ */
 public class MeWannaPlayActivity extends Activity {
 
     private final int secondsDelayed = 1;

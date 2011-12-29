@@ -43,6 +43,9 @@ class Authenticator extends AbstractAccountAuthenticator {
     }
 
     /**
+     * For now we add an anonymous account. This is to pull data from server which does not
+     * need authentication like tennis court details.
+     * 
      * {@inheritDoc}
      */
     @Override
