@@ -38,8 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * SyncAdapter implementation for syncing sample SyncAdapter contacts to the
- * platform ContactOperations provider.
+ * SyncAdapter implementation for syncing all tennis courts details on client side with server
  */
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = "SyncAdapter";
@@ -55,10 +54,16 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         mAccountManager = AccountManager.get(context);
     }
 
+ /*
+  * Called whenever sync-adapter tries to sync with server. Not sure when all that is!
+  * This function in turns tries to get the authtoken from account manager.
+  * @see android.content.AbstractThreadedSyncAdapter#onPerformSync(android.accounts.Account, android.os.Bundle, java.lang.String, android.content.ContentProviderClient, android.content.SyncResult)
+  */
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority,
         ContentProviderClient provider, SyncResult syncResult) {
-    	
+   
+    	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
   /*      List<User> users;
         List<Status> statuses;
         String authtoken = null;
