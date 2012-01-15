@@ -24,6 +24,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.mewannaplay.R;
+import com.mewannaplay.model.TennisCourt;
 
 public class MapLocationOverlay extends Overlay implements OnGestureListener, OnDoubleTapListener {
 
@@ -34,13 +35,13 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
 
     private Context context = null;
     private Paint innerPaint, borderPaint, textPaint;
-    List<MapLocation> mapLocations;
+    List<TennisCourt> tennisCourts;
 
     // The currently selected Map Location...if any is selected. This tracks
     // whether an information
     // window should be displayed & where...i.e. whether a user 'clicked' on a
     // known map location
-    private MapLocation selectedMapLocation;
+    private TennisCourt selectedMapLocation;
 
     public MapLocationOverlay(Context context) {
         this.context = context;
@@ -100,20 +101,20 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
      * Test whether an information balloon should be displayed or a prior
      * balloon hidden.
      */
-    private MapLocation getHitMapLocation(MapView mapView, GeoPoint tapPoint) {
+    private TennisCourt getHitMapLocation(MapView mapView, GeoPoint tapPoint) {
 
         // Track which MapLocation was hit...if any
-        MapLocation hitMapLocation = null;
+        TennisCourt hitMapLocation = null;
 
         RectF hitTestRecr = new RectF();
         Point screenCoords = new Point();
-        Iterator<MapLocation> iterator = getMapLocations().iterator();
+        Iterator<TennisCourt> iterator = getMapLocations().iterator();
         while (iterator.hasNext()) {
-            MapLocation testLocation = iterator.next();
+            TennisCourt testLocation = iterator.next();
 
             // Translate the MapLocation's lat/long coordinates to screen
             // coordinates
-            mapView.getProjection().toPixels(testLocation.getPoint(), screenCoords);
+            mapView.getProjection().toPixels(testLocation.getGeoPoint(), screenCoords);
 
             // Create a 'hit' testing Rectangle w/size and coordinates of our
             // icon
@@ -140,16 +141,17 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
 
     private void drawMapLocations(Canvas canvas, MapView mapView, boolean shadow) {
 
-        Iterator<MapLocation> iterator = getMapLocations().iterator();
+        Iterator<TennisCourt> iterator = getMapLocations().iterator();
         Point screenCoords = new Point();
         while (iterator.hasNext()) {
-            MapLocation location = iterator.next();
+            TennisCourt location = iterator.next();
+            GeoPoint geoPoint = location.getGeoPoint();
             Log.e("MeWannaPlay", "--getLatitudeE6------------------"
-                    + location.getPoint().getLatitudeE6());
+                    + geoPoint.getLatitudeE6());
             Log.e("MeWannaPlay", "---getLongitudeE6-----------------"
-                    + location.getPoint().getLongitudeE6());
+                    + geoPoint.getLongitudeE6());
 
-            mapView.getProjection().toPixels(location.getPoint(), screenCoords);
+            mapView.getProjection().toPixels(geoPoint, screenCoords);
 
             if (shadow) {
                 // Only offset the shadow in the y-axis as the shadow is angled
@@ -162,7 +164,7 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
             		targetBitMap = privateCourt;
             	else if (location.isOccupied())
             		targetBitMap = publicFullyOccupiedCourt;
-            	else if (location.getOccupied() == 0)
+            	else if (location.isNotOccupied())
             		targetBitMap = publicNotOccupiedCourt;
             	else
             		targetBitMap = publicSemiOccupiedCourt;
@@ -182,7 +184,7 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
                 // MapLocation
 
                 Point selDestinationOffset = new Point();
-                mapView.getProjection().toPixels(selectedMapLocation.getPoint(),
+                mapView.getProjection().toPixels(selectedMapLocation.getGeoPoint(),
                         selDestinationOffset);
 
                 // Setup the info window with the right size & location
@@ -249,7 +251,7 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
                 paint.setColor(0xFF000000);
                 // paint.setTextAlign(Paint.Align.CENTER) ;
                 // paint.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                canvas.drawText(selectedMapLocation.getTennisCourtName(), infoWindowOffsetX2
+                canvas.drawText(selectedMapLocation.getName(), infoWindowOffsetX2
                         + TEXT_OFFSET_X,
                         infoWindowOffsetY2 + TEXT_OFFSET_Y, paint);
                 paint.setTextSize(8);
@@ -353,27 +355,27 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
         return false;
     }
 
-    public List<MapLocation> getMapLocations() {
-        if (mapLocations == null) {
-            mapLocations = new ArrayList<MapLocation>();
+    public List<TennisCourt> getMapLocations() {
+        if (tennisCourts == null) {
+            tennisCourts = new ArrayList<TennisCourt>();
         }
             Log.e("MeWannaPlay", "==========================================================");
 
-             mapLocations
-             .add(new MapLocation("1", "37.799800872802734",
-             "-122.40699768066406","1", "1","Private","tennis club","6" ));
-             mapLocations
-             .add(new MapLocation("2", "37.792598724365234",
-             "-122.40599822998047","2", "1","Public","tennis club","6"));
-             mapLocations.add(new MapLocation("3",
-             "37.80910110473633",
-             "-122.41600036621094","2", "0","Public","tennis club","6"));
-             mapLocations.add(new MapLocation("4",
-             "37.79410171508789",
-             "-122.4010009765625","2", "2","Public","tennis club","6"));
+             tennisCourts
+             .add(new TennisCourt(1, 37.799800872802734,
+             -122.40699768066406,1, 1,"Private","tennis club",6 ));
+             tennisCourts
+             .add(new TennisCourt(2, 37.792598724365234,
+             -122.40599822998047,2, 1,"Public","tennis club",6));
+             tennisCourts.add(new TennisCourt(3,
+             37.80910110473633,
+             -122.41600036621094,2, 0,"Public","tennis club",6));
+             tennisCourts.add(new TennisCourt(4,
+             37.79410171508789,
+             -122.4010009765625,2, 2,"Public","tennis club",6));
         
         Log.e("MeWannaPlay", "==========================================================");
 
-        return mapLocations;
+        return tennisCourts;
     }
 }
