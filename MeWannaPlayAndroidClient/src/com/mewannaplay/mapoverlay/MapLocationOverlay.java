@@ -35,7 +35,7 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
 
     private Context context = null;
     private Paint innerPaint, borderPaint, textPaint;
-    List<TennisCourt> tennisCourts;
+    List<TennisCourt> tennisCourts = new ArrayList<TennisCourt>();
 
     // The currently selected Map Location...if any is selected. This tracks
     // whether an information
@@ -354,28 +354,18 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener, On
         // TODO Auto-generated method stub
         return false;
     }
-
+    
+    public void addMapLocation(TennisCourt tennisCourt)
+    {
+    	tennisCourts.add(tennisCourt);
+    }
+    
+    public void clearAllMapLocations()
+    {
+    	tennisCourts.clear();
+    }
+    
     public List<TennisCourt> getMapLocations() {
-        if (tennisCourts == null) {
-            tennisCourts = new ArrayList<TennisCourt>();
-        }
-            Log.e("MeWannaPlay", "==========================================================");
-
-             tennisCourts
-             .add(new TennisCourt(1, 37.799800872802734,
-             -122.40699768066406,1, 1,"Private","tennis club",6 ));
-             tennisCourts
-             .add(new TennisCourt(2, 37.792598724365234,
-             -122.40599822998047,2, 1,"Public","tennis club",6));
-             tennisCourts.add(new TennisCourt(3,
-             37.80910110473633,
-             -122.41600036621094,2, 0,"Public","tennis club",6));
-             tennisCourts.add(new TennisCourt(4,
-             37.79410171508789,
-             -122.4010009765625,2, 2,"Public","tennis club",6));
-        
-        Log.e("MeWannaPlay", "==========================================================");
-
         return tennisCourts;
     }
 }

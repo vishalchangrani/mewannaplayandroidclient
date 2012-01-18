@@ -6,17 +6,23 @@ import com.google.android.maps.GeoPoint;
 import com.google.gson.annotations.SerializedName;
 
 public class TennisCourt {
-
+	@SerializedName("tennis_id")
 	private int id;
+	@SerializedName("tennis_latitude")
 	private double latitude;
+	@SerializedName("tennis_longitude")
 	private double longitude;
+	@SerializedName("tennis_subcourts")
 	private int subcourts;
 	// TODO fix 'Occupied' on server to 'occupied' to get rid of the following
 	// annotation
 	@SerializedName("Occupied")
 	private int occupied;
+	@SerializedName("tennis_facility_type")
 	private String facilityType;
+	@SerializedName("tennis_name")
 	private String name;
+	@SerializedName("tennis_message_count")
 	private int messageCount;
 
 	public TennisCourt() {
@@ -129,7 +135,7 @@ public class TennisCourt {
 	public ContentValues toContentValue()
 	{
 		ContentValues contentValues = new ContentValues(8);
-		contentValues.put("id", id);
+		contentValues.put("_id", id);
 		contentValues.put("latitude", latitude);
 		contentValues.put("longitude", longitude);
 		contentValues.put("subcourts", subcourts);
