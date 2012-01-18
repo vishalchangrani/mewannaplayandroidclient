@@ -96,15 +96,15 @@ public class TennisCourtProvider extends ContentProvider {
 			try {
 				String sql = "insert into "
 						+ TENNIS_COURT_TABLE_NAME
-						+ "(id, latitude,longitude, subcourts, occupied,facility_type, name, message_count) values (?,?,?,?,?,?,?,?)";
+						+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count) values (?,?,?,?,?,?,?,?)";
 				SQLiteStatement insert = db.compileStatement(sql);
 
 				for (ContentValues contentValues : values) {
-					insert.bindLong(1, contentValues.getAsInteger("id"));
+					insert.bindLong(1, contentValues.getAsInteger("_id"));
 					insert.bindDouble(2,
-							contentValues.getAsFloat("latitude"));
+							contentValues.getAsDouble("latitude"));
 					insert.bindDouble(3,
-							contentValues.getAsFloat("longitude"));
+							contentValues.getAsDouble("longitude"));
 					insert.bindLong(4,
 							contentValues.getAsInteger("subcourts"));
 					insert.bindLong(5, contentValues.getAsInteger("occupied"));
@@ -179,7 +179,7 @@ public class TennisCourtProvider extends ContentProvider {
         sUriMatcher.addURI(AUTHORITY, TENNIS_COURT_TABLE_NAME, TENNISCOURTS);
 
         tennisCourtProjectMap = new HashMap<String, String>();
-        tennisCourtProjectMap.put("id", "id");
+        tennisCourtProjectMap.put("_id", "_id");
         tennisCourtProjectMap.put("latitude","latitude");
         tennisCourtProjectMap.put("longitude","longitude");
         tennisCourtProjectMap.put("subcourts","subcourts");

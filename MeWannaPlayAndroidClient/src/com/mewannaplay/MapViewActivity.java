@@ -5,20 +5,24 @@ import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
 import com.mewannaplay.mapoverlay.MapLocationOverlay;
+import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
 
 public class MapViewActivity extends MapActivity {
 
 	private static final String TAG = "MapViewActivity";
+//	private LocationManager myLocationManager;
+	private MyLocationOverlay myLocationOverlay;
+	private MapLocationOverlay mapLocationOverlay;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -34,7 +38,7 @@ public class MapViewActivity extends MapActivity {
 		else
 			Log.e(TAG, "Anonymous account not found"); // TODO figure what to do
 														// then
-
+		
 		// Request first sync..
 		ContentResolver.requestSync(annonymousAccount,
 				ProviderContract.AUTHORITY, new Bundle());
@@ -43,10 +47,28 @@ public class MapViewActivity extends MapActivity {
 				new TennisCourtContentObserver());
 
 		setContentView(R.layout.mapviewlayout);
-		MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
-		mapView.getOverlays().add(new MapLocationOverlay(this));
+		initMap();
 
+
+	/*	myLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+		myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+				0, 0, new MyLocationListener());
+		
+		 //Get the current location in start-up
+		Location location = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		if (location != null)
+		{
+		  GeoPoint initGeoPoint = new GeoPoint(
+		   (int)(myLocationManager.getLastKnownLocation(
+		    LocationManager.GPS_PROVIDER)
+		    .getLatitude()*1000000),
+		   (int)(myLocationManager.getLastKnownLocation(
+		    LocationManager.GPS_PROVIDER)
+		    .getLongitude()*1000000));
+		  centerLocation(initGeoPoint);
+		}
+*/
 		/*
 		 * ContentResolver cr = getContentResolver();
 		 * cr.delete(TennisCourts.CONTENT_URI, null, null); Cursor cursor =
@@ -74,6 +96,40 @@ public class MapViewActivity extends MapActivity {
 
 	}
 
+	private final void initMap()
+	{
+		MapView mapView = (MapView) findViewById(R.id.mapview);
+		mapView.setBuiltInZoomControls(true);
+		mapLocationOverlay = new MapLocationOverlay(this);
+		mapView.getOverlays().add(mapLocationOverlay);
+		myLocationOverlay = new MyLocationOverlay(this,
+				mapView);
+		mapView.getOverlays().add(myLocationOverlay);
+		myLocationOverlay.runOnFirstFix(new Runnable() {
+		    public void run() {
+		        centerLocation(myLocationOverlay.getMyLocation());
+		    }
+		});
+		mapView.invalidate();
+		mapView.getController().setZoom(13);
+		
+	}
+	
+	   public void onPause() {
+	        super.onPause();
+	        Log.i(TAG,"Removing GPS update requests to save power");
+	        myLocationOverlay.disableCompass();
+	        myLocationOverlay.disableMyLocation();
+	    }
+	    
+	    public void onResume(){
+	        super.onResume();
+	        Log.i(TAG,"Resuming GPS update requests");	   
+	        myLocationOverlay.enableCompass();
+	        myLocationOverlay.enableMyLocation();
+	    }
+	    
+	    
 	@Override
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
@@ -93,31 +149,114 @@ public class MapViewActivity extends MapActivity {
 
 		@Override
 		public void onChange(boolean arg0) {
+			Log.v(TAG, "Notification on TennisCourtContentObserver");
 			super.onChange(arg0);
+			
+			final MapView mapView = (MapView) findViewById(R.id.mapview);
+			Runnable waitForMapTimeTask = new Runnable() {
+				public void run() {
+					if (mapView.getLatitudeSpan() == 0
+							|| mapView.getLongitudeSpan() == 360000000) {
+						mapView.postDelayed(this, 100);
+					} else {
+						redrawMarkers(); // draw here
+					}
+				}
+			};
+			mapView.postDelayed(waitForMapTimeTask, 100);
 
-			Log.v("SMS", "Notification on SMS observer");
 
-			Uri uriSMSURI = Uri.parse("content://sms/");
-			Cursor cur = getContentResolver().query(uriSMSURI, null, null,
-					null, null);
-			cur.moveToNext();
-			String protocol = cur.getString(cur.getColumnIndex("protocol"));
-			if (protocol == null) {
-				Log.d("SMS", "SMS SEND");
-				int threadId = cur.getInt(cur.getColumnIndex("thread_id"));
-				Log.d("SMS", "SMS SEND ID = " + threadId);
-				getContentResolver().delete(
-						Uri.parse("content://sms/conversations/" + threadId),
-						null, null);
-
-			} else {
-				Log.d("SMS", "SMS RECIEVE");
-				int threadIdIn = cur.getInt(cur.getColumnIndex("thread_id"));
-				getContentResolver().delete(
-						Uri.parse("content://sms/conversations/" + threadIdIn),
-						null, null);
-			}
+			/*
+			 * String protocol = cur.getString(cur.getColumnIndex("protocol"));
+			 * if (protocol == null) { Log.d("SMS", "SMS SEND"); int threadId =
+			 * cur.getInt(cur.getColumnIndex("thread_id")); Log.d("SMS",
+			 * "SMS SEND ID = " + threadId); getContentResolver().delete(
+			 * Uri.parse("content://sms/conversations/" + threadId), null,
+			 * null);
+			 * 
+			 * } else { Log.d("SMS", "SMS RECIEVE"); int threadIdIn =
+			 * cur.getInt(cur.getColumnIndex("thread_id"));
+			 * getContentResolver().delete(
+			 * Uri.parse("content://sms/conversations/" + threadIdIn), null,
+			 * null); }
+			 */
 
 		}
 	}
+	private final void redrawMarkers()
+	{
+		this.mapLocationOverlay.clearAllMapLocations();
+		Cursor cursor = getContentResolver().query(
+				ProviderContract.TennisCourts.CONTENT_URI, null, null,
+				null, null);
+
+		if (cursor.moveToFirst()) {
+			while (cursor.isAfterLast() == false) {
+				Log.d(TAG,cursor.getString(cursor
+						.getColumnIndex("name")));
+				double latitude = cursor.getDouble(cursor.getColumnIndex("latitude"));
+				double longitude = cursor.getDouble(cursor.getColumnIndex("longitude"));
+				Log.d(TAG, " Latitude: "+latitude+" Longitude: "+longitude);
+				Log.d(TAG,getMapBounds().flattenToString());
+				Log.d(TAG,""+ getMapBounds().contains((int)(longitude * 1e6),(int)(latitude * 1e6)));
+				if (getMapBounds().contains((int)(longitude * 1e6),(int)(latitude * 1e6)))
+				{
+				 int id = cursor.getInt(cursor.getColumnIndex("_id"));
+				 int subcourts = cursor.getInt(cursor.getColumnIndex("subcourts"));
+				 int occupied = cursor.getInt(cursor.getColumnIndex("occupied"));
+				 int messageCount = cursor.getInt(cursor.getColumnIndex("message_count"));
+				 String name = cursor.getString(cursor.getColumnIndex("name"));
+				 String facilityType = cursor.getString(cursor.getColumnIndex("facility_type"));
+				 TennisCourt tennisCourt = new TennisCourt(id, latitude, longitude, subcourts, occupied, facilityType, name, messageCount);
+				 this.mapLocationOverlay.addMapLocation(tennisCourt);
+				}
+				cursor.moveToNext();
+			}
+		} else
+			Log.e(TAG, "cursor for tennis courts found to be empty");
+		cursor.close();
+		final MapView mapView = (MapView) findViewById(R.id.mapview);
+		mapView.invalidate();
+	}
+	
+	public Rect getMapBounds() {
+		final MapView mapView = (MapView) findViewById(R.id.mapview);
+		return new Rect(
+		mapView.getMapCenter().getLongitudeE6() - mapView.getLongitudeSpan()/2,
+		mapView.getMapCenter().getLatitudeE6() - mapView.getLatitudeSpan()/2,
+		mapView.getMapCenter().getLongitudeE6() + mapView.getLongitudeSpan()/2,
+		mapView.getMapCenter().getLatitudeE6() + mapView.getLatitudeSpan()/2
+		);
+		}
+
+
+/*	private class MyLocationListener implements LocationListener {
+
+		public void onLocationChanged(Location argLocation) {
+			// TODO Auto-generated method stub
+			GeoPoint myGeoPoint = new GeoPoint(
+					(int) (argLocation.getLatitude() * 1000000),
+					(int) (argLocation.getLongitude() * 1000000));
+
+			centerLocation(myGeoPoint);
+		}
+
+		public void onProviderDisabled(String provider) {
+			// TODO Auto-generated method stub
+		}
+
+		public void onProviderEnabled(String provider) {
+			// TODO Auto-generated method stub
+		}
+
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			// TODO Auto-generated method stub
+		}
+	}*/
+
+	private final void centerLocation(GeoPoint geoPoint) {
+		MapView mapView = (MapView) findViewById(R.id.mapview);
+		mapView.getController().animateTo(geoPoint);
+	}
+
 }

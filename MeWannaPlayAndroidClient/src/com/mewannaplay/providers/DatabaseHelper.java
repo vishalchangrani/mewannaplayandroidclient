@@ -18,7 +18,8 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TENNIS_COURT_TABLE_NAME + " ( id INTEGER PRIMARY KEY, " 
+    	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_TABLE_NAME);//TODO remove this
+    	db.execSQL("CREATE TABLE " + TENNIS_COURT_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
         		+ " latitude  VARCHAR(25)," 
         		+ " longitude VARCHAR(25)," 
         		+ " subcourts INTEGER,"

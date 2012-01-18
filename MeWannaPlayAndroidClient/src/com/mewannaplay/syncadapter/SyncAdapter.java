@@ -110,7 +110,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     
     private void getAllCourts()
     {
-    	
+    	if (true)
+    	{
+    		getContext().getContentResolver().notifyChange(ProviderContract.TennisCourts.CONTENT_URI, null, false);
+    		return;
+    	}
+    	//if one day has elapsed then get new list...
     	RestClient restClient = new RestClient(Constants.GET_ALL_TENNISCOURTS);
     	TennisCourt[] tennisCourts;
 		try {

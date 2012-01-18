@@ -28,17 +28,17 @@ public final class ProviderContract
 
 		public static final String TENNIS_COURT_ID = "_id";
 
-		public static final String TENNIS_LATITUDE = "tennis_latitude";
+		public static final String TENNIS_LATITUDE = "latitude";
 
-		public static final String TENNIS_LONGITUDE = "tennis_longitude";
+		public static final String TENNIS_LONGITUDE = "longitude";
 		
-		public static final String TENNIS_SUBCOURTS = "tennis_subcourts";
+		public static final String TENNIS_SUBCOURTS = "subcourts";
 
 		public static final String OCCUPIED = "occupied";
 		
-		public static final String TENNIS_FACILITY_TYPE = "tennis_facility_type";
+		public static final String TENNIS_FACILITY_TYPE = "facility_type";
 
-		public static final String TENNIS_NAME = "tennis_name";
+		public static final String TENNIS_NAME = "name";
 		
 		public static final String MESSAGE_COUNT = "message_count";
 
