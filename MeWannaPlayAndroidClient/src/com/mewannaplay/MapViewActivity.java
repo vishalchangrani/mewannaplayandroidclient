@@ -159,7 +159,11 @@ public class MapViewActivity extends MapActivity {
 							|| mapView.getLongitudeSpan() == 360000000) {
 						mapView.postDelayed(this, 100);
 					} else {
-						redrawMarkers(); // draw here
+						//redrawMarkers();
+						Log.d(TAG," Adding all tenniscourts to overlay");
+						//Approach 2 - optimize at sql level - sluggish
+						//mapLocationOverlay.getTennisCourtsInView3(mapView);
+						mapView.invalidate(); //causes draw to be invoked which will do the magic
 					}
 				}
 			};
@@ -183,51 +187,9 @@ public class MapViewActivity extends MapActivity {
 
 		}
 	}
-	private final void redrawMarkers()
-	{
-		this.mapLocationOverlay.clearAllMapLocations();
-		Cursor cursor = getContentResolver().query(
-				ProviderContract.TennisCourts.CONTENT_URI, null, null,
-				null, null);
 
-		if (cursor.moveToFirst()) {
-			while (cursor.isAfterLast() == false) {
-				Log.d(TAG,cursor.getString(cursor
-						.getColumnIndex("name")));
-				double latitude = cursor.getDouble(cursor.getColumnIndex("latitude"));
-				double longitude = cursor.getDouble(cursor.getColumnIndex("longitude"));
-				Log.d(TAG, " Latitude: "+latitude+" Longitude: "+longitude);
-				Log.d(TAG,getMapBounds().flattenToString());
-				Log.d(TAG,""+ getMapBounds().contains((int)(longitude * 1e6),(int)(latitude * 1e6)));
-				if (getMapBounds().contains((int)(longitude * 1e6),(int)(latitude * 1e6)))
-				{
-				 int id = cursor.getInt(cursor.getColumnIndex("_id"));
-				 int subcourts = cursor.getInt(cursor.getColumnIndex("subcourts"));
-				 int occupied = cursor.getInt(cursor.getColumnIndex("occupied"));
-				 int messageCount = cursor.getInt(cursor.getColumnIndex("message_count"));
-				 String name = cursor.getString(cursor.getColumnIndex("name"));
-				 String facilityType = cursor.getString(cursor.getColumnIndex("facility_type"));
-				 TennisCourt tennisCourt = new TennisCourt(id, latitude, longitude, subcourts, occupied, facilityType, name, messageCount);
-				 this.mapLocationOverlay.addMapLocation(tennisCourt);
-				}
-				cursor.moveToNext();
-			}
-		} else
-			Log.e(TAG, "cursor for tennis courts found to be empty");
-		cursor.close();
-		final MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.invalidate();
-	}
 	
-	public Rect getMapBounds() {
-		final MapView mapView = (MapView) findViewById(R.id.mapview);
-		return new Rect(
-		mapView.getMapCenter().getLongitudeE6() - mapView.getLongitudeSpan()/2,
-		mapView.getMapCenter().getLatitudeE6() - mapView.getLatitudeSpan()/2,
-		mapView.getMapCenter().getLongitudeE6() + mapView.getLongitudeSpan()/2,
-		mapView.getMapCenter().getLatitudeE6() + mapView.getLatitudeSpan()/2
-		);
-		}
+
 
 
 /*	private class MyLocationListener implements LocationListener {
