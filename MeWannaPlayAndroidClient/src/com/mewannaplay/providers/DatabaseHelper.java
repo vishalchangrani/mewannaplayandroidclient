@@ -20,8 +20,8 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
     	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_TABLE_NAME);//TODO remove this
     	db.execSQL("CREATE TABLE " + TENNIS_COURT_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
-        		+ " latitude  VARCHAR(25)," 
-        		+ " longitude VARCHAR(25)," 
+        		+ " latitude  REAL," 
+        		+ " longitude REAL," 
         		+ " subcourts INTEGER,"
         		+ " occupied INTEGER,"
         		+ " facility_type VARCHAR(100),"

@@ -152,7 +152,7 @@ public class TennisCourtProvider extends ContentProvider {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
-
+      //  qb.set
         c.setNotificationUri(getContext().getContentResolver(), uri); //??What is this
         return c;
     }
