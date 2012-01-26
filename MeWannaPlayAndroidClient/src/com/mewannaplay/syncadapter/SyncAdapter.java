@@ -22,6 +22,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         super(context, autoInitialize);
         mAccountManager = AccountManager.get(context);
     }
+    public final static String OPERATION = "operation";
+    public static final int GET_ALL_COURTS = 0;
+    public static final int GET_COURT_DETAILS = 1;
+    public static final int POST_MESSAGE = 2;
+    public static final int MARK_COURT_OCCUPIED = 3;
+    public static final String COURT_ID = "court_id";
 
  /*
   * Called whenever sync-adapter tries to sync with server. 
@@ -61,6 +68,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         ContentProviderClient provider, SyncResult syncResult) {
    
     	Log.d(TAG,"in onPerform sync");
+    	
     	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
   /*      List<User> users;
         List<Status> statuses;
@@ -104,8 +112,22 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }*/
     //	Intent i = new Intent(SYNC_FINISHED);
     //	sendBroadcast(i);
-    	getAllCourts();
-    	
+
+		int operationRequested = extras.getInt(OPERATION);
+		switch (operationRequested) {
+		case GET_ALL_COURTS:
+			getAllCourts();
+			break;
+		case GET_COURT_DETAILS:
+			int courtId = extras.getInt(COURT_ID);
+			getCourtDetails(courtId);
+			break;
+		case POST_MESSAGE:
+			break;
+		case MARK_COURT_OCCUPIED:
+			break;
+		}
+
     }
     
     private void getAllCourts()
@@ -119,7 +141,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	RestClient restClient = new RestClient(Constants.GET_ALL_TENNISCOURTS);
     	TennisCourt[] tennisCourts;
 		try {
-			tennisCourts = (TennisCourt[]) restClient.execute(TennisCourt[].class, "tenniscourt", true);
+			tennisCourts = TennisCourt.fromJSONObjectArray(restClient.execute());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,5 +154,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     		contentValues[i++] = tennisCourt.toContentValue();
     	}
     	this.getContext().getContentResolver().bulkInsert(ProviderContract.TennisCourts.CONTENT_URI, contentValues);
+    }
+    
+    private void getCourtDetails(int courtId)
+    {
+    	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_DETAILS);
+    	TennisCourt[] tennisCourts;
+		try {
+			tennisCourts = (TennisCourt[]) restClient.execute(TennisCourt[].class, "tenniscourt", true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		
+    	
     }
 }

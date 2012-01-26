@@ -81,13 +81,13 @@ public class RestClient {
     }
 
     //for convenience, since most of the calls will of type GET
-    public Object execute(Class returnType, String jsonId, boolean exepctingArray) throws Exception
+    public JSONObject execute() throws Exception
     {
-    	return execute(RequestMethods.GET, returnType, jsonId, exepctingArray);
+    	return execute(RequestMethods.GET);
     }
     
     //TODO fix this to better use generics
-	public Object execute(RequestMethods method, Class returnType, String jsonId, boolean expectingArray)
+	public JSONObject execute(RequestMethods method)
 			throws Exception {
 		String responseString = null;
 		switch (method) {
@@ -135,14 +135,8 @@ public class RestClient {
 		if (status.isNotSuccess())
 			throw new Exception("Server reported error " + status.getMessage());
 
-		// Now extract the thing we are really interested in
-		Object o = null;
-		//TODO make this smarter removed the need for this expectedArray variable all together
-		if (expectingArray)
-		 o = gson.fromJson(jsonObject.getJSONArray(jsonId).toString(), returnType);
-		else
-		 o = gson.fromJson(jsonObject.getJSONObject(jsonId).toString(), returnType);
-		return o;
+		return jsonObject;
+
 	}
 
     private HttpUriRequest addHeaderParams(HttpUriRequest request) throws Exception {
