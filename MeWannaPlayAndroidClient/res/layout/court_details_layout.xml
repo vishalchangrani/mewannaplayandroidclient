@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/relative"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="#7DAEFF98"  android:orientation="vertical">
+
+
+
+
+ <TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:id="@+id/court_title_table"
+    android:paddingRight="10dip"
+    android:paddingTop="5dip"
+    android:paddingLeft="10dip">
+
+    <TableRow
+      android:paddingLeft="10dip"
+      android:paddingRight="30dip"
+      android:paddingBottom="2dip"
+      android:clickable="true"
+      android:gravity="center"
+      android:background="@drawable/bgroundupper">
+
+      <TextView
+        android:id="@+id/court_name"
+        android:paddingLeft="70dip"
+        android:text="Tennis
+				club"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <ImageView
+        android:id="@+id/court_back_icon"
+        android:src="@drawable/gobackicon16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dip"
+        android:paddingTop="2dip"/>
+    </TableRow>
+  </TableLayout>
+
+  <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_below="@id/court_title_table"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:id="@+id/court_addr_rel_layout"
+    android:paddingRight="10dip"
+    android:background="@drawable/bgroundbottom"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:paddingBottom="5dip"
+    android:paddingLeft="10dip">
+
+    <TextView
+      android:id="@+id/court_addr_1"
+      android:text="645 B 2002"
+      android:paddingRight="0dip"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:textSize="12sp"
+      android:typeface="serif"
+      android:textColor="#000000"/>
+
+    <TextView
+      android:id="@+id/court_addr_2"
+      android:layout_below="@id/court_addr_1"
+      android:text="NY-432321"
+      android:paddingRight="20dip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="12sp"
+      android:typeface="serif"
+      android:textColor="#000000"/>
+
+
+    <TextView
+      android:id="@+id/court_phone_1"
+      android:layout_below="@id/court_addr_1"
+      android:layout_toRightOf="@id/court_addr_2"
+      android:text="(080)-3242-2341"
+      android:paddingLeft="70dip"
+      android:paddingRight="05dip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="12sp"
+      android:typeface="serif"
+      android:textColor="#000000"/>
+
+    <ImageView
+      android:id="@+id/court_phone_icon"
+      android:layout_below="@id/court_addr_1"
+      android:layout_toRightOf="@id/court_phone_1"
+      android:src="@drawable/callicon16"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="2dip"/>
+
+
+  </RelativeLayout> 
+
+
+ <TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_below="@id/court_addr_rel_layout"
+    android:id="@+id/court_sub_table_layout"
+    android:paddingRight="10dip"
+    android:paddingTop="5dip"
+  
+    android:paddingLeft="10dip">
+
+    <TableRow
+      android:paddingRight="0dip"
+  
+      android:clickable="true"
+      android:background="@drawable/bgroundupper">
+      <TextView
+        android:id="@+id/text_sub_courts"
+        android:paddingLeft="10dip"
+        android:text="Sub
+				Courts"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <TextView
+        android:id="@+id/no_of_sub_courts"
+        android:paddingLeft="10dip"
+        android:text="5"
+        android:textSize="10sp"
+        android:layout_width="80dip"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <TextView
+        android:paddingLeft="10dip"
+        android:id="@+id/court_type"
+        android:text="Type"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <TextView
+        android:id="@+id/court_facility_type"
+        android:paddingLeft="20dip"
+        android:text="Club"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#00FF00"/>
+
+
+    </TableRow>
+
+    <TableRow
+      android:paddingLeft="10dip"
+      android:paddingRight="0dip"
+  
+      android:clickable="true"
+      android:background="@drawable/bgroundbottom">
+      <TextView
+        android:id="@+id/court_surface_type"
+        android:text="Surface Type"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <TextView
+        android:id="@+id/court_surface_type_1"
+        android:paddingLeft="10dip"
+        android:text="floor"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+
+      <TextView
+        android:paddingLeft="0dip"
+        android:id="@+id/court_timings"
+        android:text="Timings"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <TextView
+        android:id="@+id/court_avail_timings"
+        android:paddingLeft="10dip"
+        android:text="8:00AM - 8:00 PM"
+        android:textSize="10sp"
+        android:textStyle="normal"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+
+
+    </TableRow>
+
+
+  </TableLayout>
+ 
+
+  <ExpandableListView
+    android:id="@+id/exapandableList"
+    android:layout_below="@id/court_sub_table_layout"
+    android:layout_width="fill_parent"
+  android:scrollbars="none"
+    android:layout_height="wrap_content"
+  android:paddingTop="10dip"
+  android:divider="#00000000" android:background="@drawable/bground"
+   android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:paddingBottom="5dip"
+
+     android:layout_marginTop="5dip"
+ 
+  />
+
+ <!--  <TextView
+    android:id="@+id/android:empty"
+    android:layout_below="@id/android:list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:text="@string/main_no_items"/>
+
+
+  <TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_below="@id/android:empty"
+    android:id="@+id/msg_table"
+    android:paddingRight="10dip"
+    android:paddingTop="10dip"
+    android:paddingLeft="10dip">
+
+    <TableRow
+      android:paddingLeft="10dip"
+      android:paddingRight="0dip"
+      android:paddingBottom="0dip"
+      android:clickable="true"
+      android:background="@drawable/bgroundupper">
+      <TextView
+        android:id="@+id/msg_name"
+        android:paddingLeft="10dip"
+        android:text="Messages"
+        android:textSize="14sp"
+        android:paddingTop="05dip"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+      <ImageView
+        android:id="@+id/msg_info_img"
+        android:src="@drawable/infor16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dip"
+        android:paddingTop="5dip"/>
+
+
+
+
+    </TableRow>
+  </TableLayout>
+ -->
+
+
+ <!--  <TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_below="@id/msg_table"
+    android:id="@+id/msg_details_table"
+    android:layout_marginRight="10dip"
+    android:layout_marginLeft="10dip">
+
+    <TableRow
+      android:paddingLeft="10dip"
+      android:paddingRight="0dip"
+      android:paddingBottom="0dip"
+      android:clickable="true"
+      android:background="#FFFFFF">
+      <TextView
+        android:id="@+id/msg_tab_time"
+        android:paddingLeft="10dip"
+        android:text="Time"
+        android:textSize="12sp"
+        android:paddingBottom="5dip"
+        android:paddingTop="05dip"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+      <TextView
+        android:id="@+id/msg_tab_poctras"
+        android:paddingLeft="40dip"
+        android:text="Poctras"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+      <TextView
+        android:id="@+id/msg_tab_info"
+        android:paddingLeft="30dip"
+        android:text="Info"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+      <TextView
+        android:id="@+id/msg_tab_level"
+        android:paddingLeft="30dip"
+        android:text="level"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+
+
+
+
+    </TableRow>
+  </TableLayout> -->
+
+
+
+<!--   <ListView
+    android:id="@+id/ListMsgView"
+    android:layout_width="fill_parent"
+    android:layout_height="140dip"
+    android:scrollbars="vertical"
+    android:layout_below="@id/msg_details_table"
+    android:paddingTop="0dip"
+    android:paddingBottom="10dip"
+    android:paddingLeft="10dip"
+    android:paddingRight="10dip"
+    android:dividerHeight="0dip"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:background="@drawable/bgroundbottom"/>
+ -->
+
+
+  <Button
+    android:id="@+id/post_msg_button"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="35dip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dip"
+    android:paddingRight="25dip"
+    android:paddingTop="10dip"
+    android:text="Post
+		Messages"
+    android:textSize="10sp"/>
+
+
+
+
+  <Button
+    android:id="@+id/marl_occu_button"
+   
+    android:layout_marginLeft="20dip"
+    android:layout_alignParentBottom="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/post_msg_button"
+    android:layout_alignTop="@id/post_msg_button"
+    android:text="Mark Court Occupied"
+    android:textSize="10sp"/>
+ 
+
+
+
+
+
+</RelativeLayout>

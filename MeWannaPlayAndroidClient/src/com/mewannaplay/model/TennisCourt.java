@@ -1,8 +1,15 @@
 package com.mewannaplay.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.ContentValues;
 
 import com.google.android.maps.GeoPoint;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 
 public class TennisCourt {
@@ -144,5 +151,13 @@ public class TennisCourt {
 		contentValues.put("name", name);
 		contentValues.put("message_count", messageCount);
 		return contentValues;
+	}
+	
+	public static TennisCourt[] fromJSONObjectArray(JSONObject jsonObject) throws JsonSyntaxException, JSONException
+	{
+		final GsonBuilder gsonb = new GsonBuilder();
+		final Gson gson = gsonb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+		return (TennisCourt[])  (gson.fromJson(jsonObject.getJSONArray("tenniscourt").toString(), TennisCourt[].class));
+
 	}
 }

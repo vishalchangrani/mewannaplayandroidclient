@@ -3,9 +3,8 @@ package com.mewannaplay;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.ContentObserver;
-import android.database.Cursor;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,7 +13,6 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.mewannaplay.mapoverlay.MapLocationOverlay;
-import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
 
 public class MapViewActivity extends MapActivity {
@@ -23,6 +21,7 @@ public class MapViewActivity extends MapActivity {
 //	private LocationManager myLocationManager;
 	private MyLocationOverlay myLocationOverlay;
 	private MapLocationOverlay mapLocationOverlay;
+	private static Account annonymousAccount;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -32,7 +31,6 @@ public class MapViewActivity extends MapActivity {
 		AccountManager mAccountManager = AccountManager.get(this);
 		Account[] accounts = mAccountManager
 				.getAccountsByType(Constants.ACCOUNT_TYPE);
-		Account annonymousAccount = null;
 		if (accounts.length > 0)
 			annonymousAccount = accounts[0];
 		else
@@ -40,7 +38,7 @@ public class MapViewActivity extends MapActivity {
 														// then
 		
 		// Request first sync..
-		ContentResolver.requestSync(annonymousAccount,
+		ContentResolver.requestSync(getAccount(this),
 				ProviderContract.AUTHORITY, new Bundle());
 		getContentResolver().registerContentObserver(
 				ProviderContract.AUTHORITY_URI, true,
@@ -221,4 +219,18 @@ public class MapViewActivity extends MapActivity {
 		mapView.getController().animateTo(geoPoint);
 	}
 
+	public static Account getAccount(Context context)
+ {
+		if (annonymousAccount == null) {
+			AccountManager mAccountManager = AccountManager.get(context);
+			Account[] accounts = mAccountManager
+					.getAccountsByType(Constants.ACCOUNT_TYPE);
+			if (accounts.length > 0)
+				annonymousAccount = accounts[0];
+			else
+				Log.e(TAG, "Anonymous account not found"); // TODO figure what
+															// to do
+		} // then
+		return annonymousAccount;
+	}
 }

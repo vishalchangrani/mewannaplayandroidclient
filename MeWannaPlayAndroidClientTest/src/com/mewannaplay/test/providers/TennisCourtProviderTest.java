@@ -1,17 +1,24 @@
 package com.mewannaplay.test.providers;
 
-import static com.mewannaplay.providers.ProviderContract.*;
+import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
+import android.accounts.Account;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.RectF;
+import android.os.Bundle;
 import android.test.ProviderTestCase2;
 
+import com.mewannaplay.Constants;
+import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.TennisCourts;
 import com.mewannaplay.providers.TennisCourtProvider;
+import com.mewannaplay.syncadapter.SyncAdapter;
 
 public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvider> {
 
-    
+  
 	public TennisCourtProviderTest() {
 		super(TennisCourtProvider.class, AUTHORITY);		
 	}
@@ -28,29 +35,29 @@ public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvid
 	        assertNotNull(cursor);
 	        assertEquals(0, cursor.getCount());
 	 }
-	 
+
 	 public void testBulkInsert()
 	 {
 		 ContentResolver cr = getMockContentResolver();
 		 ContentValues[] cotentValues = new ContentValues[2];
 		 ContentValues cotentValues1 = new ContentValues();
-		 cotentValues1.put("id",1);
-		 cotentValues1.put("tennis_latitude",80);
-		 cotentValues1.put("tennis_longitude",0);
-		 cotentValues1.put("tennis_subcourts",1);
+		 cotentValues1.put("_id",3);
+		 cotentValues1.put("latitude",80);
+		 cotentValues1.put("longitude",0);
+		 cotentValues1.put("subcourts",1);
 		 cotentValues1.put("occupied",1);
-		 cotentValues1.put("tennis_facility_type","type A");
-		 cotentValues1.put("tennis_name","tennis court 1");
+		 cotentValues1.put("facility_type","type A");
+		 cotentValues1.put("name","tennis court 1");
 		 cotentValues1.put("message_count",1);
 		 cotentValues[0] = cotentValues1;
 		 ContentValues cotentValues2 = new ContentValues();
-		 cotentValues2.put("id",2);
-		 cotentValues2.put("tennis_latitude","80");
-		 cotentValues2.put("tennis_longitude","0");
-		 cotentValues2.put("tennis_subcourts",1);
+		 cotentValues2.put("_id",2);
+		 cotentValues2.put("latitude","80");
+		 cotentValues2.put("longitude","0");
+		 cotentValues2.put("subcourts",1);
 		 cotentValues2.put("occupied",1);
-		 cotentValues2.put("tennis_facility_type","type B");
-		 cotentValues2.put("tennis_name","tennis court 2");
+		 cotentValues2.put("facility_type","type B");
+		 cotentValues2.put("name","tennis court 2");
 		 cotentValues2.put("message_count",1);
 		 cotentValues[1] = cotentValues2;
 		 int count = cr.bulkInsert(TennisCourts.CONTENT_URI, cotentValues);
@@ -60,9 +67,92 @@ public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvid
 	     assertEquals(2, cursor.getCount());
 	     cursor.moveToFirst();
 	        while (cursor.isAfterLast() == false) {
-	            System.out.println(cursor.getString(cursor.getColumnIndex("tennis_name")));
+	            System.out.println(cursor.getString(cursor.getColumnIndex("name")));
 	            cursor.moveToNext();
 	        }
 	     cursor.close();
 	 }
+	 
+	 public void testContentResolverQuery()
+ {
+
+		Cursor cursor = getMockContentResolver()
+				.query(ProviderContract.TennisCourts.CONTENT_URI,
+						null,
+						" (longitude >= ? and longitude < ?) and (latitude >= ? and latitude < ?) ",
+						new String[] { "-122.084095", "-122.084095",
+								"37.422006", "37.422006" }, null);
+	
+
+		RectF testRect = new RectF(-122.084095f, 37.422006f, -120.084095f, 40.422006f);
+		cursor.moveToFirst();
+		
+	}
+	 
+	 
+	 public void testSyncAdapterOnPerformSync() throws InterruptedException
+	 {
+		 	testBulkInsert();
+		 	Bundle extras = new Bundle(); 
+			extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
+			extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+			extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+			extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+			TestContentObserver co = new TestContentObserver();
+			getMockContentResolver().registerContentObserver(
+					ProviderContract.TennisCourts.CONTENT_URI, true,
+					co);
+			 final Account account = new Account("anonymous", Constants.ACCOUNT_TYPE);
+			// Request first sync..
+			ContentResolver.requestSync(account,
+					ProviderContract.AUTHORITY,extras);	
+			Thread.sleep(5000);
+			assertEquals(true, co.cursorObserverIsTriggered);
+
+	 }
+	 
+	 public void testSyncAdapterOnPerformSync2() throws InterruptedException
+	 {
+		 	testBulkInsert();
+		 	Bundle extras = new Bundle(); 
+			extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
+			extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+			extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+			extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+			TestContentObserver co = new TestContentObserver();
+			getMockContentResolver().registerContentObserver(
+					ProviderContract.TennisCourts.CONTENT_URI, true,
+					co);
+			 final Account account = new Account("anonymous", Constants.ACCOUNT_TYPE);
+			// Request first sync..
+			ContentResolver.requestSync(account,
+					ProviderContract.AUTHORITY,extras);	
+			Thread.sleep(5000);
+			assertEquals(true, co.cursorObserverIsTriggered);
+
+	 }
+	 
+	public class TestContentObserver extends ContentObserver {
+
+		public boolean cursorObserverIsTriggered = false;
+		public TestContentObserver() {
+			super(null);
+
+		}
+
+		@Override
+		public boolean deliverSelfNotifications() {
+			return false;
+		}
+		
+		@Override
+		public void onChange(boolean selfChange) {
+			super.onChange(selfChange);
+			Cursor cursor = getMockContext().getContentResolver().query(
+					ProviderContract.TennisCourts.CONTENT_URI, null, null,
+					null, null);
+			assertEquals(2, cursor.getCount());
+			cursorObserverIsTriggered = true;
+		}
+	};
 }

@@ -54,4 +54,9 @@
         name="profile_action">Sample profile</string>
     <string
         name="view_profile">View Profile</string>
+  <string name="main_no_items">No items</string>
+  <string name="activites">Activities</string>
+  <string name="ameneties_and_services">Amenities and services</string>
+    
+        
 </resources>

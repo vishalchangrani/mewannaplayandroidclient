@@ -34,7 +34,7 @@ public class Constants {
     public static final String GET_ALL_TENNISCOURTS =
             BASE_URL+"tenniscourts";
     public static final String GET_TENNISCOURT_DETAILS =
-    		BASE_URL+"tenniscourtdetails/id/";
+    		BASE_URL+"tenniscourtdetails/index/";
    
 
 }
