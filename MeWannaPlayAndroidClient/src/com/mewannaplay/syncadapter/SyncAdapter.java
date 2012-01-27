@@ -161,7 +161,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_DETAILS);
     	TennisCourt[] tennisCourts;
 		try {
-			tennisCourts = (TennisCourt[]) restClient.execute(TennisCourt[].class, "tenniscourt", true);
+		//	tennisCourts = (TennisCourt[]) restClient.execute(TennisCourt[].class, "tenniscourt", true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
