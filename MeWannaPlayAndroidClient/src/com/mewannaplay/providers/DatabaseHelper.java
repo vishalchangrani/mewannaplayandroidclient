@@ -10,6 +10,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
 	 private static final String DATABASE_NAME = "tenniscourts.db";
 	 private static final int DATABASE_VERSION = 1;
 	 public static final String TENNIS_COURT_TABLE_NAME = "tenniscourt";
+	 public static final String TENNIS_COURT_DETAILS_TABLE_NAME = "tenniscourtdetail";
 
 	 private static final String TAG = "DatabaseHelper";
     public DatabaseHelper(Context context) {
@@ -19,14 +20,28 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_TABLE_NAME);//TODO remove this
+    	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_DETAILS_TABLE_NAME);
     	db.execSQL("CREATE TABLE " + TENNIS_COURT_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
         		+ " latitude  REAL," 
         		+ " longitude REAL," 
         		+ " subcourts INTEGER,"
         		+ " occupied INTEGER,"
         		+ " facility_type VARCHAR(100),"
-        		+ " name VARCHAR(100),"
+        		+ " name VARCHAR(250),"
         		+ " message_count INTEGER"
+        		+ ");");
+       	db.execSQL("CREATE TABLE " + TENNIS_COURT_DETAILS_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
+        		+ " name VARCHAR(250),"
+          		+ " address VARCHAR(500),"
+          		+ " zipcode VARCHAR(20),"
+          		+ " url VARCHAR(500),"
+          		+ " facility_type VARCHAR(45),"
+          		+ " subcourts INTEGER,"
+          		+ " timings VARCHAR(500),"
+          		+ " city VARCHAR(250),"
+          		+ " state VARCHAR(100),"
+          		+ " abbreviation VARCHAR(10),"
+          		+ " phone VARCHAR(100)"
         		+ ");");
     }
 
