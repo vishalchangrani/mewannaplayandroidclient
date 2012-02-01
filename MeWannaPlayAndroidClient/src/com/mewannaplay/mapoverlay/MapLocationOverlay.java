@@ -28,14 +28,14 @@ import com.mewannaplay.R;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
 
-public class MapLocationOverlay extends Overlay implements OnGestureListener,
-		OnDoubleTapListener {
+public class MapLocationOverlay extends Overlay
+		 {
 
 	// Store these as global instances so we don't keep reloading every time
 	private final Bitmap publicSemiOccupiedCourt, publicNotOccupiedCourt,
 			publicFullyOccupiedCourt, privateCourt, arrowIcon;
 
-	private final GestureDetector gestureDetector;
+	
 
 	private Context context = null;
 	private Paint innerPaint, borderPaint, textPaint;
@@ -67,7 +67,6 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener,
 		arrowIcon = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.arrow_right_16);
 
-		this.gestureDetector = new GestureDetector(this.context, this);
 
 	}
 
@@ -82,9 +81,6 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener,
 	            isMapMoving = true;
 	        }
 
-		if (gestureDetector.onTouchEvent(event)) {
-			return true;
-		}
 		return false;
 	}
 
@@ -339,65 +335,7 @@ public class MapLocationOverlay extends Overlay implements OnGestureListener,
 		return textPaint;
 	}
 
-	@Override
-	public boolean onDoubleTap(MotionEvent e) {
-		// TODO Auto-generated method stub
-		Log.e("MeWannaPlay", "onDoubleTap occure 1");
-		return false;
-	}
-
-	@Override
-	public boolean onDoubleTapEvent(MotionEvent e) {
-
-		Log.e("MeWannaPlay", "onDoubleTapEvent occure 1");
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onSingleTapConfirmed(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onDown(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent e) {
-		Log.e("MeWannaPlay", "onLongPress ");
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-			float distanceY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	public void addMapLocation(TennisCourt tennisCourt) {
 		tennisCourts.add(tennisCourt);

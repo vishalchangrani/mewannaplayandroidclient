@@ -13,7 +13,10 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.mewannaplay.mapoverlay.MapLocationOverlay;
+import com.mewannaplay.mapoverlay.MyItemizedOverlay;
 import com.mewannaplay.providers.ProviderContract;
+import com.mewannaplay.providers.ProviderContract.TennisCourts;
+import com.mewannaplay.syncadapter.SyncAdapter;
 
 public class MapViewActivity extends MapActivity {
 
@@ -36,61 +39,18 @@ public class MapViewActivity extends MapActivity {
 		else
 			Log.e(TAG, "Anonymous account not found"); // TODO figure what to do
 														// then
-		
+	
+		getContentResolver().registerContentObserver(
+				TennisCourts.CONTENT_URI, true,
+				new TennisCourtContentObserver());
 		// Request first sync..
 		ContentResolver.requestSync(getAccount(this),
-				ProviderContract.AUTHORITY, new Bundle());
-		getContentResolver().registerContentObserver(
-				ProviderContract.AUTHORITY_URI, true,
-				new TennisCourtContentObserver());
+				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsBundle());
+	
 
 		setContentView(R.layout.mapviewlayout);
 		initMap();
 
-
-	/*	myLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-				0, 0, new MyLocationListener());
-		
-		 //Get the current location in start-up
-		Location location = myLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		if (location != null)
-		{
-		  GeoPoint initGeoPoint = new GeoPoint(
-		   (int)(myLocationManager.getLastKnownLocation(
-		    LocationManager.GPS_PROVIDER)
-		    .getLatitude()*1000000),
-		   (int)(myLocationManager.getLastKnownLocation(
-		    LocationManager.GPS_PROVIDER)
-		    .getLongitude()*1000000));
-		  centerLocation(initGeoPoint);
-		}
-*/
-		/*
-		 * ContentResolver cr = getContentResolver();
-		 * cr.delete(TennisCourts.CONTENT_URI, null, null); Cursor cursor =
-		 * cr.query(TennisCourts.CONTENT_URI, null, null, null, null);
-		 * cursor.close(); ContentValues[] cotentValues = new ContentValues[2];
-		 * ContentValues cotentValues1 = new ContentValues();
-		 * cotentValues1.put("id",1); cotentValues1.put("tennis_latitude","80");
-		 * cotentValues1.put("tennis_longitude","0");
-		 * cotentValues1.put("tennis_subcourts",1);
-		 * cotentValues1.put("occupied",1);
-		 * cotentValues1.put("tennis_facility_type","type A");
-		 * cotentValues1.put("tennis_name","tennis court 1");
-		 * cotentValues1.put("message_count",1); cotentValues[0] =
-		 * cotentValues1; ContentValues cotentValues2 = new ContentValues();
-		 * cotentValues2.put("id",2); cotentValues2.put("tennis_latitude","80");
-		 * cotentValues2.put("tennis_longitude","0");
-		 * cotentValues2.put("tennis_subcourts",1);
-		 * cotentValues2.put("occupied",1);
-		 * cotentValues2.put("tennis_facility_type","type B");
-		 * cotentValues2.put("tennis_name","tennis court 2");
-		 * cotentValues2.put("message_count",1); cotentValues[1] =
-		 * cotentValues2; int count = cr.bulkInsert(TennisCourts.CONTENT_URI,
-		 * cotentValues);
-		 */
 
 	}
 
@@ -98,8 +58,9 @@ public class MapViewActivity extends MapActivity {
 	{
 		MapView mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
-		mapLocationOverlay = new MapLocationOverlay(this);
-		mapView.getOverlays().add(mapLocationOverlay);
+
+		
+		mapView.getOverlays().add(new MyItemizedOverlay(getResources().getDrawable(R.drawable.tennisball_yellow_16), mapView));
 		myLocationOverlay = new MyLocationOverlay(this,
 				mapView);
 		mapView.getOverlays().add(myLocationOverlay);
@@ -149,6 +110,7 @@ public class MapViewActivity extends MapActivity {
 		public void onChange(boolean arg0) {
 			Log.v(TAG, "Notification on TennisCourtContentObserver");
 			super.onChange(arg0);
+			getContentResolver().unregisterContentObserver(this);
 			
 			final MapView mapView = (MapView) findViewById(R.id.mapview);
 			Runnable waitForMapTimeTask = new Runnable() {

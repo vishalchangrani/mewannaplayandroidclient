@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,7 +38,7 @@ public class TennisCourtDetails {
 	@SerializedName("tennis_subcourts")
 	private int subcourts;
 	@SerializedName("tennis_timings")
-	private String tennisTimings;
+	private String timings;
 	@SerializedName("city_name")
 	private String city;
 	@SerializedName("state_name")
@@ -154,10 +157,10 @@ public class TennisCourtDetails {
 		this.subcourts = subcourts;
 	}
 	public String getTennisTimings() {
-		return tennisTimings;
+		return timings;
 	}
 	public void setTennisTimings(String tennisTimings) {
-		this.tennisTimings = tennisTimings;
+		this.timings = tennisTimings;
 	}
 	public String getCity() {
 		return city;
@@ -245,4 +248,47 @@ public class TennisCourtDetails {
 		return tennisCourtDetails;
 	}
 	
+	
+	public ContentValues toContentValue()
+	{
+		ContentValues contentValues = new ContentValues(8);
+		contentValues.put("_id", id);
+		contentValues.put("name", nonNullString(name));
+		contentValues.put("address", nonNullString(address));
+		contentValues.put("zipcode", nonNullString(zipcode));
+		contentValues.put("url", nonNullString(url));
+		contentValues.put("facility_type", nonNullString(facilityType));
+		contentValues.put("subcourts", subcourts);
+		contentValues.put("timings", nonNullString(timings));
+		contentValues.put("city", nonNullString(city));
+		contentValues.put("state", nonNullString(state));
+		contentValues.put("abbreviation", nonNullString(abbreviation));
+		contentValues.put("phone", nonNullString(phone));
+		return contentValues;
+	}
+	
+	public static TennisCourtDetails fromCursor(Cursor cursor)
+	{
+		TennisCourtDetails tdc = new TennisCourtDetails();
+		tdc.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+		tdc.setName(cursor.getString(cursor.getColumnIndex("name")));
+		tdc.setAddress(cursor.getString(cursor.getColumnIndex("address")));
+		tdc.setZipcode(cursor.getString(cursor.getColumnIndex("zipcode")));
+		tdc.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+		tdc.setFacilityType(cursor.getString(cursor.getColumnIndex("facility_type")));
+		tdc.setSubcourts(cursor.getInt(cursor.getColumnIndex("subcourts")));
+		tdc.setTennisTimings(cursor.getString(cursor.getColumnIndex("timings")));
+		tdc.setCity(cursor.getString(cursor.getColumnIndex("city")));
+		tdc.setState(cursor.getString(cursor.getColumnIndex("state")));
+		tdc.setAbbreviation(cursor.getString(cursor.getColumnIndex("abbreviation")));
+		tdc.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+		return tdc;
+		
+	}
+	public final static String nonNullString(String inputString)
+	{
+		if (inputString == null || inputString.trim().equals(""))
+			return "";
+		return inputString;
+	}
 }

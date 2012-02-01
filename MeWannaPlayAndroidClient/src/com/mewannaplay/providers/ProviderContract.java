@@ -43,5 +43,42 @@ public final class ProviderContract
 		public static final String MESSAGE_COUNT = "message_count";
 
 	}
+	
+	//One BaseColumn implementation for each table 
+		//Each implementation has content_uri to access the table, content_types and table columns and more.
+		public final static class TennisCourtsDetails implements BaseColumns {
+		
+			public static final Uri CONTENT_URI = Uri.withAppendedPath(
+			            AUTHORITY_URI, DatabaseHelper.TENNIS_COURT_DETAILS_TABLE_NAME);
+			 
+			public static final String TENNIS_COURTS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.tenniscourts";
+
+			public static final String TENNIS_COURT_ID = "_id";
+
+			public static final String TENNIS_LATITUDE = "name";
+
+			public static final String TENNIS_LONGITUDE = "address";
+			
+			public static final String TENNIS_SUBCOURTS = "zipcode";
+
+			public static final String OCCUPIED = "url";
+			
+			public static final String FACILITY_TYPE = "facility_type";
+
+			public static final String TENNIS_NAME = "subcourts";
+			
+			public static final String MESSAGE_COUNT = "timings";
+			
+			public static final String CITY = "city";
+			
+			public static final String STATE = "state";
+			
+			public static final String ABBREVIATION = "abbreviation";
+			
+			public static final String PHONE = "phone";	
+			
+			public static final String ZIPCODE = "zipcode";	
+
+		}
 }
 

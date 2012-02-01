@@ -22,7 +22,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
-import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +33,7 @@ import android.util.Log;
 import com.mewannaplay.Constants;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourt;
+import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
 
 /**
@@ -132,7 +133,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     
     private void getAllCourts()
     {
-    	if (true)
+    	if (false)
     	{
     		getContext().getContentResolver().notifyChange(ProviderContract.TennisCourts.CONTENT_URI, null, false);
     		return;
@@ -156,18 +157,37 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	this.getContext().getContentResolver().bulkInsert(ProviderContract.TennisCourts.CONTENT_URI, contentValues);
     }
     
-    private void getCourtDetails(int courtId)
+    public void getCourtDetails(int courtId)
     {
-    	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_DETAILS);
-    	TennisCourt[] tennisCourts;
+    	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_DETAILS+courtId);
+   
 		try {
-		//	tennisCourts = (TennisCourt[]) restClient.execute(TennisCourt[].class, "tenniscourt", true);
+			TennisCourtDetails tdc  = TennisCourtDetails.fromJSONObject(restClient.execute());
+			this.getContext().getContentResolver().insert(ProviderContract.TennisCourtsDetails.CONTENT_URI.buildUpon().appendPath(courtId+"").build(), tdc.toContentValue());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
-		
-    	
+    }
+    
+    public static Bundle getAllCourtsBundle()
+    {
+    	Bundle extras = new Bundle(); 
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		return extras;
+    }
+    
+    public static Bundle getAllCourtsDetailBundle(int courtId)
+    {
+    	Bundle extras = new Bundle(); 
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_DETAILS);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		return extras;
     }
 }
