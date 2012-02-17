@@ -4,19 +4,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentValues;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
+import static com.mewannaplay.model.TennisCourtDetails.nonNullString;
 
 public class Message {
 	
 	@SerializedName("message_id")
 	private int id;
-	@SerializedName("additionalcomment")
+	@SerializedName("message_text")
 	private String text;
-	@SerializedName("postedbyuser")
+	@SerializedName("user_login_id")
 	private String user;
 	@SerializedName("level")
 	private String level;
@@ -24,11 +27,11 @@ public class Message {
 	private String scheduleTime;
 	@SerializedName("contact_info")
 	private String contactInfo;
-	@SerializedName("playersneeded")
+	@SerializedName("player_needed")
 	private String playerNeeded;
 	@SerializedName("contact_type_id")
 	private int contactTypeId;
-	@SerializedName("timeposted")
+	@SerializedName("created")
 	private String timeposted;
 
 
@@ -129,5 +132,20 @@ public class Message {
 		JSONArray tennisCourtJsonObject = jsonObject.getJSONArray("courtmessages");
 		Message[] messages = (Message[]) gson.fromJson(tennisCourtJsonObject.toString(), Message[].class);
 		return messages;
+	}
+	
+	public ContentValues toContentValue()
+	{
+		ContentValues contentValues = new ContentValues(9);
+		contentValues.put("_id", id);
+		contentValues.put("text", nonNullString(text));
+		contentValues.put("user", nonNullString(user));
+		contentValues.put("level", nonNullString(level));
+		contentValues.put("scheduled_time", nonNullString(scheduleTime));
+		contentValues.put("contact_info", nonNullString(contactInfo));
+		contentValues.put("contact_type", contactTypeId);
+		contentValues.put("players_needed", nonNullString(playerNeeded));
+		contentValues.put("time_posted", nonNullString(timeposted));
+		return contentValues;
 	}
 }

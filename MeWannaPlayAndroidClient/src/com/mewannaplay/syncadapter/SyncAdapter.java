@@ -32,6 +32,7 @@ import android.util.Log;
 
 import com.mewannaplay.Constants;
 import com.mewannaplay.client.RestClient;
+import com.mewannaplay.model.Message;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
@@ -55,8 +56,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public final static String OPERATION = "operation";
     public static final int GET_ALL_COURTS = 0;
     public static final int GET_COURT_DETAILS = 1;
-    public static final int POST_MESSAGE = 2;
-    public static final int MARK_COURT_OCCUPIED = 3;
+    public static final int GET_COURT_MESSAGES = 2;
+    public static final int POST_MESSAGE = 3;
+    public static final int MARK_COURT_OCCUPIED = 4;
     public static final String COURT_ID = "court_id";
 
  /*
@@ -123,6 +125,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			int courtId = extras.getInt(COURT_ID);
 			getCourtDetails(courtId);
 			break;
+		case GET_COURT_MESSAGES:
+			courtId = extras.getInt(COURT_ID);
+			getCourtMessages(courtId);
 		case POST_MESSAGE:
 			break;
 		case MARK_COURT_OCCUPIED:
@@ -133,7 +138,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     
     private void getAllCourts()
     {
-    	if (false)
+    	if (true)
     	{
     		getContext().getContentResolver().notifyChange(ProviderContract.TennisCourts.CONTENT_URI, null, false);
     		return;
@@ -170,6 +175,28 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		}
     }
     
+    public void getCourtMessages(int courtId)
+    {
+    	
+		try {
+	    	this.getContext().getContentResolver().delete(ProviderContract.Messages.CONTENT_URI, null, null);		
+			courtId = 13604;
+	    	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_MESSAGES+courtId);
+
+			Message[] messages  = Message.fromJSONObject(restClient.execute());
+	    	ContentValues[] contentValues = new ContentValues[messages.length];
+	    	int i = 0;
+	    	for (Message message : messages)
+	    	{
+	    		contentValues[i++] = message.toContentValue();
+	    	}
+	    	this.getContext().getContentResolver().bulkInsert(ProviderContract.Messages.CONTENT_URI, contentValues);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+    }
+    
     public static Bundle getAllCourtsBundle()
     {
     	Bundle extras = new Bundle(); 
@@ -184,6 +211,17 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     {
     	Bundle extras = new Bundle(); 
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_DETAILS);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		return extras;
+    }
+    
+    public static Bundle getAllMessagesBundle(int courtId)
+    {
+    	Bundle extras = new Bundle(); 
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGES);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);

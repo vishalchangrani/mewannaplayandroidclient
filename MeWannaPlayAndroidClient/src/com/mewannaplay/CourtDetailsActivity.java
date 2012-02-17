@@ -1,24 +1,34 @@
 package com.mewannaplay;
 
-import android.app.Activity;
-import android.content.ContentUris;
+import android.app.ListActivity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.mewannaplay.mapoverlay.MyItemizedOverlay.TennisCourtDetailsContentObserver;
 import com.mewannaplay.model.TennisCourtDetails;
+import com.mewannaplay.providers.ProviderContract;
+import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
-public class CourtDetailsActivity extends Activity {
+public class CourtDetailsActivity extends ListActivity {
 
 	private TennisCourtDetails tennisCourtDetails;
+	 private static final String TAG = "CourtDetailsActivity";
+	 private  SimpleCursorAdapter cursorAdapter;
+	 Cursor messageCursor; 
+	 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -29,7 +39,7 @@ public class CourtDetailsActivity extends Activity {
 		 cursor.moveToFirst();
 		 tennisCourtDetails = TennisCourtDetails.fromCursor(cursor);
 		 
-		
+		cursor.close(); //dont need court details from db anymore. we have cached it
 		
 		setContentView(R.layout.court_details_layout);
 		populateView();
@@ -37,11 +47,42 @@ public class CourtDetailsActivity extends Activity {
 		v.setAdapter(new ExpadableAdapter());
 		
 	
-		// Request first sync..
-		//ContentResolver.requestSync(MapViewActivity.getAccount(this),
-		//		ProviderContract.AUTHORITY,extras);
+		// the desired columns to be bound
+			            String[] columns = new String[] { "scheduled_time", "user", "contact_info",  "level", "players_needed", "text", "time_posted" };
+			            // the XML defined views which the data will be bound to
+			            int[] to = new int[] { R.id.scheduled_time,R.id.user, R.id.contact_info, R.id.level, R.id.players_needed,  R.id.message_text, R.id.time_posted };
+		messageCursor = getContentResolver().query(Messages.CONTENT_URI, null, null, null, null);
+		startManagingCursor(messageCursor);
+		
+		 cursorAdapter = new SimpleCursorAdapter(this, R.layout.court_message_row,  messageCursor, columns, to);
+	//	 View header = getLayoutInflater().inflate(R.id.msg_details_table, null);
+		// getListView().addHeaderView(header);
+		 this.setListAdapter(cursorAdapter);
+	
+		 this.getContentResolver().registerContentObserver(
+					ProviderContract.Messages.CONTENT_URI, true,
+					new MessagesContentObserver(courtId));
+		 ContentResolver.requestSync(MapViewActivity.getAccount(this),
+					ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId));
 	}
 
+	private class MessagesContentObserver extends ContentObserver {
+
+	final int courtId;
+		
+		public MessagesContentObserver(int courtId) {
+			super(null);
+			this.courtId = courtId;
+
+		}
+
+		@Override
+		public void onChange(boolean selfChange) {
+			stopManagingCursor(messageCursor);
+			messageCursor = managedQuery(Messages.CONTENT_URI, null, null, null, null);
+			runOnUiThread(new Runnable() { public void run() { cursorAdapter.changeCursor(messageCursor);}});
+		}
+		}
 	
 	private void populateView()
 	{
@@ -133,5 +174,6 @@ public class CourtDetailsActivity extends Activity {
 		}
 		
 	}
+	
 
 }

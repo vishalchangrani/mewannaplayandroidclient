@@ -187,6 +187,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 						" (longitude >= ? and longitude < ?) and (latitude >= ? and latitude < ?) ",
 						new String[] { topLeftX, bottomRightX, topLeftY,
 								bottomLeftY }, null);
+		
 
 		if (cursor.moveToFirst()) {
 			while (cursor.isAfterLast() == false) {

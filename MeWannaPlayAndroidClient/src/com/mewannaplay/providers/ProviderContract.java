@@ -80,5 +80,16 @@ public final class ProviderContract
 			public static final String ZIPCODE = "zipcode";	
 
 		}
+		
+		//One BaseColumn implementation for each table 
+		//Each implementation has content_uri to access the table, content_types and table columns and more.
+		public final static class Messages implements BaseColumns {
+		
+			public static final Uri CONTENT_URI = Uri.withAppendedPath(
+			            AUTHORITY_URI, DatabaseHelper.MESSAGES_TABLE_NAME);
+			 
+			public static final String TENNIS_COURTS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.tenniscourts";
+
+		}
 }
 
