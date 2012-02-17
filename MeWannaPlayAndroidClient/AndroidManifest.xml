@@ -20,6 +20,11 @@
 
 		<activity android:name=".MapViewActivity" android:label="MeWannaPlay"
 			android:theme="@android:style/Theme.NoTitleBar">
+	
+		</activity>
+
+	<activity android:name=".PostMessageActivity" android:label="PostMessage"
+			android:theme="@android:style/Theme.NoTitleBar">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />

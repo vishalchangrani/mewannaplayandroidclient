@@ -230,19 +230,19 @@
  
   />
 
- <!--  <TextView
+ <!-- <TextView
     android:id="@+id/android:empty"
     android:layout_below="@id/android:list"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:text="@string/main_no_items"/>
+    android:text="@string/main_no_items"/> -->
 
 
   <TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="fill_parent"
-    android:layout_below="@id/android:empty"
+    android:layout_below="@id/exapandableList"
     android:id="@+id/msg_table"
     android:paddingRight="10dip"
     android:paddingTop="10dip"
@@ -277,10 +277,10 @@
 
     </TableRow>
   </TableLayout>
- -->
+ 
 
 
- <!--  <TableLayout
+   <TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="fill_parent"
@@ -297,35 +297,50 @@
       android:background="#FFFFFF">
       <TextView
         android:id="@+id/msg_tab_time"
-        android:paddingLeft="10dip"
+
         android:text="Time"
-        android:textSize="12sp"
+        android:textSize="5dp"
         android:paddingBottom="5dip"
         android:paddingTop="05dip"
         android:textStyle="bold"
         android:typeface="serif"
         android:textColor="#000000"/>
       <TextView
-        android:id="@+id/msg_tab_poctras"
-        android:paddingLeft="40dip"
-        android:text="Poctras"
-        android:textSize="12sp"
+
+        android:text="User"
+        android:textSize="5dp"
         android:textStyle="bold"
         android:typeface="serif"
         android:textColor="#000000"/>
       <TextView
-        android:id="@+id/msg_tab_info"
-        android:paddingLeft="30dip"
-        android:text="Info"
-        android:textSize="12sp"
+
+        android:text="Contact"
+        android:textSize="5dp"
         android:textStyle="bold"
         android:typeface="serif"
         android:textColor="#000000"/>
       <TextView
-        android:id="@+id/msg_tab_level"
-        android:paddingLeft="30dip"
-        android:text="level"
-        android:textSize="12sp"
+         android:text="Level"
+        android:textSize="5dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+         <TextView
+
+        android:text="Players needed"
+        android:textSize="5dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+         <TextView
+		 android:text="Comment"
+        android:textSize="5dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="#000000"/>
+         <TextView
+        android:text="Time posted"
+        android:textSize="5dp"
         android:textStyle="bold"
         android:typeface="serif"
         android:textColor="#000000"/>
@@ -334,15 +349,15 @@
 
 
     </TableRow>
-  </TableLayout> -->
+  </TableLayout> 
 
 
 
-<!--   <ListView
-    android:id="@+id/ListMsgView"
+   <ListView
+    android:id="@android:id/list"
     android:layout_width="fill_parent"
     android:layout_height="140dip"
-    android:scrollbars="vertical"
+    android:scrollbars="vertical" 
     android:layout_below="@id/msg_details_table"
     android:paddingTop="0dip"
     android:paddingBottom="10dip"
@@ -352,7 +367,7 @@
     android:layout_marginLeft="10dip"
     android:layout_marginRight="10dip"
     android:background="@drawable/bgroundbottom"/>
- -->
+ 
 
 
   <Button

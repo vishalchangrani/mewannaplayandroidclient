@@ -35,6 +35,8 @@ public class Constants {
             BASE_URL+"tenniscourts";
     public static final String GET_TENNISCOURT_DETAILS =
     		BASE_URL+"tenniscourtdetails/index/";
+    public static final String GET_TENNISCOURT_MESSAGES =
+    		BASE_URL+"tenniscourtmessages/index/";
     
     public static enum ACTIVITY
     {

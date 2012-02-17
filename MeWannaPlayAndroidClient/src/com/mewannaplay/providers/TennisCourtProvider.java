@@ -2,6 +2,7 @@ package com.mewannaplay.providers;
 
 import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_DETAILS_TABLE_NAME;
 import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_TABLE_NAME;
+import static com.mewannaplay.providers.DatabaseHelper.MESSAGES_TABLE_NAME;
 import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
 
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class TennisCourtProvider extends ContentProvider {
 	private final static int TENNISCOURTS = 1;
 	private final static int TENNISCOURTSDETAILS = 2;
 	private final static int TENNISCOURTSDETAILS_ID = 3;
+	private final static int MESSAGES = 4;
 
 	@Override
 	public int delete(Uri uri, String where, String[] whereArgs) {
@@ -52,15 +54,18 @@ public class TennisCourtProvider extends ContentProvider {
 		case TENNISCOURTSDETAILS:
 			count = db.delete(TENNIS_COURT_DETAILS_TABLE_NAME, where, whereArgs);
 			break;
+		case MESSAGES:
+			count = db.delete(MESSAGES_TABLE_NAME, where, whereArgs);
+			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
 		db.setTransactionSuccessful();
 		}
-		finally
-		{
-			db.close();
-		}
+		finally {
+			db.endTransaction();
+			//db.close();
+		} 
 
 		getContext().getContentResolver().notifyChange(uri, null, true);
 		return count;
@@ -85,7 +90,7 @@ public class TennisCourtProvider extends ContentProvider {
 
 			db.beginTransaction();
 			try {
-				String sql = "insert OR IGNORE into "
+				String sql = "insert OR REPLACE into "
 						+ TENNIS_COURT_DETAILS_TABLE_NAME
 						+ " (_id, name,address, zipcode, url,facility_type, subcourts, timings, city, state, abbreviation, phone) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 				SQLiteStatement insert = db.compileStatement(sql);
@@ -113,7 +118,7 @@ public class TennisCourtProvider extends ContentProvider {
 			}
 			finally {
 				db.endTransaction();
-				db.close();
+				//db.close();
 			} 
 
 		default:
@@ -131,7 +136,7 @@ public class TennisCourtProvider extends ContentProvider {
 
 			db.beginTransaction();
 			try {
-				String sql = "insert OR IGNORE into "
+				String sql = "insert OR REPLACE into "
 						+ TENNIS_COURT_TABLE_NAME
 						+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count) values (?,?,?,?,?,?,?,?)";
 				SQLiteStatement insert = db.compileStatement(sql);
@@ -153,7 +158,7 @@ public class TennisCourtProvider extends ContentProvider {
 				db.setTransactionSuccessful();
 			} finally {
 				db.endTransaction();
-				db.close();
+			
 			}
 
 			break;
@@ -181,14 +186,42 @@ public class TennisCourtProvider extends ContentProvider {
 					insert.bindString(11,
 							contentValues.getAsString("abbreviation"));
 					insert.bindString(12, contentValues.getAsString("phone"));
+					insert.executeInsert();
 					count++;
 				}
 				db.setTransactionSuccessful();
 			} finally {
 				db.endTransaction();
-				db.close();
+				
 			}
 
+			break;
+		case MESSAGES:
+			db.beginTransaction();
+			try {
+				String sql = "insert OR REPLACE into "
+						+ MESSAGES_TABLE_NAME
+						+ "(_id, text,user, level, scheduled_time,contact_info, contact_type, players_needed, time_posted) values (?,?,?,?,?,?,?,?,?)";
+				SQLiteStatement insert = db.compileStatement(sql);
+
+				for (ContentValues contentValues : values) {
+					insert.bindLong(1, contentValues.getAsInteger("_id"));
+					insert.bindString(2, contentValues.getAsString("text"));
+					insert.bindString(3, contentValues.getAsString("user"));
+					insert.bindString(4, contentValues.getAsString("level"));
+					insert.bindString(5, contentValues.getAsString("scheduled_time"));
+					insert.bindString(6,contentValues.getAsString("contact_info"));
+					insert.bindLong(7, contentValues.getAsInteger("contact_type"));
+					insert.bindString(8, contentValues.getAsString("players_needed"));
+					insert.bindString(9, contentValues.getAsString("time_posted"));
+					insert.executeInsert();
+					count++;
+				}
+				db.setTransactionSuccessful();
+			} finally {
+				db.endTransaction();
+				
+			}
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
@@ -216,23 +249,22 @@ public class TennisCourtProvider extends ContentProvider {
 		case TENNISCOURTSDETAILS:
 			qb.setTables(TENNIS_COURT_DETAILS_TABLE_NAME);
 			break;
+		case MESSAGES:
+			qb.setTables(MESSAGES_TABLE_NAME);
+			break;
 		default:
 			throw new IllegalArgumentException("Unknown URI " + uri);
 		}
 
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		try
-		{
+		
+		
 		Cursor c = qb.query(db, projection, selection, selectionArgs, null,
 				null, sortOrder);
 		c.setNotificationUri(getContext().getContentResolver(), uri); // ??What is this
 		return c;
-		}
-		finally
-		{
-			db.close();
-		}
-																		
+		
+																
 		
 	}
 
@@ -261,6 +293,7 @@ public class TennisCourtProvider extends ContentProvider {
 				TENNISCOURTSDETAILS);
 		sUriMatcher.addURI(AUTHORITY, TENNIS_COURT_DETAILS_TABLE_NAME+"/#",
 				TENNISCOURTSDETAILS_ID);
+		sUriMatcher.addURI(AUTHORITY, MESSAGES_TABLE_NAME, MESSAGES);
 
 		tennisCourtProjectMap = new HashMap<String, String>();
 		tennisCourtProjectMap.put("_id", "_id");
