@@ -156,6 +156,7 @@ public class TennisCourtProvider extends ContentProvider {
 					count++;
 				}
 				db.setTransactionSuccessful();
+				Log.d(TAG," inserted "+count+" tenniscourts");
 			} finally {
 				db.endTransaction();
 			

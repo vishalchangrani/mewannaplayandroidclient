@@ -23,6 +23,10 @@
     <string
         name="login_activity_ok_button">Sign in</string>
 
+ <!-- Button to sign in after entering username and password -->
+    <string
+        name="anonymous_login">Whateva..(login as anonymous)</string>
+
     <!-- Message shown in dialog if the username or password is invalid. -->
     <string
         name="login_activity_loginfail_text_both">The username or password isn\'t valid. A Sample SyncAdapter account is

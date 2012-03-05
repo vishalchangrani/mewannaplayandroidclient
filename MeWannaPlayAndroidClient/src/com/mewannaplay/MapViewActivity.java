@@ -2,6 +2,8 @@ package com.mewannaplay;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -25,20 +27,14 @@ public class MapViewActivity extends MapActivity {
 	private MyLocationOverlay myLocationOverlay;
 	private MapLocationOverlay mapLocationOverlay;
 	private static Account annonymousAccount;
+	private AccountManagerFuture<Bundle> amFuture;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		AccountManager mAccountManager = AccountManager.get(this);
-		Account[] accounts = mAccountManager
-				.getAccountsByType(Constants.ACCOUNT_TYPE);
-		if (accounts.length > 0)
-			annonymousAccount = accounts[0];
-		else
-			Log.e(TAG, "Anonymous account not found"); // TODO figure what to do
-														// then
+
 	
 		getContentResolver().registerContentObserver(
 				TennisCourts.CONTENT_URI, true,
@@ -53,6 +49,7 @@ public class MapViewActivity extends MapActivity {
 
 
 	}
+
 
 	private final void initMap()
 	{

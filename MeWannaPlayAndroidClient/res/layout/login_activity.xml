@@ -20,7 +20,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" android:layout_gravity="center">
+      <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#c6c3c6"
+        android:minHeight="54dip"
+        android:paddingTop="4dip"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip">
+        <Button
+            android:id="@+id/anonymous_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:minWidth="100dip"
+            android:text="@string/anonymous_login"
+            android:onClick="handleAnnonymousLogin" />
+    </FrameLayout>
+    
+    
+       <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="40dp" android:layout_marginBottom="40dp">
+   
+ <TextView android:layout_width="fill_parent"
+ android:layout_height="wrap_content" android:text="OR" android:textSize="10sp" android:textColor="@android:color/white" android:gravity="center"/>
+ 
+    </LinearLayout>
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dip"
@@ -107,4 +133,5 @@
             android:text="@string/login_activity_ok_button"
             android:onClick="handleLogin" />
     </FrameLayout>
+ 
 </LinearLayout>
