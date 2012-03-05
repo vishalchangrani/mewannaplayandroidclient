@@ -16,24 +16,43 @@
 
 package com.mewannaplay.authenticator;
 
+
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
-import android.content.ContentResolver;
+import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.mewannaplay.Constants;
-import com.mewannaplay.R;
-//import com.mewannaplay.client.NetworkUtilities;
+import com.mewannaplay.client.RestClient;
 
 /**
  * This class is an implementation of AbstractAccountAuthenticator for
- * authenticating accounts in the com.example.android.samplesync domain.
+ * authenticating accounts in the com.example.android.samplesync domain. The
+ * interesting thing that this class demonstrates is the use of authTokens as
+ * part of the authentication process. In the account setup UI, the user enters
+ * their username and password. But for our subsequent calls off to the service
+ * for syncing, we want to use an authtoken instead - so we're not continually
+ * sending the password over the wire. getAuthToken() will be called when
+ * SyncAdapter calls AccountManager.blockingGetAuthToken(). When we get called,
+ * we need to return the appropriate authToken for the specified account. If we
+ * already have an authToken stored in the account, we return that authToken. If
+ * we don't, but we do have a username and password, then we'll attempt to talk
+ * to the sample service to fetch an authToken. If that fails (or we didn't have
+ * a username/password), then we need to prompt the user - so we create an
+ * AuthenticatorActivity intent and return that. That will display the dialog
+ * that prompts the user for their login information.
  */
 class Authenticator extends AbstractAccountAuthenticator {
+
+    /** The tag used to log to adb console. **/
+    private static final String TAG = "Authenticator";
+
     // Authentication Service context
     private final Context mContext;
 
@@ -42,160 +61,104 @@ class Authenticator extends AbstractAccountAuthenticator {
         mContext = context;
     }
 
-    /**
-     * For now we add an anonymous account. This is to pull data from server which does not
-     * need authentication like tennis court details.
-     * 
-     * {@inheritDoc}
-     */
     @Override
-    public Bundle addAccount(AccountAuthenticatorResponse response,
-        String accountType, String authTokenType, String[] requiredFeatures,
-        Bundle options) {
-      /*  final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
-        intent.putExtra(AuthenticatorActivity.PARAM_AUTHTOKEN_TYPE,
-            authTokenType);
-        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,
-            response);
-        final Bundle bundle = new Bundle();
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-        return bundle;*/
-    	
-    	  final Account account = new Account("anonymous", Constants.ACCOUNT_TYPE);
-    	AccountManager mAccountManager = AccountManager.get(mContext);
-    	   mAccountManager.addAccountExplicitly(account, "", null);
-           // Set contacts sync for this account.
-           ContentResolver.setSyncAutomatically(account,
-              "com.mewannaplay.providers.TennisCourtProvider", true);
-    	 final Bundle result = new Bundle();
-         result.putString(AccountManager.KEY_ACCOUNT_NAME, "anonymous");
-         result.putString(AccountManager.KEY_ACCOUNT_TYPE,
-             Constants.ACCOUNT_TYPE);
-         //result.putString(AccountManager.KEY_AUTHTOKEN, password);
-         return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Bundle confirmCredentials(AccountAuthenticatorResponse response,
-        Account account, Bundle options) {
-        if (options != null && options.containsKey(AccountManager.KEY_PASSWORD)) {
-            final String password =
-                options.getString(AccountManager.KEY_PASSWORD);
-            final boolean verified =
-                onlineConfirmPassword(account.name, password);
-            final Bundle result = new Bundle();
-            result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, verified);
-            return result;
-        }
-        // Launch AuthenticatorActivity to confirm credentials
+    public Bundle addAccount(AccountAuthenticatorResponse response, String accountType,
+            String authTokenType, String[] requiredFeatures, Bundle options) {
+        Log.v(TAG, "addAccount()");
         final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
-        intent.putExtra(AuthenticatorActivity.PARAM_USERNAME, account.name);
-        intent.putExtra(AuthenticatorActivity.PARAM_CONFIRMCREDENTIALS, true);
-        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,
-            response);
+        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
         return bundle;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Bundle editProperties(AccountAuthenticatorResponse response,
-        String accountType) {
+    public Bundle confirmCredentials(
+            AccountAuthenticatorResponse response, Account account, Bundle options) {
+        Log.v(TAG, "confirmCredentials()");
+        return null;
+    }
+
+    @Override
+    public Bundle editProperties(AccountAuthenticatorResponse response, String accountType) {
+        Log.v(TAG, "editProperties()");
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Bundle getAuthToken(AccountAuthenticatorResponse response,
-        Account account, String authTokenType, Bundle loginOptions) {
- /*       if (!authTokenType.equals(Constants.AUTHTOKEN_TYPE)) {
+    public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account,
+            String authTokenType, Bundle loginOptions) throws NetworkErrorException {
+        Log.v(TAG, "getAuthToken()");
+        if (account.name.equals(Constants.ANONYMOUS_USER))
+        {
+        	Log.e(TAG, " getAuthToken called for Anonymous user");
+        	return null;
+        }
+
+        // If the caller requested an authToken type we don't support, then
+        // return an error
+        if (!authTokenType.equals(Constants.AUTHTOKEN_TYPE)) {
             final Bundle result = new Bundle();
-            result.putString(AccountManager.KEY_ERROR_MESSAGE,
-                "invalid authTokenType");
+            result.putString(AccountManager.KEY_ERROR_MESSAGE, "invalid authTokenType");
             return result;
         }
+
+        // Extract the username and password from the Account Manager, and ask
+        // the server for an appropriate AuthToken.
         final AccountManager am = AccountManager.get(mContext);
         final String password = am.getPassword(account);
         if (password != null) {
-            final boolean verified =
-                onlineConfirmPassword(account.name, password);
-            if (verified) {
-                final Bundle result = new Bundle();
-                result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-                result.putString(AccountManager.KEY_ACCOUNT_TYPE,
-                    Constants.ACCOUNT_TYPE);
-                result.putString(AccountManager.KEY_AUTHTOKEN, password);
-                return result;
+            try
+            {
+        	 RestClient.login(account.name, password);
+        	 final Bundle result = new Bundle();
+             result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
+             result.putString(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
+             return result;
             }
-        }
-        // the password was missing or incorrect, return an Intent to an
-        // Activity that will prompt the user for the password.
+            catch(Exception e)
+            {
+   
+               
+            }
+            }
+        
+
+        // If we get here, then we couldn't access the user's password - so we
+        // need to re-prompt them for their credentials. We do that by creating
+        // an intent to display our AuthenticatorActivity panel.
         final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
         intent.putExtra(AuthenticatorActivity.PARAM_USERNAME, account.name);
-        intent.putExtra(AuthenticatorActivity.PARAM_AUTHTOKEN_TYPE,
-            authTokenType);
-        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,
-            response);
+        intent.putExtra(AuthenticatorActivity.PARAM_AUTHTOKEN_TYPE, authTokenType);
+        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-        return bundle;*/
-    	return null;
+        return bundle;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getAuthTokenLabel(String authTokenType) {
-        if (authTokenType.equals(Constants.AUTHTOKEN_TYPE)) {
-            return mContext.getString(R.string.label);
-        }
+        // null means we don't support multiple authToken types
+        Log.v(TAG, "getAuthTokenLabel()");
         return null;
-
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Bundle hasFeatures(AccountAuthenticatorResponse response,
-        Account account, String[] features) {
+    public Bundle hasFeatures(
+            AccountAuthenticatorResponse response, Account account, String[] features) {
+        // This call is used to query whether the Authenticator supports
+        // specific features. We don't expect to get called, so we always
+        // return false (no) for any queries.
+        Log.v(TAG, "hasFeatures()");
         final Bundle result = new Bundle();
         result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
         return result;
     }
 
-    /**
-     * Validates user's password on the server
-     */
-    private boolean onlineConfirmPassword(String username, String password) {
-       // return NetworkUtilities.authenticate(username, password,
-       //     null/* Handler */, null/* Context */);
-    	return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Bundle updateCredentials(AccountAuthenticatorResponse response,
-        Account account, String authTokenType, Bundle loginOptions) {
-        final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
-        intent.putExtra(AuthenticatorActivity.PARAM_USERNAME, account.name);
-        intent.putExtra(AuthenticatorActivity.PARAM_AUTHTOKEN_TYPE,
-            authTokenType);
-        intent.putExtra(AuthenticatorActivity.PARAM_CONFIRMCREDENTIALS, false);
-        final Bundle bundle = new Bundle();
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
-        return bundle;
+    public Bundle updateCredentials(AccountAuthenticatorResponse response, Account account,
+            String authTokenType, Bundle loginOptions) {
+        Log.v(TAG, "updateCredentials()");
+        return null;
     }
-
 }

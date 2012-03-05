@@ -27,16 +27,26 @@ public class Constants {
      * Authtoken type string.
      */
     public static final String AUTHTOKEN_TYPE =
-        "com.example.android.samplesync";
+        "com.mewannaplay";
+    
+    public static final String ANONYMOUS_USER = "anonymous";
     
     public static final String BASE_URL =
-            "http://api.mewannaplay.com/V1/";
+            "http://api.mewannaplay.com/v1/";
     public static final String GET_ALL_TENNISCOURTS =
             BASE_URL+"tenniscourts";
     public static final String GET_TENNISCOURT_DETAILS =
     		BASE_URL+"tenniscourtdetails/index/";
     public static final String GET_TENNISCOURT_MESSAGES =
     		BASE_URL+"tenniscourtmessages/index/";
+    public static final String LOGIN  =
+    		BASE_URL+"users/login/";
+    public static final String LOGOUT  =
+    		BASE_URL+"users/logout/";
+    public static final String PARTNERFOUND  =
+    		BASE_URL+"partnerfound/";
+    
+    public final static int password_salt_length = 8; //MUST MATCH SERVER
     
     public static enum ACTIVITY
     {

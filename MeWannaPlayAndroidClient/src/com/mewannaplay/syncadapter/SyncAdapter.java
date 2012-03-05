@@ -73,7 +73,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	Log.d(TAG,"in onPerform sync");
     	
     	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
-  /*      List<User> users;
+  /*=      List<User> users;
         List<Status> statuses;
         String authtoken = null;
          try {
@@ -138,7 +138,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     
     private void getAllCourts()
     {
-    	if (true)
+    	if (false)
     	{
     		getContext().getContentResolver().notifyChange(ProviderContract.TennisCourts.CONTENT_URI, null, false);
     		return;

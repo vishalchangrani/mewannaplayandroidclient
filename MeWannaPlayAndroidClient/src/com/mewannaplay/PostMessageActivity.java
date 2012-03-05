@@ -25,6 +25,7 @@ public class PostMessageActivity extends Activity {
 		                "Posting message", true);
 		    	progressDialog.show();
 		    	postMessage();
+		    	
 		    }
 		});
 	}

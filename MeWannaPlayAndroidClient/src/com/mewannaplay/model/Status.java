@@ -33,6 +33,6 @@ public class Status {
 	
 	public final boolean isNotSuccess()
 	{
-		return code != 200;
+		return code != 200 || error.equalsIgnoreCase("yes") || error.equalsIgnoreCase("true");
 	}
 }
