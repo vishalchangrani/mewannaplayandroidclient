@@ -16,7 +16,10 @@
 
 package com.mewannaplay.syncadapter;
 
+import java.io.IOException;
 import java.util.Date;
+
+import org.json.JSONObject;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -27,6 +30,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SyncResult;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -38,85 +42,53 @@ import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
 
 /**
- * SyncAdapter implementation for syncing all tennis courts details on client side with server
+ * SyncAdapter implementation for syncing all tennis courts details on client
+ * side with server
  */
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
-    private static final String TAG = "SyncAdapter";
+	private static final String TAG = "SyncAdapter";
 
-    private final AccountManager mAccountManager;
- 
-    public static final Intent SYNC_FINISHED = new Intent();
+	private final AccountManager mAccountManager;
 
-    private Date mLastUpdated;
+	public static final String SYNC_FINISHED_ACTION = "SYNC_FINISHED";
+	public static final String SYNC_ERROR = "SYNC_ERROR";
 
-    public SyncAdapter(Context context, boolean autoInitialize) {
-        super(context, autoInitialize);
-        mAccountManager = AccountManager.get(context);
-    }
-    public final static String OPERATION = "operation";
-    public static final int GET_ALL_COURTS = 0;
-    public static final int GET_COURT_DETAILS = 1;
-    public static final int GET_COURT_MESSAGES = 2;
-    public static final int POST_MESSAGE = 3;
-    public static final int MARK_COURT_OCCUPIED = 4;
-    public static final String COURT_ID = "court_id";
+	private Date mLastUpdated;
 
- /*
-  * Called whenever sync-adapter tries to sync with server. 
-  * This function in turns tries to get the authtoken from account manager.
-  * @see android.content.AbstractThreadedSyncAdapter#onPerformSync(android.accounts.Account, android.os.Bundle, java.lang.String, android.content.ContentProviderClient, android.content.SyncResult)
-  */
-    @Override
+	public SyncAdapter(Context context, boolean autoInitialize) {
+		super(context, autoInitialize);
+		mAccountManager = AccountManager.get(context);
+	}
+
+	public final static String OPERATION = "operation";
+	public static final int GET_ALL_COURTS = 0;
+	public static final int GET_COURT_DETAILS = 1;
+	public static final int GET_COURT_MESSAGES = 2;
+	public static final int POST_MESSAGE = 3;
+	public static final int MARK_COURT_OCCUPIED = 4;
+	public static final String COURT_ID = "court_id";
+
+	/*
+	 * Called whenever sync-adapter tries to sync with server. This function in
+	 * turns tries to get the authtoken from account manager.
+	 * 
+	 * @see
+	 * android.content.AbstractThreadedSyncAdapter#onPerformSync(android.accounts
+	 * .Account, android.os.Bundle, java.lang.String,
+	 * android.content.ContentProviderClient, android.content.SyncResult)
+	 */
+	@Override
     public void onPerformSync(Account account, Bundle extras, String authority,
         ContentProviderClient provider, SyncResult syncResult) {
    
     	Log.d(TAG,"in onPerform sync");
-    	
+    	boolean isError = false;
     	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
-  /*=      List<User> users;
-        List<Status> statuses;
-        String authtoken = null;
-         try {
-             // use the account manager to request the credentials
-             authtoken =
-                mAccountManager.blockingGetAuthToken(account,
-                    Constants.AUTHTOKEN_TYPE, true  notifyAuthFailure );
-             // fetch updates from the sample service over the cloud
-             users =
-                NetworkUtilities.fetchFriendUpdates(account, authtoken,
-                    mLastUpdated);
-            // update the last synced date.
-            mLastUpdated = new Date();
-            // update platform contacts.
-            Log.d(TAG, "Calling contactManager's sync contacts");
-            ContactManager.syncContacts(mContext, account.name, users);
-            // fetch and update status messages for all the synced users.
-            statuses = NetworkUtilities.fetchFriendStatuses(account, authtoken);
-            ContactManager.insertStatuses(mContext, account.name, statuses);
-        } catch (final AuthenticatorException e) {
-            syncResult.stats.numParseExceptions++;
-            Log.e(TAG, "AuthenticatorException", e);
-        } catch (final OperationCanceledException e) {
-            Log.e(TAG, "OperationCanceledExcetpion", e);
-        } catch (final IOException e) {
-            Log.e(TAG, "IOException", e);
-            syncResult.stats.numIoExceptions++;
-        } catch (final AuthenticationException e) {
-            mAccountManager.invalidateAuthToken(Constants.ACCOUNT_TYPE,
-                authtoken);
-            syncResult.stats.numAuthExceptions++;
-            Log.e(TAG, "AuthenticationException", e);
-        } catch (final ParseException e) {
-            syncResult.stats.numParseExceptions++;
-            Log.e(TAG, "ParseException", e);
-        } catch (final JSONException e) {
-            syncResult.stats.numParseExceptions++;
-            Log.e(TAG, "JSONException", e);
-        }*/
-    //	Intent i = new Intent(SYNC_FINISHED);
-    //	sendBroadcast(i);
-
-		int operationRequested = extras.getInt(OPERATION);
+ 
+    	try
+    	{
+		
+    	int operationRequested = extras.getInt(OPERATION);
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
 			getAllCourts();
@@ -133,99 +105,141 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		case MARK_COURT_OCCUPIED:
 			break;
 		}
+    	}catch (IOException e)
+    	{
+    		 syncResult.stats.numIoExceptions++;
+    		 isError = true;
+    	}
+    	catch (SQLException e)
+    	{
+    		syncResult.databaseError = true;
+    		isError = true;
+    	}
+    	finally
+    	{
+    		  Intent i = new Intent(SYNC_FINISHED_ACTION);
+    		  i.putExtra(SYNC_ERROR, isError);
+    	      this.getContext().sendBroadcast(i);
+    	}
 
     }
-    
-    private void getAllCourts()
-    {
-    	if (false)
-    	{
-    		getContext().getContentResolver().notifyChange(ProviderContract.TennisCourts.CONTENT_URI, null, false);
-    		return;
-    	}
-    	//if one day has elapsed then get new list...
-    	RestClient restClient = new RestClient(Constants.GET_ALL_TENNISCOURTS);
-    	TennisCourt[] tennisCourts;
-		try {
-			tennisCourts = TennisCourt.fromJSONObjectArray(restClient.execute());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
-		}
-    	ContentValues[] contentValues = new ContentValues[tennisCourts.length];
-    	int i = 0;
-    	for (TennisCourt tennisCourt : tennisCourts)
-    	{
-    		contentValues[i++] = tennisCourt.toContentValue();
-    	}
-    	this.getContext().getContentResolver().bulkInsert(ProviderContract.TennisCourts.CONTENT_URI, contentValues);
-    }
-    
-    public void getCourtDetails(int courtId)
-    {
-    	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_DETAILS+courtId);
-   
-		try {
-			TennisCourtDetails tdc  = TennisCourtDetails.fromJSONObject(restClient.execute());
-			this.getContext().getContentResolver().insert(ProviderContract.TennisCourtsDetails.CONTENT_URI.buildUpon().appendPath(courtId+"").build(), tdc.toContentValue());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-    }
-    
-    public void getCourtMessages(int courtId)
-    {
-    	
-		try {
-	    	this.getContext().getContentResolver().delete(ProviderContract.Messages.CONTENT_URI, null, null);		
-			courtId = 13604;
-	    	RestClient restClient = new RestClient(Constants.GET_TENNISCOURT_MESSAGES+courtId);
 
-			Message[] messages  = Message.fromJSONObject(restClient.execute());
-	    	ContentValues[] contentValues = new ContentValues[messages.length];
-	    	int i = 0;
-	    	for (Message message : messages)
-	    	{
-	    		contentValues[i++] = message.toContentValue();
-	    	}
-	    	this.getContext().getContentResolver().bulkInsert(ProviderContract.Messages.CONTENT_URI, contentValues);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
+	private void getAllCourts() throws IOException {
+		try {
+			if (false) {
+				getContext().getContentResolver().notifyChange(
+						ProviderContract.TennisCourts.CONTENT_URI, null, false);
+				return;
+			}
+			// if one day has elapsed then get new list...
+			RestClient restClient = new RestClient(
+					Constants.GET_ALL_TENNISCOURTS);
+			TennisCourt[] tennisCourts;
+			try {
+				tennisCourts = TennisCourt.fromJSONObjectArray(restClient
+						.execute());
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage());
+				throw new IOException(" Conversion error ");
+			}
+
+			ContentValues[] contentValues = new ContentValues[tennisCourts.length];
+			int i = 0;
+			for (TennisCourt tennisCourt : tennisCourts) {
+				contentValues[i++] = tennisCourt.toContentValue();
+			}
+			this.getContext()
+					.getContentResolver()
+					.bulkInsert(ProviderContract.TennisCourts.CONTENT_URI,
+							contentValues);
+		} catch (IOException e) {
+			// Following is to notify listener to remove spinner.
+			// Unfortunately there is no way at this point to listen for
+			// sysnadapter perform sync completion
+			getContext().getContentResolver().notifyChange(
+					ProviderContract.TennisCourts.CONTENT_URI, null, false);
+			throw e;
 		}
-    }
-    
-    public static Bundle getAllCourtsBundle()
-    {
-    	Bundle extras = new Bundle(); 
+	}
+
+	public void getCourtDetails(int courtId) throws IOException {
+		RestClient restClient = new RestClient(
+				Constants.GET_TENNISCOURT_DETAILS + courtId);
+		JSONObject jsonObject = restClient.execute();
+		try {
+			TennisCourtDetails tdc = TennisCourtDetails
+					.fromJSONObject(jsonObject);
+			this.getContext()
+					.getContentResolver()
+					.insert(ProviderContract.TennisCourtsDetails.CONTENT_URI
+							.buildUpon().appendPath(courtId + "").build(),
+							tdc.toContentValue());
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			throw new IOException(" Conversion error ");
+		}
+	}
+
+	public void getCourtMessages(int courtId) throws IOException {
+
+		ContentValues[] contentValues = null;
+		this.getContext().getContentResolver()
+				.delete(ProviderContract.Messages.CONTENT_URI, null, null);
+		courtId = 13604;
+		RestClient restClient = new RestClient(
+				Constants.GET_TENNISCOURT_MESSAGES + courtId);
+		try {
+			Message[] messages = Message.fromJSONObject(restClient.execute());
+			contentValues = new ContentValues[messages.length];
+			int i = 0;
+			for (Message message : messages) {
+				contentValues[i++] = message.toContentValue();
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			throw new IOException(" Conversion error ");
+		}
+		this.getContext()
+				.getContentResolver()
+				.bulkInsert(ProviderContract.Messages.CONTENT_URI,
+						contentValues);
+
+	}
+
+	public static Bundle getAllCourtsBundle() {
+		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
 		return extras;
-    }
-    
-    public static Bundle getAllCourtsDetailBundle(int courtId)
-    {
-    	Bundle extras = new Bundle(); 
+	}
+
+	public static Bundle getAllCourtsDetailBundle(int courtId) {
+		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_DETAILS);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		
+		 
 		return extras;
-    }
-    
-    public static Bundle getAllMessagesBundle(int courtId)
-    {
-    	Bundle extras = new Bundle(); 
+	}
+
+	public static Bundle getAllMessagesBundle(int courtId) {
+		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGES);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
 		return extras;
-    }
+	}
 }
