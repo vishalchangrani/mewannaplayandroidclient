@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -15,7 +14,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -72,24 +70,24 @@ public class RestClient {
 	}
 
 	// for convenience, since most of the calls will of type GET
-	public JSONObject execute() throws Exception {
+	public JSONObject execute() throws IOException  {
 		return execute(RequestMethods.GET, null);
 	}
 
 	// TODO fix this to better use generics
-	public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend)
-			throws Exception {
+	public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend) throws IOException
+			{
 		String responseString = null;
 		switch (method) {
 		case GET: {
 			HttpGet request = new HttpGet(url);
-			request = (HttpGet) addHeaderParams(request);
+		//	request = (HttpGet) addHeaderParams(request);
 			responseString = executeRequest(request, url);
 			break;
 		}
 		case POST: {
 			HttpPost request = new HttpPost(url);
-			request = (HttpPost) addHeaderParams(request);
+		//	request = (HttpPost) addHeaderParams(request);
 			if (jsonObjectToSend != null) {
 				StringEntity se = new StringEntity(jsonObjectToSend.toString());
 				request.setEntity(se);
@@ -108,29 +106,38 @@ public class RestClient {
 		}
 
 		if (responseString == null)
-			throw new Exception("Server response not recevieved for " + url);
+			throw new IOException("Server response not recevieved for " + url);
 
 		// responseString =
 		// "{\"status\":{\"error\":\"No\",\"code\":200,\"description\":\"\",\"message\":\"Ok\"},\"tenniscourt\":[{\"tennis_id\":\"13604\",\"tennis_latitude\":\"32.807622\",\"tennis_longitude\":\"-85.971383\",\"tennis_subcourts\":\"4\",\"Occupied\":\"124\",\"tennis_facility_type\":\"Private\",\"tennis_name\":\"Willowpoint Golf & Country Club\",\"message_count\":\"124\"}]}";
 		// First extract status
 		final JSONTokener jsonTokener = new JSONTokener(responseString);
-		JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+		Status status = null;
+		JSONObject jsonObject = null;
+		try 
+		{
+		jsonObject = (JSONObject) jsonTokener.nextValue();
 		final GsonBuilder gsonb = new GsonBuilder();
 		final Gson gson = gsonb.setFieldNamingPolicy(
 				FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-		final Status status = gson.fromJson(jsonObject.getJSONObject("status")
+		status = gson.fromJson(jsonObject.getJSONObject("status")
 				.toString(), Status.class);
+		}
+		catch(Exception e)
+		{
+			throw new IOException("Conversion error " + url);
+		}
 
 		if (status == null)
-			throw new Exception("Server response not recevieved for " + url);
+			throw new IOException("Server response not recevieved for " + url);
 		if (status.isNotSuccess())
-			throw new Exception(status.getMessage());
+			throw new IOException(status.getMessage());
 
 		return jsonObject;
 
 	}
 
-	private HttpUriRequest addHeaderParams(HttpUriRequest request)
+/*	private HttpUriRequest addHeaderParams(HttpUriRequest request)
 			throws Exception {
 		for (NameValuePair h : headers) {
 			request.addHeader(h.getName(), h.getValue());
@@ -141,7 +148,7 @@ public class RestClient {
 			request.addHeader(new BasicScheme().authenticate(creds, request));
 		}
 		return request;
-	}
+	}*/
 
 	// private HttpUriRequest addBodyParams(HttpUriRequest request) throws
 	// Exception {
@@ -206,6 +213,7 @@ public class RestClient {
 			return "";
 		} catch (IOException e) {
 			mHttpClient.getConnectionManager().shutdown();
+			mHttpClient = null;
 			Log.e(TAG, e.getMessage(), e);
 			throw e;
 		}

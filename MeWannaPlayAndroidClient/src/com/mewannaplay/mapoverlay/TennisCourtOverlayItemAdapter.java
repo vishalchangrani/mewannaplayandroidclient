@@ -14,7 +14,7 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 	final private Context c;
 	// Store these as global instances so we don't keep reloading every time
 	private Bitmap publicSemiOccupiedCourt, publicNotOccupiedCourt,
-				publicFullyOccupiedCourt, privateCourt;
+				publicFullyOccupiedCourt;
 		
 	public TennisCourtOverlayItemAdapter(TennisCourt tennisCourt, Context c) {
 		super(tennisCourt.getGeoPoint(), tennisCourt.getName(), "Messages :"

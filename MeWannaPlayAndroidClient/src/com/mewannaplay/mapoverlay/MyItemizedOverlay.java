@@ -77,57 +77,11 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	@Override
 	protected boolean onBalloonTap(int index) {
 		int id = m_overlays.get(index).getTennisCourt().getId();
-		getTennisCourtDetails(id);
-		
+	    ((MapViewActivity)c).getTennisCourtDetails(id);
 		return true;
 	}
+
 	
-	private void getTennisCourtDetails(int id)
-	{
-		
-		progressDialog = ProgressDialog.show(this.c, "", 
-                "Fetching court details...", true);
-		
-		this.c.getContentResolver().registerContentObserver(
-				ProviderContract.TennisCourtsDetails.CONTENT_URI, true,
-				new TennisCourtDetailsContentObserver(id));
-		Log.d(TAG, " --> Requesting sync for "+id);
-		ContentResolver.requestSync(MapViewActivity.getAccount(this.c),
-				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsDetailBundle(id));
-	}
-	
-	public class TennisCourtDetailsContentObserver extends ContentObserver {
-
-		private final int tennisCourtId;
-		
-		public TennisCourtDetailsContentObserver(int tennisCourtId) {
-			super(null);
-			this.tennisCourtId = tennisCourtId;
-
-		}
-
-		@Override
-		public boolean deliverSelfNotifications() {
-			return false;
-		}
-		
-		@Override
-		public void onChange(boolean selfChange) {
-			Log.d(TAG, " **** recevied onChange for tenniscourtdetails");
-			super.onChange(selfChange);
-			progressDialog.dismiss();
-			MyItemizedOverlay.this.c.getContentResolver().unregisterContentObserver(this);
-			startTennisCourtDetailActivity(tennisCourtId);
-		}
-	};
-	private void startTennisCourtDetailActivity(int id) {
-
-		Intent intentForTennisCourtDetails = new Intent(this.c, CourtDetailsActivity.class);
-		Bundle extras = new Bundle(); 
-		extras.putInt(SyncAdapter.COURT_ID,id);
-		intentForTennisCourtDetails.putExtras(extras);
-		this.c.startActivity(intentForTennisCourtDetails);//fire it up baby		
-	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event, MapView mapView) {
@@ -137,7 +91,8 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	        {
 	            
 	    	 	// Added to example to make more complete
-	            isMapMoving = true;
+				clear();
+				isMapMoving = true;
 	        }
 
 		return false;
@@ -216,6 +171,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 				cursor.moveToNext();
 			}
+			Log.d(TAG, "total courts added = "+m_overlays.size());
 		} else
 			Log.e(TAG, "cursor for tennis courts found to be empty");
 		cursor.close();
@@ -226,7 +182,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 			      //  mapView.removeAllViews();
 			        // Workaround for another issue with this class:
 			        // <a href="http://groups.google.com/group/android-developers/browse_thread/thread/38b11314e34714c3">http://groups.google.com/group/android-developers/browse_thread/thread/38b11314e34714c3</a>
-			        setLastFocusedIndex(-1);
-			        populate();
+			    //    setLastFocusedIndex(-1);
+			      //  populate();
 			    }
 }

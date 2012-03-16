@@ -36,7 +36,7 @@ public class SplashScreenActivity extends Activity {
 		Log.d(TAG, "Accounts found: "+accounts.length);
 		
 		
-	
+	//If no accounts defined yet or the only account is that of anonymous prompt for login
 		if (accounts.length == 0 || (accounts.length == 1 && accounts[0].name.equals(Constants.ANONYMOUS_USER))) 			
 			accountManagerFuture = mAccountManager
 					.addAccount(Constants.ACCOUNT_TYPE,

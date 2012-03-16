@@ -2,22 +2,33 @@ package com.mewannaplay;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ExpandableListView;
+import android.widget.SimpleCursorAdapter;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
+import com.mewannaplay.CourtDetailsActivity.ExpadableAdapter;
 import com.mewannaplay.mapoverlay.MapLocationOverlay;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
+import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
-import com.mewannaplay.providers.ProviderContract.TennisCourts;
+import com.mewannaplay.providers.ProviderContract.Messages;
+import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
 public class MapViewActivity extends MapActivity {
@@ -28,7 +39,9 @@ public class MapViewActivity extends MapActivity {
 	private MapLocationOverlay mapLocationOverlay;
 	private static Account annonymousAccount;
 	private AccountManagerFuture<Bundle> amFuture;
-
+	private ProgressDialog progressDialog;
+	private AlertDialog alert;
+	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,10 +49,16 @@ public class MapViewActivity extends MapActivity {
 
 
 	
-		getContentResolver().registerContentObserver(
-				TennisCourts.CONTENT_URI, true,
-				new TennisCourtContentObserver());
+//		getContentResolver().registerContentObserver(
+//				TennisCourts.CONTENT_URI, true,
+//				new TennisCourtContentObserver());
+		
+	 	progressDialog = ProgressDialog.show(MapViewActivity.this, "", 
+                "Fetching courts...", true);
+    	progressDialog.show();
+    	
 		// Request first sync..
+    	 registerReceiver(syncFinishedReceiver, new IntentFilter(SyncAdapter.SYNC_FINISHED_ACTION));
 		ContentResolver.requestSync(getAccount(this),
 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsBundle());
 	
@@ -76,6 +95,12 @@ public class MapViewActivity extends MapActivity {
 	        Log.i(TAG,"Removing GPS update requests to save power");
 	        myLocationOverlay.disableCompass();
 	        myLocationOverlay.disableMyLocation();
+	        if (syncFinishedReceiverForCourtDetails != null)
+	        {
+	        	unregisterReceiver(syncFinishedReceiverForCourtDetails);
+	        }
+	        	
+	        syncFinishedReceiverForCourtDetails = null;
 	    }
 	    
 	    public void onResume(){
@@ -83,6 +108,7 @@ public class MapViewActivity extends MapActivity {
 	        Log.i(TAG,"Resuming GPS update requests");	   
 	        myLocationOverlay.enableCompass();
 	        myLocationOverlay.enableMyLocation();
+	       
 	    }
 	    
 	    
@@ -192,4 +218,106 @@ public class MapViewActivity extends MapActivity {
 		} // then
 		return annonymousAccount;
 	}
+	
+	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
+
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+	        Log.d(TAG, "Sync finished, should refresh nao!!");
+	        unregisterReceiver(this);
+	        progressDialog.dismiss();
+	        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
+	        {
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(MapViewActivity.this);
+	        	builder.setMessage("Error while fetching courts")
+	        	       .setCancelable(false)
+	        	       .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	        	           public void onClick(DialogInterface dialog, int id) {
+	        	        	   MapViewActivity.this.finish();
+	        	           }
+	        	       });
+	        	      
+	        	alert = builder.create();
+	        	alert.show();
+	        }
+	        else
+	        {
+	        	final MapView mapView = (MapView) findViewById(R.id.mapview);
+				Runnable waitForMapTimeTask = new Runnable() {
+					public void run() {
+						if (mapView.getLatitudeSpan() == 0
+								|| mapView.getLongitudeSpan() == 360000000) {
+							mapView.postDelayed(this, 100);
+						} else {
+							//redrawMarkers();
+							Log.d(TAG," Adding all tenniscourts to overlay");
+							//Approach 2 - optimize at sql level - sluggish
+							//mapLocationOverlay.getTennisCourtsInView3(mapView);
+							mapView.invalidate(); //causes draw to be invoked which will do the magic
+						}
+					}
+				};
+				mapView.postDelayed(waitForMapTimeTask, 100);
+	        }
+	    }
+	};
+
+	
+	 public void getTennisCourtDetails(int id)
+		{
+			
+			progressDialog = ProgressDialog.show(this, "", 
+	                "Fetching court details...", true);
+		    Log.d(TAG, " --> Requesting sync for "+id);
+		    syncFinishedReceiverForCourtDetails = new SyncFinishedReceiverForCourtDetails(id);
+			registerReceiver(syncFinishedReceiverForCourtDetails, new IntentFilter(SyncAdapter.SYNC_FINISHED_ACTION));
+			ContentResolver.requestSync(MapViewActivity.getAccount(this),
+					ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsDetailBundle(id));
+		}
+	 
+		private final class SyncFinishedReceiverForCourtDetails extends BroadcastReceiver {
+
+			final int courtId;
+			
+			public SyncFinishedReceiverForCourtDetails(int courtId)
+			{
+				this.courtId = courtId;
+			}
+			
+		    @Override
+		    public void onReceive(Context context, Intent intent) {
+		        Log.d(TAG, "Sync finished, should refresh nao!!");
+		        unregisterReceiver(this);
+		        syncFinishedReceiverForCourtDetails = null;
+		        progressDialog.dismiss();
+		        
+		        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
+		        {
+		        	AlertDialog.Builder builder = new AlertDialog.Builder(MapViewActivity.this);
+		        	builder.setMessage("Error while fetching court details")
+		        	       .setCancelable(false)
+		        	       .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+		        	           public void onClick(DialogInterface dialog, int id) {
+		        	        	  
+		        	           }
+		        	       });
+		        	      
+		        	alert = builder.create();
+		        	alert.show();
+		        }
+		        else
+		        {
+		        	startTennisCourtDetailActivity(courtId);
+		        }
+		    }
+		};
+
+		
+		private void startTennisCourtDetailActivity(int id) {			
+			Intent intentForTennisCourtDetails = new Intent(this, CourtDetailsActivity.class);
+			Bundle extras = new Bundle(); 
+			extras.putInt(SyncAdapter.COURT_ID,id);
+			intentForTennisCourtDetails.putExtras(extras);
+			startActivity(intentForTennisCourtDetails);//fire it up baby		
+		}
 }
