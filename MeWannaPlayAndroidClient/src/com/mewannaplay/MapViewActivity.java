@@ -1,5 +1,8 @@
 package com.mewannaplay;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
@@ -11,24 +14,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ExpandableListView;
-import android.widget.SimpleCursorAdapter;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
-import com.mewannaplay.CourtDetailsActivity.ExpadableAdapter;
 import com.mewannaplay.mapoverlay.MapLocationOverlay;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
-import com.mewannaplay.model.TennisCourtDetails;
+import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
+import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
-import com.mewannaplay.providers.ProviderContract.Messages;
-import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
 public class MapViewActivity extends MapActivity {
@@ -42,6 +40,7 @@ public class MapViewActivity extends MapActivity {
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
+	private MyItemizedOverlay myItemizedOverlay;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +73,9 @@ public class MapViewActivity extends MapActivity {
 	{
 		MapView mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
-
 		
-		mapView.getOverlays().add(new MyItemizedOverlay(getResources().getDrawable(R.drawable.tennisball_yellow_16), mapView));
+		myItemizedOverlay = new MyItemizedOverlay(getResources().getDrawable(R.drawable.tennisball_yellow_16), mapView);
+		mapView.getOverlays().add(myItemizedOverlay);
 		myLocationOverlay = new MyLocationOverlay(this,
 				mapView);
 		mapView.getOverlays().add(myLocationOverlay);
@@ -93,7 +92,7 @@ public class MapViewActivity extends MapActivity {
 	   public void onPause() {
 	        super.onPause();
 	        Log.i(TAG,"Removing GPS update requests to save power");
-	        myLocationOverlay.disableCompass();
+	      //  myLocationOverlay.disableCompass();
 	        myLocationOverlay.disableMyLocation();
 	        if (syncFinishedReceiverForCourtDetails != null)
 	        {
@@ -106,7 +105,7 @@ public class MapViewActivity extends MapActivity {
 	    public void onResume(){
 	        super.onResume();
 	        Log.i(TAG,"Resuming GPS update requests");	   
-	        myLocationOverlay.enableCompass();
+	       // myLocationOverlay.enableCompass();
 	        myLocationOverlay.enableMyLocation();
 	       
 	    }
@@ -117,63 +116,6 @@ public class MapViewActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	class TennisCourtContentObserver extends ContentObserver {
-
-		public TennisCourtContentObserver() {
-			super(null);
-		}
-
-		@Override
-		public boolean deliverSelfNotifications() {
-			return false;
-		}
-
-		@Override
-		public void onChange(boolean arg0) {
-			Log.v(TAG, "Notification on TennisCourtContentObserver");
-			super.onChange(arg0);
-			getContentResolver().unregisterContentObserver(this);
-			
-			final MapView mapView = (MapView) findViewById(R.id.mapview);
-			Runnable waitForMapTimeTask = new Runnable() {
-				public void run() {
-					if (mapView.getLatitudeSpan() == 0
-							|| mapView.getLongitudeSpan() == 360000000) {
-						mapView.postDelayed(this, 100);
-					} else {
-						//redrawMarkers();
-						Log.d(TAG," Adding all tenniscourts to overlay");
-						//Approach 2 - optimize at sql level - sluggish
-						//mapLocationOverlay.getTennisCourtsInView3(mapView);
-						mapView.invalidate(); //causes draw to be invoked which will do the magic
-					}
-				}
-			};
-			mapView.postDelayed(waitForMapTimeTask, 100);
-
-
-			/*
-			 * String protocol = cur.getString(cur.getColumnIndex("protocol"));
-			 * if (protocol == null) { Log.d("SMS", "SMS SEND"); int threadId =
-			 * cur.getInt(cur.getColumnIndex("thread_id")); Log.d("SMS",
-			 * "SMS SEND ID = " + threadId); getContentResolver().delete(
-			 * Uri.parse("content://sms/conversations/" + threadId), null,
-			 * null);
-			 * 
-			 * } else { Log.d("SMS", "SMS RECIEVE"); int threadIdIn =
-			 * cur.getInt(cur.getColumnIndex("thread_id"));
-			 * getContentResolver().delete(
-			 * Uri.parse("content://sms/conversations/" + threadIdIn), null,
-			 * null); }
-			 */
-
-		}
-	}
-
-	
-
-
 
 /*	private class MyLocationListener implements LocationListener {
 
@@ -251,6 +193,8 @@ public class MapViewActivity extends MapActivity {
 						} else {
 							//redrawMarkers();
 							Log.d(TAG," Adding all tenniscourts to overlay");
+							getAllTennisCourts();
+							//MyItemizedOverlay.setMapMoving(true);
 							//Approach 2 - optimize at sql level - sluggish
 							//mapLocationOverlay.getTennisCourtsInView3(mapView);
 							mapView.invalidate(); //causes draw to be invoked which will do the magic
@@ -319,5 +263,55 @@ public class MapViewActivity extends MapActivity {
 			extras.putInt(SyncAdapter.COURT_ID,id);
 			intentForTennisCourtDetails.putExtras(extras);
 			startActivity(intentForTennisCourtDetails);//fire it up baby		
+		}
+		
+		private void getAllTennisCourts() {
+	
+			Cursor cursor = this
+					.getContentResolver()
+					.query(ProviderContract.TennisCourts.CONTENT_URI,
+							null,
+							null,
+							null, null);
+			try
+			{
+			List<TennisCourtOverlayItemAdapter> newListOfOverlays = new ArrayList<TennisCourtOverlayItemAdapter>();
+			if (cursor.moveToFirst()) {
+				while (cursor.isAfterLast() == false) {
+					//Log.d(TAG, cursor.getString(cursor.getColumnIndex("name")));
+
+					double latitude = cursor.getDouble(cursor
+							.getColumnIndex("latitude"));
+					double longitude = cursor.getDouble(cursor
+							.getColumnIndex("longitude"));
+//					Log.d(TAG, " Latitude: " + latitude + " Longitude: "
+//							+ longitude);
+
+					int id = cursor.getInt(cursor.getColumnIndex("_id"));
+					int subcourts = cursor.getInt(cursor
+							.getColumnIndex("subcourts"));
+					int occupied = cursor.getInt(cursor.getColumnIndex("occupied"));
+					int messageCount = cursor.getInt(cursor
+							.getColumnIndex("message_count"));
+					String name = cursor.getString(cursor.getColumnIndex("name"));
+					String facilityType = cursor.getString(cursor
+							.getColumnIndex("facility_type"));
+					TennisCourt tennisCourt = new TennisCourt(id, latitude,
+							longitude, subcourts, occupied, facilityType, name,
+							messageCount);
+					newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
+					//addOverlay(new TennisCourtOverlayItemAdapter(tennisCourt, this.c));
+
+					cursor.moveToNext();
+				}
+				myItemizedOverlay.addOverlays(newListOfOverlays);
+				Log.d(TAG, "total courts added = "+myItemizedOverlay.size());
+			} else
+				Log.e(TAG, "cursor for tennis courts found to be empty");
+			}
+			finally
+			{
+			cursor.close();
+			}
 		}
 }

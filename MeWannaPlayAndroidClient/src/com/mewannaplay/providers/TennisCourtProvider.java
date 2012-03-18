@@ -262,6 +262,7 @@ public class TennisCourtProvider extends ContentProvider {
 		
 		Cursor c = qb.query(db, projection, selection, selectionArgs, null,
 				null, sortOrder);
+		
 		c.setNotificationUri(getContext().getContentResolver(), uri); // ??What is this
 		return c;
 		
