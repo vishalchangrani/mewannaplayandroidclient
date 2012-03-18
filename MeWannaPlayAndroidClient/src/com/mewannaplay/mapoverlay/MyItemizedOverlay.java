@@ -16,27 +16,22 @@
 package com.mewannaplay.mapoverlay;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
-import com.mewannaplay.CourtDetailsActivity;
 import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
-import com.mewannaplay.syncadapter.SyncAdapter;
 import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
 public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
@@ -49,7 +44,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	
 	 private static volatile GeoPoint lastLatLon = new GeoPoint(0, 0);
 	 private static volatile GeoPoint currLatLon;
-	 protected volatile static boolean isMapMoving = false;
+	 protected volatile static boolean isMapMoving = true;
 	
 	public MyItemizedOverlay(Drawable defaultMarker, MapView mapView) {
 		super(boundCenter(defaultMarker), mapView);
@@ -62,6 +57,13 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	    m_overlays.add(overlay);
 	    setLastFocusedIndex(-1);
 	    populate();
+	}
+	
+	public void addOverlays(Collection<TennisCourtOverlayItemAdapter> overlays)
+	{
+		  	m_overlays.addAll(overlays);
+		    setLastFocusedIndex(-1);
+		    populate();
 	}
 
 	@Override
@@ -83,8 +85,8 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event, MapView mapView) {
+//	@Override
+/*	public boolean onTouchEvent(MotionEvent event, MapView mapView) {
 		
 	   Log.d(TAG, " onTouchEvent "+event.getAction()) ;
 		if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE)
@@ -96,34 +98,52 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	        }
 
 		return false;
-	}
+	}*/
 	
 	@Override
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
 		if (shadow)
 			return;
 		
+	/*	if (size() == 1843)
+		{
+			super.draw(canvas, mapView, shadow);
+			return;
+		}
 		Log.d(TAG," Map found to be moving? "+isMapMoving);
-		if (isMapMoving) {
+
 		
 			currLatLon = mapView.getProjection().fromPixels(0, 0);
+			if (lastLatLon == null)
+				lastLatLon = currLatLon;
 			if (currLatLon.equals(lastLatLon)) {
+				if (!isMapMoving)
+				{
+					Log.d(TAG, " Map not moving");
+					
+				}
+				else
+				{
 				isMapMoving = false;
 				Log.d(TAG, " Map stopped moving");
-			} else {
+				Log.d(TAG," ---------- in draw of overlay");
+				getTennisCourtsInView(mapView);
+				}
+				
+				
+			} else { //started moving
 				Log.d(TAG, " Map still moving "+lastLatLon+" "+currLatLon);
 				lastLatLon = currLatLon;
+				isMapMoving = true;
 				return;
-			}
-		}
-		Log.d(TAG," ---------- in draw of overlay");
-		getTennisCourtsInView(mapView);
-		super.draw(canvas, mapView, shadow);
+			}*/
 		
+			super.draw(canvas, mapView, shadow);
+				
 	}
 	private void getTennisCourtsInView(MapView mapView) {
 		//TODO: skip all this if mapview bounds havent changed
-		clear();
+	    clear();
 		String topLeftX = Double.toString((mapView.getMapCenter()
 				.getLongitudeE6() - mapView.getLongitudeSpan() / 2) / 1e6);
 		String topLeftY = Double.toString((mapView.getMapCenter()
@@ -135,6 +155,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 //		Log.d(TAG, " Left: " + topLeftX + "," + topLeftY + " Bottom: "
 //				+ bottomRightX + "," + bottomLeftY);
+		
 		Cursor cursor = c
 				.getContentResolver()
 				.query(ProviderContract.TennisCourts.CONTENT_URI,
@@ -142,8 +163,9 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 						" (longitude >= ? and longitude < ?) and (latitude >= ? and latitude < ?) ",
 						new String[] { topLeftX, bottomRightX, topLeftY,
 								bottomLeftY }, null);
-		
-
+		try
+		{
+		List<TennisCourtOverlayItemAdapter> newListOfOverlays = new ArrayList<TennisCourtOverlayItemAdapter>();
 		if (cursor.moveToFirst()) {
 			while (cursor.isAfterLast() == false) {
 				//Log.d(TAG, cursor.getString(cursor.getColumnIndex("name")));
@@ -167,22 +189,37 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 				TennisCourt tennisCourt = new TennisCourt(id, latitude,
 						longitude, subcourts, occupied, facilityType, name,
 						messageCount);
-				addOverlay(new TennisCourtOverlayItemAdapter(tennisCourt, this.c));
+				newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
+				//addOverlay(new TennisCourtOverlayItemAdapter(tennisCourt, this.c));
 
 				cursor.moveToNext();
 			}
+			addOverlays(newListOfOverlays);
 			Log.d(TAG, "total courts added = "+m_overlays.size());
 		} else
 			Log.e(TAG, "cursor for tennis courts found to be empty");
+		}
+		finally
+		{
 		cursor.close();
+		}
 	}
 	
 	public void clear() {
-		m_overlays.clear();
+		//m_overlays.clear();
+		m_overlays = new ArrayList<TennisCourtOverlayItemAdapter>();
 			      //  mapView.removeAllViews();
 			        // Workaround for another issue with this class:
 			        // <a href="http://groups.google.com/group/android-developers/browse_thread/thread/38b11314e34714c3">http://groups.google.com/group/android-developers/browse_thread/thread/38b11314e34714c3</a>
 			    //    setLastFocusedIndex(-1);
 			      //  populate();
 			    }
+
+	public static boolean isMapMoving() {
+		return isMapMoving;
+	}
+
+	public static void setMapMoving(boolean isMapMoving) {
+		MyItemizedOverlay.isMapMoving = isMapMoving;
+	}
 }
