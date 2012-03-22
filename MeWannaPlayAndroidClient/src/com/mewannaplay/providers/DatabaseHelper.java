@@ -12,6 +12,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
 	 public static final String TENNIS_COURT_TABLE_NAME = "tenniscourt";
 	 public static final String TENNIS_COURT_DETAILS_TABLE_NAME = "tenniscourtdetail";
 	 public static final String MESSAGES_TABLE_NAME = "messages";
+	 public static final String CITIES_TABLE_NAME = "cities";
 
 	 private static final String TAG = "DatabaseHelper";
     public DatabaseHelper(Context context) {
@@ -23,6 +24,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_TABLE_NAME);//TODO remove this
     	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_DETAILS_TABLE_NAME);
     	db.execSQL("DROP TABLE IF EXISTS " + MESSAGES_TABLE_NAME);
+    	db.execSQL("DROP TABLE IF EXISTS " + CITIES_TABLE_NAME);
     	db.execSQL("CREATE TABLE " + TENNIS_COURT_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
         		+ " latitude  REAL," 
         		+ " longitude REAL," 
@@ -54,6 +56,12 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
         		+ " contact_type INTEGER,"
           		+ " players_needed VARCHAR(10),"
           		+ " time_posted VARCHAR(500)"
+        		+ ");");
+    	db.execSQL("CREATE TABLE " + CITIES_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
+          		+ " name VARCHAR(500),"
+          		+ " abbreviation VARCHAR(20),"
+          		+ " latitude  REAL," 
+        		+ " longitude REAL" 
         		+ ");");
     }
 

@@ -7,6 +7,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -17,14 +18,17 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
-import com.mewannaplay.mapoverlay.MapLocationOverlay;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
 import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
+import com.mewannaplay.model.City;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
@@ -34,19 +38,44 @@ public class MapViewActivity extends MapActivity {
 	private static final String TAG = "MapViewActivity";
 //	private LocationManager myLocationManager;
 	private MyLocationOverlay myLocationOverlay;
-	private MapLocationOverlay mapLocationOverlay;
 	private static Account annonymousAccount;
 	private AccountManagerFuture<Bundle> amFuture;
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
+	private static City currentCity;
+	public static MapViewActivity mapViewActivity;
+	
+	
+	static final int DIALOG_STATE_CITY_CHOICE = 0;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mapViewActivity = this;
 
-
+		// Restore UI state from the savedInstanceState.
+		  if (savedInstanceState != null)
+		  {
+			  Integer id = savedInstanceState.getInt("currentCityId");
+			  String cityname = savedInstanceState.getString("currentCity");
+			  String state = savedInstanceState.getString("currentState");
+			  Double latitude = savedInstanceState.getDouble("currentLatitude");
+			  Double longitude = savedInstanceState.getDouble("currentLongitude");
+			  if (id != null && cityname != null && state != null && latitude != null && longitude != null)
+			  {
+				  City city = new City();
+				  city.setId(id);
+				  city.setName(cityname);
+				  city.setAbbreviation(state);
+				  city.setLatitude(latitude);
+				  city.setLongitude(longitude);
+				  currentCity = city;
+			  }
+				  
+		  }
 	
 //		getContentResolver().registerContentObserver(
 //				TennisCourts.CONTENT_URI, true,
@@ -64,6 +93,17 @@ public class MapViewActivity extends MapActivity {
 
 		setContentView(R.layout.mapviewlayout);
 		initMap();
+		
+		TextView dropDownCity = (TextView) findViewById(R.id.dropdown_city);
+		dropDownCity.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				MapViewActivity.this.showDialog(DIALOG_STATE_CITY_CHOICE);
+				
+			}
+
+		});
 
 
 	}
@@ -167,9 +207,10 @@ public class MapViewActivity extends MapActivity {
 	    public void onReceive(Context context, Intent intent) {
 	        Log.d(TAG, "Sync finished, should refresh nao!!");
 	        unregisterReceiver(this);
-	        progressDialog.dismiss();
+	        
 	        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
 	        {
+	        	progressDialog.dismiss();
 	        	AlertDialog.Builder builder = new AlertDialog.Builder(MapViewActivity.this);
 	        	builder.setMessage("Error while fetching courts")
 	        	       .setCancelable(false)
@@ -193,7 +234,9 @@ public class MapViewActivity extends MapActivity {
 						} else {
 							//redrawMarkers();
 							Log.d(TAG," Adding all tenniscourts to overlay");
+							progressDialog.setMessage("Parsing data...");
 							getAllTennisCourts();
+							progressDialog.dismiss();
 							//MyItemizedOverlay.setMapMoving(true);
 							//Approach 2 - optimize at sql level - sluggish
 							//mapLocationOverlay.getTennisCourtsInView3(mapView);
@@ -314,4 +357,50 @@ public class MapViewActivity extends MapActivity {
 			cursor.close();
 			}
 		}
+		
+		@Override
+		protected Dialog onCreateDialog(int id) {
+			Dialog dialog = null;
+		    switch(id) {
+		    case DIALOG_STATE_CITY_CHOICE:
+		    	dialog = new StateCityChoiceDialog(this);
+		    	
+		    	break;
+		    
+		    
+		    }
+		    return dialog;
+		}
+
+		public City getCurrentCity() {
+			return currentCity;
+		}
+
+
+		public void setCurrentCity(City currentCity) {
+			MapViewActivity.currentCity = currentCity;
+			MapView mapView = (MapView)findViewById(R.id.mapview);
+			mapView.getController().animateTo(new GeoPoint((int)(currentCity.getLatitude()*1e6),(int)(currentCity.getLongitude()* 1e6)));
+		}
+		
+		@Override
+		public void onSaveInstanceState(Bundle savedInstanceState) 
+ {
+		// Store UI state to the savedInstanceState.
+		// This bundle will be passed to onCreate on next call.
+
+		if (currentCity != null) {
+			savedInstanceState.putInt("currentCityId", currentCity.getId());
+			savedInstanceState.putString("currentCity", currentCity.getName());
+			savedInstanceState.putString("currentState",
+					currentCity.getAbbreviation());
+			savedInstanceState.putDouble("currentLatitude",
+					currentCity.getLatitude());
+			savedInstanceState.putDouble("currentLongitude",
+					currentCity.getLongitude());
+		}
+
+		super.onSaveInstanceState(savedInstanceState);
+	}
+		
 }
