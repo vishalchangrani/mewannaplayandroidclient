@@ -36,6 +36,7 @@ import android.util.Log;
 
 import com.mewannaplay.Constants;
 import com.mewannaplay.client.RestClient;
+import com.mewannaplay.model.City;
 import com.mewannaplay.model.Message;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.model.TennisCourtDetails;
@@ -66,6 +67,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int GET_COURT_MESSAGES = 2;
 	public static final int POST_MESSAGE = 3;
 	public static final int MARK_COURT_OCCUPIED = 4;
+	public static final int GET_ALL_CITIES  = 5;
 	public static final String COURT_ID = "court_id";
 
 	/*
@@ -92,6 +94,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
 			getAllCourts();
+			getAllCities();
 			break;
 		case GET_COURT_DETAILS:
 			int courtId = extras.getInt(COURT_ID);
@@ -103,6 +106,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		case POST_MESSAGE:
 			break;
 		case MARK_COURT_OCCUPIED:
+			break;
+		case GET_ALL_CITIES:
+			getAllCities();
 			break;
 		}
     	}catch (IOException e)
@@ -206,6 +212,37 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 	}
 
+	public void getAllCities() throws IOException
+	{
+		try {
+			RestClient restClient = new RestClient(
+					Constants.GET_ALL_CITIES);
+			City[] cities;
+			try {
+				cities = City.fromJSONObjectArray(restClient
+						.execute());
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage());
+				throw new IOException(" Conversion error ");
+			}
+
+			ContentValues[] contentValues = new ContentValues[cities.length];
+			int i = 0;
+			for (City city : cities) {
+				contentValues[i++] = city.toContentValue();
+			}
+			this.getContext()
+					.getContentResolver()
+					.bulkInsert(ProviderContract.Cities.CONTENT_URI,
+							contentValues);
+		} catch (IOException e) {
+			getContext().getContentResolver().notifyChange(
+					ProviderContract.Cities.CONTENT_URI, null, false);
+			throw e;
+		}
+	}
+	
+	
 	public static Bundle getAllCourtsBundle() {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
@@ -235,6 +272,18 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGES);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		return extras;
+	}
+	
+	
+	public static Bundle getAllCitiesBundle() {
+		Bundle extras = new Bundle();
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_CITIES);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);

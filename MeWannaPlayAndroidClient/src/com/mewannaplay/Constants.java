@@ -45,6 +45,8 @@ public class Constants {
     		BASE_URL+"users/logout/";
     public static final String PARTNERFOUND  =
     		BASE_URL+"partnerfound/";
+    public static final String GET_ALL_CITIES =
+            BASE_URL+"cities";
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
     

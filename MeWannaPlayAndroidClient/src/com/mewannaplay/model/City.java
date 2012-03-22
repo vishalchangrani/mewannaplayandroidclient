@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentValues;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,9 +21,9 @@ public class City {
 	@SerializedName("state_abbreviation")
 	private String abbreviation;
 	@SerializedName("city_latitude")
-	private String latitude;
+	private double latitude;
 	@SerializedName("city_longitude")
-	private String longitude;
+	private double longitude;
 	
 	public int getId() {
 		return id;
@@ -41,20 +43,20 @@ public class City {
 	public void setAbbreviation(String abbreviation) {
 		this.abbreviation = abbreviation;
 	}
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 	
-	public static City[] fromJSONObject(JSONObject jsonObject) throws JsonSyntaxException, JSONException
+	public static City[] fromJSONObjectArray(JSONObject jsonObject) throws JsonSyntaxException, JSONException
 	{
 		final GsonBuilder gsonb = new GsonBuilder();
 		final Gson gson = gsonb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();		
@@ -62,5 +64,18 @@ public class City {
 		City[] citiesArr = (City[]) gson.fromJson(cities.toString(), City[].class);
 		return citiesArr;
 	}
+	
+	
+	public ContentValues toContentValue()
+	{
+		ContentValues contentValues = new ContentValues(5);
+		contentValues.put("_id", id);
+		contentValues.put("latitude", latitude);
+		contentValues.put("longitude", longitude);
+		contentValues.put("name", name);
+		contentValues.put("abbreviation", abbreviation);
+		return contentValues;
+	}
+
 
 }

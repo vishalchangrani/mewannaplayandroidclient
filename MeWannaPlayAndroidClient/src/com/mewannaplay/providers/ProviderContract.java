@@ -91,5 +91,15 @@ public final class ProviderContract
 			public static final String TENNIS_COURTS_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.tenniscourts";
 
 		}
+		
+		
+		public final static class Cities implements BaseColumns {
+			
+			public static final Uri CONTENT_URI = Uri.withAppendedPath(
+			            AUTHORITY_URI, DatabaseHelper.CITIES_TABLE_NAME);
+			 
+			public static final String CITIES_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.cities";
+
+		}
 }
 
