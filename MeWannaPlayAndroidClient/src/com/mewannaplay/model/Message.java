@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -132,6 +133,19 @@ public class Message {
 		JSONArray tennisCourtJsonObject = jsonObject.getJSONArray("courtmessages");
 		Message[] messages = (Message[]) gson.fromJson(tennisCourtJsonObject.toString(), Message[].class);
 		return messages;
+	}
+	
+	public JSONObject toJSONObject()
+	{
+		final GsonBuilder gsonb = new GsonBuilder();
+		final Gson gson = gsonb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();		
+		try {
+			return new JSONObject(gson.toJson(this));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			Log.e(this.getClass().toString(), e.getMessage());
+			return null;
+		}
 	}
 	
 	public ContentValues toContentValue()

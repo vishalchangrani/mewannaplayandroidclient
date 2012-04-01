@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerFuture;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -18,6 +17,9 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
+import com.mewannaplay.client.RestClient;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
 import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
 import com.mewannaplay.model.City;
@@ -39,7 +42,6 @@ public class MapViewActivity extends MapActivity {
 //	private LocationManager myLocationManager;
 	private MyLocationOverlay myLocationOverlay;
 	private static Account annonymousAccount;
-	private AccountManagerFuture<Bundle> amFuture;
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
@@ -55,7 +57,8 @@ public class MapViewActivity extends MapActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mapViewActivity = this;
-
+		setContentView(R.layout.mapviewlayout);
+		
 		// Restore UI state from the savedInstanceState.
 		  if (savedInstanceState != null)
 		  {
@@ -73,10 +76,13 @@ public class MapViewActivity extends MapActivity {
 				  city.setLatitude(latitude);
 				  city.setLongitude(longitude);
 				  currentCity = city;
+				 
 			  }
 				  
 		  }
 	
+		if (currentCity != null)
+			 ((TextView) (MapViewActivity.mapViewActivity.findViewById(R.id.dropdown_city))).setText(currentCity.getName()+","+currentCity.getAbbreviation());
 //		getContentResolver().registerContentObserver(
 //				TennisCourts.CONTENT_URI, true,
 //				new TennisCourtContentObserver());
@@ -91,7 +97,7 @@ public class MapViewActivity extends MapActivity {
 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsBundle());
 	
 
-		setContentView(R.layout.mapviewlayout);
+	
 		initMap();
 		
 		TextView dropDownCity = (TextView) findViewById(R.id.dropdown_city);
@@ -206,6 +212,7 @@ public class MapViewActivity extends MapActivity {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
 	        Log.d(TAG, "Sync finished, should refresh nao!!");
+	        
 	        unregisterReceiver(this);
 	        
 	        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
@@ -343,8 +350,6 @@ public class MapViewActivity extends MapActivity {
 							longitude, subcourts, occupied, facilityType, name,
 							messageCount);
 					newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
-					//addOverlay(new TennisCourtOverlayItemAdapter(tennisCourt, this.c));
-
 					cursor.moveToNext();
 				}
 				myItemizedOverlay.addOverlays(newListOfOverlays);
@@ -403,4 +408,24 @@ public class MapViewActivity extends MapActivity {
 		super.onSaveInstanceState(savedInstanceState);
 	}
 		
+		
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+		    MenuInflater inflater = getMenuInflater();
+		    inflater.inflate(R.menu.map_activity_menu, menu);
+		    return true;
+		}
+		
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+		    // Handle item selection
+		    switch (item.getItemId()) {
+		        case R.id.logout:
+		            RestClient.logout();
+		            this.finish();
+		            return true;
+		        default:
+		            return super.onOptionsItemSelected(item);
+		    }
+		}
 }

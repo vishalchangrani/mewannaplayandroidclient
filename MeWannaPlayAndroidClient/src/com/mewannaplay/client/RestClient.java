@@ -292,4 +292,8 @@ public class RestClient {
 
 	}
 
+	public static boolean isLoggedIn()
+	{
+		return loggedIn;
+	}
 }

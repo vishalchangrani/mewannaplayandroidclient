@@ -381,7 +381,8 @@
     android:paddingTop="10dip"
     android:text="Post
 		Messages"
-    android:textSize="10sp"/>
+    android:textSize="10sp"
+    android:onClick="postMessage" android:enabled="false"/>
 
 
 
@@ -396,7 +397,7 @@
     android:layout_toRightOf="@id/post_msg_button"
     android:layout_alignTop="@id/post_msg_button"
     android:text="Mark Court Occupied"
-    android:textSize="10sp"/>
+    android:textSize="10sp"  android:enabled="false"/>
  
 
 

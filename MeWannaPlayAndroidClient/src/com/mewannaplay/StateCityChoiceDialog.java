@@ -21,6 +21,7 @@ public class StateCityChoiceDialog extends Dialog {
 	
 	Spinner citySpinner;
 	Spinner stateSpinner;
+	private int stateSpinnerCurrentPos = -1;
 	
 	public StateCityChoiceDialog(Context context) {
 		super(context);
@@ -39,44 +40,48 @@ public class StateCityChoiceDialog extends Dialog {
 		{
 
 			SimpleCursorAdapter adapter = ((SimpleCursorAdapter)(stateSpinner.getAdapter()));
-			Cursor cursor =  adapter.getCursor(); 
+			
+			for(int i=0; i < adapter.getCount(); i++) {
+				Cursor cursor = (Cursor) adapter.getItem(i);
+				  if(city.getAbbreviation().equals(cursor.getString(cursor.getColumnIndex("abbreviation")))){
+					  stateSpinnerCurrentPos = i;
+					  stateSpinner.setSelection(i);
+				    break;
+				  }
+				}
+			
 
-			if (cursor.moveToFirst()) {
+			/*if (cursor.moveToFirst()) {
 				while (cursor.isAfterLast() == false) {
 					if (cursor.getString(cursor.getColumnIndex("abbreviation")).equals(city.getAbbreviation()))
 					{
 						int initialPosition = cursor.getPosition();
+						stateSpinnerCurrentPos = initialPosition;
 						initialPosition = (int) adapter.getItemId(initialPosition);
-						OnItemSelectedListener temp = stateSpinner.getOnItemSelectedListener();
-						stateSpinner.setOnItemSelectedListener(null);
 						stateSpinner.setSelection(initialPosition);
-						stateSpinner.setOnItemSelectedListener(temp);
-						temp = null;
 						break;
 					}
 					cursor.moveToNext();
 				}
-			}
+			}*/
 
 			adapter = ((SimpleCursorAdapter)(citySpinner.getAdapter()));
 		 
+
 			if (adapter.getCursor() == null)
 			{
 				initCursorForCitySpinner(city.getAbbreviation());
 			}
-			cursor =  adapter.getCursor();
-			if (cursor.moveToFirst()) {
-				while (cursor.isAfterLast() == false) {
-					if (cursor.getString(cursor.getColumnIndex("name")).equals(city.getName()) && cursor.getString(cursor.getColumnIndex("abbreviation")).equals(city.getAbbreviation()))
-					{
-						int initialPosition = cursor.getPosition();
-						initialPosition = (int) adapter.getItemId(initialPosition);
-						citySpinner.setSelection(initialPosition);
-						break;
-					}
-					cursor.moveToNext();
+			
+			for(int i=0; i < adapter.getCount(); i++) {
+				Cursor cursor = (Cursor) adapter.getItem(i);
+				  if(cursor.getString(cursor.getColumnIndex("name")).equals(city.getName()) && cursor.getString(cursor.getColumnIndex("abbreviation")).equals(city.getAbbreviation())){
+					  citySpinner.setSelection(i);
+				    break;
+				  }
 				}
-			}
+			
+	
 		}
 	}
 	@Override
@@ -105,6 +110,9 @@ public class StateCityChoiceDialog extends Dialog {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long rowId) {
+				if (arg2 == stateSpinnerCurrentPos)
+					return;
+				stateSpinnerCurrentPos = arg2;
 				String state = ((TextView)arg1).getText().toString();
 				if (state != null)
 					initCursorForCitySpinner(state);
@@ -172,4 +180,5 @@ public class StateCityChoiceDialog extends Dialog {
 		((SimpleCursorAdapter)(citySpinner.getAdapter())).changeCursor(cur);
 		citySpinner.setEnabled(true);
 	}
+
 }
