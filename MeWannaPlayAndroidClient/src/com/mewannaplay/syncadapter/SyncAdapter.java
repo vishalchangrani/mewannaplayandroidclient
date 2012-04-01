@@ -19,6 +19,7 @@ package com.mewannaplay.syncadapter;
 import java.io.IOException;
 import java.util.Date;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.accounts.Account;
@@ -35,6 +36,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.mewannaplay.Constants;
+import com.mewannaplay.client.RequestMethods;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.City;
 import com.mewannaplay.model.Message;
@@ -69,6 +71,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int MARK_COURT_OCCUPIED = 4;
 	public static final int GET_ALL_CITIES  = 5;
 	public static final String COURT_ID = "court_id";
+	public static final String MESSAGE_OBJECT_KEY = "message_object_key";
 
 	/*
 	 * Called whenever sync-adapter tries to sync with server. This function in
@@ -93,8 +96,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	int operationRequested = extras.getInt(OPERATION);
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
-			getAllCourts();
-			getAllCities();
+			//getAllCourts();
+			//getAllCities();
 			break;
 		case GET_COURT_DETAILS:
 			int courtId = extras.getInt(COURT_ID);
@@ -104,6 +107,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			courtId = extras.getInt(COURT_ID);
 			getCourtMessages(courtId);
 		case POST_MESSAGE:
+			courtId = extras.getInt(COURT_ID);
+			JSONObject message = new JSONObject(extras.getString(MESSAGE_OBJECT_KEY));
+			postMessage(courtId, message);
 			break;
 		case MARK_COURT_OCCUPIED:
 			break;
@@ -111,7 +117,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			getAllCities();
 			break;
 		}
-    	}catch (IOException e)
+    	}
+    	catch (JSONException e)
+    	{
+    		 syncResult.stats.numParseExceptions++;
+    		 isError = true;
+    	}
+    	catch (IOException e)
     	{
     		 syncResult.stats.numIoExceptions++;
     		 isError = true;
@@ -242,6 +254,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		}
 	}
 	
+	public void postMessage(int courtId, JSONObject message) throws IOException, JSONException
+	{
+		
+			RestClient restClient = new RestClient(
+					Constants.POST_MESSAGE+courtId);
+			restClient.execute(RequestMethods.POST, message);	
+	}
 	
 	public static Bundle getAllCourtsBundle() {
 		Bundle extras = new Bundle();
@@ -289,6 +308,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		return extras;
+	}
+	
+	public static Bundle getPostMessageBundle(int courtId, String messageAsJSONString) {
+		Bundle extras = new Bundle();
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.POST_MESSAGE);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putString(SyncAdapter.MESSAGE_OBJECT_KEY, messageAsJSONString);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		
 		return extras;
 	}
 }

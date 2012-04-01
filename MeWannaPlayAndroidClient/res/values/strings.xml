@@ -61,6 +61,22 @@
   <string name="main_no_items">No items</string>
   <string name="activites">Activities</string>
   <string name="ameneties_and_services">Amenities and services</string>
+  <string name="logout">Log out</string>
     
-        
+    <string name="level_prompt">Choose a level</string>
+ 
+    <string-array name="level_arrays">
+        <item>Beginner</item>
+        <item>Novice</item>
+        <item>Expert</item>
+    </string-array>
+    
+     <string name="players_needed_prompt">Choose players needed</string>
+ 
+    <string-array name="players_needed">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
 </resources>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
@@ -37,6 +40,15 @@ public class CourtDetailsActivity extends ListActivity {
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
+		
+		
+		if (RestClient.isLoggedIn())
+		{
+			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
+			postMsgButton.setEnabled(true);
+			Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
+			markCourtOccupied.setEnabled(true);
+		}
 		
       	// TODO this should ideally be not done on the UI thread..but
     	// will fix later
@@ -174,25 +186,12 @@ public class CourtDetailsActivity extends ListActivity {
 	}
 	
 	
-
-	
-	
-	//TODO User following to refresh message view
-	private class MessagesContentObserver extends ContentObserver {
-
-		final int courtId;
-			
-			public MessagesContentObserver(int courtId) {
-				super(null);
-				this.courtId = courtId;
-
-			}
-
-			@Override
-			public void onChange(boolean selfChange) {
-				stopManagingCursor(messageCursor);
-				messageCursor = managedQuery(Messages.CONTENT_URI, null, null, null, null);
-				runOnUiThread(new Runnable() { public void run() { cursorAdapter.changeCursor(messageCursor);}});
-			}
-			}
+	public void postMessage(View v)
+	{
+		Intent intentForTennisCourtDetails = new Intent(this, PostMessageActivity.class);
+		Bundle extras = new Bundle(); 
+		extras.putInt(SyncAdapter.COURT_ID,courtId);
+		intentForTennisCourtDetails.putExtras(extras);
+		startActivity(intentForTennisCourtDetails);//fire it up baby		
+	}
 }

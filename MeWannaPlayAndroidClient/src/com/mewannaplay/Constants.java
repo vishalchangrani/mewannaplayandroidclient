@@ -47,6 +47,8 @@ public class Constants {
     		BASE_URL+"partnerfound/";
     public static final String GET_ALL_CITIES =
             BASE_URL+"cities";
+    public static final String POST_MESSAGE =
+            BASE_URL+"tenniscourtmessages/index/";
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
     
