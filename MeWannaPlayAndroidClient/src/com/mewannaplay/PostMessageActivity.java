@@ -20,8 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.googlecode.android.widgets.DateSlider.SliderContainer;
-import com.googlecode.android.widgets.DateSlider.SliderContainer.OnTimeChangeListener;
-import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.Message;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
