@@ -47,6 +47,7 @@ import android.widget.TextView;
 import com.mewannaplay.Constants;
 import com.mewannaplay.R;
 import com.mewannaplay.client.RestClient;
+import com.mewannaplay.providers.ProviderContract;
 
 /**
  * Activity which displays login screen to the user.
@@ -184,7 +185,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     	        if (!alreadyAdded) {
     	        	 final Account anonymousAccount = new Account(Constants.ANONYMOUS_USER, Constants.ACCOUNT_TYPE);
     	            mAccountManager.addAccountExplicitly(anonymousAccount, "", null);
-    	            ContentResolver.setSyncAutomatically(anonymousAccount, ContactsContract.AUTHORITY, false);
+    	            ContentResolver.setSyncAutomatically(anonymousAccount,ProviderContract.AUTHORITY, true);
+    	            ContentResolver.setIsSyncable(anonymousAccount, ProviderContract.AUTHORITY, 1);
     	        } 
     	        final Intent intent = new Intent();
     	        intent.putExtra(AccountManager.KEY_ACCOUNT_NAME, Constants.ANONYMOUS_USER);
@@ -242,7 +244,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         	if (!existingAccount)
         	{
         		 mAccountManager.addAccountExplicitly(accountToAdd, mPassword, null);
-        		 ContentResolver.setSyncAutomatically(accountToAdd, ContactsContract.AUTHORITY, false);
+        		 ContentResolver.setSyncAutomatically(accountToAdd, ProviderContract.AUTHORITY, true);
+        		 ContentResolver.setIsSyncable(accountToAdd, ProviderContract.AUTHORITY, 1);
+
         	}
         
         

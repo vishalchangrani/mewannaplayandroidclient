@@ -1,13 +1,19 @@
 package com.mewannaplay;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +26,7 @@ import android.widget.TextView;
 
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourtDetails;
+import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
@@ -33,6 +40,8 @@ public class CourtDetailsActivity extends ListActivity {
 	 private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	int courtId;
+	private ContentObserver messageContentObserver;
+	private Timer messageRefreshTimer; 
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -55,9 +64,12 @@ public class CourtDetailsActivity extends ListActivity {
     	Cursor cursor = getContentResolver().query(
     			TennisCourtsDetails.CONTENT_URI, null, " _id = ?",
     			new String[] { courtId + "" }, null);
+    	if (cursor.getCount() == 0)
+    		this.finish();
     	cursor.moveToFirst();
     	tennisCourtDetails = TennisCourtDetails.fromCursor(cursor);
       	cursor.close(); // dont need court details from db anymore. we
+      	getContentResolver().delete(ProviderContract.Messages.CONTENT_URI, null, null); //clean message table
     	// have cached it
     	if (tennisCourtDetails == null)
     	{
@@ -89,10 +101,59 @@ public class CourtDetailsActivity extends ListActivity {
     	// getLayoutInflater().inflate(R.id.msg_details_table, null);
     	// getListView().addHeaderView(header);
     	CourtDetailsActivity.this.setListAdapter(cursorAdapter);
+    	
+    
+	}
+
+	private class MessagesContentObserver extends ContentObserver 
+	{
+
+		public MessagesContentObserver(Handler handler) {
+			super(handler);
+			// TODO Auto-generated constructor stub
+		}
+		@Override
+		public void onChange(boolean selfChange) {
+			// TODO Auto-generated method stub
+			super.onChange(selfChange);
+			CourtDetailsActivity.this.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					Log.d(TAG, "In observer for messages");
+					cursorAdapter.notifyDataSetChanged();					
+				}
+				
+			});
+		}
 		
 	}
 
-	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		getContentResolver().unregisterContentObserver(messageContentObserver);
+		messageContentObserver = null;
+		messageRefreshTimer.cancel();
+		messageRefreshTimer = null;
+/*		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId));
+		ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
+*/	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		messageContentObserver = new MessagesContentObserver(null);
+    	getContentResolver().registerContentObserver(Messages.CONTENT_URI, true, messageContentObserver);
+    	messageRefreshTimer = new Timer("message refresher for "+courtId);
+    	messageRefreshTimer.schedule(new MessageRefresh(), new Date(), 10*1000);
+    	
+    	/*ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
+				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId), 10);*/
+	}
 	
 	private void populateView()
 	{
@@ -194,4 +255,12 @@ public class CourtDetailsActivity extends ListActivity {
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);//fire it up baby		
 	}
+	
+	
+	class MessageRefresh extends TimerTask {
+		   public void run() {
+			   ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
+				ProviderContract.AUTHORITY,  SyncAdapter.getAllMessagesBundle(courtId));
+		   }
+		}
 }

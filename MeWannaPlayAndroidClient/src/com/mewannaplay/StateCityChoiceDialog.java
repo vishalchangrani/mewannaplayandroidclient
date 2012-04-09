@@ -151,6 +151,15 @@ public class StateCityChoiceDialog extends Dialog {
 				
 			}
 		});
+		
+		button = (Button) findViewById(R.id.choose_current_location);
+		button.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				chooseCurrentLocation(v);
+			}
+		});
 		init();
 		getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 	}
@@ -179,6 +188,13 @@ public class StateCityChoiceDialog extends Dialog {
 		MapViewActivity.mapViewActivity.startManagingCursor(cur);
 		((SimpleCursorAdapter)(citySpinner.getAdapter())).changeCursor(cur);
 		citySpinner.setEnabled(true);
+	}
+	
+	public void chooseCurrentLocation(View v)
+	{
+		MapViewActivity.mapViewActivity.setCurrentCity(null);
+		((TextView) (MapViewActivity.mapViewActivity.findViewById(R.id.dropdown_city))).setText(R.string.current_location);
+		this.dismiss();
 	}
 
 }

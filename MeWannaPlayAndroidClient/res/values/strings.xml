@@ -62,6 +62,7 @@
   <string name="activites">Activities</string>
   <string name="ameneties_and_services">Amenities and services</string>
   <string name="logout">Log out</string>
+  <string name="current_location">Current location</string>
     
     <string name="level_prompt">Choose a level</string>
  

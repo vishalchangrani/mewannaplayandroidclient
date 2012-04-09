@@ -44,7 +44,7 @@ public class PostMessageActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Calendar mInitialTime = Calendar.getInstance();
-		   if (savedInstanceState!=null) {
+		   if (savedInstanceState!=null && savedInstanceState.containsKey("time")) {
 	            Calendar c = (Calendar)savedInstanceState.getSerializable("time");
 	            if (c != null && c.after(mInitialTime)) { //TODO Add check for before
 	                
@@ -96,6 +96,11 @@ public class PostMessageActivity extends Activity {
 	private void postMessage()
 	{
 		Message message = new Message();
+		
+		//hack!courtId should also be a column in message table but its not
+		message.setTennisCourtId(courtId);
+		// -------------------------------
+		
 		String utcScheduleTime = Util.getUTCTimeForHourMinute(mContainer.getTime().get(Calendar.HOUR_OF_DAY), mContainer.getTime().get(Calendar.MINUTE));
 		message.setScheduleTime(utcScheduleTime);
 		Object item= ((Spinner)this.findViewById(R.id.players_needed)).getSelectedItem();

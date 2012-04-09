@@ -224,6 +224,7 @@ public class TennisCourtProvider extends ContentProvider {
 				db.setTransactionSuccessful();
 			} finally {
 				db.endTransaction();
+				//db.close();
 				
 			}
 			break;
