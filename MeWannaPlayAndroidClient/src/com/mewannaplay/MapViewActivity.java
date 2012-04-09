@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -46,7 +48,7 @@ public class MapViewActivity extends MapActivity {
 	private AlertDialog alert;
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
-	private static City currentCity;
+	private static City currentCity; //if null means currentLocation selected
 	public static MapViewActivity mapViewActivity;
 	
 	
@@ -60,32 +62,12 @@ public class MapViewActivity extends MapActivity {
 		setContentView(R.layout.mapviewlayout);
 		
 		// Restore UI state from the savedInstanceState.
-		  if (savedInstanceState != null)
+		  if (savedInstanceState != null && savedInstanceState.containsKey("current_city"))
 		  {
-			  Integer id = savedInstanceState.getInt("currentCityId");
-			  String cityname = savedInstanceState.getString("currentCity");
-			  String state = savedInstanceState.getString("currentState");
-			  Double latitude = savedInstanceState.getDouble("currentLatitude");
-			  Double longitude = savedInstanceState.getDouble("currentLongitude");
-			  if (id != null && cityname != null && state != null && latitude != null && longitude != null)
-			  {
-				  City city = new City();
-				  city.setId(id);
-				  city.setName(cityname);
-				  city.setAbbreviation(state);
-				  city.setLatitude(latitude);
-				  city.setLongitude(longitude);
-				  currentCity = city;
-				 
-			  }
-				  
+			  setCurrentCity((City) savedInstanceState.getSerializable("current_city"));
+			  ((TextView) (MapViewActivity.mapViewActivity.findViewById(R.id.dropdown_city))).setText(currentCity.getName()+","+currentCity.getAbbreviation());				  
 		  }
 	
-		if (currentCity != null)
-			 ((TextView) (MapViewActivity.mapViewActivity.findViewById(R.id.dropdown_city))).setText(currentCity.getName()+","+currentCity.getAbbreviation());
-//		getContentResolver().registerContentObserver(
-//				TennisCourts.CONTENT_URI, true,
-//				new TennisCourtContentObserver());
 		
 	 	progressDialog = ProgressDialog.show(MapViewActivity.this, "", 
                 "Fetching courts...", true);
@@ -122,16 +104,18 @@ public class MapViewActivity extends MapActivity {
 		
 		myItemizedOverlay = new MyItemizedOverlay(getResources().getDrawable(R.drawable.tennisball_yellow_16), mapView);
 		mapView.getOverlays().add(myItemizedOverlay);
-		myLocationOverlay = new MyLocationOverlay(this,
+		myLocationOverlay = new MyMyLocationOverlay(this,
 				mapView);
 		mapView.getOverlays().add(myLocationOverlay);
 		myLocationOverlay.runOnFirstFix(new Runnable() {
 		    public void run() {
-		        centerLocation(myLocationOverlay.getMyLocation());
+		    	if (currentCity == null) //user has not selected any city
+		    		centerLocation(myLocationOverlay.getMyLocation());
 		    }
 		});
 		mapView.invalidate();
 		mapView.getController().setZoom(13);
+		
 		
 	}
 	
@@ -140,6 +124,8 @@ public class MapViewActivity extends MapActivity {
 	        Log.i(TAG,"Removing GPS update requests to save power");
 	      //  myLocationOverlay.disableCompass();
 	        myLocationOverlay.disableMyLocation();
+	        MapView mapView = (MapView) findViewById(R.id.mapview);
+	        mapView.getOverlays().remove(myLocationOverlay);
 	        if (syncFinishedReceiverForCourtDetails != null)
 	        {
 	        	unregisterReceiver(syncFinishedReceiverForCourtDetails);
@@ -152,7 +138,12 @@ public class MapViewActivity extends MapActivity {
 	        super.onResume();
 	        Log.i(TAG,"Resuming GPS update requests");	   
 	       // myLocationOverlay.enableCompass();
-	        myLocationOverlay.enableMyLocation();
+	       if (!myLocationOverlay.enableMyLocation())
+	       {
+	    		Toast.makeText(this, "location unavialable", Toast.LENGTH_LONG).show();
+	       }
+	       MapView mapView = (MapView) findViewById(R.id.mapview);
+	        mapView.getOverlays().add(myLocationOverlay);
 	       
 	    }
 	    
@@ -162,30 +153,6 @@ public class MapViewActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-/*	private class MyLocationListener implements LocationListener {
-
-		public void onLocationChanged(Location argLocation) {
-			// TODO Auto-generated method stub
-			GeoPoint myGeoPoint = new GeoPoint(
-					(int) (argLocation.getLatitude() * 1000000),
-					(int) (argLocation.getLongitude() * 1000000));
-
-			centerLocation(myGeoPoint);
-		}
-
-		public void onProviderDisabled(String provider) {
-			// TODO Auto-generated method stub
-		}
-
-		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
-		}
-
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			// TODO Auto-generated method stub
-		}
-	}*/
 
 	private final void centerLocation(GeoPoint geoPoint) {
 		MapView mapView = (MapView) findViewById(R.id.mapview);
@@ -385,27 +352,29 @@ public class MapViewActivity extends MapActivity {
 		public void setCurrentCity(City currentCity) {
 			MapViewActivity.currentCity = currentCity;
 			MapView mapView = (MapView)findViewById(R.id.mapview);
-			mapView.getController().animateTo(new GeoPoint((int)(currentCity.getLatitude()*1e6),(int)(currentCity.getLongitude()* 1e6)));
+			if (currentCity != null)
+			{
+				
+				mapView.getController().animateTo(new GeoPoint((int)(currentCity.getLatitude()*1e6),(int)(currentCity.getLongitude()* 1e6)));
+			}
+			else
+			{
+				GeoPoint lastLocation = myLocationOverlay.getMyLocation();
+				if (lastLocation != null)
+					mapView.getController().animateTo(lastLocation);
+			}
 		}
 		
 		@Override
 		public void onSaveInstanceState(Bundle savedInstanceState) 
  {
+		super.onSaveInstanceState(savedInstanceState);
 		// Store UI state to the savedInstanceState.
 		// This bundle will be passed to onCreate on next call.
 
 		if (currentCity != null) {
-			savedInstanceState.putInt("currentCityId", currentCity.getId());
-			savedInstanceState.putString("currentCity", currentCity.getName());
-			savedInstanceState.putString("currentState",
-					currentCity.getAbbreviation());
-			savedInstanceState.putDouble("currentLatitude",
-					currentCity.getLatitude());
-			savedInstanceState.putDouble("currentLongitude",
-					currentCity.getLongitude());
+			savedInstanceState.putSerializable("current_city", currentCity);
 		}
-
-		super.onSaveInstanceState(savedInstanceState);
 	}
 		
 		
@@ -428,4 +397,38 @@ public class MapViewActivity extends MapActivity {
 		            return super.onOptionsItemSelected(item);
 		    }
 		}
+		
+	private class MyMyLocationOverlay extends MyLocationOverlay
+	{
+
+		public MyMyLocationOverlay(Context context, MapView mapView) {
+			super(context, mapView);
+		}
+		
+		@Override
+		public synchronized void onLocationChanged(Location location) {
+			
+			super.onLocationChanged(location);
+			if (currentCity == null)
+				centerLocation(this.getMyLocation());
+		}
+		
+		@Override
+		public void onProviderDisabled(String provider) {
+			// TODO Auto-generated method stub
+			super.onProviderDisabled(provider);
+			if (!this.isMyLocationEnabled())
+			{
+				Toast t = new Toast(MapViewActivity.this);
+				t.setText("location unavialable");
+				t.show();
+				
+			}
+		}
+	}
+	
+	public Location getMyCurrentLocation()
+	{
+		return myLocationOverlay.getLastFix();
+	}
 }

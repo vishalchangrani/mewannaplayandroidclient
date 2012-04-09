@@ -34,6 +34,8 @@ public class Message {
 	private int contactTypeId;
 	@SerializedName("created")
 	private String timeposted;
+	@SerializedName("tennis_court_id")
+	private int tennisCourtId;
 
 
 	public int getId() {
@@ -126,11 +128,21 @@ public class Message {
 	}
 
 
+	public int getTennisCourtId() {
+		return tennisCourtId;
+	}
+
+
+	public void setTennisCourtId(int tennisCourtId) {
+		this.tennisCourtId = tennisCourtId;
+	}
+
+
 	public static Message[] fromJSONObject(JSONObject jsonObject) throws JsonSyntaxException, JSONException
 	{
 		final GsonBuilder gsonb = new GsonBuilder();
 		final Gson gson = gsonb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();		
-		JSONArray tennisCourtJsonObject = jsonObject.getJSONArray("courtmessages");
+		JSONArray tennisCourtJsonObject = jsonObject.getJSONArray("Message");
 		Message[] messages = (Message[]) gson.fromJson(tennisCourtJsonObject.toString(), Message[].class);
 		return messages;
 	}

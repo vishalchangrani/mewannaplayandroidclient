@@ -92,12 +92,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
  
     	try
     	{
-		
+		if (!extras.containsKey(OPERATION))
+			return;
     	int operationRequested = extras.getInt(OPERATION);
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
-			//getAllCourts();
-			//getAllCities();
+			getAllCourts();
+			getAllCities();
 			break;
 		case GET_COURT_DETAILS:
 			int courtId = extras.getInt(COURT_ID);
@@ -106,6 +107,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		case GET_COURT_MESSAGES:
 			courtId = extras.getInt(COURT_ID);
 			getCourtMessages(courtId);
+			break;
 		case POST_MESSAGE:
 			courtId = extras.getInt(COURT_ID);
 			JSONObject message = new JSONObject(extras.getString(MESSAGE_OBJECT_KEY));
@@ -122,16 +124,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	{
     		 syncResult.stats.numParseExceptions++;
     		 isError = true;
+    		 Log.e(TAG, e.getMessage());
     	}
     	catch (IOException e)
     	{
     		 syncResult.stats.numIoExceptions++;
     		 isError = true;
+    		 Log.e(TAG, e.getMessage());
     	}
     	catch (SQLException e)
     	{
     		syncResult.databaseError = true;
     		isError = true;
+    		Log.e(TAG, e.getMessage());
     	}
     	finally
     	{
@@ -200,9 +205,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 	public void getCourtMessages(int courtId) throws IOException {
 
+		Log.d(TAG, " in getCourtMessages...");
 		ContentValues[] contentValues = null;
-		this.getContext().getContentResolver()
-				.delete(ProviderContract.Messages.CONTENT_URI, null, null);
 		courtId = 13604;
 		RestClient restClient = new RestClient(
 				Constants.GET_TENNISCOURT_MESSAGES + courtId);
@@ -221,7 +225,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 				.getContentResolver()
 				.bulkInsert(ProviderContract.Messages.CONTENT_URI,
 						contentValues);
-
 	}
 
 	public void getAllCities() throws IOException

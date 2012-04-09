@@ -23,8 +23,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Canvas;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -56,7 +58,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	public void addOverlay(TennisCourtOverlayItemAdapter overlay) {
 	    m_overlays.add(overlay);
 	    setLastFocusedIndex(-1);
-	    populate();
+	    populate(); 
 	}
 	
 	public void addOverlays(Collection<TennisCourtOverlayItemAdapter> overlays)
@@ -73,7 +75,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	@Override
 	public int size() {
-		return m_overlays.size();
+		return  m_overlays.size() > 10 ? 10 : m_overlays.size();
 	}
 
 	@Override
@@ -220,6 +222,8 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	}
 
 	public static void setMapMoving(boolean isMapMoving) {
-		MyItemizedOverlay.isMapMoving = isMapMoving;
+		MyItemizedOverlay.isMapMoving = isMapMoving; 
 	}
+	
+
 }

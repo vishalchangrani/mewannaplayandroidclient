@@ -91,6 +91,7 @@ public class RestClient {
 			if (jsonObjectToSend != null) {
 				StringEntity se = new StringEntity(jsonObjectToSend.toString());
 				request.setEntity(se);
+				Log.d(TAG, jsonObjectToSend.toString());
 			}
 			responseString = executeRequest(request, url);
 			break;
@@ -136,51 +137,6 @@ public class RestClient {
 		return jsonObject;
 
 	}
-
-/*	private HttpUriRequest addHeaderParams(HttpUriRequest request)
-			throws Exception {
-		for (NameValuePair h : headers) {
-			request.addHeader(h.getName(), h.getValue());
-		}
-		if (authentication) {
-			UsernamePasswordCredentials creds = new UsernamePasswordCredentials(
-					username, password);
-			request.addHeader(new BasicScheme().authenticate(creds, request));
-		}
-		return request;
-	}*/
-
-	// private HttpUriRequest addBodyParams(HttpUriRequest request) throws
-	// Exception {
-	// if (jsonBody != null) {
-	// request.addHeader("Content-Type", "application/json");
-	// if (request instanceof HttpPost)
-	// ((HttpPost) request).setEntity(new StringEntity(jsonBody, "UTF-8"));
-	// else if (request instanceof HttpPut)
-	// ((HttpPut) request).setEntity(new StringEntity(jsonBody, "UTF-8"));
-	// } else if (!params.isEmpty()) {
-	// if (request instanceof HttpPost)
-	// ((HttpPost) request).setEntity(new UrlEncodedFormEntity(params,
-	// HTTP.UTF_8));
-	// else if (request instanceof HttpPut)
-	// ((HttpPut) request).setEntity(new UrlEncodedFormEntity(params,
-	// HTTP.UTF_8));
-	// }
-	// return request;
-	// }
-
-	// private String addGetParams() throws Exception {
-	// StringBuffer combinedParams = new StringBuffer();
-	// if (!params.isEmpty()) {
-	// combinedParams.append("?");
-	// for (NameValuePair p : params) {
-	// combinedParams.append((combinedParams.length() > 1 ? "&" : "") +
-	// p.getName() + "="
-	// + URLEncoder.encode(p.getValue(), "UTF-8"));
-	// }
-	// }
-	// return combinedParams.toString();
-	// }
 
 	public String getErrorMessage() {
 		return message;

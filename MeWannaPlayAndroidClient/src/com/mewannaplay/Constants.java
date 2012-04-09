@@ -48,9 +48,11 @@ public class Constants {
     public static final String GET_ALL_CITIES =
             BASE_URL+"cities";
     public static final String POST_MESSAGE =
-            BASE_URL+"tenniscourtmessages/index/";
+            BASE_URL+"tenniscourtmessages/add";
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
+
+	public static final float PROXIMITY = 20f;
     
     public static enum ACTIVITY
     {
