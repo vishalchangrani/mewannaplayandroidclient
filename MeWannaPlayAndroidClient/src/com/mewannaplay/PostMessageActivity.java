@@ -78,7 +78,7 @@ public class PostMessageActivity extends Activity {
 	        mContainer.setMaxTime(maxTime);
 	        
 	        
-		courtId = 13604;//this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
+		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		Button cancelButton = (Button) findViewById(R.id.post_message);
 		cancelButton.setOnClickListener(new OnClickListener() {
 		    public void onClick(View v) {

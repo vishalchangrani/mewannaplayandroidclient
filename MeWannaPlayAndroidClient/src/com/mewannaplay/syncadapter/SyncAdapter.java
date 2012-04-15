@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.SyncResult;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.mewannaplay.Constants;
@@ -64,6 +65,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	}
 
 	public final static String OPERATION = "operation";
+	public final static String RESULT_RECEVIER = "result_receiver";
 	public static final int GET_ALL_COURTS = 0;
 	public static final int GET_COURT_DETAILS = 1;
 	public static final int GET_COURT_MESSAGES = 2;
@@ -149,11 +151,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 	private void getAllCourts() throws IOException {
 		try {
-			if (false) {
-				getContext().getContentResolver().notifyChange(
-						ProviderContract.TennisCourts.CONTENT_URI, null, false);
-				return;
-			}
 			// if one day has elapsed then get new list...
 			RestClient restClient = new RestClient(
 					Constants.GET_ALL_TENNISCOURTS);
@@ -197,8 +194,16 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 					.insert(ProviderContract.TennisCourtsDetails.CONTENT_URI
 							.buildUpon().appendPath(courtId + "").build(),
 							tdc.toContentValue());
+			this.getContext()
+			.getContentResolver()
+			.bulkInsert(ProviderContract.Acitivity.CONTENT_URI,
+					tdc.contentValuesForActivity());
+			this.getContext()
+			.getContentResolver()
+			.bulkInsert(ProviderContract.Amenity.CONTENT_URI,
+					tdc.contentValuesForAmenity());
 		} catch (Exception e) {
-			Log.e(TAG, e.getMessage());
+			Log.e(TAG, " getCourtDetails "+e.getMessage());
 			throw new IOException(" Conversion error ");
 		}
 	}
@@ -207,7 +212,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 		Log.d(TAG, " in getCourtMessages...");
 		ContentValues[] contentValues = null;
-		courtId = 13604;
 		RestClient restClient = new RestClient(
 				Constants.GET_TENNISCOURT_MESSAGES + courtId);
 		try {
@@ -221,6 +225,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			Log.e(TAG, e.getMessage());
 			throw new IOException(" Conversion error ");
 		}
+		Log.d(TAG, "now calling bulk insert for messages");
 		this.getContext()
 				.getContentResolver()
 				.bulkInsert(ProviderContract.Messages.CONTENT_URI,
@@ -261,7 +266,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	{
 		
 			RestClient restClient = new RestClient(
-					Constants.POST_MESSAGE+courtId);
+					Constants.POST_MESSAGE);
 			restClient.execute(RequestMethods.POST, message);	
 	}
 	
@@ -294,11 +299,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGES);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
 		return extras;
 	}
 	

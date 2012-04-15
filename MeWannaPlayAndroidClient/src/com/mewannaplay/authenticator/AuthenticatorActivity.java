@@ -185,7 +185,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     	        if (!alreadyAdded) {
     	        	 final Account anonymousAccount = new Account(Constants.ANONYMOUS_USER, Constants.ACCOUNT_TYPE);
     	            mAccountManager.addAccountExplicitly(anonymousAccount, "", null);
-    	            ContentResolver.setSyncAutomatically(anonymousAccount,ProviderContract.AUTHORITY, true);
+    	            ContentResolver.setSyncAutomatically(anonymousAccount,ProviderContract.AUTHORITY, false);
     	            ContentResolver.setIsSyncable(anonymousAccount, ProviderContract.AUTHORITY, 1);
     	        } 
     	        final Intent intent = new Intent();
@@ -244,7 +244,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         	if (!existingAccount)
         	{
         		 mAccountManager.addAccountExplicitly(accountToAdd, mPassword, null);
-        		 ContentResolver.setSyncAutomatically(accountToAdd, ProviderContract.AUTHORITY, true);
+        		 ContentResolver.setSyncAutomatically(accountToAdd, ProviderContract.AUTHORITY, false);
         		 ContentResolver.setIsSyncable(accountToAdd, ProviderContract.AUTHORITY, 1);
 
         	}

@@ -13,7 +13,9 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
 	 public static final String TENNIS_COURT_DETAILS_TABLE_NAME = "tenniscourtdetail";
 	 public static final String MESSAGES_TABLE_NAME = "messages";
 	 public static final String CITIES_TABLE_NAME = "cities";
-
+	 public static final String TENNIS_COURT_ACIVITY_TABLE_NAME = "activity";
+	 public static final String TENNIS_COURT_AMENITY_TABLE_NAME = "amenity";
+	 
 	 private static final String TAG = "DatabaseHelper";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,6 +27,8 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_DETAILS_TABLE_NAME);
     	db.execSQL("DROP TABLE IF EXISTS " + MESSAGES_TABLE_NAME);
     	db.execSQL("DROP TABLE IF EXISTS " + CITIES_TABLE_NAME);
+    	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_ACIVITY_TABLE_NAME);
+    	db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_AMENITY_TABLE_NAME);
     	db.execSQL("CREATE TABLE " + TENNIS_COURT_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
         		+ " latitude  REAL," 
         		+ " longitude REAL," 
@@ -34,6 +38,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
         		+ " name VARCHAR(250),"
         		+ " message_count INTEGER"
         		+ ");");
+    	
        	db.execSQL("CREATE TABLE " + TENNIS_COURT_DETAILS_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
         		+ " name VARCHAR(250),"
           		+ " address VARCHAR(500),"
@@ -63,13 +68,27 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
           		+ " latitude  REAL," 
         		+ " longitude REAL" 
         		+ ");");
+    	db.execSQL("CREATE TABLE " + TENNIS_COURT_ACIVITY_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
+          		+ " remark VARCHAR(100),"
+          		+ " tennis_court INTEGER NOT NULL, "
+          		+ " FOREIGN KEY(tennis_court) REFERENCES "+TENNIS_COURT_DETAILS_TABLE_NAME+"(_id) ON DELETE CASCADE"
+        		+ ");");
+    	db.execSQL("CREATE INDEX tennis_court_activity_index ON "+ TENNIS_COURT_ACIVITY_TABLE_NAME+"(tennis_court)");
+    	
+    	db.execSQL("CREATE TABLE " + TENNIS_COURT_AMENITY_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
+          		+ " remark VARCHAR(100),"
+          		+ " tennis_court INTEGER NOT NULL, "
+          		+ " FOREIGN KEY(tennis_court) REFERENCES "+TENNIS_COURT_DETAILS_TABLE_NAME+"(_id) ON DELETE CASCADE"
+        		+ ");");
+    	db.execSQL("CREATE INDEX tennis_court_amenity_index ON "+ TENNIS_COURT_AMENITY_TABLE_NAME+"(tennis_court)");
+          		
+    	
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion
                 + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TENNIS_COURT_TABLE_NAME);
         onCreate(db);
     }
     
