@@ -3,6 +3,9 @@
  */
 package com.mewannaplay.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,10 +52,13 @@ public class TennisCourtDetails {
 	private String phone;
 	
 	 
-	private boolean[] activites = new boolean[Constants.ACTIVITY.values().length];
+	/*private boolean[] activites = new boolean[Constants.ACTIVITY.values().length];
 	private String[] activity_remarks = new String[Constants.ACTIVITY.values().length];
-	private boolean[] ameneties = new boolean[Constants.ACTIVITY.values().length];
-	private String[]amenity_remarks = new String[Constants.ACTIVITY.values().length];
+	private boolean[] ameneties = new boolean[Constants.AMENITY.values().length];
+	private String[]amenity_remarks = new String[Constants.AMENITY.values().length];*/
+
+	TennisActivity[] tennisActivities = new TennisActivity[Constants.ACTIVITY.values().length];
+	TennisAmenity[] tennisAmeneties = new TennisAmenity[Constants.AMENITY.values().length];
 	
 	public class TennisActivity
 	{
@@ -72,6 +78,24 @@ public class TennisCourtDetails {
 		public void setRemarks(String remarks) {
 			this.remarks = remarks;
 		}
+		
+		public ContentValues toContentValue()
+		{
+			ContentValues contentValues = new ContentValues(8);
+			contentValues.put("_id", typeId);
+			contentValues.put("remark", nonNullString(remarks));
+			contentValues.put("tennis_court", TennisCourtDetails.this.getId());
+			return contentValues;
+		}
+		
+		public  TennisActivity fromCursor(Cursor cursor)
+		{
+			TennisActivity tdc = new TennisActivity();
+			tdc.setTypeId(cursor.getInt(cursor.getColumnIndex("_id")));
+			tdc.setRemarks(cursor.getString(cursor.getColumnIndex("remark")));
+			return tdc;
+		}
+		
 	}
 	
 	public class TennisAmenity
@@ -92,9 +116,24 @@ public class TennisCourtDetails {
 		public void setRemarks(String remarks) {
 			this.remarks = remarks;
 		}
+		public ContentValues toContentValue()
+		{
+			ContentValues contentValues = new ContentValues(8);
+			contentValues.put("_id", typeId);
+			contentValues.put("remark", TennisCourtDetails.nonNullString(remarks));
+			contentValues.put("tennis_court", TennisCourtDetails.this.id);
+			return contentValues;
+		}
+		public TennisAmenity fromCursor(Cursor cursor)
+		{
+			TennisAmenity tdc = new TennisAmenity();
+			tdc.setTypeId(cursor.getInt(cursor.getColumnIndex("_id")));
+			tdc.setRemarks(cursor.getString(cursor.getColumnIndex("remark")));
+			return tdc;
+		}
 	}
 	
-	public class TennisContact
+	private class TennisContact
 	{
 		@SerializedName("contact_type_id")
 		private int typeId;
@@ -187,7 +226,19 @@ public class TennisCourtDetails {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public boolean[] getActivites() {
+public TennisActivity[] getTennisActivities() {
+		return tennisActivities;
+	}
+	public void setTennisActivities(TennisActivity[] tennisActivities) {
+		this.tennisActivities = tennisActivities;
+	}
+	public TennisAmenity[] getTennisAmeneties() {
+		return tennisAmeneties;
+	}
+	public void setTennisAmeneties(TennisAmenity[] tennisAmeneties) {
+		this.tennisAmeneties = tennisAmeneties;
+	}
+	/*	public boolean[] getActivites() {
 		return activites;
 	}
 	public void setActivites(boolean[] activites) {
@@ -210,7 +261,7 @@ public class TennisCourtDetails {
 	}
 	public void setAmenity_remarks(String[] amenity_remarks) {
 		this.amenity_remarks = amenity_remarks;
-	}
+	}*/
 	public static TennisCourtDetails fromJSONObject(JSONObject jsonObject) throws JsonSyntaxException, JSONException
 	{
 		final GsonBuilder gsonb = new GsonBuilder();
@@ -220,18 +271,18 @@ public class TennisCourtDetails {
 		TennisCourtDetails tennisCourtDetails = (TennisCourtDetails)  (gson.fromJson(tennisCourtJsonObject.toString(), TennisCourtDetails.class));
 		JSONArray tennisActivityJsonArray = tennisCourtJsonObject.getJSONArray("TennisActivity");
 		TennisActivity[] tennisActivities = (TennisActivity[]) gson.fromJson(tennisActivityJsonArray.toString(), TennisActivity[].class);
+	
 		for (TennisActivity tennisActivity : tennisActivities)
 		{
-			tennisCourtDetails.getActivites()[tennisActivity.getTypeId()] = true;
-			tennisCourtDetails.getActivity_remarks()[tennisActivity.getTypeId()] = tennisActivity.getRemarks();
+			tennisCourtDetails.getTennisActivities()[tennisActivity.getTypeId()] = tennisActivity;
 		}
 	
 		JSONArray tennisAmenityJsonArray = tennisCourtJsonObject.getJSONArray("TennisAmenity");
-		TennisAmenity[] tennisAmeneties = (TennisAmenity[]) gson.fromJson(tennisAmenityJsonArray.toString(), TennisAmenity[].class);
-		for (TennisAmenity tennisAmenity : tennisAmeneties)
+		TennisAmenity[] tennisAms = (TennisAmenity[]) gson.fromJson(tennisAmenityJsonArray.toString(), TennisAmenity[].class);
+		for (TennisAmenity tennisAmenity : tennisAms)
 		{
-			tennisCourtDetails.getAmeneties()[tennisAmenity.getTypeId()] = true;
-			tennisCourtDetails.getAmenity_remarks()[tennisAmenity.getTypeId()] = tennisAmenity.getRemarks();
+			tennisCourtDetails.getTennisAmeneties()[tennisAmenity.getTypeId()] = tennisAmenity;
+			
 		}
 		
 		
@@ -264,10 +315,13 @@ public class TennisCourtDetails {
 		contentValues.put("state", nonNullString(state));
 		contentValues.put("abbreviation", nonNullString(abbreviation));
 		contentValues.put("phone", nonNullString(phone));
+		
 		return contentValues;
 	}
 	
-	public static TennisCourtDetails fromCursor(Cursor cursor)
+
+	
+	public static TennisCourtDetails fromCursor(Cursor cursor, Cursor activityCursor, Cursor amenityCursor)
 	{
 		TennisCourtDetails tdc = new TennisCourtDetails();
 		tdc.setId(cursor.getInt(cursor.getColumnIndex("_id")));
@@ -282,6 +336,23 @@ public class TennisCourtDetails {
 		tdc.setState(cursor.getString(cursor.getColumnIndex("state")));
 		tdc.setAbbreviation(cursor.getString(cursor.getColumnIndex("abbreviation")));
 		tdc.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+		
+		for (boolean hasItem = activityCursor.moveToFirst(); hasItem; hasItem = activityCursor.moveToNext()) {
+		    int type = activityCursor.getInt(activityCursor.getColumnIndex("_id"));
+		    TennisActivity tennisActivity = tdc.new TennisActivity();
+		    tennisActivity.setTypeId(type);
+		    tennisActivity.setRemarks(activityCursor.getString(activityCursor.getColumnIndex("remark")));
+		    tdc.getTennisActivities()[type] = tennisActivity;
+		}
+		for (boolean hasItem = amenityCursor.moveToFirst(); hasItem; hasItem = amenityCursor.moveToNext()) {
+		    int type = amenityCursor.getInt(amenityCursor.getColumnIndex("_id"));
+		    TennisAmenity tennisam =  tdc.new TennisAmenity();
+		    tennisam.setTypeId(type);
+		    tennisam.setRemarks(amenityCursor.getString(amenityCursor.getColumnIndex("remark")));
+		    tdc.getTennisAmeneties()[type] = tennisam;
+		}
+
+		
 		return tdc;
 		
 	}
@@ -291,4 +362,42 @@ public class TennisCourtDetails {
 			return "";
 		return inputString;
 	}
+	
+	public ContentValues[] contentValuesForActivity()
+	{
+		List<ContentValues> contentValues = new ArrayList<ContentValues>();
+	
+		for (int i = 0;i<tennisActivities.length;i++)
+		{
+			TennisActivity ta = tennisActivities[i];
+			if (ta == null)
+				continue;
+			ContentValues cs = new ContentValues(3); 
+			cs.put("_id", ta.getTypeId());
+			cs.put("remark", nonNullString(ta.getRemarks()));
+			cs.put("tennis_court", this.id);
+			contentValues.add(cs);
+		}
+		return contentValues.toArray(new ContentValues[contentValues.size()]);
+	}
+	
+	public ContentValues[] contentValuesForAmenity()
+	{
+		List<ContentValues> contentValues = new ArrayList<ContentValues>();
+		
+		for (int i = 0;i<tennisAmeneties.length;i++)
+		{
+			TennisAmenity ta = tennisAmeneties[i];
+			if (ta == null)
+				continue;
+			ContentValues cs = new ContentValues(3); 
+			cs.put("_id", ta.getTypeId());
+			cs.put("remark", nonNullString(ta.getRemarks()));
+			cs.put("tennis_court", this.id);
+			contentValues.add(cs);
+		}
+		return contentValues.toArray(new ContentValues[contentValues.size()]);
+	}
+	
+	
 }

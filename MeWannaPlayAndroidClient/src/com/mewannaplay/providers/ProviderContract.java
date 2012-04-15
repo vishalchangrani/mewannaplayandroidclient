@@ -101,5 +101,23 @@ public final class ProviderContract
 			public static final String CITIES_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.cities";
 
 		}
+		
+		public final static class Acitivity implements BaseColumns {
+			
+			public static final Uri CONTENT_URI = Uri.withAppendedPath(
+			            AUTHORITY_URI, DatabaseHelper.TENNIS_COURT_ACIVITY_TABLE_NAME);
+			 
+			public static final String CITIES_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.activites";
+
+		}
+		
+	public final static class Amenity implements BaseColumns {
+			
+			public static final Uri CONTENT_URI = Uri.withAppendedPath(
+			            AUTHORITY_URI, DatabaseHelper.TENNIS_COURT_AMENITY_TABLE_NAME);
+			 
+			public static final String CITIES_CONTENT_TYPE = "vnd.android.cursor.dir/vnd.mewannaplay.amenities";
+
+		}
 }
 

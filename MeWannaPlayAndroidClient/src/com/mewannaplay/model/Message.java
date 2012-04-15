@@ -152,7 +152,13 @@ public class Message {
 		final GsonBuilder gsonb = new GsonBuilder();
 		final Gson gson = gsonb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();		
 		try {
-			return new JSONObject(gson.toJson(this));
+			
+			//HACK ALERT! Wrapping in data object since CAKE PHP server expects data object for SOME of the POST service
+			JSONObject messageAsJSON = new JSONObject();
+			messageAsJSON.put("Message",new JSONObject(gson.toJson(this)));
+			JSONObject finalJsonObject = new JSONObject();
+			finalJsonObject.put("data",messageAsJSON);
+			return finalJsonObject;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			Log.e(this.getClass().toString(), e.getMessage());

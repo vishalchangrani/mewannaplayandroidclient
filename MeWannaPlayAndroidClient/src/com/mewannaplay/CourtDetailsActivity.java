@@ -1,10 +1,9 @@
 package com.mewannaplay;
 
-import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -12,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
-public class CourtDetailsActivity extends ListActivity {
+public class CourtDetailsActivity extends ListActivity{
 
 	private TennisCourtDetails tennisCourtDetails;
 	 private static final String TAG = "CourtDetailsActivity";
@@ -42,6 +43,9 @@ public class CourtDetailsActivity extends ListActivity {
 	int courtId;
 	private ContentObserver messageContentObserver;
 	private Timer messageRefreshTimer; 
+	private AsyncTask<Void, Void, Void> getMessageTask;
+	private Handler handler = new Handler();
+	private ServiceResultReceiver receiver;
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -67,8 +71,21 @@ public class CourtDetailsActivity extends ListActivity {
     	if (cursor.getCount() == 0)
     		this.finish();
     	cursor.moveToFirst();
-    	tennisCourtDetails = TennisCourtDetails.fromCursor(cursor);
+    	
+    	Cursor activityCursor = getContentResolver().query(
+    			ProviderContract.Acitivity.CONTENT_URI, null, " tennis_court = ?",
+    			new String[] { courtId + "" }, null);
+    	
+    	Cursor amenityCursor = getContentResolver().query(
+    			ProviderContract.Amenity.CONTENT_URI, null, " tennis_court = ?",
+    			new String[] { courtId + "" }, null);
+    	
+    	
+    	tennisCourtDetails = TennisCourtDetails.fromCursor(cursor,activityCursor,amenityCursor);
       	cursor.close(); // dont need court details from db anymore. we
+      	activityCursor.close();
+      	amenityCursor.close();
+      	
       	getContentResolver().delete(ProviderContract.Messages.CONTENT_URI, null, null); //clean message table
     	// have cached it
     	if (tennisCourtDetails == null)
@@ -102,6 +119,14 @@ public class CourtDetailsActivity extends ListActivity {
     	// getListView().addHeaderView(header);
     	CourtDetailsActivity.this.setListAdapter(cursorAdapter);
     	
+    	// Set our receiver
+
+   // 	receiver = new ServiceResultReceiver(new Handler());
+
+    	//receiver.setReceiver(this);
+
+
+    	
     
 	}
 
@@ -114,7 +139,7 @@ public class CourtDetailsActivity extends ListActivity {
 		}
 		@Override
 		public void onChange(boolean selfChange) {
-			// TODO Auto-generated method stub
+			Log.d(TAG, "onChange for message");
 			super.onChange(selfChange);
 			CourtDetailsActivity.this.runOnUiThread(new Runnable() {
 
@@ -135,12 +160,13 @@ public class CourtDetailsActivity extends ListActivity {
 		super.onPause();
 		getContentResolver().unregisterContentObserver(messageContentObserver);
 		messageContentObserver = null;
-		messageRefreshTimer.cancel();
-		messageRefreshTimer = null;
-/*		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId));
+	//	messageRefreshTimer.cancel();
+	//	messageRefreshTimer = null;
+		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId)); 
 		ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
-*/	}
+		ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, false);
+	}
 
 	@Override
 	protected void onResume() {
@@ -148,11 +174,15 @@ public class CourtDetailsActivity extends ListActivity {
 		super.onResume();
 		messageContentObserver = new MessagesContentObserver(null);
     	getContentResolver().registerContentObserver(Messages.CONTENT_URI, true, messageContentObserver);
-    	messageRefreshTimer = new Timer("message refresher for "+courtId);
-    	messageRefreshTimer.schedule(new MessageRefresh(), new Date(), 10*1000);
-    	
-    	/*ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId), 10);*/
+    	//messageRefreshTimer = new Timer("message refresher for "+courtId);
+    	//messageRefreshTimer.schedule(new MessageRefresh(), new Date(), 60*1000);
+    	//getMessageTask = new GetMessagesTask();
+    	//getMessageTask.execute();
+    	 ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, true);
+    	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
+				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId), 10);
+    	//ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
+			//	ProviderContract.AUTHORITY,  SyncAdapter.getAllMessagesBundle(courtId));
 	}
 	
 	private void populateView()
@@ -195,10 +225,30 @@ public class CourtDetailsActivity extends ListActivity {
 			switch(groupPosition)
 			{
 			case 0:
+				View view = infalInflater.inflate(R.layout.child_layout_ameneties_services, null);
 				
-				return infalInflater.inflate(R.layout.child_layout_ameneties_services, null);
+				((ImageView)(view.findViewById(R.id.lockerRoomIcon))).setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.LOCKER_ROOM.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.parking))).setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.PARKING.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.lessons))).setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.LESSONS.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.lights))).setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.LIGHTS.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.snackBar))).setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.SNACK_BAR.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.shop))).setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.SHOP.ordinal()] != null ? 1 : 0); 
+				
+		
+				return view;
 			case 1:
-				return infalInflater.inflate(R.layout.child_layout_activities, null);
+				
+				view = infalInflater.inflate(R.layout.child_layout_activities, null);				
+				((ImageView)(view.findViewById(R.id.adultProgram))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.NEW_PLAYER_ADULT_PROGRAM.ordinal()] != null ? 1 : 0);
+				((ImageView)(view.findViewById(R.id.teamTennis))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.TEAM_TENNIS.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.juniorProgram))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.NEW_PLAYER_JUNIOR_PROGRAM.ordinal()]!= null ? 1 : 0);
+				((ImageView)(view.findViewById(R.id.tournaments))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.TOURNAMENTS.ordinal()] != null? 1 : 0);
+				((ImageView)(view.findViewById(R.id.ladders))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.LADDERS.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.roundRobin))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.ROUND_ROBINS.ordinal()] != null ? 1 : 0);
+				((ImageView)(view.findViewById(R.id.socialMixers))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.SOCIAL_MIXERS.ordinal()] != null ? 1 : 0); 
+				((ImageView)(view.findViewById(R.id.seniors))).setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.SENIORS.ordinal()] != null ? 1 : 0);
+				return view;
+
 			}
 			return null;
 		}
@@ -257,10 +307,28 @@ public class CourtDetailsActivity extends ListActivity {
 	}
 	
 	
-	class MessageRefresh extends TimerTask {
+	/*class MessageRefresh extends TimerTask {
 		   public void run() {
+			   Log.d(TAG, "scheduling timertask to get messages ");
 			   ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
 				ProviderContract.AUTHORITY,  SyncAdapter.getAllMessagesBundle(courtId));
 		   }
-		}
+		}*/
+	
+	private class GetMessagesTask extends AsyncTask<Void, Void, Void> {
+	    @Override 
+		protected Void doInBackground(Void... arg0) {
+	    	 Log.d(TAG, "scheduling timertask to get messages ");
+			   ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
+				ProviderContract.AUTHORITY,  SyncAdapter.getAllMessagesBundle(courtId));
+			   return null;
+	     }
+
+	 }
+	
+	/*@Override
+	public void onReceiveResult(int resultCode, Bundle resultBundle) {
+		Log.d(TAG, " onRecvResult ");
+		
+	}*/
 }

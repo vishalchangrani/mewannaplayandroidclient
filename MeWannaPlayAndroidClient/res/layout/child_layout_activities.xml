@@ -7,18 +7,18 @@
 	android:gravity="right">
     <TableRow android:gravity="center_horizontal">
         <LinearLayout android:gravity="left" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-            <ImageView android:src="@android:drawable/ic_delete" android:layout_height="wrap_content" android:layout_width="15dp" android:id="@+id/adultProgram"></ImageView>
+            <ImageView android:src="@drawable/check_or_uncheck_image" android:layout_height="wrap_content" android:layout_width="15dp" android:id="@+id/adultProgram"></ImageView>
             <TextView android:text="New player adult program" android:textSize="10dp" android:paddingLeft="2dip" android:typeface="serif" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:textColor="#000000" android:textStyle="normal" android:gravity="center_vertical"></TextView>
         </LinearLayout>
         <LinearLayout android:paddingLeft="10dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-            <ImageView android:src="@android:drawable/ic_delete" android:layout_height="wrap_content" android:layout_width="15dp" android:id="@+id/teamTennis"></ImageView>
+            <ImageView android:src="@drawable/check_or_uncheck_image" android:layout_height="wrap_content" android:layout_width="15dp" android:id="@+id/teamTennis"></ImageView>
             <TextView android:text="Team tennis" android:textSize="10dp" android:paddingLeft="2dip" android:typeface="serif" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:textColor="#000000" android:textStyle="normal"></TextView>
         </LinearLayout>
     </TableRow>
 	<TableRow android:gravity="center_horizontal">
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="horizontal">
-			<ImageView android:id="@+id/juniorProgram" android:src="@android:drawable/ic_delete"
+			<ImageView android:id="@+id/juniorProgram" android:src="@drawable/check_or_uncheck_image"
 				android:layout_width="15dp" android:layout_height="wrap_content" />
 			<TextView android:paddingLeft="2dip" android:text="New player junior program"
 				android:textSize="10dp" android:textStyle="normal" android:typeface="serif"
@@ -29,7 +29,7 @@
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="horizontal"
 			android:paddingLeft="10dip">
-			<ImageView android:id="@+id/tournaments" android:src="@android:drawable/ic_delete"
+			<ImageView android:id="@+id/tournaments" android:src="@drawable/check_or_uncheck_image"
 				android:layout_width="15dp" android:layout_height="wrap_content" />
 			<TextView android:paddingLeft="2dip" android:text="Tournaments"
 				android:textSize="10sp" android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
 	<TableRow android:gravity="center_horizontal">
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="horizontal">
-			<ImageView android:id="@+id/ladders" android:src="@android:drawable/ic_delete"
+			<ImageView android:id="@+id/ladders" android:src="@drawable/check_or_uncheck_image"
 				android:layout_width="15dp" android:layout_height="wrap_content" />
 			<TextView android:paddingLeft="2dip" android:text="Ladders"
 				android:textSize="10dp" android:textStyle="normal" android:typeface="serif"
@@ -52,7 +52,7 @@
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="horizontal"
 			android:paddingLeft="10dip">
-			<ImageView android:id="@+id/roundRobin" android:src="@android:drawable/ic_delete"
+			<ImageView android:id="@+id/roundRobin" android:src="@drawable/check_or_uncheck_image"
 				android:layout_width="15dp" android:layout_height="wrap_content" />
 			<TextView android:paddingLeft="2dip" android:text="Round robins"
 				android:textSize="10sp" android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
 <TableRow android:gravity="center_horizontal">
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="horizontal">
-			<ImageView android:id="@+id/socialMixers" android:src="@android:drawable/ic_delete"
+			<ImageView android:id="@+id/socialMixers" android:src="@drawable/check_or_uncheck_image"
 				android:layout_width="15dp" android:layout_height="wrap_content" />
 			<TextView android:paddingLeft="2dip" android:text="Social/Mixers"
 				android:textSize="10dp" android:textStyle="normal" android:typeface="serif"
@@ -75,7 +75,7 @@
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:orientation="horizontal"
 			android:paddingLeft="10dip">
-			<ImageView android:id="@+id/seniors" android:src="@android:drawable/ic_delete"
+			<ImageView android:id="@+id/seniors" android:src="@drawable/check_or_uncheck_image"
 				android:layout_width="15dp" android:layout_height="wrap_content" />
 			<TextView android:paddingLeft="2dip" android:text="Seniors 50+"
 				android:textSize="10sp" android:layout_width="wrap_content"
