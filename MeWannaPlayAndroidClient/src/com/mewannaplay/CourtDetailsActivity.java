@@ -1,9 +1,13 @@
 package com.mewannaplay;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.Timer;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -14,14 +18,18 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -112,13 +120,25 @@ public class CourtDetailsActivity extends ListActivity{
     			Messages.CONTENT_URI, null, null, null, null);
     	startManagingCursor(messageCursor);
 
-    	cursorAdapter = new SimpleCursorAdapter(CourtDetailsActivity.this,
+    	cursorAdapter = new MessagesCursorAdapter(CourtDetailsActivity.this,
     			R.layout.court_message_row, messageCursor, columns, to);
     	// View header =
     	// getLayoutInflater().inflate(R.id.msg_details_table, null);
     	// getListView().addHeaderView(header);
     	CourtDetailsActivity.this.setListAdapter(cursorAdapter);
     	
+    	this.getListView().setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+			Log.d(TAG,"selected");
+				
+			}
+    		
+    	});
+    	this.getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
     	// Set our receiver
 
    // 	receiver = new ServiceResultReceiver(new Handler());
@@ -331,4 +351,87 @@ public class CourtDetailsActivity extends ListActivity{
 		Log.d(TAG, " onRecvResult ");
 		
 	}*/
+	
+	
+	private class MessagesCursorAdapter extends SimpleCursorAdapter
+	{
+
+		private final LayoutInflater mInflater;
+		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		public MessagesCursorAdapter(Context context, int layout, Cursor c,
+				String[] from, int[] to) {
+			super(context, layout, c, from, to);
+			 mInflater = LayoutInflater.from(context);
+
+		}
+		
+		
+		@Override
+	    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+	         return mInflater.inflate(R.layout.court_message_row, parent, false);
+	    }
+
+	    @Override
+	    public void bindView(View view, Context context, Cursor cursor) {
+	        //1
+	    	
+	    	String scheduled_time = cursor.getString(cursor.getColumnIndex("scheduled_time"));
+	    	sdfDate.setTimeZone(TimeZone.getTimeZone("gmt"));
+
+	    	Date scheduledDate;
+			try {
+				scheduledDate = sdfDate.parse(scheduled_time);
+			     String scheduledDateOnlyTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(scheduledDate).toString();
+			     ((TextView) view.findViewById(R.id.scheduled_time)).setText(scheduledDateOnlyTime);
+			} catch (ParseException e) {
+				Log.e(TAG,e.getMessage());
+			}
+	   
+	        
+	        //2
+	        String user = cursor.getString(cursor.getColumnIndex("user"));
+	        if (user.length() > 20)
+	        	user = user.substring(0, 20);
+	        ((TextView) view.findViewById(R.id.user)).setText(user);
+	        
+	        
+	        //3
+	        String contact_info = cursor.getString(cursor.getColumnIndex("contact_info"));
+	        if (contact_info.length() > 20)
+	        	contact_info = contact_info.substring(0, 20);
+	        ((TextView) view.findViewById(R.id.contact_info)).setText(user);
+	        
+	        //4
+	        String level = cursor.getString(cursor.getColumnIndex("level"));
+	        ((TextView) view.findViewById(R.id.level)).setText("Beginner");
+	        
+	        //5
+	        String players_needed = cursor.getString(cursor.getColumnIndex("players_needed"));
+	        ((TextView) view.findViewById(R.id.players_needed)).setText("Players needed: "+players_needed);
+	        
+	        //6
+	        String time_posted = cursor.getString(cursor.getColumnIndex("time_posted"));
+	        Date timePostedDate;
+			try {
+				timePostedDate = sdfDate.parse(time_posted);
+				String timepostedAgo  = DateUtils.getRelativeTimeSpanString(timePostedDate.getTime()).toString();
+			    ((TextView) view.findViewById(R.id.time_posted)).setText(timepostedAgo);
+			} catch (ParseException e) {
+				Log.e(TAG,e.getMessage());
+			}
+	        
+			//7
+	        String messageText = cursor.getString(cursor.getColumnIndex("text"));
+	        if (messageText.length() > 50)
+	        {
+	        	messageText = messageText.substring(0, 48);
+	        	messageText = messageText + "...";
+	        }
+	        ((TextView) view.findViewById(R.id.message_text)).setText(messageText);
+	    }
+	    
+
+		
+	}
 }
