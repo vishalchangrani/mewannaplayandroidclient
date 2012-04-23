@@ -92,11 +92,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	boolean isError = false;
     	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
  
-    	try
-    	{
-		if (!extras.containsKey(OPERATION))
+    	if (!extras.containsKey(OPERATION))
 			return;
     	int operationRequested = extras.getInt(OPERATION);
+    	try
+    	{
+		
+    	
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
 			getAllCourts();
@@ -144,6 +146,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	{
     		  Intent i = new Intent(SYNC_FINISHED_ACTION);
     		  i.putExtra(SYNC_ERROR, isError);
+    		  i.putExtra(OPERATION, operationRequested);
     	      this.getContext().sendBroadcast(i);
     	}
 

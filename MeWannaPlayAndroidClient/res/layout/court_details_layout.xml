@@ -4,9 +4,7 @@
   android:id="@+id/relative"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
-  android:background="#7DAEFF98"  android:orientation="vertical">
-
-
+  android:orientation="vertical">
 
 
  <TableLayout
@@ -280,7 +278,7 @@
  
 
 
-   <TableLayout
+<!--    <TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="fill_parent"
@@ -349,7 +347,7 @@
 
 
     </TableRow>
-  </TableLayout> 
+  </TableLayout>  -->
 
 
 
@@ -358,7 +356,7 @@
     android:layout_width="fill_parent"
     android:layout_height="140dip"
     android:scrollbars="vertical" 
-    android:layout_below="@id/msg_details_table"
+    android:layout_below="@id/msg_table"
     android:paddingTop="0dip"
     android:paddingBottom="10dip"
     android:paddingLeft="10dip"
@@ -366,7 +364,7 @@
     android:dividerHeight="0dip"
     android:layout_marginLeft="10dip"
     android:layout_marginRight="10dip"
-    android:background="@drawable/bgroundbottom"/>
+     android:choiceMode="singleChoice" />
  
 
 

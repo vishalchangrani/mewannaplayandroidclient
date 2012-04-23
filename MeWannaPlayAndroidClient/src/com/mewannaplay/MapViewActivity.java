@@ -180,6 +180,9 @@ public class MapViewActivity extends MapActivity {
 	    public void onReceive(Context context, Intent intent) {
 	        Log.d(TAG, "Sync finished, should refresh nao!!");
 	        
+	        if (intent.getExtras().getInt(SyncAdapter.OPERATION) != SyncAdapter.GET_ALL_COURTS)
+	        	return;
+	        
 	        unregisterReceiver(this);
 	        
 	        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
