@@ -1,10 +1,13 @@
 package com.mewannaplay.model;
 
+import static com.mewannaplay.model.TennisCourtDetails.nonNullString;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.util.Log;
 
 import com.google.gson.FieldNamingPolicy;
@@ -12,7 +15,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
-import static com.mewannaplay.model.TennisCourtDetails.nonNullString;
 
 public class Message {
 	
@@ -22,6 +24,8 @@ public class Message {
 	private String text;
 	@SerializedName("user_login_id")
 	private String user;
+	@SerializedName("user_name")
+	private String userName;
 	@SerializedName("level")
 	private String level;
 	@SerializedName("schedule_time")
@@ -65,6 +69,16 @@ public class Message {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 
@@ -172,6 +186,7 @@ public class Message {
 		contentValues.put("_id", id);
 		contentValues.put("text", nonNullString(text));
 		contentValues.put("user", nonNullString(user));
+		contentValues.put("user_name", nonNullString(userName));
 		contentValues.put("level", nonNullString(level));
 		contentValues.put("scheduled_time", nonNullString(scheduleTime));
 		contentValues.put("contact_info", nonNullString(contactInfo));
@@ -179,5 +194,22 @@ public class Message {
 		contentValues.put("players_needed", nonNullString(playerNeeded));
 		contentValues.put("time_posted", nonNullString(timeposted));
 		return contentValues;
+	}
+	
+	
+	public static Message fromCursor(Cursor cursor)
+	{
+		Message message = new Message();
+		message.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+		message.setUser(cursor.getString(cursor.getColumnIndex("user")));
+		message.setUserName(cursor.getString(cursor.getColumnIndex("user_name")));
+		message.setScheduleTime(cursor.getString(cursor.getColumnIndex("scheduled_time")));
+		message.setContactInfo(cursor.getString(cursor.getColumnIndex("contact_info")));
+		message.setContactTypeId(cursor.getInt(cursor.getColumnIndex("contact_type")));
+		message.setPlayerNeeded(cursor.getString(cursor.getColumnIndex("players_needed")));
+		message.setTimeposted(cursor.getString(cursor.getColumnIndex("time_posted")));
+		message.setLevel(cursor.getString(cursor.getColumnIndex("level")));
+		message.setText(cursor.getString(cursor.getColumnIndex("text")));
+		return message;
 	}
 }

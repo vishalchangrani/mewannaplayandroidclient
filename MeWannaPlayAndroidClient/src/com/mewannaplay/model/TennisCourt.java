@@ -31,6 +31,16 @@ public class TennisCourt {
 	private String name;
 	@SerializedName("tennis_message_count")
 	private int messageCount;
+	@SerializedName("city_name")
+	private String city;
+	@SerializedName("state_name")
+	private String state;
+	@SerializedName("county_name")
+	private String countyName;
+	@SerializedName("state_abbreviation")
+	private String abbreviation;
+	
+	
 
 	public TennisCourt() {
 
@@ -38,7 +48,7 @@ public class TennisCourt {
 
 	public TennisCourt(int id, double latitude, double longitude,
 			int subcourts, int occupied, String facilityType, String name,
-			int messageCount) {
+			int messageCount, String city, String county, String state, String abbreviation) {
 		this.id = id;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -47,6 +57,10 @@ public class TennisCourt {
 		this.facilityType = facilityType;
 		this.name = name;
 		this.messageCount = messageCount;
+		this.city = city;
+		this.state = state;
+		this.countyName = county;
+		this.countyName = county;
 	}
 
 	public int getId() {
@@ -134,6 +148,42 @@ public class TennisCourt {
 		return occupied == 0;
 	}
 	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountyName() {
+		return countyName;
+	}
+
+	public void setCountyName(String countyName) {
+		this.countyName = countyName;
+	}
+
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
+	}
+
+	public void setOccupied(int occupied) {
+		this.occupied = occupied;
+	}
+
 	public GeoPoint getGeoPoint()
 	{
 	 return new GeoPoint((int) (latitude * 1e6), (int) (longitude * 1e6));
@@ -150,6 +200,10 @@ public class TennisCourt {
 		contentValues.put("facility_type", facilityType);
 		contentValues.put("name", name);
 		contentValues.put("message_count", messageCount);
+		contentValues.put("city", city);
+		contentValues.put("state", state);
+		contentValues.put("county", countyName);
+		contentValues.put("abbreviation", abbreviation);
 		return contentValues;
 	}
 	

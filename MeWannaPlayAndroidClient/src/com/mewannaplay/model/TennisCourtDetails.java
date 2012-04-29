@@ -315,7 +315,6 @@ public TennisActivity[] getTennisActivities() {
 		contentValues.put("state", nonNullString(state));
 		contentValues.put("abbreviation", nonNullString(abbreviation));
 		contentValues.put("phone", nonNullString(phone));
-		
 		return contentValues;
 	}
 	

@@ -28,7 +28,11 @@
 			android:theme="@android:style/Theme.NoTitleBar">
 		
 		</activity>
+
+	<activity android:name=".ViewMessageActivity" android:label="ViewMessage"
+			android:theme="@android:style/Theme.NoTitleBar">
 		
+		</activity>		
 		
 		  <activity
             android:name=".authenticator.AuthenticatorActivity"

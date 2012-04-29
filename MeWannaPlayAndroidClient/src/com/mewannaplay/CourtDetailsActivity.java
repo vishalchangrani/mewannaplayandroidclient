@@ -34,6 +34,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.mewannaplay.client.RestClient;
+import com.mewannaplay.model.Message;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
@@ -109,7 +110,7 @@ public class CourtDetailsActivity extends ListActivity{
     	v.setAdapter(new ExpadableAdapter());
 
     	// the desired columns to be bound
-    	String[] columns = new String[] { "scheduled_time", "user",
+    	String[] columns = new String[] { "scheduled_time", "user_name",
     			"contact_info", "level", "players_needed", "text",
     	"time_posted" };
     	// the XML defined views which the data will be bound to
@@ -130,10 +131,10 @@ public class CourtDetailsActivity extends ListActivity{
     	this.getListView().setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-			Log.d(TAG,"selected");
-				
+			public void onItemClick(AdapterView<?> arg0, View view, int arg2,
+					long rowId) {
+			Log.d(TAG,"selected "+rowId);
+			viewMessage(rowId);
 			}
     		
     	});
@@ -326,6 +327,14 @@ public class CourtDetailsActivity extends ListActivity{
 		startActivity(intentForTennisCourtDetails);//fire it up baby		
 	}
 	
+	public final void viewMessage(long rowId)
+	{
+		Intent intentForTennisCourtDetails = new Intent(this, ViewMessageActivity.class);
+		Bundle extras = new Bundle(); 
+		extras.putInt(SyncAdapter.MESSAGE_ID,(int) rowId);
+		intentForTennisCourtDetails.putExtras(extras);
+		startActivity(intentForTennisCourtDetails);
+	}
 	
 	/*class MessageRefresh extends TimerTask {
 		   public void run() {
@@ -390,7 +399,7 @@ public class CourtDetailsActivity extends ListActivity{
 	   
 	        
 	        //2
-	        String user = cursor.getString(cursor.getColumnIndex("user"));
+	        String user = TennisCourtDetails.nonNullString(cursor.getString(cursor.getColumnIndex("user_name")));
 	        if (user.length() > 20)
 	        	user = user.substring(0, 20);
 	        ((TextView) view.findViewById(R.id.user)).setText(user);
