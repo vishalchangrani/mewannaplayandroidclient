@@ -316,9 +316,17 @@ public class MapViewActivity extends MapActivity {
 					String name = cursor.getString(cursor.getColumnIndex("name"));
 					String facilityType = cursor.getString(cursor
 							.getColumnIndex("facility_type"));
+					String city = cursor.getString(cursor
+							.getColumnIndex("city"));
+					String county = cursor.getString(cursor
+							.getColumnIndex("county"));
+					String state = cursor.getString(cursor
+							.getColumnIndex("state"));
+					String abbr = cursor.getString(cursor
+							.getColumnIndex("abbreviation"));
 					TennisCourt tennisCourt = new TennisCourt(id, latitude,
 							longitude, subcourts, occupied, facilityType, name,
-							messageCount);
+							messageCount, city, county, state, abbr);
 					newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
 					cursor.moveToNext();
 				}

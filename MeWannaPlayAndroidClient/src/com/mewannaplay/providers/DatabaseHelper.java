@@ -34,36 +34,44 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
         		+ " longitude REAL," 
         		+ " subcourts INTEGER,"
         		+ " occupied INTEGER,"
-        		+ " facility_type VARCHAR(100),"
-        		+ " name VARCHAR(250),"
-        		+ " message_count INTEGER"
+        		+ " facility_type VARCHAR(20),"
+        		+ " name VARCHAR(50),"
+        		+ " message_count INTEGER,"
+        		+ " city VARCHAR(30),"
+        		+ " county VARCHAR(20),"
+          		+ " state VARCHAR(20),"
+          		+ " abbreviation VARCHAR(3)"
         		+ ");");
     	
+    	db.execSQL("CREATE INDEX city_index ON "+ TENNIS_COURT_TABLE_NAME+"(city);");
+    	db.execSQL("CREATE INDEX state_index ON "+ TENNIS_COURT_TABLE_NAME+"(abbreviation);");
+    	
        	db.execSQL("CREATE TABLE " + TENNIS_COURT_DETAILS_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
-        		+ " name VARCHAR(250),"
-          		+ " address VARCHAR(500),"
-          		+ " zipcode VARCHAR(20),"
-          		+ " url VARCHAR(500),"
-          		+ " facility_type VARCHAR(45),"
+        		+ " name VARCHAR(30),"
+          		+ " address VARCHAR(100),"
+          		+ " zipcode VARCHAR(10),"
+          		+ " url VARCHAR(100),"
+          		+ " facility_type VARCHAR(20),"
           		+ " subcourts INTEGER,"
-          		+ " timings VARCHAR(500),"
-          		+ " city VARCHAR(250),"
-          		+ " state VARCHAR(100),"
-          		+ " abbreviation VARCHAR(10),"
-          		+ " phone VARCHAR(100)"
+          		+ " timings VARCHAR(100),"
+          		+ " city VARCHAR(30),"
+          		+ " state VARCHAR(20),"
+          		+ " abbreviation VARCHAR(3),"
+          		+ " phone VARCHAR(20)"
         		+ ");");
     	db.execSQL("CREATE TABLE " + MESSAGES_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
           		+ " text VARCHAR(500),"
           		+ " user VARCHAR(20),"
+          		+ " user_name VARCHAR(20),"
           		+ " level VARCHAR(45),"
-          		+ " scheduled_time VARCHAR(500),"
+          		+ " scheduled_time VARCHAR(100),"
           		+ " contact_info VARCHAR(250),"
         		+ " contact_type INTEGER,"
           		+ " players_needed VARCHAR(10),"
-          		+ " time_posted VARCHAR(500)"
+          		+ " time_posted VARCHAR(100)"
         		+ ");");
     	db.execSQL("CREATE TABLE " + CITIES_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
-          		+ " name VARCHAR(500),"
+          		+ " name VARCHAR(30),"
           		+ " abbreviation VARCHAR(20),"
           		+ " latitude  REAL," 
         		+ " longitude REAL" 
@@ -80,7 +88,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
           		+ " tennis_court INTEGER NOT NULL, "
           		+ " FOREIGN KEY(tennis_court) REFERENCES "+TENNIS_COURT_DETAILS_TABLE_NAME+"(_id) ON DELETE CASCADE"
         		+ ");");
-    	db.execSQL("CREATE INDEX tennis_court_amenity_index ON "+ TENNIS_COURT_AMENITY_TABLE_NAME+"(tennis_court)");
+    	db.execSQL("CREATE INDEX tennis_court_amenity_index ON "+ TENNIS_COURT_AMENITY_TABLE_NAME+"(tennis_court);");
           		
     	
     }

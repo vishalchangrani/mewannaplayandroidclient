@@ -73,6 +73,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int MARK_COURT_OCCUPIED = 4;
 	public static final int GET_ALL_CITIES  = 5;
 	public static final String COURT_ID = "court_id";
+	public static final String MESSAGE_ID = "message_id";
 	public static final String MESSAGE_OBJECT_KEY = "message_object_key";
 
 	/*
@@ -97,8 +98,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	int operationRequested = extras.getInt(OPERATION);
     	try
     	{
-		
-    	
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
 			getAllCourts();

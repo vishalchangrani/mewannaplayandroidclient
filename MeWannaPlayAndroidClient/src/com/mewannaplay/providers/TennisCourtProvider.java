@@ -148,7 +148,7 @@ public class TennisCourtProvider extends ContentProvider {
 
 				String sql = "insert OR REPLACE into "
 						+ TENNIS_COURT_TABLE_NAME
-						+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count) values (?,?,?,?,?,?,?,?)";
+						+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count, city, county, state, abbreviation) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 				insert = db.compileStatement(sql);
 
 				for (ContentValues contentValues : values) {
@@ -162,6 +162,10 @@ public class TennisCourtProvider extends ContentProvider {
 					insert.bindString(7, contentValues.getAsString("name"));
 					insert.bindLong(8,
 							contentValues.getAsInteger("message_count"));
+					insert.bindString(9, contentValues.getAsString("city"));
+					insert.bindString(10, contentValues.getAsString("county"));
+					insert.bindString(11, contentValues.getAsString("state"));
+					insert.bindString(12, contentValues.getAsString("abbreviation"));
 					insert.executeInsert();
 					count++;
 				}
@@ -203,7 +207,7 @@ public class TennisCourtProvider extends ContentProvider {
 			
 				sql = "insert OR REPLACE into "
 						+ MESSAGES_TABLE_NAME
-						+ "(_id, text,user, level, scheduled_time,contact_info, contact_type, players_needed, time_posted) values (?,?,?,?,?,?,?,?,?)";
+						+ "(_id, text,user, level, scheduled_time,contact_info, contact_type, players_needed, time_posted, user_name) values (?,?,?,?,?,?,?,?,?,?)";
 				Log.d(TAG, "executing to SQL "+sql);
 				insert = db.compileStatement(sql);
 
@@ -222,6 +226,8 @@ public class TennisCourtProvider extends ContentProvider {
 							contentValues.getAsString("players_needed"));
 					insert.bindString(9,
 							contentValues.getAsString("time_posted"));
+					insert.bindString(10,
+							contentValues.getAsString("user_name"));
 					insert.executeInsert();
 					count++;
 				}
