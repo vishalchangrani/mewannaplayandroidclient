@@ -33,7 +33,6 @@ import android.content.Intent;
 import android.content.SyncResult;
 import android.database.SQLException;
 import android.os.Bundle;
-import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.mewannaplay.Constants;
@@ -44,6 +43,7 @@ import com.mewannaplay.model.Message;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
+import com.mewannaplay.providers.TennisCourtProvider;
 
 /**
  * SyncAdapter implementation for syncing all tennis courts details on client
@@ -156,7 +156,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			// if one day has elapsed then get new list...
 			RestClient restClient = new RestClient(
 					Constants.GET_ALL_TENNISCOURTS);
-			TennisCourt[] tennisCourts;
+			
+			try {
+				JSONObject jsonObject = restClient.execute();
+				ContentProviderClient contentProviderClient = this.getContext()
+				.getContentResolver().acquireContentProviderClient(ProviderContract.TennisCourts.CONTENT_URI);
+				TennisCourtProvider tcp = (TennisCourtProvider) contentProviderClient.getLocalContentProvider();
+				tcp.bullkInsertCourts(jsonObject);
+				
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage());
+				throw new IOException(" Conversion error ");
+			}
+			
+		/*	TennisCourt[] tennisCourts;
 			try {
 				tennisCourts = TennisCourt.fromJSONObjectArray(restClient
 						.execute());
@@ -173,7 +186,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			this.getContext()
 					.getContentResolver()
 					.bulkInsert(ProviderContract.TennisCourts.CONTENT_URI,
-							contentValues);
+							contentValues);*/
 		} catch (IOException e) {
 			// Following is to notify listener to remove spinner.
 			// Unfortunately there is no way at this point to listen for

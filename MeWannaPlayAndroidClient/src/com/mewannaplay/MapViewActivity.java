@@ -15,6 +15,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,9 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.erdao.android.mapviewutil.markerclusterer.GeoClusterer;
+import com.erdao.android.mapviewutil.markerclusterer.MarkerBitmap;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
@@ -37,6 +42,7 @@ import com.mewannaplay.model.City;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
+import com.readystatesoftware.mapviewballoons.TennisCourtGeoItem;
 
 public class MapViewActivity extends MapActivity {
 
@@ -50,7 +56,9 @@ public class MapViewActivity extends MapActivity {
 	private MyItemizedOverlay myItemizedOverlay;
 	private static City currentCity; //if null means currentLocation selected
 	public static MapViewActivity mapViewActivity;
-	
+	private GeoClusterer clusterer;
+	// marker icons
+		private List<MarkerBitmap> markerIconBmps_ = new ArrayList<MarkerBitmap>();
 	
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
 	
@@ -114,8 +122,32 @@ public class MapViewActivity extends MapActivity {
 		    }
 		});
 		mapView.invalidate();
-		mapView.getController().setZoom(13);
+		mapView.getController().setZoom(5);
 		
+		
+		BitmapFactory.Options options = new BitmapFactory.Options(); 
+		options.inPurgeable = true;
+		// prepare for marker icons.
+		// small icon for maximum 10 items
+		markerIconBmps_.add(
+			new MarkerBitmap(
+					BitmapFactory.decodeResource(getResources(), R.drawable.balloon_s_n, options),
+					BitmapFactory.decodeResource(getResources(), R.drawable.balloon_s_s, options),
+					new Point(20,20),
+					14,
+					10)
+			);
+		// large icon. 100 will be ignored.
+		markerIconBmps_.add(
+				new MarkerBitmap(
+						BitmapFactory.decodeResource(getResources(), R.drawable.balloon_l_n, options),
+						BitmapFactory.decodeResource(getResources(), R.drawable.balloon_l_s, options),
+						new Point(28,28),
+						16,
+						100)
+				);
+		float screenDensity = this.getResources().getDisplayMetrics().density;
+		clusterer = new GeoClusterer(mapView,markerIconBmps_,screenDensity);
 		
 	}
 	
@@ -213,11 +245,23 @@ public class MapViewActivity extends MapActivity {
 							Log.d(TAG," Adding all tenniscourts to overlay");
 							progressDialog.setMessage("Parsing data...");
 							getAllTennisCourts();
+							
+							
 							progressDialog.dismiss();
+							final MapView mapView = (MapView) findViewById(R.id.mapview);
+							mapView.postDelayed(new Runnable(){
+								public void run(){
+								clusterer.resetViewport();
+								//clusterer.redraw();
+								mapView.invalidate(); //causes draw to be invoked which will do the magic
+							}}, 2);
 							//MyItemizedOverlay.setMapMoving(true);
 							//Approach 2 - optimize at sql level - sluggish
 							//mapLocationOverlay.getTennisCourtsInView3(mapView);
-							mapView.invalidate(); //causes draw to be invoked which will do the magic
+							// now redraw the cluster. it will create markers.
+							
+							
+							
 						}
 					}
 				};
@@ -327,10 +371,13 @@ public class MapViewActivity extends MapActivity {
 					TennisCourt tennisCourt = new TennisCourt(id, latitude,
 							longitude, subcourts, occupied, facilityType, name,
 							messageCount, city, county, state, abbr);
-					newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
+					//newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
+					clusterer.addItem(new TennisCourtGeoItem(tennisCourt));
 					cursor.moveToNext();
 				}
-				myItemizedOverlay.addOverlays(newListOfOverlays);
+
+				
+				//myItemizedOverlay.addOverlays(newListOfOverlays);
 				Log.d(TAG, "total courts added = "+myItemizedOverlay.size());
 			} else
 				Log.e(TAG, "cursor for tennis courts found to be empty");

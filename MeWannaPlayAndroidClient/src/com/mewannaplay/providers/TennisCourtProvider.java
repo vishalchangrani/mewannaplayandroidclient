@@ -1,14 +1,17 @@
 package com.mewannaplay.providers;
 
+import static com.mewannaplay.providers.DatabaseHelper.CITIES_TABLE_NAME;
+import static com.mewannaplay.providers.DatabaseHelper.MESSAGES_TABLE_NAME;
+import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_ACIVITY_TABLE_NAME;
+import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_AMENITY_TABLE_NAME;
 import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_DETAILS_TABLE_NAME;
 import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_TABLE_NAME;
-import static com.mewannaplay.providers.DatabaseHelper.MESSAGES_TABLE_NAME;
-import static com.mewannaplay.providers.DatabaseHelper.CITIES_TABLE_NAME;
-import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_AMENITY_TABLE_NAME;
-import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_ACIVITY_TABLE_NAME;
 import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
 
 import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -311,7 +314,7 @@ public class TennisCourtProvider extends ContentProvider {
 		switch (sUriMatcher.match(uri)) {
 		case TENNISCOURTS:
 			qb.setTables(TENNIS_COURT_TABLE_NAME);
-			qb.setProjectionMap(tennisCourtProjectMap);
+			//qb.setProjectionMap(tennisCourtProjectMap);
 			break;
 		case TENNISCOURTSDETAILS:
 			qb.setTables(TENNIS_COURT_DETAILS_TABLE_NAME);
@@ -364,6 +367,60 @@ public class TennisCourtProvider extends ContentProvider {
 
 		getContext().getContentResolver().notifyChange(uri, null, true);
 		return count;
+	}
+	
+	
+	public  int bullkInsertCourts(JSONObject tenniscourts) throws Exception
+	{
+		int count = 0;
+		
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		SQLiteStatement insert = null;
+		try {
+			db.beginTransaction();
+	
+				String sql = "insert OR REPLACE into "
+						+ TENNIS_COURT_TABLE_NAME
+						+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count, city, county, state, abbreviation) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+				insert = db.compileStatement(sql);
+				JSONArray array = tenniscourts.getJSONArray("tenniscourt");
+						for (int i = 0; i < array.length(); i++) {
+						    JSONObject row = array.getJSONObject(i);
+						
+					insert.bindLong(1, i /* row.getInt("tennis_id") */);
+					insert.bindDouble(2, row.getDouble("tennis_latitude"));
+					insert.bindDouble(3, row.getDouble("tennis_longitude"));
+					insert.bindLong(4, row.getInt("tennis_subcourts"));
+					insert.bindLong(5, row.getInt("Occupied"));
+					insert.bindString(6,
+							row.getString("tennis_facility_type"));
+					insert.bindString(7, row.getString("tennis_name"));
+					insert.bindLong(8,
+							row.getInt("message_count"));
+					insert.bindString(9, row.getString("city_name"));
+					insert.bindString(10, row.getString("county_name"));
+					insert.bindString(11, row.getString("state_name"));
+					insert.bindString(12, row.getString("state_abbreviation"));
+					insert.executeInsert();
+					count++;
+				}
+				db.setTransactionSuccessful();
+		} 
+		catch (Exception e)
+		{
+			Log.e(TAG, " inserted " + count + " tenniscourts");
+			throw e;
+		}
+		finally {
+			db.endTransaction();
+			if (insert != null)
+				insert.close();
+		}
+	//	getContext().getContentResolver().notifyChange(uri, null, false);
+		
+				Log.d(TAG, " inserted " + count + " tenniscourts");
+				return count;
+
 	}
 
 	static {
