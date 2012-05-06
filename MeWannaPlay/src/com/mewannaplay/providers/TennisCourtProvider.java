@@ -96,7 +96,7 @@ public class TennisCourtProvider extends ContentProvider {
 			try {
 				String sql = "insert into "
 						+ TENNIS_COURT_TABLE_NAME
-						+ "(id, tennis_latitude,tennis_longitude, tennis_subcourts, occupied,tennis_facility_type, tennis_name, message_count) values (?,?,?,?,?,?,?,?)";
+						+ "(_id, tennis_latitude,tennis_longitude, tennis_subcourts, occupied,tennis_facility_type, tennis_name, message_count) values (?,?,?,?,?,?,?,?)";
 				SQLiteStatement insert = db.compileStatement(sql);
 
 				for (ContentValues contentValues : values) {
