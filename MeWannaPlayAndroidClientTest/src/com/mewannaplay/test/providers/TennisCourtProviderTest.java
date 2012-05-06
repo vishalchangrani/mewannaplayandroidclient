@@ -1,6 +1,9 @@
 package com.mewannaplay.test.providers;
 
 import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
+
+import java.io.IOException;
+
 import android.accounts.Account;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -13,6 +16,7 @@ import android.test.ProviderTestCase2;
 
 import com.mewannaplay.Constants;
 import com.mewannaplay.providers.ProviderContract;
+import com.mewannaplay.providers.ProviderContract.Cities;
 import com.mewannaplay.providers.ProviderContract.TennisCourts;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.providers.TennisCourtProvider;
@@ -121,7 +125,7 @@ public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvid
 
 	 }
 	 
-	 public void testSyncAdapterOnPerformSync2() throws InterruptedException
+	 public void testSyncAdapterOnPerformSync2() throws InterruptedException, IOException
 	 {
 		 	Bundle extras = new Bundle(); 
 			extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_DETAILS);
@@ -148,7 +152,16 @@ public class TennisCourtProviderTest extends ProviderTestCase2<TennisCourtProvid
 
 	 }
 	 
-	public class TestContentObserver extends ContentObserver {
+	 public void testGetAllCities() throws InterruptedException, IOException
+	 {
+		 SyncAdapter sq = new SyncAdapter(this.getMockContext(), false);
+		sq.getAllCities();
+		 Cursor cursor = getMockContentResolver().query(Cities.CONTENT_URI, null, null, null, null);
+		 assertEquals(cursor.getCount(),681);
+		 cursor.close();
+	 }
+	 
+	 public class TestContentObserver extends ContentObserver {
 
 		public boolean cursorObserverIsTriggered = false;
 		public TestContentObserver() {

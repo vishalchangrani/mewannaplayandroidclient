@@ -6,9 +6,6 @@
   android:layout_height="fill_parent"
   android:background="#7DAEFF98">
 
-
-
-
   <TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
@@ -221,7 +218,7 @@
     android:layout_below="@id/court_sub_table_layout"
     android:layout_width="fill_parent"
     android:textSize="12dip"
-    android:layout_height="wrap_content"
+    android:layout_height="100dip"
     android:paddingRight="00dip"
     android:paddingTop="5dip"
     android:paddingBottom="5dip"

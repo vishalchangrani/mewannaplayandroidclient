@@ -11,15 +11,11 @@ import org.json.JSONObject;
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,9 +33,8 @@ import android.widget.Toast;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
+import com.mewannaplay.providers.ProviderContract.TennisCourts;
 import com.mewannaplay.view.MapLocationViewer;
-import com.services.BackgroundWebSerive;
-import com.services.MWPBgWebSerive;
 
 public class MapViewActivity extends MapActivity {
 
@@ -100,6 +95,8 @@ public class MapViewActivity extends MapActivity {
             }
         });
 
+        ContentResolver cr = getContentResolver();
+        Cursor cursor = cr.query(TennisCourts.CONTENT_URI, null, null, null, null);
     }
 
     public class MyOnItemSelectedListener implements OnItemSelectedListener {
