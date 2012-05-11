@@ -56,9 +56,9 @@ public class MapViewActivity extends MapActivity {
 	private MyItemizedOverlay myItemizedOverlay;
 	private static City currentCity; //if null means currentLocation selected
 	public static MapViewActivity mapViewActivity;
-	private GeoClusterer clusterer;
+//	private GeoClusterer clusterer;
 	// marker icons
-		private List<MarkerBitmap> markerIconBmps_ = new ArrayList<MarkerBitmap>();
+		//private List<MarkerBitmap> markerIconBmps_ = new ArrayList<MarkerBitmap>();
 	
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
 	
@@ -125,7 +125,7 @@ public class MapViewActivity extends MapActivity {
 		mapView.getController().setZoom(5);
 		
 		
-		BitmapFactory.Options options = new BitmapFactory.Options(); 
+	/*	BitmapFactory.Options options = new BitmapFactory.Options(); 
 		options.inPurgeable = true;
 		// prepare for marker icons.
 		// small icon for maximum 10 items
@@ -147,7 +147,7 @@ public class MapViewActivity extends MapActivity {
 						100)
 				);
 		float screenDensity = this.getResources().getDisplayMetrics().density;
-		clusterer = new GeoClusterer(mapView,markerIconBmps_,screenDensity);
+		clusterer = new GeoClusterer(mapView,markerIconBmps_,screenDensity);*/
 		
 	}
 	
@@ -251,7 +251,7 @@ public class MapViewActivity extends MapActivity {
 							final MapView mapView = (MapView) findViewById(R.id.mapview);
 							mapView.postDelayed(new Runnable(){
 								public void run(){
-								clusterer.resetViewport();
+								//clusterer.resetViewport();
 								//clusterer.redraw();
 								mapView.invalidate(); //causes draw to be invoked which will do the magic
 							}}, 2);
@@ -371,13 +371,13 @@ public class MapViewActivity extends MapActivity {
 					TennisCourt tennisCourt = new TennisCourt(id, latitude,
 							longitude, subcourts, occupied, facilityType, name,
 							messageCount, city, county, state, abbr);
-					//newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
-					clusterer.addItem(new TennisCourtGeoItem(tennisCourt));
+					newListOfOverlays.add(new TennisCourtOverlayItemAdapter(tennisCourt));
+					//clusterer.addItem(new TennisCourtGeoItem(tennisCourt));
 					cursor.moveToNext();
 				}
 
 				
-				//myItemizedOverlay.addOverlays(newListOfOverlays);
+				myItemizedOverlay.addOverlays(newListOfOverlays);
 				Log.d(TAG, "total courts added = "+myItemizedOverlay.size());
 			} else
 				Log.e(TAG, "cursor for tennis courts found to be empty");
