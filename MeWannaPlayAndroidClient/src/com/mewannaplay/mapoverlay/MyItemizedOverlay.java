@@ -17,6 +17,7 @@ package com.mewannaplay.mapoverlay;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.ProgressDialog;
@@ -55,16 +56,17 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		populate();//fix for google bug
 	}
 
-	public void addOverlay(TennisCourtOverlayItemAdapter overlay) {
+	/*public void addOverlay(TennisCourtOverlayItemAdapter overlay) {
 	    m_overlays.add(overlay);
 	    setLastFocusedIndex(-1);
 	    populate(); 
 	}
-	
+	*/
 	public void addOverlays(Collection<TennisCourtOverlayItemAdapter> overlays)
 	{
 		  	m_overlays.addAll(overlays);
-		    setLastFocusedIndex(-1);
+		  	Collections.sort(m_overlays, new TennisCourtOverlayItemAdapter.TennisCourtComparator());
+		  	setLastFocusedIndex(-1);
 		    populate();
 	}
 
@@ -75,7 +77,9 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	@Override
 	public int size() {
-		return  m_overlays.size() > 10 ? 10 : m_overlays.size();
+		
+		
+		return  m_overlays.size();
 	}
 
 	@Override

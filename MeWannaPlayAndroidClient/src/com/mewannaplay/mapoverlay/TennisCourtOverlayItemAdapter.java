@@ -1,6 +1,8 @@
 package com.mewannaplay.mapoverlay;
 
 
+import java.util.Comparator;
+
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.util.Log;
@@ -103,4 +105,29 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 
 	}
 
+	public static class TennisCourtComparator implements Comparator<TennisCourtOverlayItemAdapter>
+	{
+
+		@Override
+		public int compare(TennisCourtOverlayItemAdapter arg0,
+				TennisCourtOverlayItemAdapter arg1) {
+		
+			GeoPoint gp1 = arg0.getPoint();
+			GeoPoint gp2 = arg1.getPoint();
+			 if (gp1.getLongitudeE6() > gp2.getLongitudeE6()) {
+			      return 1;
+			    } else if (gp1.getLongitudeE6() < gp2.getLongitudeE6()) {
+			      return -1;
+			    } else if (gp1.getLatitudeE6() > gp2.getLatitudeE6()) {
+			      return 1;
+			    } else if (gp1.getLatitudeE6() < gp2.getLatitudeE6()) {
+			      return -1;
+			    }
+			    return 0;
+		}
+		
+	}
+	
+	 
+	
 }
