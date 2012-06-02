@@ -51,6 +51,10 @@ public class Constants {
             BASE_URL+"tenniscourtmessages/add";
     public static final String DELETE_MESSAGE =
             BASE_URL+"tenniscourtmessage/index/?/partnerfound/"; //e.g.  http://api.mewannaplay.com/V1/tenniscourtmessage/index/13604/partnerfound/true
+    public static final String MARK_COURT_OCCUPIED  =
+    		BASE_URL+"markoccupied/id/";
+    public static final String GET_OCCUPIED_COURT_AND_POSTED_MSG  =
+    		BASE_URL+"user";
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
 

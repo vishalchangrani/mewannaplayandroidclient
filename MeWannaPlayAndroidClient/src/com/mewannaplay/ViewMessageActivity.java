@@ -92,6 +92,8 @@ public class ViewMessageActivity extends Activity {
 	    	deleteMessage();
 		        	           }
 		        	       });
+		 builder.create().show();
+		 
 		   
 	 }
 	 

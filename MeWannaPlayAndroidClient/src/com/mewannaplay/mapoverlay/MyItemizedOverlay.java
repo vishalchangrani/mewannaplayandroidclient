@@ -147,7 +147,11 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 			super.draw(canvas, mapView, shadow);
 				
 	}
-	private void getTennisCourtsInView(MapView mapView) {
+/*	
+ * This function was used for one of the clustering approaches..functin works but now since the approach is to just show the 
+ * tennis courts in the current state we just add all those overlays to the map.
+ * 
+ * private void getTennisCourtsInView(MapView mapView) {
 		//TODO: skip all this if mapview bounds havent changed
 	    clear();
 		String topLeftX = Double.toString((mapView.getMapCenter()
@@ -217,7 +221,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		{
 		cursor.close();
 		}
-	}
+	} */
 	
 	public void clear() {
 		//m_overlays.clear();
