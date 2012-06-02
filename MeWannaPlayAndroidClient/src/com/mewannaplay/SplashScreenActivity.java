@@ -2,11 +2,8 @@ package com.mewannaplay;
 
 import java.io.IOException;
 
-import com.mewannaplay.client.RestClient;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
@@ -16,6 +13,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+
+//There are two types of account we support - 1. Anonymous 2. Actual
+//Anonymous account doesn't require password and its not authenticated against the server. With anonymous account user can only view the map, court details and messages but cannot 
+//post a message or mark any court occupied.
+//Actual account requires a password and is authenticated against the server. A user who is authenticated can use all 
+//These accounts are created in the account manager
 public class SplashScreenActivity extends Activity {
 
 	private final static int secondsDelayed = 1;
@@ -30,7 +33,7 @@ public class SplashScreenActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 
-		AccountManager mAccountManager = AccountManager.get(this);
+		final AccountManager mAccountManager = AccountManager.get(this);
 		Account[] accounts = mAccountManager
 				.getAccountsByType(Constants.ACCOUNT_TYPE);
 		Log.d(TAG, "Accounts found: "+accounts.length);
@@ -60,7 +63,17 @@ public class SplashScreenActivity extends Activity {
 				@Override
 				public void run() {
 					try {
-						accountManagerFuture.getResult();
+						Bundle resultOfLogin = accountManagerFuture.getResult();
+						String accountName = resultOfLogin.getString(AccountManager.KEY_ACCOUNT_NAME);
+						
+						for (Account account : mAccountManager.getAccountsByType(Constants.ACCOUNT_TYPE))
+						{
+							if (account.name.equals(accountName))
+							{
+								MapViewActivity.setAccount(account);//Initialize MapView with the account used to login (Anonymous or other)
+							}
+						}
+						
 						handler.post(startMapViewActivity);
 					} catch (OperationCanceledException e) {
 						// TODO Auto-generated catch block
@@ -78,11 +91,6 @@ public class SplashScreenActivity extends Activity {
 			};
 			new Thread(runnable).start();
 		}
-
-
-		
-
-	
 
 	Runnable startMapViewActivity = new Runnable() {
 		@Override

@@ -231,7 +231,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         boolean existingAccount = false;
         for (Account account : accounts)
         {
-        	if (!account.name.equals(mUsername))
+        	if (!account.name.equals(mUsername)) //If user logged in successfully as a valid account then remove the anonymous account
         	{
         		mAccountManager.removeAccount(account, null, null); //remove anonymous account
         	}

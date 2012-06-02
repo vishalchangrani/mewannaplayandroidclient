@@ -395,7 +395,8 @@
     android:layout_toRightOf="@id/post_msg_button"
     android:layout_alignTop="@id/post_msg_button"
     android:text="Mark Court Occupied"
-    android:textSize="10sp"  android:enabled="false"/>
+    android:textSize="10sp"  android:enabled="false"
+     android:onClick="markOccupied"/>
  
 
 

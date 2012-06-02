@@ -274,14 +274,14 @@ public TennisActivity[] getTennisActivities() {
 	
 		for (TennisActivity tennisActivity : tennisActivities)
 		{
-			tennisCourtDetails.getTennisActivities()[tennisActivity.getTypeId()] = tennisActivity;
+			tennisCourtDetails.getTennisActivities()[tennisActivity.getTypeId()-1] = tennisActivity;
 		}
 	
 		JSONArray tennisAmenityJsonArray = tennisCourtJsonObject.getJSONArray("TennisAmenity");
 		TennisAmenity[] tennisAms = (TennisAmenity[]) gson.fromJson(tennisAmenityJsonArray.toString(), TennisAmenity[].class);
 		for (TennisAmenity tennisAmenity : tennisAms)
 		{
-			tennisCourtDetails.getTennisAmeneties()[tennisAmenity.getTypeId()] = tennisAmenity;
+			tennisCourtDetails.getTennisAmeneties()[tennisAmenity.getTypeId()-1] = tennisAmenity;
 			
 		}
 		
@@ -341,14 +341,14 @@ public TennisActivity[] getTennisActivities() {
 		    TennisActivity tennisActivity = tdc.new TennisActivity();
 		    tennisActivity.setTypeId(type);
 		    tennisActivity.setRemarks(activityCursor.getString(activityCursor.getColumnIndex("remark")));
-		    tdc.getTennisActivities()[type] = tennisActivity;
+		    tdc.getTennisActivities()[type-1] = tennisActivity;
 		}
 		for (boolean hasItem = amenityCursor.moveToFirst(); hasItem; hasItem = amenityCursor.moveToNext()) {
 		    int type = amenityCursor.getInt(amenityCursor.getColumnIndex("_id"));
 		    TennisAmenity tennisam =  tdc.new TennisAmenity();
 		    tennisam.setTypeId(type);
 		    tennisam.setRemarks(amenityCursor.getString(amenityCursor.getColumnIndex("remark")));
-		    tdc.getTennisAmeneties()[type] = tennisam;
+		    tdc.getTennisAmeneties()[type-1] = tennisam;
 		}
 
 		
