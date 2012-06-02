@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,8 +34,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.google.android.maps.GeoPoint;
 import com.mewannaplay.client.RestClient;
-import com.mewannaplay.model.Message;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
@@ -45,6 +46,7 @@ public class CourtDetailsActivity extends ListActivity{
 
 	private TennisCourtDetails tennisCourtDetails;
 	 private static final String TAG = "CourtDetailsActivity";
+	 public static final String SELECTED_COURTS_GEOPOINT = "SELECTED_COURTS_GEOPOINT";
 	 private  SimpleCursorAdapter cursorAdapter;
 	 Cursor messageCursor; 
 	 private ProgressDialog progressDialog;
@@ -55,6 +57,7 @@ public class CourtDetailsActivity extends ListActivity{
 	private AsyncTask<Void, Void, Void> getMessageTask;
 	private Handler handler = new Handler();
 	private ServiceResultReceiver receiver;
+	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -62,15 +65,14 @@ public class CourtDetailsActivity extends ListActivity{
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
-		
+		thisCourtsLocation = (Location) this.getIntent().getExtras().getParcelable(SELECTED_COURTS_GEOPOINT);
 		
 		if (RestClient.isLoggedIn())
 		{
 			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 			postMsgButton.setEnabled(true);
-			Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
-			markCourtOccupied.setEnabled(true);
 		}
+	
 		
       	// TODO this should ideally be not done on the UI thread..but
     	// will fix later
@@ -191,7 +193,7 @@ public class CourtDetailsActivity extends ListActivity{
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+		
 		super.onResume();
 		messageContentObserver = new MessagesContentObserver(null);
     	getContentResolver().registerContentObserver(Messages.CONTENT_URI, true, messageContentObserver);
@@ -204,6 +206,16 @@ public class CourtDetailsActivity extends ListActivity{
 				ProviderContract.AUTHORITY, SyncAdapter.getAllMessagesBundle(courtId), 10);
     	//ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
 			//	ProviderContract.AUTHORITY,  SyncAdapter.getAllMessagesBundle(courtId));
+    	Location currentLocation = MapViewActivity.mapViewActivity.getMyCurrentLocation();
+    	if (currentLocation != null && RestClient.isLoggedIn())
+    	{
+    		boolean isInProximity = currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) <= Constants.PROXIMITY : false;
+    		if (isInProximity)
+    		{
+    			Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
+    			markCourtOccupied.setEnabled(true);
+    		}
+    	}
 	}
 	
 	private void populateView()
@@ -325,6 +337,11 @@ public class CourtDetailsActivity extends ListActivity{
 		extras.putInt(SyncAdapter.COURT_ID,courtId);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);//fire it up baby		
+	}
+	
+	public void markOccupied(View v)
+	{
+		//TODO Use syncadapter to mark court occupied
 	}
 	
 	public final void viewMessage(long rowId)

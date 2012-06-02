@@ -28,9 +28,6 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.erdao.android.mapviewutil.markerclusterer.GeoClusterer;
-import com.erdao.android.mapviewutil.markerclusterer.MarkerBitmap;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
@@ -42,23 +39,19 @@ import com.mewannaplay.model.City;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
-import com.readystatesoftware.mapviewballoons.TennisCourtGeoItem;
 
 public class MapViewActivity extends MapActivity {
 
 	private static final String TAG = "MapViewActivity";
 //	private LocationManager myLocationManager;
 	private MyLocationOverlay myLocationOverlay;
-	private static Account annonymousAccount;
+	private static Account loggedInUserAccount;
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
 	private static City currentCity; //if null means currentLocation selected
 	public static MapViewActivity mapViewActivity;
-//	private GeoClusterer clusterer;
-	// marker icons
-		//private List<MarkerBitmap> markerIconBmps_ = new ArrayList<MarkerBitmap>();
 	
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
 	
@@ -122,32 +115,8 @@ public class MapViewActivity extends MapActivity {
 		    }
 		});
 		mapView.invalidate();
-		mapView.getController().setZoom(5);
+		//mapView.getController().setZoom(5);
 		
-		
-	/*	BitmapFactory.Options options = new BitmapFactory.Options(); 
-		options.inPurgeable = true;
-		// prepare for marker icons.
-		// small icon for maximum 10 items
-		markerIconBmps_.add(
-			new MarkerBitmap(
-					BitmapFactory.decodeResource(getResources(), R.drawable.balloon_s_n, options),
-					BitmapFactory.decodeResource(getResources(), R.drawable.balloon_s_s, options),
-					new Point(20,20),
-					14,
-					10)
-			);
-		// large icon. 100 will be ignored.
-		markerIconBmps_.add(
-				new MarkerBitmap(
-						BitmapFactory.decodeResource(getResources(), R.drawable.balloon_l_n, options),
-						BitmapFactory.decodeResource(getResources(), R.drawable.balloon_l_s, options),
-						new Point(28,28),
-						16,
-						100)
-				);
-		float screenDensity = this.getResources().getDisplayMetrics().density;
-		clusterer = new GeoClusterer(mapView,markerIconBmps_,screenDensity);*/
 		
 	}
 	
@@ -193,17 +162,28 @@ public class MapViewActivity extends MapActivity {
 
 	public static Account getAccount(Context context)
  {
-		if (annonymousAccount == null) {
+		if (loggedInUserAccount == null) {
 			AccountManager mAccountManager = AccountManager.get(context);
 			Account[] accounts = mAccountManager
 					.getAccountsByType(Constants.ACCOUNT_TYPE);
 			if (accounts.length > 0)
-				annonymousAccount = accounts[0];
+			{
+				for (Account account : accounts)
+				{
+					loggedInUserAccount = accounts[0];
+				}
+			
+			}
 			else
-				Log.e(TAG, "Anonymous account not found"); // TODO figure what
-															// to do
-		} // then
-		return annonymousAccount;
+				Log.e(TAG, "No account found"); 
+															
+		} 
+		return loggedInUserAccount;
+	}
+	
+	public static void setAccount(Account account)
+	{
+		loggedInUserAccount = account;
 	}
 	
 	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
@@ -241,27 +221,9 @@ public class MapViewActivity extends MapActivity {
 								|| mapView.getLongitudeSpan() == 360000000) {
 							mapView.postDelayed(this, 100);
 						} else {
-							//redrawMarkers();
-							Log.d(TAG," Adding all tenniscourts to overlay");
-							progressDialog.setMessage("Parsing data...");
-							getAllTennisCourts();
-							
-							
+						
 							progressDialog.dismiss();
-							final MapView mapView = (MapView) findViewById(R.id.mapview);
-							mapView.postDelayed(new Runnable(){
-								public void run(){
-								//clusterer.resetViewport();
-								//clusterer.redraw();
-								mapView.invalidate(); //causes draw to be invoked which will do the magic
-							}}, 2);
-							//MyItemizedOverlay.setMapMoving(true);
-							//Approach 2 - optimize at sql level - sluggish
-							//mapLocationOverlay.getTennisCourtsInView3(mapView);
-							// now redraw the cluster. it will create markers.
-							
-							
-							
+							MapViewActivity.this.showDialog(DIALOG_STATE_CITY_CHOICE);
 						}
 					}
 				};
@@ -325,18 +287,32 @@ public class MapViewActivity extends MapActivity {
 			Intent intentForTennisCourtDetails = new Intent(this, CourtDetailsActivity.class);
 			Bundle extras = new Bundle(); 
 			extras.putInt(SyncAdapter.COURT_ID,id);
+			extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT, this.getMyCurrentLocation());
 			intentForTennisCourtDetails.putExtras(extras);
 			startActivity(intentForTennisCourtDetails);//fire it up baby		
 		}
 		
-		private void getAllTennisCourts() {
-	
+
+		
+		private void getAllTennisCourts(City cityToFocusOn) {
+			//Loading all courts kills the app (ANRs.and out of memory since there is just 
+			//too much of data and too many overlays
+			//One simple strategy for now is to just load the courts of the selected court
+			//TODO implement a way to cluster icons on the map
 			Cursor cursor = this
 					.getContentResolver()
 					.query(ProviderContract.TennisCourts.CONTENT_URI,
 							null,
+							" abbreviation = ?",
+							new String[] {cityToFocusOn.getAbbreviation()}, null);
+			
+			/*Cursor cursor = this
+					.getContentResolver()
+					.query(ProviderContract.TennisCourts.CONTENT_URI,
 							null,
-							null, null);
+							null,
+							null, null); */
+			
 			try
 			{
 			List<TennisCourtOverlayItemAdapter> newListOfOverlays = new ArrayList<TennisCourtOverlayItemAdapter>();
@@ -388,6 +364,7 @@ public class MapViewActivity extends MapActivity {
 			}
 		}
 		
+		
 		@Override
 		protected Dialog onCreateDialog(int id) {
 			Dialog dialog = null;
@@ -409,11 +386,23 @@ public class MapViewActivity extends MapActivity {
 
 		public void setCurrentCity(City currentCity) {
 			MapViewActivity.currentCity = currentCity;
-			MapView mapView = (MapView)findViewById(R.id.mapview);
+			final MapView mapView = (MapView)findViewById(R.id.mapview);
 			if (currentCity != null)
 			{
 				
+				//redrawMarkers();
+				Log.d(TAG," Adding all tenniscourts to overlay");
+		        myItemizedOverlay.clear();
+				getAllTennisCourts(currentCity);
+			
+			
+				mapView.postDelayed(new Runnable(){
+					public void run(){
+					mapView.invalidate(); //causes draw to be invoked which will do the magic
+				}}, 2);
+	
 				mapView.getController().animateTo(new GeoPoint((int)(currentCity.getLatitude()*1e6),(int)(currentCity.getLongitude()* 1e6)));
+				mapView.getController().setZoom(14);
 			}
 			else
 			{

@@ -6,4 +6,6 @@
         <item name="android:background">@drawable/slider_back</item>
         <item name="android:layout_margin">3dp</item>
     </style>
+    
+   
 </resources>

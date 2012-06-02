@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="erdao"/>
 	<classpathentry kind="src" path="readysoftwaresource"/>
 	<classpathentry kind="src" path="googlesource"/>
 	<classpathentry kind="src" path="gen"/>

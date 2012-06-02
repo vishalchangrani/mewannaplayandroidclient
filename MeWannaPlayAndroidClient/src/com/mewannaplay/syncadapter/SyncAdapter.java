@@ -17,13 +17,11 @@
 package com.mewannaplay.syncadapter;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
@@ -40,7 +38,6 @@ import com.mewannaplay.client.RequestMethods;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.City;
 import com.mewannaplay.model.Message;
-import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.TennisCourtProvider;
@@ -48,20 +45,30 @@ import com.mewannaplay.providers.TennisCourtProvider;
 /**
  * SyncAdapter implementation for syncing all tennis courts details on client
  * side with server
+ * 
+ * The general pattern is,
+ * 1. Activity registers a broadcast receiver with intent SYNC_FINISHED_ACTION
+ * 2. Acitivty calls ContentResolver.requestSync with desired operation as parameter in the intent bundle along with other
+ *    needed params such as court id or message id.
+ * 3. Syncadapter runs in a different thread and calls the onPerformSync method.
+ * 4. When it finishes it sends a broadcast to with intent containing operation which was finished and is there was an error.
+ * 5. Broadcast receiver (registered in step 1 above) checks if error - on error displays error dialog else any other operation and unregisters itself.
+ * 
+ * NOTE:
+ * a. Syncadapter does not retries. Here Syncadapter is only used a service. The advantage being its managed by android.
+ * b. Only one broadcast receiver should be registered at one time before calling requestSync. Else all registered broadcast receiver
+ * will be notified even if the operation they were interested in is not done 
  */
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	private static final String TAG = "SyncAdapter";
 
-	private final AccountManager mAccountManager;
-
+	//Keys used in intent extras to communicate back result
 	public static final String SYNC_FINISHED_ACTION = "SYNC_FINISHED";
 	public static final String SYNC_ERROR = "SYNC_ERROR";
 
-	private Date mLastUpdated;
 
 	public SyncAdapter(Context context, boolean autoInitialize) {
 		super(context, autoInitialize);
-		mAccountManager = AccountManager.get(context);
 	}
 
 	public final static String OPERATION = "operation";
@@ -72,14 +79,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int POST_MESSAGE = 3;
 	public static final int MARK_COURT_OCCUPIED = 4;
 	public static final int GET_ALL_CITIES  = 5;
+	public static final int DELETE_MESSAGE = 6;
 	public static final String COURT_ID = "court_id";
 	public static final String MESSAGE_ID = "message_id";
 	public static final String MESSAGE_OBJECT_KEY = "message_object_key";
 
 	/*
-	 * Called whenever sync-adapter tries to sync with server. This function in
-	 * turns tries to get the authtoken from account manager.
-	 * 
+	 * Called whenever sync-adapter tries to sync with server. 
 	 * @see
 	 * android.content.AbstractThreadedSyncAdapter#onPerformSync(android.accounts
 	 * .Account, android.os.Bundle, java.lang.String,
@@ -91,7 +97,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
    
     	Log.d(TAG,"in onPerform sync");
     	boolean isError = false;
-    	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
+    	
  
     	if (!extras.containsKey(OPERATION))
 			return;
@@ -117,9 +123,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			postMessage(courtId, message);
 			break;
 		case MARK_COURT_OCCUPIED:
+			//markCourtOccupied(extras.getInt(COURT_ID));
 			break;
 		case GET_ALL_CITIES:
 			getAllCities();
+			break;
+		case DELETE_MESSAGE:
+			deleteMessage(extras.getInt(MESSAGE_ID));
 			break;
 		}
     	}
@@ -151,6 +161,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     }
 
+	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
 	private void getAllCourts() throws IOException {
 		try {
 			// if one day has elapsed then get new list...
@@ -169,6 +180,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 				throw new IOException(" Conversion error ");
 			}
 			
+			//commenting out original way of doing json to object to database insertion using google json library since
+			//it was extremely slow.
 		/*	TennisCourt[] tennisCourts;
 			try {
 				tennisCourts = TennisCourt.fromJSONObjectArray(restClient
@@ -285,6 +298,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			restClient.execute(RequestMethods.POST, message);	
 	}
 	
+	public void deleteMessage(int messageId) throws IOException
+	{
+		String deleteMessageURL = Constants.DELETE_MESSAGE.replace("?", Integer.toString(messageId)) + "false";
+		
+		RestClient restClient = new RestClient(
+				deleteMessageURL);
+		restClient.execute(RequestMethods.DELETE,null);	
+	}
+	
 	public static Bundle getAllCourtsBundle() {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
@@ -310,6 +332,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		return extras;
 	}
 
+	//Different than the other bundles since in get all messages we want to continously refresh
+	//the list by letting the syncadapter run periodically.
 	public static Bundle getAllMessagesBundle(int courtId) {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGES);
@@ -345,6 +369,18 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
 		
+		return extras;
+	}
+	
+	public static Bundle getDeleteMessageBundle(int messageId) {
+		Bundle extras = new Bundle();
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.DELETE_MESSAGE);
+		extras.putInt(SyncAdapter.MESSAGE_ID, messageId);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);	
 		return extras;
 	}
 }

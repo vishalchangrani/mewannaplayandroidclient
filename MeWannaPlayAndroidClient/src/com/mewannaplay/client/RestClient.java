@@ -8,6 +8,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -38,22 +39,19 @@ import com.mewannaplay.model.Status;
 import com.mewannaplay.model.User;
 
 public class RestClient {
-	private boolean authentication;
+	
 	private final static ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
-	private String jsonBody;
 	private String message;
 	private String response;
 	private int responseCode;
 	private final String url;
-	// HTTP Basic Authentication
-	private String username;
-	private String password;
+
 	private static final String TAG = "RestClient";
 	private static boolean loggedIn = false;
 
 	// shared instance of httpclient
 	private static HttpClient mHttpClient;
-	public static final int REGISTRATION_TIMEOUT = 30 * 1000; // ms
+	public static final int REGISTRATION_TIMEOUT = 120 * 1000; // ms
 
 	// Create a local instance of cookie store
 	private final static CookieStore cookieStore = new BasicCookieStore();
@@ -93,6 +91,11 @@ public class RestClient {
 				request.setEntity(se);
 				Log.d(TAG, jsonObjectToSend.toString());
 			}
+			responseString = executeRequest(request, url);
+			break;
+		}
+		case DELETE: {
+			HttpDelete request = new HttpDelete(url);
 			responseString = executeRequest(request, url);
 			break;
 		}
@@ -148,10 +151,6 @@ public class RestClient {
 
 	public int getResponseCode() {
 		return responseCode;
-	}
-
-	public void setJSONString(String data) {
-		jsonBody = data;
 	}
 
 	private String executeRequest(HttpUriRequest request, String url)
