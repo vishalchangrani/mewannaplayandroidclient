@@ -10,9 +10,13 @@ import java.util.Timer;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.location.Location;
@@ -207,15 +211,19 @@ public class CourtDetailsActivity extends ListActivity{
     	//ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
 			//	ProviderContract.AUTHORITY,  SyncAdapter.getAllMessagesBundle(courtId));
     	Location currentLocation = MapViewActivity.mapViewActivity.getMyCurrentLocation();
-    	if (currentLocation != null && RestClient.isLoggedIn())
+    	//If no court has been marked occupied by this user and current location is known and he is not an anonymous user
+    //	if (MapViewActivity.getCourtMarkedOccupied() == -1 && currentLocation != null && RestClient.isLoggedIn())
     	{
-    		boolean isInProximity = currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) <= Constants.PROXIMITY : false;
-    		if (isInProximity)
+    		//and he is in proximity of the court
+    	//	boolean isInProximity = currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) <= Constants.PROXIMITY : false;
+    	//	if (isInProximity)
     		{
+    			//then enable markoccupied button
     			Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
     			markCourtOccupied.setEnabled(true);
     		}
     	}
+    	
 	}
 	
 	private void populateView()
@@ -341,8 +349,54 @@ public class CourtDetailsActivity extends ListActivity{
 	
 	public void markOccupied(View v)
 	{
-		//TODO Use syncadapter to mark court occupied
+		
+		   progressDialog = ProgressDialog.show(CourtDetailsActivity.this, "", 
+	                "Marking court occupied...", true);
+	    	progressDialog.show();
+	
+		registerReceiver(syncFinishedReceiver, new IntentFilter(SyncAdapter.SYNC_FINISHED_ACTION)); 
+		ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
+					ProviderContract.AUTHORITY,  SyncAdapter.getMarkOccupiedBundle(courtId));
 	}
+	
+	
+	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
+
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+	        Log.d(TAG, "sync for mark occupied done");
+	        
+	        unregisterReceiver(this);
+	        
+	        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
+	        {
+	        	progressDialog.dismiss();
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(CourtDetailsActivity.this);
+	        	builder.setMessage("Error while marking court occupied")
+	        	       .setCancelable(false)
+	        	       .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	        	           public void onClick(DialogInterface dialog, int id) {
+	        	        	   CourtDetailsActivity.this.finish();
+	        	           }
+	        	       });
+	        	      
+	        	alert = builder.create();
+	        	alert.show();
+	        }
+	        else
+	        {
+	        	//Server has been updated now update mapviewacitity's static variables
+	        	MapViewActivity.setCourtMarkedOccupied(courtId);
+	        //	ContentValues contentValues = new ContentValues(5);
+	        //	contentValues.put("occupied", "1");
+	       // 	getContentResolver().update(ProviderContract.TennisCourts.CONTENT_URI.buildUpon().appendPath(courtId + "").build(), contentValues, " _id = ?", new String[]{courtId+""});
+	        	progressDialog.setMessage("Court marked occupied");
+	        	progressDialog.dismiss();
+	        	
+	        }
+	    }
+	};
+	
 	
 	public final void viewMessage(long rowId)
 	{

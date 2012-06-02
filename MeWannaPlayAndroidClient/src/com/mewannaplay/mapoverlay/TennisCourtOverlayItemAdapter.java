@@ -26,6 +26,7 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 				publicFullyOccupiedCourt;
 	private static Drawable privateCourtInProximity, publicSemiOccupiedCourtInProximity, publicNotOccupiedCourtInProximity,
 	publicFullyOccupiedCourtInProximity;
+	private static Drawable flagOccupied;
 		
 	static 
 	{
@@ -54,6 +55,9 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 		publicNotOccupiedCourtInProximity = MeWannaPlay.getAppContext().getResources().getDrawable(R.drawable.tennisball_red_15);
 		publicNotOccupiedCourtInProximity.setBounds(publicNotOccupiedCourtInProximity.getIntrinsicWidth() /- 2, publicNotOccupiedCourtInProximity.getIntrinsicHeight() / -2,
 				publicNotOccupiedCourtInProximity.getIntrinsicWidth() / 2, publicNotOccupiedCourtInProximity.getIntrinsicHeight() / 2);
+		flagOccupied = MeWannaPlay.getAppContext().getResources().getDrawable(R.drawable.flagoccupied);
+		flagOccupied.setBounds(flagOccupied.getIntrinsicWidth() /- 2, flagOccupied.getIntrinsicHeight() / -2,
+				flagOccupied.getIntrinsicWidth() / 2, flagOccupied.getIntrinsicHeight() / 2);
 		
 				
 	}
@@ -71,7 +75,11 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 		Location thisCourtsLocation = this.getLocation();
 		boolean isInProximity = currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) <= Constants.PROXIMITY : false;
 		if (isInProximity)
-			Log.d(TAG, currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) + "meters ": "current locatio null");
+			Log.d(TAG, currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) + "meters ": "current location null");
+		
+		//Select the overlay image for this court based on conditions
+		if (tc.getId() == MapViewActivity.getCourtMarkedOccupied()) //If this court has been marked occupied by this user then show occupied flag
+			return flagOccupied;
 		if (tc.isPrivate())
 			return isInProximity ? privateCourtInProximity : privateCourt;
 		else {

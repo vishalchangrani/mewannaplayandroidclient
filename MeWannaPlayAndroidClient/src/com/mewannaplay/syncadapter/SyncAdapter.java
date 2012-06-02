@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.mewannaplay.Constants;
+import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.client.RequestMethods;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.City;
@@ -80,6 +81,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int MARK_COURT_OCCUPIED = 4;
 	public static final int GET_ALL_CITIES  = 5;
 	public static final int DELETE_MESSAGE = 6;
+	public static final int GET_OCCUPIED_COURT_AND_POSTED_MSG = 7;
 	public static final String COURT_ID = "court_id";
 	public static final String MESSAGE_ID = "message_id";
 	public static final String MESSAGE_OBJECT_KEY = "message_object_key";
@@ -106,6 +108,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	{
 		switch (operationRequested) {
 		case GET_ALL_COURTS:
+			//TODO Add code here to truncate tennis_courts and cities table
 			getAllCourts();
 			getAllCities();
 			break;
@@ -123,13 +126,16 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			postMessage(courtId, message);
 			break;
 		case MARK_COURT_OCCUPIED:
-			//markCourtOccupied(extras.getInt(COURT_ID));
+			markCourtOccupied(extras.getInt(COURT_ID));
 			break;
 		case GET_ALL_CITIES:
 			getAllCities();
 			break;
 		case DELETE_MESSAGE:
 			deleteMessage(extras.getInt(MESSAGE_ID));
+			break;
+		case GET_OCCUPIED_COURT_AND_POSTED_MSG:
+			getOccupiedCourtAndPostedMsg();
 			break;
 		}
     	}
@@ -160,6 +166,50 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	}
 
     }
+
+	private void getOccupiedCourtAndPostedMsg() throws IOException {
+
+		Log.d(TAG," getting occupied court id and posted message id");
+		RestClient restClient = new RestClient(
+				Constants.GET_OCCUPIED_COURT_AND_POSTED_MSG);
+		JSONObject jsonObject = restClient.execute();
+
+		try {
+			String tennisCourtId = jsonObject.getString("tennis_court_id");
+			int tenniscourtid = Integer.parseInt(tennisCourtId);
+			Log.d(TAG, "Setting occupied court to "+tenniscourtid);
+			MapViewActivity.setCourtMarkedOccupied(tenniscourtid);
+		} catch (JSONException e) {
+			Log.e(TAG, " Conversion error while retreiving tenniscourtid from "
+					+ jsonObject.toString());
+			MapViewActivity.setCourtMarkedOccupied(-1);
+		} catch (NumberFormatException e) {
+			// User has not marked any court occupied
+			MapViewActivity.setCourtMarkedOccupied(-1);
+		}
+
+		try {
+			String messageId = jsonObject.getString("message_id");
+			int message = Integer.parseInt(messageId);
+			Log.d(TAG, "Setting posted message id to "+message);
+			MapViewActivity.setMessagePosted(message);
+		} catch (JSONException e) {
+			Log.e(TAG, " Conversion error while retreiving message id from "
+					+ jsonObject.toString());
+			MapViewActivity.setMessagePosted(-1);
+		} catch (NumberFormatException e) {
+			// User has not posted any message
+			MapViewActivity.setMessagePosted(-1);
+		}
+
+	}
+
+	private void markCourtOccupied(int courtId) throws IOException {
+		RestClient restClient = new RestClient(
+				Constants.MARK_COURT_OCCUPIED + courtId);
+		restClient.execute();
+		
+	}
 
 	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
 	private void getAllCourts() throws IOException {
@@ -347,6 +397,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	}
 	
 	
+	//Different than the other bundles since  court occupied by user and message posted by him if any
+		//is queried periodically from mapviewactivity if user is not anonymous
+		public static Bundle getOccupiedCourtAndPostedMsgBundle() {
+			Bundle extras = new Bundle();
+			extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_OCCUPIED_COURT_AND_POSTED_MSG);
+			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+			return extras;
+		}
+		
+		
 	public static Bundle getAllCitiesBundle() {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_CITIES);
@@ -381,6 +445,18 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);	
+		return extras;
+	}
+	
+	public static Bundle getMarkOccupiedBundle(int courtId) {
+		Bundle extras = new Bundle();
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.MARK_COURT_OCCUPIED);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
 		return extras;
 	}
 }

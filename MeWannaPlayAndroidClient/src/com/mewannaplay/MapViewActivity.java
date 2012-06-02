@@ -15,8 +15,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,17 +41,26 @@ import com.mewannaplay.syncadapter.SyncAdapter;
 public class MapViewActivity extends MapActivity {
 
 	private static final String TAG = "MapViewActivity";
-//	private LocationManager myLocationManager;
 	private MyLocationOverlay myLocationOverlay;
-	private static Account loggedInUserAccount;
+	
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
-	private static City currentCity; //if null means currentLocation selected
-	public static MapViewActivity mapViewActivity;
+	
+	
 	
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
+	
+	
+	//State variables...information used by all activities
+	private static Account loggedInUserAccount;//Gives the logged in user - anonymous or registered user
+	private static City currentCity; //Current city and state selected 
+	private static int courtMarkedOccupied = -1; //court id of the court mark occupied by this user (-1 if none or user is anonymous)
+	private static int messagePosted = -1; //message id of the message posted by this user if any else -1 (anonymous user cannot post message)
+	public static MapViewActivity mapViewActivity; //reference to this activity itself
+	//-------------------------------------------------------
+	
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -133,6 +140,12 @@ public class MapViewActivity extends MapActivity {
 	        }
 	        	
 	        syncFinishedReceiverForCourtDetails = null;
+	        
+	        //Remove all periodic syncs
+	    	ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+					ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
+			ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
+			ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, false);
 	    }
 	    
 	    public void onResume(){
@@ -145,6 +158,15 @@ public class MapViewActivity extends MapActivity {
 	       }
 	       MapView mapView = (MapView) findViewById(R.id.mapview);
 	        mapView.getOverlays().add(myLocationOverlay);
+	        
+	    	//Kickoff continuous  refresh of court mark occupied by user and message id posted by user (if user not anon)
+	        if (RestClient.isLoggedIn()) //This is no anonymous user
+	        {
+	        	Log.d(TAG, " Adding continous refresh for court id and posted message id for this user");
+	        	ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, true);
+	        	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
+	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 10);
+	        }
 	       
 	    }
 	    
@@ -477,5 +499,25 @@ public class MapViewActivity extends MapActivity {
 	public Location getMyCurrentLocation()
 	{
 		return myLocationOverlay.getLastFix();
+	}
+
+
+	public static int getCourtMarkedOccupied() {
+		return courtMarkedOccupied;
+	}
+
+
+	public static void setCourtMarkedOccupied(int courtMarkedOccupied) {
+		MapViewActivity.courtMarkedOccupied = courtMarkedOccupied;
+	}
+
+
+	public static int getMessagePosted() {
+		return messagePosted;
+	}
+
+
+	public static void setMessagePosted(int messagePosted) {
+		MapViewActivity.messagePosted = messagePosted;
 	}
 }

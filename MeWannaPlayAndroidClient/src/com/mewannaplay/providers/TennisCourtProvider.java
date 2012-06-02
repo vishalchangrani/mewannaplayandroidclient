@@ -360,6 +360,7 @@ public class TennisCourtProvider extends ContentProvider {
 		case TENNISCOURTS:
 			count = db
 					.update(TENNIS_COURT_TABLE_NAME, values, where, whereArgs);
+			
 			break;
 		default:
 			throw new IllegalArgumentException("Unsupported URI " + uri);
@@ -387,7 +388,7 @@ public class TennisCourtProvider extends ContentProvider {
 						for (int i = 0; i < array.length(); i++) {
 						    JSONObject row = array.getJSONObject(i);
 						
-					insert.bindLong(1, i /* row.getInt("tennis_id") */);
+					insert.bindLong(1, row.getInt("tennis_id"));
 					insert.bindDouble(2, row.getDouble("tennis_latitude"));
 					insert.bindDouble(3, row.getDouble("tennis_longitude"));
 					insert.bindLong(4, row.getInt("tennis_subcourts"));
