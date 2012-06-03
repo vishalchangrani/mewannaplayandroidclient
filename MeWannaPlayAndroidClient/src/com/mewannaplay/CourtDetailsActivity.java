@@ -403,6 +403,7 @@ public class CourtDetailsActivity extends ListActivity{
 		Intent intentForTennisCourtDetails = new Intent(this, ViewMessageActivity.class);
 		Bundle extras = new Bundle(); 
 		extras.putInt(SyncAdapter.MESSAGE_ID,(int) rowId);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
 	}

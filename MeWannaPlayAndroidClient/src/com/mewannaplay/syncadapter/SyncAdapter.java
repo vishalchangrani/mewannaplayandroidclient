@@ -82,6 +82,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int GET_ALL_CITIES  = 5;
 	public static final int DELETE_MESSAGE = 6;
 	public static final int GET_OCCUPIED_COURT_AND_POSTED_MSG = 7;
+	public static final int GET_COURT_MESSAGE_BY_ID = 8;
 	public static final String COURT_ID = "court_id";
 	public static final String MESSAGE_ID = "message_id";
 	public static final String MESSAGE_OBJECT_KEY = "message_object_key";
@@ -137,6 +138,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		case GET_OCCUPIED_COURT_AND_POSTED_MSG:
 			getOccupiedCourtAndPostedMsg();
 			break;
+		case GET_COURT_MESSAGE_BY_ID:
+			getCourtMessageByTennisCourtId(extras.getInt(COURT_ID));
+			break;
 		}
     	}
     	catch (JSONException e)
@@ -167,6 +171,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     }
 
+	
+
 	private void getOccupiedCourtAndPostedMsg() throws IOException {
 
 		Log.d(TAG," getting occupied court id and posted message id");
@@ -175,7 +181,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		JSONObject jsonObject = restClient.execute();
 
 		try {
-			String tennisCourtId = jsonObject.getString("tennis_court_id");
+			String tennisCourtId = jsonObject.getString("occupied_courtid");
 			int tenniscourtid = Integer.parseInt(tennisCourtId);
 			Log.d(TAG, "Setting occupied court to "+tenniscourtid);
 			MapViewActivity.setCourtMarkedOccupied(tenniscourtid);
@@ -189,17 +195,17 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		}
 
 		try {
-			String messageId = jsonObject.getString("message_id");
+			String messageId = jsonObject.getString("postedmessage_courtid");
 			int message = Integer.parseInt(messageId);
 			Log.d(TAG, "Setting posted message id to "+message);
-			MapViewActivity.setMessagePosted(message);
+			MapViewActivity.setCourtPostedMessageOn(message);
 		} catch (JSONException e) {
 			Log.e(TAG, " Conversion error while retreiving message id from "
 					+ jsonObject.toString());
-			MapViewActivity.setMessagePosted(-1);
+			MapViewActivity.setCourtPostedMessageOn(-1);
 		} catch (NumberFormatException e) {
 			// User has not posted any message
-			MapViewActivity.setMessagePosted(-1);
+			MapViewActivity.setCourtPostedMessageOn(-1);
 		}
 
 	}
@@ -310,6 +316,31 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 						contentValues);
 	}
 
+	
+   /* Very similar to getCourtMessages except only the message posted by this user is retrieved
+    */
+	private void getCourtMessageByTennisCourtId(int courtId) throws IOException {
+    	Log.d(TAG, " in getCourtMessageByTennisCourtId...");
+    	RestClient restClient = new RestClient(
+				Constants.GET_TENNISCOURT_MESSAGE_BY_COURTID + courtId);
+    	ContentValues contentValue = new ContentValues();
+    	try {
+			Message message = Message.fromSingleJSONObject(restClient.execute());
+			contentValue = message.toContentValue();
+    	}
+    	 catch (Exception e) {
+ 			Log.e(TAG, e.getMessage());
+ 			throw new IOException(" Conversion error ");
+ 		}
+			Log.d(TAG, "now calling bulk insert for this message");
+			this.getContext()
+					.getContentResolver()
+					.bulkInsert(ProviderContract.Messages.CONTENT_URI,
+							new ContentValues[] { contentValue});
+  
+	}
+    
+    
 	public void getAllCities() throws IOException
 	{
 		try {
@@ -382,6 +413,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		return extras;
 	}
 
+	
+	public static Bundle getMessagePostedByUserBundle(int courtId) {
+		Bundle extras = new Bundle();
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGE_BY_ID);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		return extras;
+	}
+	
 	//Different than the other bundles since in get all messages we want to continously refresh
 	//the list by letting the syncadapter run periodically.
 	public static Bundle getAllMessagesBundle(int courtId) {
@@ -436,10 +480,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		return extras;
 	}
 	
-	public static Bundle getDeleteMessageBundle(int messageId) {
+	public static Bundle getDeleteMessageBundle(int courtId) {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.DELETE_MESSAGE);
-		extras.putInt(SyncAdapter.MESSAGE_ID, messageId);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);

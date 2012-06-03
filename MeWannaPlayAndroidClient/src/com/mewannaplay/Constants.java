@@ -38,7 +38,7 @@ public class Constants {
     public static final String GET_TENNISCOURT_DETAILS =
     		BASE_URL+"tenniscourtdetails/index/";
     public static final String GET_TENNISCOURT_MESSAGES =
-    		BASE_URL+"tenniscourtmessages/index/";
+    		BASE_URL+"tenniscourtmessages/index/"; //here index to be passed is courtid 
     public static final String LOGIN  =
     		BASE_URL+"users/login/";
     public static final String LOGOUT  =
@@ -51,10 +51,13 @@ public class Constants {
             BASE_URL+"tenniscourtmessages/add";
     public static final String DELETE_MESSAGE =
             BASE_URL+"tenniscourtmessage/index/?/partnerfound/"; //e.g.  http://api.mewannaplay.com/V1/tenniscourtmessage/index/13604/partnerfound/true
+    //NOTE in delete message index is court id and NOT message id!
     public static final String MARK_COURT_OCCUPIED  =
     		BASE_URL+"markoccupied/id/";
     public static final String GET_OCCUPIED_COURT_AND_POSTED_MSG  =
     		BASE_URL+"user";
+    public static final String GET_TENNISCOURT_MESSAGE_BY_COURTID =
+            BASE_URL+"tenniscourtmessage/index/";
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
 

@@ -36,6 +36,7 @@ import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
 import com.mewannaplay.model.City;
 import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract;
+import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
 public class MapViewActivity extends MapActivity {
@@ -57,7 +58,7 @@ public class MapViewActivity extends MapActivity {
 	private static Account loggedInUserAccount;//Gives the logged in user - anonymous or registered user
 	private static City currentCity; //Current city and state selected 
 	private static int courtMarkedOccupied = -1; //court id of the court mark occupied by this user (-1 if none or user is anonymous)
-	private static int messagePosted = -1; //message id of the message posted by this user if any else -1 (anonymous user cannot post message)
+	private static int courtPostedMessageOn = -1; //court id of the court on which a message has been posted by this user else -1 (anonymous user cannot post message)
 	public static MapViewActivity mapViewActivity; //reference to this activity itself
 	//-------------------------------------------------------
 	
@@ -311,11 +312,9 @@ public class MapViewActivity extends MapActivity {
 			extras.putInt(SyncAdapter.COURT_ID,id);
 			extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT, this.getMyCurrentLocation());
 			intentForTennisCourtDetails.putExtras(extras);
-			startActivity(intentForTennisCourtDetails);//fire it up baby		
+			startActivity(intentForTennisCourtDetails);	
 		}
-		
-
-		
+	
 		private void getAllTennisCourts(City cityToFocusOn) {
 			//Loading all courts kills the app (ANRs.and out of memory since there is just 
 			//too much of data and too many overlays
@@ -512,12 +511,84 @@ public class MapViewActivity extends MapActivity {
 	}
 
 
-	public static int getMessagePosted() {
-		return messagePosted;
+	public static void setCourtPostedMessageOn(int messagePosted) {
+		MapViewActivity.courtPostedMessageOn = messagePosted;
 	}
 
 
-	public static void setMessagePosted(int messagePosted) {
-		MapViewActivity.messagePosted = messagePosted;
+	public static int getCourtPostedMessageOn() {
+		return courtPostedMessageOn;
 	}
+
+	public void onPartnerFound(View v)
+	{
+				progressDialog = ProgressDialog.show(this, "", 
+		                "Fetching message", true);
+			    Log.d(TAG, " --> Requesting sync for message for courtid"+getCourtPostedMessageOn());
+				getContentResolver().delete(ProviderContract.Messages.CONTENT_URI, null, null); //clean message table
+				registerReceiver(postedMessageReceiver, new IntentFilter(SyncAdapter.SYNC_FINISHED_ACTION));
+				ContentResolver.requestSync(MapViewActivity.getAccount(this),
+						ProviderContract.AUTHORITY, SyncAdapter.getMessagePostedByUserBundle(getCourtPostedMessageOn()));
+	
+	}
+	
+	
+	public final void viewMessage(int messageId, int courtId)
+	{
+		Intent intentForTennisCourtDetails = new Intent(this, ViewMessageActivity.class);
+		Bundle extras = new Bundle(); 
+		extras.putInt(SyncAdapter.MESSAGE_ID, messageId);
+		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		intentForTennisCourtDetails.putExtras(extras);
+		startActivity(intentForTennisCourtDetails);
+	}
+	
+	private BroadcastReceiver postedMessageReceiver = new BroadcastReceiver() {
+
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+	        Log.d(TAG, "Sync finished, should refresh nao!!");
+	        
+	        if (intent.getExtras().getInt(SyncAdapter.OPERATION) != SyncAdapter.GET_COURT_MESSAGE_BY_ID)
+	        	return;
+	        
+	        unregisterReceiver(this);
+	        
+	        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR))
+	        {
+	        	progressDialog.dismiss();
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(MapViewActivity.this);
+	        	builder.setMessage("Error while fetching message")
+	        	       .setCancelable(false)
+	        	       .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+	        	           public void onClick(DialogInterface dialog, int id) {
+	        	        	   MapViewActivity.this.finish();
+	        	           }
+	        	       });
+	        	      
+	        	alert = builder.create();
+	        	alert.show();
+	        }
+	        else
+	        {
+	        	progressDialog.dismiss();
+	        	//Retreive the message id of the message just fetched by syncadapter
+	        	Cursor cursor = getContentResolver().query(
+	    				Messages.CONTENT_URI, new String[]{"_id"}, null,
+	        			null, " LIMIT 1");
+	        	if (cursor.getCount() == 0)
+	        	{
+	        		Log.e(TAG," Court message not found");
+	    			return;
+	        	}
+	        	cursor.moveToFirst();
+	        	int messageId = cursor.getInt(cursor.getColumnIndex("_id"));
+	        	cursor.close();
+	        	cursor = null;
+	        	if (messageId != 0)
+	        		viewMessage(messageId, getCourtPostedMessageOn());
+	        }
+	    }
+	};
+
 }

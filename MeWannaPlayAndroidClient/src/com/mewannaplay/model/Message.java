@@ -161,6 +161,14 @@ public class Message {
 		return messages;
 	}
 	
+	public static Message fromSingleJSONObject(JSONObject jsonObject) throws JsonSyntaxException, JSONException
+	{
+		final GsonBuilder gsonb = new GsonBuilder();
+		final Gson gson = gsonb.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();	
+		Message message = (Message) gson.fromJson(jsonObject.getString("Message").toString(), Message.class);
+		return message;
+	}
+	
 	public JSONObject toJSONObject()
 	{
 		final GsonBuilder gsonb = new GsonBuilder();
