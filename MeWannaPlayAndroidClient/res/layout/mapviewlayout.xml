@@ -39,7 +39,7 @@
     android:layout_height="wrap_content"
     android:layout_toRightOf="@id/ImageInfoButton01"
     android:background="@drawable/shoutout"
-    android:layout_marginLeft="10dp"
+    android:layout_marginLeft="10dp" android:onClick="onPartnerFound"
     />
    
 

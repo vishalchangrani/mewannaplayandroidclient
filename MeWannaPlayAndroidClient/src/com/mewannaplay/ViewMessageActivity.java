@@ -28,6 +28,7 @@ public class ViewMessageActivity extends Activity {
 	private Message message;
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
+	int courtId; //HACK Alert - court id should be part of message object but its not hence need to be passed around seperately
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,13 @@ public class ViewMessageActivity extends Activity {
 			this.finish();
 			return;
 		}
-		
+		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
+		if (courtId <= 0 )
+		{
+			Log.e(TAG," courtId not specified");
+			this.finish();
+			return;
+		}
 		setContentView(R.layout.view_message_layout);
 		
 		
@@ -102,7 +109,7 @@ public class ViewMessageActivity extends Activity {
 	 {
 		 registerReceiver(syncFinishedReceiver, new IntentFilter(SyncAdapter.SYNC_FINISHED_ACTION));
 			ContentResolver.requestSync(MapViewActivity.getAccount(this),
-					ProviderContract.AUTHORITY, SyncAdapter.getDeleteMessageBundle(message.getId()));
+					ProviderContract.AUTHORITY, SyncAdapter.getDeleteMessageBundle(courtId));
 	 }
 		private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
 
