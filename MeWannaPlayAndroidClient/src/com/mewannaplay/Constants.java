@@ -51,17 +51,19 @@ public class Constants {
             BASE_URL+"tenniscourtmessages/add";
     public static final String DELETE_MESSAGE =
             BASE_URL+"tenniscourtmessage/index/?/partnerfound/"; //e.g.  http://api.mewannaplay.com/V1/tenniscourtmessage/index/13604/partnerfound/true
-    //NOTE in delete message index is court id and NOT message id!
+    //NOTE in delete message index is message id
     public static final String MARK_COURT_OCCUPIED  =
     		BASE_URL+"markoccupied/id/";
     public static final String GET_OCCUPIED_COURT_AND_POSTED_MSG  =
     		BASE_URL+"user";
     public static final String GET_TENNISCOURT_MESSAGE_BY_COURTID =
             BASE_URL+"tenniscourtmessage/index/";
+    public static final String GET_TENNIS_COURT_STATS =
+            BASE_URL+"tenniscourtstats";  //Tennis court stats is information about the court which changes over time (message count and occupied count)
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
 
-	public static final float PROXIMITY = 20f;
+	public static final float PROXIMITY = 20f; //METERS
     
     public static enum ACTIVITY
     {

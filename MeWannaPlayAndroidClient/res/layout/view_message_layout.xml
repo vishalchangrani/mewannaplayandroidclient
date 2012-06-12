@@ -86,13 +86,13 @@
 </LinearLayout>
 	
 	<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal"  android:layout_centerInParent="true" android:layout_marginTop="50dip">
-
-
 		<Button android:id="@+id/delete_message"
 			 android:onClick="onDelete"
 			android:layout_width="150dip" android:layout_height="50dip"
-			android:text="Delete"
+			android:text="Delete message"
 			android:textSize="10sp"/>
+		<Button android:textSize="9sp" android:onClick="onDeletePartnerFound" android:id="@+id/delete_message_partner_found" android:text="Partner found.delete message" android:layout_height="50dip" android:layout_width="150dip"></Button>
 </LinearLayout>
+	
 	
 </LinearLayout>

@@ -40,7 +40,7 @@
     android:layout_toRightOf="@id/ImageInfoButton01"
     android:background="@drawable/shoutout"
     android:layout_marginLeft="10dp" android:onClick="onPartnerFound"
-    />
+    android:visibility="invisible"/>"
    
 
   <TextView

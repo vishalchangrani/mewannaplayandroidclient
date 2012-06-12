@@ -12,7 +12,6 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,7 +37,6 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.google.android.maps.GeoPoint;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
@@ -57,11 +55,7 @@ public class CourtDetailsActivity extends ListActivity{
 	private AlertDialog alert;
 	int courtId;
 	private ContentObserver messageContentObserver;
-	private Timer messageRefreshTimer; 
-	private AsyncTask<Void, Void, Void> getMessageTask;
-	private Handler handler = new Handler();
-	private ServiceResultReceiver receiver;
-	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
+
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -69,7 +63,7 @@ public class CourtDetailsActivity extends ListActivity{
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
-		thisCourtsLocation = (Location) this.getIntent().getExtras().getParcelable(SELECTED_COURTS_GEOPOINT);
+	
 		
 		if (RestClient.isLoggedIn())
 		{
@@ -84,7 +78,12 @@ public class CourtDetailsActivity extends ListActivity{
     			TennisCourtsDetails.CONTENT_URI, null, " _id = ?",
     			new String[] { courtId + "" }, null);
     	if (cursor.getCount() == 0)
+    	{
+    		Log.e(TAG, " cursor for courtId "+courtId+" was empty in tenniscourtdetails table");
+    		cursor.close();
     		this.finish();
+    		return;
+    	}
     	cursor.moveToFirst();
     	
     	Cursor activityCursor = getContentResolver().query(

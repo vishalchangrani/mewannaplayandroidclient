@@ -29,7 +29,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SyncResult;
-import android.database.SQLException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -73,7 +73,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	}
 
 	public final static String OPERATION = "operation";
-	public final static String RESULT_RECEVIER = "result_receiver";
+	public final static String ACKNOWLEDGEMENT_NEEDED = "ACK_NEEDED"; //Flag to indicate if the caller has a broadcast receiver 
+																	  //which needs to be notified when this operation finishes
+																	  //True - onPerformSync sends a broadcast when operation finishes (default)
+																	  //False - No broadcast is sent (used for periodic operations like courtstats etc. 
+	
+	//All types of operation
 	public static final int GET_ALL_COURTS = 0;
 	public static final int GET_COURT_DETAILS = 1;
 	public static final int GET_COURT_MESSAGES = 2;
@@ -83,8 +88,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static final int DELETE_MESSAGE = 6;
 	public static final int GET_OCCUPIED_COURT_AND_POSTED_MSG = 7;
 	public static final int GET_COURT_MESSAGE_BY_ID = 8;
+	public static final int GET_ALL_COURTS_STATS = 9;
+	
 	public static final String COURT_ID = "court_id";
 	public static final String MESSAGE_ID = "message_id";
+	public static final String PARTNER_FOUND = "partner_found";
 	public static final String MESSAGE_OBJECT_KEY = "message_object_key";
 
 	/*
@@ -104,7 +112,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
  
     	if (!extras.containsKey(OPERATION))
 			return;
-    	int operationRequested = extras.getInt(OPERATION);
+    	
+    	int operationRequested = extras.getInt(OPERATION); //what operation is requested?
+    	boolean ackNeeded = extras.getBoolean(ACKNOWLEDGEMENT_NEEDED, true); //Is acknowledgment requested for this operation?
     	try
     	{
 		switch (operationRequested) {
@@ -133,7 +143,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			getAllCities();
 			break;
 		case DELETE_MESSAGE:
-			deleteMessage(extras.getInt(MESSAGE_ID));
+			deleteMessage(extras.getInt(COURT_ID), extras.getInt(MESSAGE_ID),  extras.getBoolean(PARTNER_FOUND, false));
 			break;
 		case GET_OCCUPIED_COURT_AND_POSTED_MSG:
 			getOccupiedCourtAndPostedMsg();
@@ -141,32 +151,39 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		case GET_COURT_MESSAGE_BY_ID:
 			getCourtMessageByTennisCourtId(extras.getInt(COURT_ID));
 			break;
+		case GET_ALL_COURTS_STATS:
+			new Thread()
+			{
+				public void run()
+				{
+					try {
+						getAllCourtStats();
+					} catch (IOException e) {
+						Log.e(TAG, "error while doing getcourtstats");
+					}
+				}
+			}.start();
+			
+			
+			break;
 		}
     	}
-    	catch (JSONException e)
+    	catch (Throwable e)
     	{
-    		 syncResult.stats.numParseExceptions++;
+    		// syncResult.stats.numParseExceptions++; //DO NOT record error..syncadapter otherwise keeps retrying which we dont want.
     		 isError = true;
-    		 Log.e(TAG, e.getMessage());
-    	}
-    	catch (IOException e)
-    	{
-    		 syncResult.stats.numIoExceptions++;
-    		 isError = true;
-    		 Log.e(TAG, e.getMessage());
-    	}
-    	catch (SQLException e)
-    	{
-    		syncResult.databaseError = true;
-    		isError = true;
-    		Log.e(TAG, e.getMessage());
+    		 Log.e(TAG,"Exception for opertaion "+operationRequested);
     	}
     	finally
     	{
+    		 
+    		 if (ackNeeded) //send broadcast which represent the completion of the operation (broadcast receivers in the calling activity use this to update view)
+    		 {
     		  Intent i = new Intent(SYNC_FINISHED_ACTION);
     		  i.putExtra(SYNC_ERROR, isError);
     		  i.putExtra(OPERATION, operationRequested);
     	      this.getContext().sendBroadcast(i);
+    		 }
     	}
 
     }
@@ -217,10 +234,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		
 	}
 
-	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
+
 	private void getAllCourts() throws IOException {
-		try {
-			// if one day has elapsed then get new list...
+	
 			RestClient restClient = new RestClient(
 					Constants.GET_ALL_TENNISCOURTS);
 			
@@ -256,16 +272,32 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 					.getContentResolver()
 					.bulkInsert(ProviderContract.TennisCourts.CONTENT_URI,
 							contentValues);*/
-		} catch (IOException e) {
-			// Following is to notify listener to remove spinner.
-			// Unfortunately there is no way at this point to listen for
-			// sysnadapter perform sync completion
-			getContext().getContentResolver().notifyChange(
-					ProviderContract.TennisCourts.CONTENT_URI, null, false);
-			throw e;
-		}
+	
 	}
 
+	//Here is where we will pull tennis court details such as occupied, free etc. from the server time to time.
+	private void getAllCourtStats() throws IOException
+	{
+
+	
+			RestClient restClient = new RestClient(
+					Constants.GET_TENNIS_COURT_STATS);
+			
+			try {
+				JSONObject jsonObject = restClient.execute();
+				ContentProviderClient contentProviderClient = this.getContext()
+				.getContentResolver().acquireContentProviderClient(ProviderContract.TennisCourts.CONTENT_URI);
+				TennisCourtProvider tcp = (TennisCourtProvider) contentProviderClient.getLocalContentProvider();
+			//	tcp.bulkUpdateTennisCourts(jsonObject);
+				
+			} catch (Exception e) {
+				Log.e(TAG, " Exception while doing get all court stats "+e.getMessage());
+				throw new IOException(" Conversion error ");
+			}
+	
+	}
+	
+	
 	public void getCourtDetails(int courtId) throws IOException {
 		RestClient restClient = new RestClient(
 				Constants.GET_TENNISCOURT_DETAILS + courtId);
@@ -365,8 +397,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 					.bulkInsert(ProviderContract.Cities.CONTENT_URI,
 							contentValues);
 		} catch (IOException e) {
-			getContext().getContentResolver().notifyChange(
-					ProviderContract.Cities.CONTENT_URI, null, false);
+			//getContext().getContentResolver().notifyChange(
+			//		ProviderContract.Cities.CONTENT_URI, null, false);
 			throw e;
 		}
 	}
@@ -379,13 +411,17 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			restClient.execute(RequestMethods.POST, message);	
 	}
 	
-	public void deleteMessage(int messageId) throws IOException
+	public void deleteMessage(int courtId, int messageId, boolean partnerFound) throws IOException
 	{
-		String deleteMessageURL = Constants.DELETE_MESSAGE.replace("?", Integer.toString(messageId)) + "false";
+		String deleteMessageURL = Constants.DELETE_MESSAGE.replace("?", Integer.toString(courtId)) + partnerFound;
 		
 		RestClient restClient = new RestClient(
 				deleteMessageURL);
 		restClient.execute(RequestMethods.DELETE,null);	
+		//Delete from android database
+		this.getContext()
+		.getContentResolver().delete(ProviderContract.Messages.CONTENT_URI, " _id = ? ", new String[] {""+messageId});
+		
 	}
 	
 	public static Bundle getAllCourtsBundle() {
@@ -432,6 +468,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGES);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putBoolean(SyncAdapter.ACKNOWLEDGEMENT_NEEDED, false); //default is true hence we have to specify fault here explicitly
 		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
@@ -446,11 +483,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		public static Bundle getOccupiedCourtAndPostedMsgBundle() {
 			Bundle extras = new Bundle();
 			extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_OCCUPIED_COURT_AND_POSTED_MSG);
-			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
-			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-			//extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+			extras.putBoolean(SyncAdapter.ACKNOWLEDGEMENT_NEEDED, false);
 			return extras;
 		}
 		
@@ -480,10 +513,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		return extras;
 	}
 	
-	public static Bundle getDeleteMessageBundle(int courtId) {
+	public static Bundle getDeleteMessageBundle(int courtId, int messageId, boolean partnerFound) {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.DELETE_MESSAGE);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
+		extras.putInt(SyncAdapter.MESSAGE_ID, messageId);
+		extras.putBoolean(SyncAdapter.PARTNER_FOUND, partnerFound);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
@@ -501,6 +536,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		return extras;
+	}
+	
+	public static Bundle getAllCourtsStatsBundle() {
+		Bundle extras = new Bundle();
+		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS_STATS);
+		extras.putBoolean(SyncAdapter.ACKNOWLEDGEMENT_NEEDED, false); 
 		return extras;
 	}
 }
