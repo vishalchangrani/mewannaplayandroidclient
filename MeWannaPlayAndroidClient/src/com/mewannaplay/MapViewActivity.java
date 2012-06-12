@@ -23,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,8 @@ public class MapViewActivity extends MapActivity {
 	private static int courtMarkedOccupied = -1; //court id of the court mark occupied by this user (-1 if none or user is anonymous)
 	private static int courtPostedMessageOn = -1; //court id of the court on which a message has been posted by this user else -1 (anonymous user cannot post message)
 	public static MapViewActivity mapViewActivity; //reference to this activity itself
+	public static boolean fetchedAllcourts = false; //This flag is needed to decide whether or not to start background refresh of court info. Only when all courts are fetch we start bgrnd threads
+													
 	//-------------------------------------------------------
 	
 	
@@ -143,12 +146,17 @@ public class MapViewActivity extends MapActivity {
 	        syncFinishedReceiverForCourtDetails = null;
 	        
 	        //Remove all periodic syncs
+	        //This should remove the two periodic refreshes and any other sync that might be happening at this time
 	    	ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
 					ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
 			ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
 			ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, false);
+			
+		//	stopBackGroundRefresh();
+			
 	    }
 	    
+	 
 	    public void onResume(){
 	        super.onResume();
 	        Log.i(TAG,"Resuming GPS update requests");	   
@@ -160,17 +168,49 @@ public class MapViewActivity extends MapActivity {
 	       MapView mapView = (MapView) findViewById(R.id.mapview);
 	        mapView.getOverlays().add(myLocationOverlay);
 	        
-	    	//Kickoff continuous  refresh of court mark occupied by user and message id posted by user (if user not anon)
-	        if (RestClient.isLoggedIn()) //This is no anonymous user
+	       // startBackGroundRefresh(); //Start background refreshes from syncadapter
+	      
+	    }
+	    
+	    
+	    private void startBackGroundRefresh()
+	    {
+	    	 if (!fetchedAllcourts)
+	    		 return;//First time when the activity starts we have no courts fetched yet...hence dont start background refresh yet.
+	        
+	    	//Start the two background periodic refresh
+	        //1.
+	        //Kickoff continuous refresh for court statistics which keep changing (this includes message count and occupied count)
+	    	Log.d(TAG, " Adding continous refresh for court statistics");
+        	ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, true);
+        	
+        	//Periodically update the two flags courtMarkedOccupied and courtPostedMessageOn
+        	//Set to 10 second period for development BUT in production this will be set to 5 minutes
+        	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
+ 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsStatsBundle(), 60 * 5);
+        	//2.
+        	//Also kickoff continuous  refresh of court mark occupied by user and message id posted by user (if user not anonymous)
+	        if (RestClient.isLoggedIn()) //This is not an anonymous user
 	        {
 	        	Log.d(TAG, " Adding continous refresh for court id and posted message id for this user");
 	        	ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, true);
+	        	
+	        	//Periodically update the two flags courtMarkedOccupied and courtPostedMessageOn
+	        	//Set to 10 second period for development BUT in production this will be set to 5 minutes
 	        	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
-	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 10);
+	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 60 * 2);
 	        }
-	       
 	    }
 	    
+	    private void stopBackGroundRefresh()
+		   {
+			   //Remove all periodic syncs
+		        //This should remove the two periodic refreshes and any other sync that might be happening at this time
+		    	ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+						ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
+				ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
+				ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, false);
+		   }
 	    
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -247,6 +287,11 @@ public class MapViewActivity extends MapActivity {
 						
 							progressDialog.dismiss();
 							MapViewActivity.this.showDialog(DIALOG_STATE_CITY_CHOICE);
+							
+							//now that we have fetched all courts..start background threads to keep refreshing their status..
+							//Also remember fetch for all courts is done so next time the activity resume restart the background thread.
+							fetchedAllcourts = true;
+							//startBackGroundRefresh();
 						}
 					}
 				};
@@ -315,6 +360,19 @@ public class MapViewActivity extends MapActivity {
 			startActivity(intentForTennisCourtDetails);	
 		}
 	
+		private void getAllTennisCourts(Location currentLocation)
+		{
+		
+			Cursor cursor = this
+					.getContentResolver()
+					.query(ProviderContract.TennisCourts.CONTENT_URI,
+							null,
+							null,
+							null, null);
+			populateOverlays(cursor, currentLocation);
+			
+			
+		}
 		private void getAllTennisCourts(City cityToFocusOn) {
 			//Loading all courts kills the app (ANRs.and out of memory since there is just 
 			//too much of data and too many overlays
@@ -333,7 +391,13 @@ public class MapViewActivity extends MapActivity {
 							null,
 							null,
 							null, null); */
-			
+		 populateOverlays(cursor, null);
+		}
+		
+		
+		
+		private void populateOverlays(Cursor cursor, Location location)
+		{
 			try
 			{
 			List<TennisCourtOverlayItemAdapter> newListOfOverlays = new ArrayList<TennisCourtOverlayItemAdapter>();
@@ -348,6 +412,18 @@ public class MapViewActivity extends MapActivity {
 //					Log.d(TAG, " Latitude: " + latitude + " Longitude: "
 //							+ longitude);
 
+					if (location != null)
+					{
+						Location courtLocation = new Location("");
+						courtLocation.setLatitude(latitude);
+						courtLocation.setLongitude(longitude);
+						if (location.distanceTo(courtLocation)  > (20 * 1609.344))
+						{
+							cursor.moveToNext();
+							continue;
+						}
+						
+					}
 					int id = cursor.getInt(cursor.getColumnIndex("_id"));
 					int subcourts = cursor.getInt(cursor
 							.getColumnIndex("subcourts"));
@@ -385,7 +461,6 @@ public class MapViewActivity extends MapActivity {
 			}
 		}
 		
-		
 		@Override
 		protected Dialog onCreateDialog(int id) {
 			Dialog dialog = null;
@@ -412,7 +487,7 @@ public class MapViewActivity extends MapActivity {
 			{
 				
 				//redrawMarkers();
-				Log.d(TAG," Adding all tenniscourts to overlay");
+				Log.d(TAG," Adding all tenniscourts for the state to which this city belongs to as overlays on the map");
 		        myItemizedOverlay.clear();
 				getAllTennisCourts(currentCity);
 			
@@ -429,7 +504,16 @@ public class MapViewActivity extends MapActivity {
 			{
 				GeoPoint lastLocation = myLocationOverlay.getMyLocation();
 				if (lastLocation != null)
+				{
+					Location l = new Location("");
+					l.setLatitude(lastLocation.getLatitudeE6()/1E6);
+					l.setLongitude(lastLocation.getLongitudeE6()/1E6);
+					getAllTennisCourts(l); //Load only courts in 20 mile radius of current location not all
 					mapView.getController().animateTo(lastLocation);
+					mapView.getController().setZoom(14);
+				}
+				//Else show dialog box that current location is not available
+				
 			}
 		}
 		
@@ -511,8 +595,35 @@ public class MapViewActivity extends MapActivity {
 	}
 
 
-	public static void setCourtPostedMessageOn(int messagePosted) {
+	public static void setCourtPostedMessageOn(final int messagePosted) {
+		//if message is posted show the shoutout (view message) icon on the map else remove it
+		
+		if (messagePosted  != MapViewActivity.courtPostedMessageOn) //A changed happened 
+		{
+			//Enable/disable and visibility on/off needs be done on the thread that created the view
+			//which is the UI thread..Hence posting runnable on it.
+			MapViewActivity.mapViewActivity.runOnUiThread( new Runnable() {
+				 
+			 public void run()
+			 {
+			if (messagePosted == -1) //Posted message was removed from the server by a cron job on the server
+			{
+				 Button viewMessageButton = (Button) MapViewActivity.mapViewActivity.findViewById(R.id.ShoutOutButton);
+				 viewMessageButton.setEnabled(false); //disable the button and make it invisible
+				 viewMessageButton.setVisibility(View.INVISIBLE);
+			}
+			else //a new message was posted by the user
+			{
+				Button viewMessageButton = (Button) MapViewActivity.mapViewActivity.findViewById(R.id.ShoutOutButton);
+				 viewMessageButton.setEnabled(true); //disable the button and make it invisible
+				 viewMessageButton.setVisibility(View.VISIBLE);
+			}
+			 }
+			 });
+		}
+			
 		MapViewActivity.courtPostedMessageOn = messagePosted;
+		
 	}
 
 
@@ -522,6 +633,11 @@ public class MapViewActivity extends MapActivity {
 
 	public void onPartnerFound(View v)
 	{
+				if (getCourtPostedMessageOn() < 0)
+				{
+					Log.e(TAG, " Court id is invalid "+getCourtPostedMessageOn());
+					return;
+				}
 				progressDialog = ProgressDialog.show(this, "", 
 		                "Fetching message", true);
 			    Log.d(TAG, " --> Requesting sync for message for courtid"+getCourtPostedMessageOn());
@@ -575,7 +691,7 @@ public class MapViewActivity extends MapActivity {
 	        	//Retreive the message id of the message just fetched by syncadapter
 	        	Cursor cursor = getContentResolver().query(
 	    				Messages.CONTENT_URI, new String[]{"_id"}, null,
-	        			null, " LIMIT 1");
+	        			null, " _id LIMIT 1");
 	        	if (cursor.getCount() == 0)
 	        	{
 	        		Log.e(TAG," Court message not found");

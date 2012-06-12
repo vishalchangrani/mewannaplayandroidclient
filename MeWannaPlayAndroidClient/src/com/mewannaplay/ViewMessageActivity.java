@@ -73,15 +73,31 @@ public class ViewMessageActivity extends Activity {
     	((TextView) findViewById(R.id.user_name_view)).setText(message.getUserName());
     	
     	Button deleteButton = ((Button) findViewById(R.id.delete_message));
+    	Button deleteButtonPartnerFound = ((Button) findViewById(R.id.delete_message_partner_found));
     	if (message.getUserName().equals(MapViewActivity.getAccount(this).name)) //If the message was posted by this user
+    	{
     		deleteButton.setEnabled(true); //he can delete, its his message
+    		deleteButtonPartnerFound.setEnabled(true);
+    	}
     	else
+    	{
     		deleteButton.setEnabled(false); //else he can't
+    		deleteButtonPartnerFound.setEnabled(false);
+    	}
     		
     	
 	}
 	
 	 public void onDelete(View v)
+	 {
+		 onDelete(false);
+	 }
+	 public void onDeletePartnerFound(View v)
+	 {
+		 onDelete(true);
+	 }
+	 
+	 public void onDelete(final boolean partnerFound)
 	 {
 		 AlertDialog.Builder builder = new AlertDialog.Builder(ViewMessageActivity.this);
 		 builder.setMessage("Are you sure you want to delete this message? ")
@@ -96,20 +112,18 @@ public class ViewMessageActivity extends Activity {
 		        	        	   progressDialog = ProgressDialog.show(ViewMessageActivity.this, "", 
 	                "Deleting message...", true);
 	    	progressDialog.show();
-	    	deleteMessage();
+	    	deleteMessage(partnerFound);
 		        	           }
 		        	       });
 		 builder.create().show();
-		 
-		   
+	   
 	 }
-	 
-	 
-	 public void deleteMessage()
+	
+	 public void deleteMessage(boolean partnerFound)
 	 {
 		 registerReceiver(syncFinishedReceiver, new IntentFilter(SyncAdapter.SYNC_FINISHED_ACTION));
 			ContentResolver.requestSync(MapViewActivity.getAccount(this),
-					ProviderContract.AUTHORITY, SyncAdapter.getDeleteMessageBundle(courtId));
+					ProviderContract.AUTHORITY, SyncAdapter.getDeleteMessageBundle(courtId, message.getId(), partnerFound));
 	 }
 		private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
 
@@ -139,6 +153,7 @@ public class ViewMessageActivity extends Activity {
 		        	progressDialog.setMessage("Message deleted successfully");
 		        	progressDialog.dismiss();
 		        	ViewMessageActivity.this.finish();
+		        	MapViewActivity.setCourtPostedMessageOn(-1);//To make the shout out icon disappear
 		        }
 		    }
 		};

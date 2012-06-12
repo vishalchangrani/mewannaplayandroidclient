@@ -76,7 +76,7 @@ public class TennisCourtProvider extends ContentProvider {
 			//db.close();
 		} 
 
-		getContext().getContentResolver().notifyChange(uri, null, true);
+		//getContext().getContentResolver().notifyChange(uri, null, true);
 		return count;
 	}
 
@@ -120,7 +120,7 @@ public class TennisCourtProvider extends ContentProvider {
 				insert.executeInsert();
 				db.setTransactionSuccessful();
 				
-				getContext().getContentResolver().notifyChange(uri, null, false);
+				//getContext().getContentResolver().notifyChange(uri, null, false);
 				return ContentUris.withAppendedId(uri,contentValues.getAsInteger("_id"));
 			}catch (SQLException e)
 			{
@@ -306,6 +306,8 @@ public class TennisCourtProvider extends ContentProvider {
 		return true;
 	}
 
+  
+	
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
@@ -366,10 +368,43 @@ public class TennisCourtProvider extends ContentProvider {
 			throw new IllegalArgumentException("Unsupported URI " + uri);
 		}
 
-		getContext().getContentResolver().notifyChange(uri, null, true);
+		//getContext().getContentResolver().notifyChange(uri, null, true);
 		return count;
 	}
 	
+	
+	//There is no bulk update in ContentProvider..hence defining one here..
+	//This has to be called from a reference of TennisCourtProvider and not ContentProvider
+	public void bulkUpdateTennisCourts(JSONObject tenniscourts) throws Exception
+	{
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+		int count = 0;
+		try {
+		//	db.beginTransaction();
+			JSONArray array = tenniscourts.getJSONArray("tenniscourt");
+			
+			for (int i = 0; i < array.length(); i++) {
+				 JSONObject row = array.getJSONObject(i);
+					ContentValues values = new ContentValues(3);
+					values.put("subcourts", row.getInt("tennis_subcourts"));
+					values.put("occupied", row.getInt("Occupied"));
+					values.put("message_count", row.getInt("message_count"));
+					count = count + db.update(TENNIS_COURT_TABLE_NAME, values, "  _id = ? ", new String[]{ ""+row.getInt("tennis_id")});
+			}
+		//	db.setTransactionSuccessful();
+			}
+		catch (Exception e)
+		{
+			Log.e(TAG, e.getMessage());
+			throw e;
+		}
+		finally {
+			Log.d(TAG, " updated  " + count + " tenniscourts");
+		}
+			
+				
+	}
 	
 	public  int bullkInsertCourts(JSONObject tenniscourts) throws Exception
 	{
