@@ -156,7 +156,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			{
 				public void run()
 				{
+					this.setName("getAllCourtStatsThread");
 					try {
+						Log.d(TAG, "spawning of thread for getAllCourtStats");
 						getAllCourtStats();
 					} catch (IOException e) {
 						Log.e(TAG, "error while doing getcourtstats");

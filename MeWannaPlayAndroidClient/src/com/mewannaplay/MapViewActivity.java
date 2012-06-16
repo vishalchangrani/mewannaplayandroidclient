@@ -133,7 +133,7 @@ public class MapViewActivity extends MapActivity {
 	
 	   public void onPause() {
 	        super.onPause();
-	        Log.i(TAG,"Removing GPS update requests to save power");
+	        Log.d(TAG,"Removing GPS update requests to save power");
 	      //  myLocationOverlay.disableCompass();
 	        myLocationOverlay.disableMyLocation();
 	        MapView mapView = (MapView) findViewById(R.id.mapview);
@@ -152,7 +152,7 @@ public class MapViewActivity extends MapActivity {
 			ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
 			ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, false);
 			
-		//	stopBackGroundRefresh();
+		    stopBackGroundRefresh();
 			
 	    }
 	    
@@ -168,11 +168,10 @@ public class MapViewActivity extends MapActivity {
 	       MapView mapView = (MapView) findViewById(R.id.mapview);
 	        mapView.getOverlays().add(myLocationOverlay);
 	        
-	       // startBackGroundRefresh(); //Start background refreshes from syncadapter
+	       startBackGroundRefresh(); //Start background refreshes from syncadapter
 	      
 	    }
-	    
-	    
+
 	    private void startBackGroundRefresh()
 	    {
 	    	 if (!fetchedAllcourts)
@@ -184,31 +183,34 @@ public class MapViewActivity extends MapActivity {
 	    	Log.d(TAG, " Adding continous refresh for court statistics");
         	ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, true);
         	
-        	//Periodically update the two flags courtMarkedOccupied and courtPostedMessageOn
+        	//Periodically update courts occupied count and message count for all courts
         	//Set to 10 second period for development BUT in production this will be set to 5 minutes
         	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
- 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsStatsBundle(), 60 * 5);
+ 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsStatsBundle(), 10);
         	//2.
         	//Also kickoff continuous  refresh of court mark occupied by user and message id posted by user (if user not anonymous)
 	        if (RestClient.isLoggedIn()) //This is not an anonymous user
-	        {
-	        	Log.d(TAG, " Adding continous refresh for court id and posted message id for this user");
-	        	ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, true);
-	        	
+	        {	        	
+	        	Log.d(TAG, " Adding continous refresh for court statistics");
 	        	//Periodically update the two flags courtMarkedOccupied and courtPostedMessageOn
 	        	//Set to 10 second period for development BUT in production this will be set to 5 minutes
 	        	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
-	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 60 * 2);
+	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 20);
 	        }
 	    }
 	    
 	    private void stopBackGroundRefresh()
 		   {
-			   //Remove all periodic syncs
+			    Log.d(TAG, "Stopping background refresh");
+			    ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
+	    	    //Remove all periodic syncs
 		        //This should remove the two periodic refreshes and any other sync that might be happening at this time
 		    	ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
 						ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
-				ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);//cancel all syncs
+		    	if (RestClient.isLoggedIn())
+		    		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+						ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
+				
 				ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, false);
 		   }
 	    
@@ -291,7 +293,7 @@ public class MapViewActivity extends MapActivity {
 							//now that we have fetched all courts..start background threads to keep refreshing their status..
 							//Also remember fetch for all courts is done so next time the activity resume restart the background thread.
 							fetchedAllcourts = true;
-							//startBackGroundRefresh();
+							startBackGroundRefresh();
 						}
 					}
 				};
