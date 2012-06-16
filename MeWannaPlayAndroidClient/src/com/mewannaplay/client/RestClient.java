@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
@@ -13,13 +14,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnManagerParams;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
@@ -155,20 +163,26 @@ public class RestClient {
 
 	private String executeRequest(HttpUriRequest request, String url)
 			throws IOException {
-		HttpResponse httpResponse;
+		HttpResponse httpResponse = null;
+		HttpEntity entity = null;
 		try {
 			maybeCreateHttpClient();
 			httpResponse = mHttpClient.execute(request, localContext);
 			responseCode = httpResponse.getStatusLine().getStatusCode();
 			message = httpResponse.getStatusLine().getReasonPhrase();
-			HttpEntity entity = httpResponse.getEntity();
+			entity = httpResponse.getEntity();
 			if (entity != null) {
-				return EntityUtils.toString(entity);
+				Log.d(TAG, "Entity not null");
+				String response = EntityUtils.toString(entity);
+				return response;
 			}
+			Log.d(TAG, "Entity null!!");
 			return "";
 		} catch (IOException e) {
 			mHttpClient.getConnectionManager().shutdown();
 			mHttpClient = null;
+			if (entity != null)
+				entity.consumeContent();
 			Log.e(TAG, e.getMessage(), e);
 			throw e;
 		}
@@ -179,8 +193,26 @@ public class RestClient {
 	 */
 	public static void maybeCreateHttpClient() {
 		if (mHttpClient == null) {
-			mHttpClient = new DefaultHttpClient();
-			final HttpParams params = mHttpClient.getParams();
+			
+			
+			  // Create and initialize HTTP parameters
+	        HttpParams params = new BasicHttpParams();
+	        ConnManagerParams.setMaxTotalConnections(params, 5);
+	        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+	        
+	        // Create and initialize scheme registry 
+	        SchemeRegistry schemeRegistry = new SchemeRegistry();
+	        schemeRegistry.register(
+	                new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+	        
+	        // Create an HttpClient with the ThreadSafeClientConnManager.
+	        // This connection manager must be used if more than one thread will
+	        // be using the HttpClient.
+	        ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
+	        mHttpClient = new DefaultHttpClient(cm, params);
+	        
+		//	mHttpClient = new DefaultHttpClient();
+			params = mHttpClient.getParams();
 			HttpConnectionParams.setConnectionTimeout(params,
 					REGISTRATION_TIMEOUT);
 			HttpConnectionParams.setSoTimeout(params, REGISTRATION_TIMEOUT);
