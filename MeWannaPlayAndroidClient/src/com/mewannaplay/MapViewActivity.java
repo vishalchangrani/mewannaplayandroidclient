@@ -186,7 +186,7 @@ public class MapViewActivity extends MapActivity {
         	//Periodically update courts occupied count and message count for all courts
         	//Set to 10 second period for development BUT in production this will be set to 5 minutes
         	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
- 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsStatsBundle(), 10);
+ 				ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsStatsBundle(), 60 * 2);
         	//2.
         	//Also kickoff continuous  refresh of court mark occupied by user and message id posted by user (if user not anonymous)
 	        if (RestClient.isLoggedIn()) //This is not an anonymous user
@@ -195,7 +195,7 @@ public class MapViewActivity extends MapActivity {
 	        	//Periodically update the two flags courtMarkedOccupied and courtPostedMessageOn
 	        	//Set to 10 second period for development BUT in production this will be set to 5 minutes
 	        	ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
-	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 20);
+	 				ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 60 * 3);
 	        }
 	    }
 	    

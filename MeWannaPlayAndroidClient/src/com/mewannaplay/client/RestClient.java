@@ -147,10 +147,10 @@ public class RestClient {
 	
 	
 	/*
-	 * I had to add this method since for certain operations like getallcourtstats the json returned from server is huge (approx 369KB)
+	 * I had to add this method since for certain operations like getallcourtstats and getallcourts since the json returned from server is huge (approx 369KB)
 	 * Creating a json object from the server response causes Out of memory exception. Hence this method is used to parse the json and update the dababase
 	 * using JSonReader which uses inputstream of the response. This way we avoid out of memory since no json object is created in memory for the response
-	 * Currently on getAllCourtStats uses this. However getallcourts should also use this (TODO) and eventually all Rest calls should use this.
+	 * Currently on getAllCourtStats and getAlCourts use this (eventually all Rest calls should use this)
 	 */
 	public JsonReader excuteGetAndReturnStream() throws IOException
 	{

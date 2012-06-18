@@ -456,59 +456,153 @@ public class TennisCourtProvider extends ContentProvider {
 	}
 	
 	
-	public  int bullkInsertCourts(JSONObject tenniscourts) throws Exception
-	{
+	//There is no bulk update in ContentProvider..hence defining one here..
+		//This has to be called from a reference of TennisCourtProvider and not ContentProvider
+		public void bullkInsertCourts(JsonReader jsonReader) throws IOException
+ {
+		if (jsonReader == null)
+			return;
+
 		int count = 0;
-		
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		SQLiteStatement insert = null;
+		SQLiteDatabase db = null;
 		try {
+			long id = -1;
+			double latitude = -1, longitude = -1;
+			int subcourts = -1, occupied = -1, message_count = -1;
+			String facility_type = null, tennis_name = null, city = null, county = null, state = null, abbreviation = null;
+
+			db = dbHelper.getWritableDatabase();
+
 			db.beginTransaction();
+
+			String sql = "insert OR REPLACE into "
+					+ TENNIS_COURT_TABLE_NAME
+					+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count, city, county, state, abbreviation) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			insert = db.compileStatement(sql);
+
+			// Not reading the whole json object in memory since its
+			// huge..instead parsing it using JSONReader
+			jsonReader.beginObject();
+			while (jsonReader.hasNext()) {
+
+				final String name = jsonReader.nextName();
+				final boolean isNull = jsonReader.peek() == JsonToken.NULL;
+
+				if (name.equals("tenniscourt") && !isNull) {
+
+					jsonReader.beginArray();
+					while (jsonReader.hasNext()) {
 	
-				String sql = "insert OR REPLACE into "
-						+ TENNIS_COURT_TABLE_NAME
-						+ "(_id, latitude,longitude, subcourts, occupied,facility_type, name, message_count, city, county, state, abbreviation) values (?,?,?,?,?,?,?,?,?,?,?,?)";
-				insert = db.compileStatement(sql);
-				JSONArray array = tenniscourts.getJSONArray("tenniscourt");
-						for (int i = 0; i < array.length(); i++) {
-						    JSONObject row = array.getJSONObject(i);
+						// Reinitialize-----
+						 id = -1; 
+						 latitude = -1; longitude = -1;
+						 subcourts = -1; occupied = -1; message_count = -1;
+						 facility_type = null; tennis_name = null; city = null; county = null; state = null; abbreviation = null;
+						//--------------------
 						
-					insert.bindLong(1, row.getInt("tennis_id"));
-					insert.bindDouble(2, row.getDouble("tennis_latitude"));
-					insert.bindDouble(3, row.getDouble("tennis_longitude"));
-					insert.bindLong(4, row.getInt("tennis_subcourts"));
-					insert.bindLong(5, row.getInt("Occupied"));
-					insert.bindString(6,
-							row.getString("tennis_facility_type"));
-					insert.bindString(7, row.getString("tennis_name"));
-					insert.bindLong(8,
-							row.getInt("message_count"));
-					insert.bindString(9, row.getString("city_name"));
-					insert.bindString(10, row.getString("county_name"));
-					insert.bindString(11, row.getString("state_name"));
-					insert.bindString(12, row.getString("state_abbreviation"));
-					insert.executeInsert();
-					count++;
+						 //Read Object ------
+						 jsonReader.beginObject();
+						 while (jsonReader.hasNext()) {
+					
+							
+							//Read Next----------
+							final String innerInnerName = jsonReader.nextName();
+							final boolean isInnerInnerNull = jsonReader.peek() == JsonToken.NULL;
+
+							if (innerInnerName.equals("tennis_id")
+									&& !isInnerInnerNull)
+								id = jsonReader.nextLong();
+							else if (innerInnerName.equals("tennis_subcourts")
+									&& !isInnerInnerNull)
+								subcourts = jsonReader.nextInt();
+							else if (innerInnerName.equals("Occupied")
+									&& !isInnerInnerNull)
+								occupied = jsonReader.nextInt();
+							else if (innerInnerName.equals("message_count")
+									&& !isInnerInnerNull)
+								message_count = jsonReader.nextInt();
+							else if (innerInnerName.equals("tennis_latitude")
+									&& !isInnerInnerNull)
+								latitude = jsonReader.nextDouble();
+							else if (innerInnerName.equals("tennis_longitude")
+									&& !isInnerInnerNull)
+								longitude = jsonReader.nextDouble();
+							else if (innerInnerName
+									.equals("tennis_facility_type")
+									&& !isInnerInnerNull)
+								facility_type = jsonReader.nextString();
+							else if (innerInnerName.equals("tennis_name")
+									&& !isInnerInnerNull)
+								tennis_name = jsonReader.nextString();
+							else if (innerInnerName.equals("city_name")
+									&& !isInnerInnerNull)
+								city = jsonReader.nextString();
+							else if (innerInnerName.equals("county_name")
+									&& !isInnerInnerNull)
+								county = jsonReader.nextString();
+							else if (innerInnerName.equals("state_name")
+									&& !isInnerInnerNull)
+								state = jsonReader.nextString();
+							else if (innerInnerName
+									.equals("state_abbreviation")
+									&& !isInnerInnerNull)
+								abbreviation = jsonReader.nextString();
+							else
+								jsonReader.skipValue();
+
+						}
+						jsonReader.endObject();
+						//----------------------
+						
+						// Validate and insert --------------
+						if (id != -1 && latitude != -1 && longitude != -1
+								&& subcourts >= 0 && occupied >= 0
+								&& facility_type != null && tennis_name != null
+								&& message_count >= 0 && city != null
+								&& county != null && state != null
+								&& abbreviation != null) {
+							insert.bindLong(1, id);
+							insert.bindDouble(2, latitude);
+							insert.bindDouble(3, longitude);
+							insert.bindLong(4, subcourts);
+							insert.bindLong(5, occupied);
+							insert.bindString(6, facility_type);
+							insert.bindString(7, tennis_name);
+							insert.bindLong(8, message_count);
+							insert.bindString(9, city);
+							insert.bindString(10, county);
+							insert.bindString(11, state);
+							insert.bindString(12, abbreviation);
+							insert.executeInsert(); // if valid insert
+							count++;
+						}
+						//----------------
+					}
+					jsonReader.endArray();
 				}
-				db.setTransactionSuccessful();
-		} 
-		catch (Exception e)
-		{
-			Log.e(TAG, " inserted " + count + " tenniscourts");
-			throw e;
-		}
-		finally {
-			db.endTransaction();
+				// else if (name.equals( "status" ) && !isNull ) //TODO Handle
+				// status
+				else
+					jsonReader.skipValue();
+			}
+			
+			jsonReader.endObject();
+			db.setTransactionSuccessful();
+		} finally {
+			Log.d(TAG, " inserted  " + count + " tenniscourts");
+			if (db != null)
+				db.endTransaction();
 			if (insert != null)
 				insert.close();
+			if (jsonReader != null)
+				jsonReader.close();
 		}
-	//	getContext().getContentResolver().notifyChange(uri, null, false);
-		
-				Log.d(TAG, " inserted " + count + " tenniscourts");
-				return count;
 
 	}
-
+	
+	
+	
 	static {
 		sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		sUriMatcher.addURI(AUTHORITY, TENNIS_COURT_TABLE_NAME, TENNISCOURTS);
