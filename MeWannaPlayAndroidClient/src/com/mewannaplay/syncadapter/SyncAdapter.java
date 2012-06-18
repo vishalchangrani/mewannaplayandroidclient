@@ -281,17 +281,15 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	private void getAllCourtStats() throws IOException
 	{
 
-	
 			RestClient restClient = new RestClient(
 					Constants.GET_TENNIS_COURT_STATS);
 			
 			try {
-				JSONObject jsonObject = restClient.execute();
 				ContentProviderClient contentProviderClient = this.getContext()
 				.getContentResolver().acquireContentProviderClient(ProviderContract.TennisCourts.CONTENT_URI);
 				TennisCourtProvider tcp = (TennisCourtProvider) contentProviderClient.getLocalContentProvider();
-			//	tcp.bulkUpdateTennisCourts(jsonObject);
-				
+				tcp.bulkUpdateTennisCourts(restClient.excuteGetAndReturnStream()); 
+
 			} catch (Exception e) {
 				Log.e(TAG, " Exception while doing get all court stats "+e.getMessage());
 				throw new IOException(" Conversion error ");
