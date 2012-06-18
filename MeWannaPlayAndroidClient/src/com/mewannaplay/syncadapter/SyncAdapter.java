@@ -243,11 +243,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 					Constants.GET_ALL_TENNISCOURTS);
 			
 			try {
-				JSONObject jsonObject = restClient.execute();
+			//	JSONObject jsonObject = restClient.execute();
 				ContentProviderClient contentProviderClient = this.getContext()
 				.getContentResolver().acquireContentProviderClient(ProviderContract.TennisCourts.CONTENT_URI);
 				TennisCourtProvider tcp = (TennisCourtProvider) contentProviderClient.getLocalContentProvider();
-				tcp.bullkInsertCourts(jsonObject);
+				tcp.bullkInsertCourts(restClient.excuteGetAndReturnStream());
 				
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
