@@ -206,7 +206,7 @@ public class MapViewActivity extends MapActivity {
 	    	    //Remove all periodic syncs
 		        //This should remove the two periodic refreshes and any other sync that might be happening at this time
 		    	ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
-						ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
+						ProviderContract.AUTHORITY, SyncAdapter.getAllCourtsStatsBundle()); 
 		    	if (RestClient.isLoggedIn())
 		    		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
 						ProviderContract.AUTHORITY, SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); 
@@ -546,6 +546,7 @@ public class MapViewActivity extends MapActivity {
 		        case R.id.logout:
 		            RestClient.logout();
 		            this.finish();
+		            AccountManager.get(this).removeAccount(MapViewActivity.getAccount(this), null, null);
 		            return true;
 		        default:
 		            return super.onOptionsItemSelected(item);

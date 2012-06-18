@@ -8,6 +8,7 @@ import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_DETAILS_TABL
 import static com.mewannaplay.providers.DatabaseHelper.TENNIS_COURT_TABLE_NAME;
 import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -25,6 +26,8 @@ import android.database.sqlite.SQLiteStatement;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import com.mewannaplay.providers.ProviderContract.TennisCourts;
 
 /**
@@ -375,36 +378,83 @@ public class TennisCourtProvider extends ContentProvider {
 	
 	//There is no bulk update in ContentProvider..hence defining one here..
 	//This has to be called from a reference of TennisCourtProvider and not ContentProvider
-	public void bulkUpdateTennisCourts(JSONObject tenniscourts) throws Exception
+	public void bulkUpdateTennisCourts(JsonReader jsonReader) throws IOException
 	{
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-
 		int count = 0;
-		try {
-		//	db.beginTransaction();
-			JSONArray array = tenniscourts.getJSONArray("tenniscourt");
-			
-			for (int i = 0; i < array.length(); i++) {
-				 JSONObject row = array.getJSONObject(i);
-					ContentValues values = new ContentValues(3);
-					values.put("subcourts", row.getInt("tennis_subcourts"));
-					values.put("occupied", row.getInt("Occupied"));
-					values.put("message_count", row.getInt("message_count"));
-					count = count + db.update(TENNIS_COURT_TABLE_NAME, values, "  _id = ? ", new String[]{ ""+row.getInt("tennis_id")});
-			}
-		//	db.setTransactionSuccessful();
-			}
-		catch (Exception e)
+		try
 		{
-			Log.e(TAG, e.getMessage());
-			throw e;
-		}
-		finally {
-			Log.d(TAG, " updated  " + count + " tenniscourts");
-		}
+			ContentValues values = new ContentValues(3);
+			//values.put("subcourts", "0");
+			values.put("occupied", "0");
+			values.put("message_count", "0");
+			String tennisId = "-1";
+
+			if (jsonReader == null)
+				return;
 			
-				
+			SQLiteDatabase db = dbHelper.getWritableDatabase();
+			
+			//Not reading the whole json object in memory since its huge..instead parsing it using JSONReader
+			jsonReader.beginObject();
+			while( jsonReader.hasNext() ){
+
+				final String name = jsonReader.nextName();
+				final boolean isNull = jsonReader.peek() == JsonToken.NULL;
+
+				if( name.equals( "tenniscourt" ) && !isNull ) {
+					jsonReader.beginArray();
+					while( jsonReader.hasNext() ) {
+						jsonReader.beginObject();
+
+						while( jsonReader.hasNext() ) {
+							final String innerInnerName = jsonReader.nextName();
+							final boolean isInnerInnerNull = jsonReader.peek() == JsonToken.NULL;
+							if( innerInnerName.equals( "Occupied" ))
+							{ 
+								if(!isInnerInnerNull ) 
+									values.put("occupied",jsonReader.nextString());
+								else
+									values.put("occupied","0");
+							}
+							else if( innerInnerName.equals( "message_count" ))
+							{ 
+								if(!isInnerInnerNull ) 
+									values.put("message_count",jsonReader.nextString());
+								else
+									values.put("message_count","0");
+							}
+
+							else if( innerInnerName.equals( "tennis_id" ) && !isInnerInnerNull ) {
+								tennisId = jsonReader.nextString();
+							}
+							else if(!isInnerInnerNull) //skip tennis_subcourts
+								jsonReader.skipValue();
+
+						}
+						jsonReader.endObject();
+						if (!values.getAsString("message_count").equals("0") || !values.getAsString("occupied").equals("0"))
+							Log.d(TAG,tennisId +" "+values.toString());
+						if (!tennisId.equals("-1") && !tennisId.trim().equals(""))
+							count = count + db.update(TENNIS_COURT_TABLE_NAME, values, "  _id = ? ", new String[]{ tennisId}); //Update database
+					}
+					jsonReader.endArray();
+				}
+				//  else if (name.equals( "status" ) && !isNull ) //TODO Handle status
+				else
+					jsonReader.skipValue();
+			}
+			jsonReader.endObject(); 
+		}
+		finally
+		{
+			Log.d(TAG, " updated  " + count + " tenniscourts");
+			
+			if (jsonReader != null)
+				jsonReader.close();
+		}
+
 	}
+	
 	
 	public  int bullkInsertCourts(JSONObject tenniscourts) throws Exception
 	{

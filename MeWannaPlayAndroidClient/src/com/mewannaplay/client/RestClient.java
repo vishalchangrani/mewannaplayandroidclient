@@ -1,6 +1,8 @@
 package com.mewannaplay.client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
@@ -41,6 +43,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonReader;
 import com.mewannaplay.Constants;
 import com.mewannaplay.authenticator.AuthenticatorActivity;
 import com.mewannaplay.model.Status;
@@ -88,7 +91,7 @@ public class RestClient {
 		case GET: {
 			HttpGet request = new HttpGet(url);
 		//	request = (HttpGet) addHeaderParams(request);
-			responseString = executeRequest(request, url);
+			responseString = executeRequest(request);
 			break;
 		}
 		case POST: {
@@ -99,22 +102,15 @@ public class RestClient {
 				request.setEntity(se);
 				Log.d(TAG, jsonObjectToSend.toString());
 			}
-			responseString = executeRequest(request, url);
+			responseString = executeRequest(request);
 			break;
 		}
 		case DELETE: {
 			HttpDelete request = new HttpDelete(url);
-			responseString = executeRequest(request, url);
+			responseString = executeRequest(request);
 			break;
 		}
-		/*
-		 * case PUT: { HttpPut request = new HttpPut(url); request = (HttpPut)
-		 * addHeaderParams(request); request = (HttpPut) addBodyParams(request);
-		 * responseString = executeRequest(request, url); break; } case DELETE:
-		 * { HttpDelete request = new HttpDelete(url); request = (HttpDelete)
-		 * addHeaderParams(request); responseString = executeRequest(request,
-		 * url); }
-		 */
+	
 		}
 
 		if (responseString == null)
@@ -148,7 +144,51 @@ public class RestClient {
 		return jsonObject;
 
 	}
+	
+	
+	/*
+	 * I had to add this method since for certain operations like getallcourtstats the json returned from server is huge (approx 369KB)
+	 * Creating a json object from the server response causes Out of memory exception. Hence this method is used to parse the json and update the dababase
+	 * using JSonReader which uses inputstream of the response. This way we avoid out of memory since no json object is created in memory for the response
+	 * Currently on getAllCourtStats uses this. However getallcourts should also use this (TODO) and eventually all Rest calls should use this.
+	 */
+	public JsonReader excuteGetAndReturnStream() throws IOException
+	{
+		HttpGet request = new HttpGet(url);
+		HttpResponse httpResponse = null;
+		HttpEntity entity = null;
+		try {
+			maybeCreateHttpClient();
+			httpResponse = mHttpClient.execute(request, localContext);
+			responseCode = httpResponse.getStatusLine().getStatusCode();
+			message = httpResponse.getStatusLine().getReasonPhrase();
+			entity = httpResponse.getEntity();
+			if (entity != null) {
+				Log.d(TAG, "Entity not null");
+				InputStreamReader inputStreamReader = null;
+				BufferedReader bufferedReader = null;
+				JsonReader jsonReader = null;
 
+				inputStreamReader = new InputStreamReader(entity.getContent());
+				bufferedReader = new BufferedReader(inputStreamReader);
+				jsonReader = new JsonReader(bufferedReader);
+
+				return jsonReader; //Returning a the reader rather than a String ..caller has to make sure he calls jsonreader.close()
+			}
+			Log.d(TAG, "Entity null!!");
+			return null;
+		} catch (IOException e) {
+			mHttpClient.getConnectionManager().shutdown();
+			mHttpClient = null;
+			if (entity != null)
+				entity.consumeContent();
+			Log.e(TAG, e.getMessage(), e);
+			throw e;
+		}
+	}
+	
+	
+	
 	public String getErrorMessage() {
 		return message;
 	}
@@ -161,7 +201,7 @@ public class RestClient {
 		return responseCode;
 	}
 
-	private String executeRequest(HttpUriRequest request, String url)
+	private String executeRequest(HttpUriRequest request)
 			throws IOException {
 		HttpResponse httpResponse = null;
 		HttpEntity entity = null;

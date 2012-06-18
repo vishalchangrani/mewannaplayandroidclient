@@ -19,10 +19,6 @@ package com.mewannaplay.authenticator;
 
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
@@ -35,7 +31,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -380,23 +375,6 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 			return "";
 		}
 
-    }
-    
-    public static String md5(String s) 
-    {
-        MessageDigest digest;
-        try 
-        {
-            digest = MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes(),0,s.length());
-            String hash = new BigInteger(1, digest.digest()).toString(16);
-            return hash;
-        } 
-        catch (NoSuchAlgorithmException e) 
-        {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     
