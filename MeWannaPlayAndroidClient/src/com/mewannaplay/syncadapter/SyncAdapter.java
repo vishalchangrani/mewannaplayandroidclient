@@ -232,7 +232,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	private void markCourtOccupied(int courtId) throws IOException {
 		RestClient restClient = new RestClient(
 				Constants.MARK_COURT_OCCUPIED + courtId);
-		restClient.execute();
+		restClient.execute(RequestMethods.POST, null);
 		
 	}
 
