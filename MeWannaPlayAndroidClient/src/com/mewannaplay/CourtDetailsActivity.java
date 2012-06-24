@@ -55,6 +55,7 @@ public class CourtDetailsActivity extends ListActivity{
 	private AlertDialog alert;
 	int courtId;
 	private ContentObserver messageContentObserver;
+	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
 
 	 
 	@Override
@@ -63,7 +64,7 @@ public class CourtDetailsActivity extends ListActivity{
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
-	
+		thisCourtsLocation = (Location) this.getIntent().getExtras().getParcelable(SELECTED_COURTS_GEOPOINT);
 		
 		if (RestClient.isLoggedIn())
 		{
