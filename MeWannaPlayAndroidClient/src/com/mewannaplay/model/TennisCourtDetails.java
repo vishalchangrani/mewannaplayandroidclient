@@ -290,7 +290,7 @@ public TennisActivity[] getTennisActivities() {
 		TennisContact[] tennisContacts = (TennisContact[]) gson.fromJson(tennisContactArray.toString(), TennisContact[].class);
 		for (TennisContact tennisContact : tennisContacts)
 		{
-			if (tennisContact.getTypeId() == 0) //only interested in phone number
+			if (tennisContact.getTypeId() == 5) //only interested in phone number
 			{
 				tennisCourtDetails.setPhone(tennisContact.getContactDetails());
 				break;
