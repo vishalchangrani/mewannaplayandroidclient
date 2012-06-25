@@ -7,7 +7,7 @@
 	<ImageView android:id="@+id/splashscreen_image" android:scaleType="fitXY"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:background="@drawable/splashscreen"
+		android:background="@drawable/mwpflashscreen"
 		/>
 
 
