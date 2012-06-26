@@ -19,6 +19,7 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -44,7 +46,7 @@ import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
-public class CourtDetailsActivity extends ListActivity{
+public class CourtDetailsActivity extends ListActivity implements OnClickListener{
 
 	private TennisCourtDetails tennisCourtDetails;
 	 private static final String TAG = "CourtDetailsActivity";
@@ -56,6 +58,7 @@ public class CourtDetailsActivity extends ListActivity{
 	int courtId;
 	private ContentObserver messageContentObserver;
 	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
+	ImageView phone;
 
 	 
 	@Override
@@ -245,7 +248,8 @@ public class CourtDetailsActivity extends ListActivity{
 		  tv.setText(tennisCourtDetails.getTennisTimings());
 		  tv = (TextView) this.findViewById(R.id.no_of_sub_courts);
 		  tv.setText(""+tennisCourtDetails.getSubcourts());
-		  
+		  phone=(ImageView)findViewById(R.id.court_phone_icon);
+		  phone.setOnClickListener(this);
 	}
 	public class ExpadableAdapter extends BaseExpandableListAdapter {
 
@@ -514,5 +518,40 @@ public class CourtDetailsActivity extends ListActivity{
 	    
 
 		
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				CourtDetailsActivity.this);
+
+		alertDialogBuilder.setTitle("Do you want to make a call?");
+
+		alertDialogBuilder
+
+				.setPositiveButton("okay",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int id) {
+								Intent callIntent = new Intent(
+										Intent.ACTION_CALL);
+								callIntent.setData(Uri.parse("tel:"+tennisCourtDetails.getPhone().trim().toString()));
+								startActivity(callIntent);
+
+							}
+						})
+				.setNegativeButton("cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int id) {
+
+								dialog.cancel();
+							}
+						});
+
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		alertDialog.show();
 	}
 }
