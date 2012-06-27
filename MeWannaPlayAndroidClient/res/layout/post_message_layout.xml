@@ -224,7 +224,8 @@ comments :"
                     android:textSize="11dp"
                     android:textColor="#000"
                     android:layout_marginLeft="140dp"
-                    android:text="*Please note your message will be  active for 20 minutes" />
+                    android:textStyle="italic"
+                    android:text="*Please note your message will be active upto 20 minutes from the scheduled time" />
                 
             </LinearLayout>
         </LinearLayout>

@@ -19,9 +19,6 @@ package com.mewannaplay.authenticator;
 
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
@@ -392,5 +389,5 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 		}
 
     }
-   
+
 }

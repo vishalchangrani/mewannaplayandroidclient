@@ -46,11 +46,12 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.mewannaplay.Constants;
 import com.mewannaplay.authenticator.AuthenticatorActivity;
+import com.mewannaplay.model.NewUser;
 import com.mewannaplay.model.Status;
 import com.mewannaplay.model.User;
 
 public class RestClient {
-	
+
 	private final static ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
 	private String message;
 	private String response;
@@ -79,24 +80,24 @@ public class RestClient {
 	}
 
 	// for convenience, since most of the calls will of type GET
-	public JSONObject execute() throws IOException  {
+	public JSONObject execute() throws IOException {
 		return execute(RequestMethods.GET, null);
 	}
 
 	// TODO fix this to better use generics
-	public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend) throws IOException
-			{
+	public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend)
+			throws IOException {
 		String responseString = null;
 		switch (method) {
 		case GET: {
 			HttpGet request = new HttpGet(url);
-		//	request = (HttpGet) addHeaderParams(request);
+			// request = (HttpGet) addHeaderParams(request);
 			responseString = executeRequest(request);
 			break;
 		}
 		case POST: {
 			HttpPost request = new HttpPost(url);
-		//	request = (HttpPost) addHeaderParams(request);
+			// request = (HttpPost) addHeaderParams(request);
 			if (jsonObjectToSend != null) {
 				StringEntity se = new StringEntity(jsonObjectToSend.toString());
 				request.setEntity(se);
@@ -110,7 +111,7 @@ public class RestClient {
 			responseString = executeRequest(request);
 			break;
 		}
-	
+
 		}
 
 		if (responseString == null)
@@ -122,17 +123,14 @@ public class RestClient {
 		final JSONTokener jsonTokener = new JSONTokener(responseString);
 		Status status = null;
 		JSONObject jsonObject = null;
-		try 
-		{
-		jsonObject = (JSONObject) jsonTokener.nextValue();
-		final GsonBuilder gsonb = new GsonBuilder();
-		final Gson gson = gsonb.setFieldNamingPolicy(
-				FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-		status = gson.fromJson(jsonObject.getJSONObject("status")
-				.toString(), Status.class);
-		}
-		catch(Exception e)
-		{
+		try {
+			jsonObject = (JSONObject) jsonTokener.nextValue();
+			final GsonBuilder gsonb = new GsonBuilder();
+			final Gson gson = gsonb.setFieldNamingPolicy(
+					FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+			status = gson.fromJson(jsonObject.getJSONObject("status")
+					.toString(), Status.class);
+		} catch (Exception e) {
 			throw new IOException("Conversion error " + url);
 		}
 
@@ -144,16 +142,18 @@ public class RestClient {
 		return jsonObject;
 
 	}
-	
-	
+
 	/*
-	 * I had to add this method since for certain operations like getallcourtstats and getallcourts since the json returned from server is huge (approx 369KB)
-	 * Creating a json object from the server response causes Out of memory exception. Hence this method is used to parse the json and update the dababase
-	 * using JSonReader which uses inputstream of the response. This way we avoid out of memory since no json object is created in memory for the response
-	 * Currently on getAllCourtStats and getAlCourts use this (eventually all Rest calls should use this)
+	 * I had to add this method since for certain operations like
+	 * getallcourtstats and getallcourts since the json returned from server is
+	 * huge (approx 369KB) Creating a json object from the server response
+	 * causes Out of memory exception. Hence this method is used to parse the
+	 * json and update the dababase using JSonReader which uses inputstream of
+	 * the response. This way we avoid out of memory since no json object is
+	 * created in memory for the response Currently on getAllCourtStats and
+	 * getAlCourts use this (eventually all Rest calls should use this)
 	 */
-	public JsonReader excuteGetAndReturnStream() throws IOException
-	{
+	public JsonReader excuteGetAndReturnStream() throws IOException {
 		HttpGet request = new HttpGet(url);
 		HttpResponse httpResponse = null;
 		HttpEntity entity = null;
@@ -173,7 +173,9 @@ public class RestClient {
 				bufferedReader = new BufferedReader(inputStreamReader);
 				jsonReader = new JsonReader(bufferedReader);
 
-				return jsonReader; //Returning a the reader rather than a String ..caller has to make sure he calls jsonreader.close()
+				return jsonReader; // Returning a the reader rather than a
+									// String ..caller has to make sure he calls
+									// jsonreader.close()
 			}
 			Log.d(TAG, "Entity null!!");
 			return null;
@@ -186,9 +188,7 @@ public class RestClient {
 			throw e;
 		}
 	}
-	
-	
-	
+
 	public String getErrorMessage() {
 		return message;
 	}
@@ -201,8 +201,7 @@ public class RestClient {
 		return responseCode;
 	}
 
-	private String executeRequest(HttpUriRequest request)
-			throws IOException {
+	private String executeRequest(HttpUriRequest request) throws IOException {
 		HttpResponse httpResponse = null;
 		HttpEntity entity = null;
 		try {
@@ -233,25 +232,25 @@ public class RestClient {
 	 */
 	public static void maybeCreateHttpClient() {
 		if (mHttpClient == null) {
-			
-			
-			  // Create and initialize HTTP parameters
-	        HttpParams params = new BasicHttpParams();
-	        ConnManagerParams.setMaxTotalConnections(params, 5);
-	        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-	        
-	        // Create and initialize scheme registry 
-	        SchemeRegistry schemeRegistry = new SchemeRegistry();
-	        schemeRegistry.register(
-	                new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-	        
-	        // Create an HttpClient with the ThreadSafeClientConnManager.
-	        // This connection manager must be used if more than one thread will
-	        // be using the HttpClient.
-	        ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-	        mHttpClient = new DefaultHttpClient(cm, params);
-	        
-		//	mHttpClient = new DefaultHttpClient();
+
+			// Create and initialize HTTP parameters
+			HttpParams params = new BasicHttpParams();
+			ConnManagerParams.setMaxTotalConnections(params, 5);
+			HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+
+			// Create and initialize scheme registry
+			SchemeRegistry schemeRegistry = new SchemeRegistry();
+			schemeRegistry.register(new Scheme("http", PlainSocketFactory
+					.getSocketFactory(), 80));
+
+			// Create an HttpClient with the ThreadSafeClientConnManager.
+			// This connection manager must be used if more than one thread will
+			// be using the HttpClient.
+			ClientConnectionManager cm = new ThreadSafeClientConnManager(
+					params, schemeRegistry);
+			mHttpClient = new DefaultHttpClient(cm, params);
+
+			// mHttpClient = new DefaultHttpClient();
 			params = mHttpClient.getParams();
 			HttpConnectionParams.setConnectionTimeout(params,
 					REGISTRATION_TIMEOUT);
@@ -263,40 +262,38 @@ public class RestClient {
 	public static void login(String username, String password) throws Exception {
 		if (loggedIn) {
 
-					Log.e(TAG, " Already logged in. Logging out");
-					logout();
-				
-		}
-		else
-		{
+			Log.e(TAG, " Already logged in. Logging out");
+			logout();
+
+		} else {
 			headers.clear();
 
 			cookieStore.clear();
 		}
-			// Bind custom cookie store to the local context
-			localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
-			try {
-				// Login magic goes here
-				User user = new User(username,
-						AuthenticatorActivity.encryptPassword(password));
-				RestClient restClient = new RestClient(Constants.LOGIN);
-				restClient.execute(RequestMethods.POST, user.toJSONObject());
-				Log.d(TAG, username + " logged in successfully");
-				loggedIn = true;
-			} catch (JSONException e) {
-				Log.e(TAG, e.getMessage());
-				throw new Exception("Failed to login");
-			} catch (JsonSyntaxException e) {
-				Log.e(TAG, e.getMessage());
-				throw new Exception("Failed to login");
-			} catch (Exception e) {
-				Log.e(TAG, e.getMessage());
-				throw e;
-			} finally {
-				if (!loggedIn)
-					cookieStore.clear();
-			}
-		
+		// Bind custom cookie store to the local context
+		localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+		try {
+			// Login magic goes here
+			User user = new User(username,
+					AuthenticatorActivity.encryptPassword(password));
+			RestClient restClient = new RestClient(Constants.LOGIN);
+			restClient.execute(RequestMethods.POST, user.toJSONObject());
+			Log.d(TAG, username + " logged in successfully");
+			loggedIn = true;
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+			throw new Exception("Failed to login");
+		} catch (JsonSyntaxException e) {
+			Log.e(TAG, e.getMessage());
+			throw new Exception("Failed to login");
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			throw e;
+		} finally {
+			if (!loggedIn)
+				cookieStore.clear();
+		}
+
 	}
 
 	public static void logout() {
@@ -319,8 +316,42 @@ public class RestClient {
 
 	}
 
-	public static boolean isLoggedIn()
-	{
+	public static void registerNewUser(String userName, String password,
+			String email) throws Exception{
+		if (loggedIn) {
+			Log.e(TAG,
+					" Already logged in! and creating a new user... Logging out");
+			logout();
+
+		} else {
+			headers.clear();
+			cookieStore.clear();
+		}
+		// Bind custom cookie store to the local context
+		//localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+		try {
+			// Login magic goes here
+			NewUser user = new NewUser(userName,
+					AuthenticatorActivity.encryptPassword(password), email);
+			RestClient restClient = new RestClient(Constants.LOGIN);
+			restClient.execute(RequestMethods.POST, user.toJSONObject());
+			Log.d(TAG, userName + " registered successfully");
+		
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+			throw new Exception("Failed to login");
+		} catch (JsonSyntaxException e) {
+			Log.e(TAG, e.getMessage());
+			throw new Exception("Failed to login");
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			throw e;
+		} finally {
+			//
+		}
+	}
+
+	public static boolean isLoggedIn() {
 		return loggedIn;
 	}
 }
