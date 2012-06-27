@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:pj="http://schemas.android.com/apk/res/com.mewannaplay.activities"
+  android:id="@+id/mewannaplay_container"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:apiKey="@string/apiKey"
+        android:focusableInTouchMode="true"
+    />
+    
+   <RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:pj="http://schemas.android.com/apk/res/com.mewannaplay.activities"
+  android:id="@+id/mapheader"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+   android:layout_marginLeft="5dp"
+    android:layout_marginTop="8dp"
+    android:layout_alignParentLeft="true">
+
+  <Button
+    android:id="@+id/ImageInfoButton01"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:background="@drawable/help_information"/>
+   
+   <Button
+    android:id="@+id/ShoutOutButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/ImageInfoButton01"
+    android:background="@drawable/shoutout"
+    android:layout_marginLeft="10dp" android:onClick="onPartnerFound"
+    android:visibility="invisible"/>"
+   
+
+  <TextView
+    android:id="@+id/dropdown_city"
+    android:layout_width="160dp" 
+    android:layout_height="30dp"
+    android:layout_alignParentRight="true"
+    android:layout_alignTop="@id/ImageInfoButton01"
+    android:text="Current location"
+     android:gravity="right"
+     android:textColor="@android:color/black"/>
+    
+    </RelativeLayout>
+
+</RelativeLayout>

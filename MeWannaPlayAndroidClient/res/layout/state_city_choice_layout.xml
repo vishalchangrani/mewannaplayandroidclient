@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:gravity="center">
+    <Button android:text="@string/current_location" android:id="@+id/choose_current_location" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+    <TextView android:text="State" android:id="@+id/statetext" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="left"></TextView>
+    <Spinner android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/state_spinner"></Spinner>
+    <TextView android:text="City" android:id="@+id/citytext" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="left"></TextView>
+    <Spinner android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/city_spinner"></Spinner>
+    <Button android:text="OK" android:id="@+id/okstatecity" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+</LinearLayout>

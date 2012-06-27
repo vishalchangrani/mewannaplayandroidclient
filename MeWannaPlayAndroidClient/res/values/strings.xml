@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">MeWannaPlayAndroidClient</string>
+	<string name="label">MeWannaPlay</string>
+	  <!-- Title string for Login activity-->
+    <string
+        name="ui_activity_title">Sign-in</string>
+    <!-- Message shown in progress dialog while app connects to the server -->
+    <string
+        name="ui_activity_authenticating">Authenticating\u2026</string>
+
+    <!-- AuthenticatorActivity -->
+    <skip />
+    <!-- Label above username EditText -->
+    <string
+        name="login_activity_username_label">Username</string>
+    <!-- Label above password EditText -->
+    <string
+        name="login_activity_password_label">Password</string>
+    <!-- Button to sign in after entering username and password -->
+    <string
+        name="login_activity_ok_button">Sign in</string>
+
+ <!-- Button to sign in after entering username and password -->
+    <string
+        name="anonymous_login">Whateva..(login as anonymous)</string>
+
+    <!-- Message shown in dialog if the username or password is invalid. -->
+    <string
+        name="login_activity_loginfail_text_both">The username or password isn\'t valid. A Sample SyncAdapter account is
+        required. Please try again. </string>
+    <!-- Message shown in dialog if the password is invalid -->
+    <string
+        name="login_activity_loginfail_text_pwonly">You entered the wrong password or your account has changed.
+        Please re-enter your password.</string>
+    <!-- Message shown in dialog to prompt the user for their password -->
+    <string
+        name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
+    <!--
+        Message shown if the provided account doesn't support the current
+        activity.
+    -->
+    <string
+        name="login_activity_newaccount_text">Sign in to your Sample SyncAdapter account. </string>
+
+    <!-- Button that takes the user to the "sign in" screen -->
+    <string
+        name="sign_in_button_label">Sign in</string>
+    <!-- Button for going to the previous screen or step -->
+    <string
+        name="back_button_label">Back</string>
+    <!-- Button to cancel the current operation -->
+    <string
+        name="cancel_button_label">Cancel</string>
+    <string
+        name="profile_action">Sample profile</string>
+    <string
+        name="view_profile">View Profile</string>
+  <string name="main_no_items">No items</string>
+  <string name="activites">Activities</string>
+  <string name="ameneties_and_services">Amenities and services</string>
+  <string name="logout">Log out</string>
+  <string name="current_location">Current location</string>
+    
+    <string name="level_prompt">Choose a level</string>
+ 
+    <string-array name="level_arrays">
+        <item>Beginner</item>
+        <item>Novice</item>
+        <item>Expert</item>
+    </string-array>
+    
+     <string name="players_needed_prompt">Choose players needed</string>
+ 
+    <string-array name="players_needed">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+</resources>
