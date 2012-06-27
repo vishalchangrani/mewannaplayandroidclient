@@ -41,7 +41,7 @@
         activity.
     -->
     <string
-        name="login_activity_newaccount_text">Sign in to your Sample SyncAdapter account. </string>
+        name="login_activity_newaccount_text">Sign in to your MeWannaPlay account. </string>
 
     <!-- Button that takes the user to the "sign in" screen -->
     <string
