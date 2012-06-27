@@ -19,10 +19,14 @@ package com.mewannaplay.authenticator;
 
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerFuture;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -40,6 +44,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mewannaplay.Constants;
+import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.R;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.providers.ProviderContract;
@@ -92,6 +97,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     private String mUsername;
 
     private EditText mUsernameEdit;
+	private final Handler handler = new Handler();
+	AccountManagerFuture<Bundle> accountManagerFuture = null;
 
     /**
      * {@inheritDoc}
@@ -118,6 +125,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         if (!TextUtils.isEmpty(mUsername)) mUsernameEdit.setText(mUsername);
         mMessage.setText(getMessage());
     }
+        
+
 
     /*
      * {@inheritDoc}
@@ -188,6 +197,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     	        intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
     	        setAccountAuthenticatorResult(intent.getExtras());
     	        setResult(RESULT_OK, intent);
+    	        startActivity(new Intent(AuthenticatorActivity.this,
+    					MapViewActivity.class));
+    			
     	        finish();   	    
     }
 
@@ -250,6 +262,10 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);
+        startActivity(new Intent(AuthenticatorActivity.this,
+				MapViewActivity.class));
+		
+           
         finish();
     }
 
@@ -376,6 +392,5 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 		}
 
     }
-
-    
+   
 }
