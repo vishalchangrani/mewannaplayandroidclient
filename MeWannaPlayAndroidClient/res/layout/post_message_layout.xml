@@ -50,8 +50,8 @@
                     android:typeface="serif" />
 
                 <include
-                    layout="@layout/timeslider"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    layout="@layout/timeslider" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,8 +127,8 @@ Contact :"
                     android:id="@+id/contact_info"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp" 
-                    android:layout_marginRight="10dp">
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp" >
                 </EditText>
             </LinearLayout>
         </LinearLayout>
@@ -161,8 +161,8 @@ comments :"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
-                    android:layout_marginTop="30dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="30dp"
                     android:inputType="textMultiLine" />
             </LinearLayout>
 
@@ -177,38 +177,28 @@ comments :"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="12" >
-
-                   
-                    
-                    
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="8" >
-                    
-                    
-                    
-                    
 
-                     <Button
+                    <Button
                         android:id="@+id/cancel"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
-                        android:onClick="onCancel"
                         android:layout_marginLeft="30dp"
                         android:background="@drawable/cancelbtn"
+                        android:onClick="onCancel"
                         android:textSize="10sp" />
-                     <Button
+
+                    <Button
                         android:id="@+id/post_message"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
-                        
                         android:background="@drawable/postbtn"
                         android:textSize="10sp" />
-                     
-                     
                 </LinearLayout>
             </LinearLayout>
 
@@ -221,11 +211,12 @@ comments :"
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="11dp"
-                    android:textColor="#000"
                     android:layout_marginLeft="140dp"
-                    android:text="*Please note your message will be  active for 20 minutes" />
-                
+                    android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
+                    android:textColor="#000"
+                    android:textSize="11dp"
+                    android:textStyle="italic" />
+ 
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
