@@ -29,6 +29,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -294,12 +295,17 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
             Log.e(TAG, "onAuthenticationResult: failed to authenticate");
             if (mRequestNewAccount) {
                 // "Please enter a valid username/password.
-                mMessage.setText(error);
+                //mMessage.setText(error);
+            	mMessage.setTextColor(Color.RED);
+                mMessage.setText("Please enter a valid username/password.");
             } else {
                 // "Please enter a valid password." (Used when the
                 // account is already in the database but the password
                 // doesn't work.)
-                mMessage.setText(error);
+               // mMessage.setText(error);
+            	mMessage.setTextColor(Color.RED);
+                mMessage.setText("Please enter a valid password.");
+
             }
         }
     }
