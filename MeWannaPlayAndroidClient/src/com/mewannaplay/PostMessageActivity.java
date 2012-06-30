@@ -12,10 +12,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,7 +30,7 @@ import com.mewannaplay.model.Message;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
-public class PostMessageActivity extends Activity {
+public class PostMessageActivity extends Activity implements OnCheckedChangeListener {
 
 	
 	private static final String TAG = "PostMessageActivity";
@@ -36,7 +42,8 @@ public class PostMessageActivity extends Activity {
 	    protected int mLayoutID;
 	    private final static int minuteInterval = 30;
 	    private SliderContainer mContainer;
-	    
+	    RadioGroup rgcontactinfo;
+	    EditText econtactinfo;
 	    
 	
 	
@@ -61,7 +68,9 @@ public class PostMessageActivity extends Activity {
 		
 		setContentView(R.layout.post_message_layout);
 
-		
+		rgcontactinfo=(RadioGroup)findViewById(R.id.rgcontact);
+		econtactinfo=(EditText)findViewById(R.id.contact_info);
+		rgcontactinfo.setOnCheckedChangeListener(this);
 		
 		 mContainer = (SliderContainer) this.findViewById(R.id.dateSliderContainer);
 		   mContainer.setMinuteInterval(minuteInterval);
@@ -108,7 +117,7 @@ public class PostMessageActivity extends Activity {
 			message.setPlayerNeeded(item.toString());
 		else
 			message.setPlayerNeeded("1");
-		String contactInfo = ((TextView)this.findViewById(R.id.contact_info)).getText().toString();
+		String contactInfo = econtactinfo.getText().toString();
 		if (contactInfo.matches("[0-9]+"))
 			message.setContactTypeId(0);
 		else
@@ -167,5 +176,32 @@ public class PostMessageActivity extends Activity {
 		    super.onSaveInstanceState(outState);
 	        if (outState==null) outState = new Bundle();
 	        outState.putSerializable("time", mContainer.getTime());
+	}
+
+
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		// TODO Auto-generated method stub
+		
+		switch (checkedId) {
+		case R.id.rbphn:
+			econtactinfo.setInputType(InputType.TYPE_CLASS_PHONE);
+			econtactinfo.setHint("e.g. 9999999999");
+//			int maxLength = 10;
+//		
+//			InputFilter[] FilterArray = new InputFilter[1];
+//			FilterArray[0] = new InputFilter.LengthFilter(maxLength);
+//			econtactinfo.setFilters(FilterArray);
+			econtactinfo.setFilters( new InputFilter[] { new InputFilter.LengthFilter(10) } ); 
+			break;
+
+		case R.id.rbemail:
+			econtactinfo.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+			econtactinfo.setHint("e.g abcd@efgh.com");
+			econtactinfo.setFilters( new InputFilter[] { new InputFilter.LengthFilter(100) } ); 
+			break;
+		}
+		
 	}
 }

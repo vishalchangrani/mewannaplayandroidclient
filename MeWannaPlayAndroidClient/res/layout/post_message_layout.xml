@@ -123,13 +123,7 @@ Contact :"
                     android:textStyle="bold"
                     android:typeface="serif" />
 
-                <EditText
-                    android:id="@+id/contact_info"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="10dp" >
-                </EditText>
+           
             </LinearLayout>
         </LinearLayout>
 
@@ -138,38 +132,106 @@ Contact :"
             android:layout_height="fill_parent"
             android:layout_weight="30"
             android:orientation="vertical" >
+     <RadioGroup
+                    android:id="@+id/rgcontact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/rbphn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Phone" />
+
+                    <RadioButton
+                        android:id="@+id/rbemail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email" />
+                </RadioGroup>
+            <EditText
+                android:id="@+id/contact_info"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="10dp"
+                android:hint="e.g.9999999999"
+                android:inputType="phone"
+                android:maxLength="10"
+                 >
+            </EditText>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="8" >
+                android:layout_weight="8"
+                android:orientation="vertical"
+                android:weightSum="3" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
-                    android:text="Additional 
-comments :"
-                    android:textColor="#fff"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:typeface="serif" />
-
-                <EditText
-                    android:id="@+id/message"
+                <LinearLayout
                     android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2.3" >
+
+                    
+                    
+                     <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="30dp"
-                    android:inputType="textMultiLine" />
+                    android:layout_marginLeft="60dp"
+                    android:text="*Note: Contact details will be visible to other users"
+                    android:textColor="#000"
+                    android:textSize="10dp"
+                    android:textStyle="italic" />
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.7" >
+                    
+                    
+                    
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Additional 
+comments :"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <EditText
+                        android:id="@+id/message"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:inputType="textMultiLine" />
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="12"
+                android:layout_weight="9"
                 android:orientation="horizontal"
                 android:weightSum="20" >
 
@@ -205,7 +267,7 @@ comments :"
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="9" >
 
                 <TextView
                     android:id="@+id/textView1"
@@ -214,9 +276,9 @@ comments :"
                     android:layout_marginLeft="80dp"
                     android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
                     android:textColor="#000"
-                    android:textSize="6dp"
+                    android:textSize="10dp"
+                    
                     android:textStyle="italic" />
- 
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
