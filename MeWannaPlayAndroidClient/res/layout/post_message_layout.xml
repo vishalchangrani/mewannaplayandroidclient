@@ -211,10 +211,10 @@ comments :"
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="140dp"
+                    android:layout_marginLeft="80dp"
                     android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
                     android:textColor="#000"
-                    android:textSize="11dp"
+                    android:textSize="6dp"
                     android:textStyle="italic" />
  
             </LinearLayout>
