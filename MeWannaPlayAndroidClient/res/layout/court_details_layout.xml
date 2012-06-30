@@ -245,7 +245,7 @@
         android:layout_below="@id/exapandableList"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="10dip" >
+        android:paddingTop="3dip" >
 
         <TableRow
      
@@ -365,7 +365,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/foot" >
 
         <Button
@@ -395,5 +396,19 @@
             android:layout_marginTop="5dp"
             android:onClick="markOccupied" />
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="480dp"
+        android:layout_marginBottom="30dp"
+      >
+ <TextView
+                android:id="@+id/cmessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff0000"
+                android:layout_marginLeft="8dp"
+                android:textSize="8pt"
+                android:text="Have to login to post"
+                android:textStyle="bold" /></LinearLayout>
 </RelativeLayout>
