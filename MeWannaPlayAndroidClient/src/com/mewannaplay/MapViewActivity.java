@@ -3,6 +3,8 @@ package com.mewannaplay;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.midi.MidiDevice.Info;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.AlertDialog;
@@ -24,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +43,7 @@ import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
-public class MapViewActivity extends MapActivity {
+public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	private static final String TAG = "MapViewActivity";
 	private MyLocationOverlay myLocationOverlay;
@@ -53,7 +56,7 @@ public class MapViewActivity extends MapActivity {
 	
 	
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
-	
+	Button info;
 	
 	//State variables...information used by all activities
 	private static Account loggedInUserAccount;//Gives the logged in user - anonymous or registered user
@@ -93,7 +96,8 @@ public class MapViewActivity extends MapActivity {
 
 	
 		initMap();
-		
+		info=(Button)findViewById(R.id.ImageInfoButton01);
+		info.setOnClickListener(this);
 		TextView dropDownCity = (TextView) findViewById(R.id.dropdown_city);
 		dropDownCity.setOnClickListener(new OnClickListener() {
 
@@ -110,7 +114,7 @@ public class MapViewActivity extends MapActivity {
 
 
 	private final void initMap()
-	{
+	{   	
 		MapView mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 		
@@ -709,5 +713,12 @@ public class MapViewActivity extends MapActivity {
 	        }
 	    }
 	};
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent i=new Intent(MapViewActivity.this,com.mewannaplay.Info.class);
+		startActivity(i);
+	}
 
 }
