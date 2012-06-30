@@ -73,6 +73,8 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		{
 			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 			postMsgButton.setEnabled(true);
+			TextView cmsg=(TextView)findViewById(R.id.cmessage);
+			cmsg.setVisibility(View.GONE);
 		}
 	
 		
