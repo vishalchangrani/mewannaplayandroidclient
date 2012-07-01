@@ -20,10 +20,11 @@ import android.util.Log;
 //These accounts are created in the account manager
 public class SplashScreenActivity extends Activity {
 
-	private final static int secondsDelayed = 1;
+
 	private final static String TAG = "SplashScreenActivity";
 	private final Handler handler = new Handler();
 	AccountManagerFuture<Bundle> accountManagerFuture = null;
+	public static final String DELAY_FOR_SPLASH = "DELAY_FOR_SPLASH";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -36,11 +37,14 @@ public class SplashScreenActivity extends Activity {
 			public void run() {
 
 				try {
-					sleep(5000);
+				    final Intent intent = getIntent();
+			        final int delayInSecondsToShowSplashScreen = intent.getIntExtra(DELAY_FOR_SPLASH,2000);
+					sleep(delayInSecondsToShowSplashScreen);
 
 				} catch (InterruptedException e) {
 
 					e.printStackTrace();
+					finish();
 				} finally {
 
 					final AccountManager mAccountManager = AccountManager
@@ -60,11 +64,17 @@ public class SplashScreenActivity extends Activity {
 								SplashScreenActivity.this, null, null);
 					} else {
 						Account validUserAccount = null;
+						
+						//Find that one actual non-anon account to login with
 						for (Account account : accounts) {
 							if (!account.name.equals(Constants.ANONYMOUS_USER))
+							{
 								validUserAccount = account;
-
+								break;
+							}
 						}
+						
+						
 						accountManagerFuture = mAccountManager.getAuthToken(
 								validUserAccount, Constants.AUTHTOKEN_TYPE,
 								null, SplashScreenActivity.this, null, null);
@@ -74,11 +84,19 @@ public class SplashScreenActivity extends Activity {
 						@Override
 						public void run() {
 							try {
+								//Blocking call on accountmanager..
+								//This tells what happened on the authenticatoractivity screen...
+								if (accountManagerFuture.isCancelled())
+								{
+									finish();
+									return;
+								}
+								
 								Bundle resultOfLogin = accountManagerFuture
 										.getResult();
 								String accountName = resultOfLogin
 										.getString(AccountManager.KEY_ACCOUNT_NAME);
-
+								
 								for (Account account : mAccountManager
 										.getAccountsByType(Constants.ACCOUNT_TYPE)) {
 									if (account.name.equals(accountName)) {

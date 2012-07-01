@@ -19,7 +19,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
-            <intent-filter>
+          <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -82,7 +82,14 @@
                 someone who explicitly knows the class name
             -->
         </activity>
-
+  		<activity
+            android:name=".NewUserRegisterationActivity"
+            android:label="New user registeration"
+             android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+             
+        </activity>
         <provider
             android:name="com.mewannaplay.providers.TennisCourtProvider"
             android:authorities="com.mewannaplay.providers.TennisCourtProvider" />

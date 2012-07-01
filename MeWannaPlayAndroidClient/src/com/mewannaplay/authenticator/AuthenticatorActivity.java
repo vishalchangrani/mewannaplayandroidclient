@@ -42,7 +42,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mewannaplay.Constants;
-import com.mewannaplay.MapViewActivity;
+import com.mewannaplay.NewUserRegisterationActivity;
 import com.mewannaplay.R;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.providers.ProviderContract;
@@ -110,6 +110,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         Log.i(TAG, "loading data from Intent");
         final Intent intent = getIntent();
         mUsername = intent.getStringExtra(PARAM_USERNAME);
+        mPassword = intent.getStringExtra(PARAM_PASSWORD);
+   
+    
         mRequestNewAccount = mUsername == null;
         mConfirmCredentials = intent.getBooleanExtra(PARAM_CONFIRM_CREDENTIALS, false);
         Log.i(TAG, "    request new: " + mRequestNewAccount);
@@ -121,7 +124,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         mUsernameEdit = (EditText) findViewById(R.id.username_edit);
         mPasswordEdit = (EditText) findViewById(R.id.password_edit);
         if (!TextUtils.isEmpty(mUsername)) mUsernameEdit.setText(mUsername);
+        if (!TextUtils.isEmpty(mPassword)) mUsernameEdit.setText(mPassword);
         mMessage.setText(getMessage());
+
     }
         
 
@@ -195,8 +200,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     	        intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
     	        setAccountAuthenticatorResult(intent.getExtras());
     	        setResult(RESULT_OK, intent);
-    	        startActivity(new Intent(AuthenticatorActivity.this,
-    					MapViewActivity.class));
+    	 //       startActivity(new Intent(AuthenticatorActivity.this,
+    	//				MapViewActivity.class));
     			
     	        finish();   	    
     }
@@ -260,12 +265,29 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
         setAccountAuthenticatorResult(intent.getExtras());
         setResult(RESULT_OK, intent);
-        startActivity(new Intent(AuthenticatorActivity.this,
-				MapViewActivity.class));
+       // startActivity(new Intent(AuthenticatorActivity.this,
+		//		MapViewActivity.class));
 		
            
         finish();
     }
+    
+    private void finishLoginWithFailure()
+    {
+        Log.e(TAG, "finishLoginWithFailure()");
+        Account[] accounts = mAccountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
+     
+        for (Account account : accounts)
+        		mAccountManager.removeAccount(account, null, null); //remove ALL com.mewannaplay account
+        		
+        		 final Intent intent = new Intent();
+
+                intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
+                setAccountAuthenticatorResult(null); //indicate failure to calling activity
+                finish(); 
+   
+    }
+    
 
     /**
      * Called when the authentication process completes (see attemptLogin()).
@@ -395,5 +417,40 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 		}
 
     }
+    
+    public void onNewUserRegister(View v)
+    {
+    	Intent i = new Intent(this,NewUserRegisterationActivity.class);    
+    	startActivityForResult(i,0);
+    }
 
-}
+    
+    //Callback form NewUserRegesterationActivity
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent intent) {
+    	
+    	  if (intent != null)
+    	  {
+    	  mUsername = intent.getStringExtra(PARAM_USERNAME);
+          mPassword = intent.getStringExtra(PARAM_PASSWORD);
+    	  }
+    	  else
+    	  {
+    		  mUsername = null;
+    		  mPassword = null;
+    	  }
+          
+        if (requestCode == 0 && 
+            resultCode == RESULT_OK && !TextUtils.isEmpty(mUsername) && !TextUtils.isEmpty(mPassword)) {            
+            	  mUsernameEdit.setText(mUsername);
+                  mPasswordEdit.setText(mPassword);
+                  handleLogin(null); //Login this newly created user
+            }
+           
+            else
+            {
+            	finishLoginWithFailure();
+            	
+            }
+        }
+    }
