@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" 
+    android:background="@drawable/bgtwo">
+
+    <Button
+        android:id="@+id/choose_current_location"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="Current_location" 
+        android:background="@drawable/buttons"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:textStyle="bold">
+    </Button>
+
+    <TextView
+        android:id="@+id/statetext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="5dp"
+        android:textColor="#fff"
+        android:text="State" >
+    </TextView>
+
+    <Spinner
+        android:id="@+id/state_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </Spinner>
+
+    <TextView
+        android:id="@+id/citytext"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+         android:layout_marginLeft="5dp"
+           android:textColor="#fff"
+        android:text="City" >
+    </TextView>
+
+    <Spinner
+        android:id="@+id/city_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </Spinner>
+
+    <Button
+        android:id="@+id/okstatecity"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="OK"
+        android:background="@drawable/buttons" 
+         android:textColor="#fff"
+        android:textSize="20dp"
+        android:textStyle="bold">
+    </Button>
+
+</LinearLayout>

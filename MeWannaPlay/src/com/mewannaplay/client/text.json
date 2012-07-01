@@ -1,0 +1,20 @@
+{
+    "status":{
+        "error":"No",
+        "code":200,
+        "description":"",
+        "message":"Ok"
+    },
+    "tenniscourt":[
+        {
+            "tennis_id":"13604",
+            "tennis_latitude":"32.807622",
+            "tennis_longitude":"-85.971383",
+            "tennis_subcourts":"4",
+            "Occupied":"124",
+            "tennis_facility_type":"Private",
+            "tennis_name":"Willowpoint Golf & Country Club",
+            "message_count":"124"
+        }
+    ]
+}

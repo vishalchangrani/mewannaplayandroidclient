@@ -1,0 +1,4779 @@
+{
+
+    "status": {
+        "error": "No",
+        "code": 200,
+        "description": "",
+        "message": "Ok"
+    },
+    "cities": [
+        {
+            "city_id": "3845",
+            "city_name": "Alexander City",
+            "state_abbreviation": "AL",
+            "city_latitude": "32.94401",
+            "city_longitude": "-85.95385"
+        },
+        {
+            "city_id": "3846",
+            "city_name": "Birmingham",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.52066",
+            "city_longitude": "-86.80249"
+        },
+        {
+            "city_id": "3847",
+            "city_name": "Hoover",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.40539",
+            "city_longitude": "-86.81138"
+        },
+        {
+            "city_id": "3848",
+            "city_name": "Michigan",
+            "state_abbreviation": "MI",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3849",
+            "city_name": "Homewood",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.47177",
+            "city_longitude": "-86.80082"
+        },
+        {
+            "city_id": "3850",
+            "city_name": "Fairfield",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.48594",
+            "city_longitude": "-86.91194"
+        },
+        {
+            "city_id": "3851",
+            "city_name": "Midfield",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.4615",
+            "city_longitude": "-86.90888"
+        },
+        {
+            "city_id": "3852",
+            "city_name": "Bessemer",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.40178",
+            "city_longitude": "-86.95444"
+        },
+        {
+            "city_id": "3853",
+            "city_name": "Vestavia Hills",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3854",
+            "city_name": "Gardendale ",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3855",
+            "city_name": "Pelham",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3856",
+            "city_name": "Trussville",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3857",
+            "city_name": "Pell City",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3858",
+            "city_name": "Sylacauga",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3859",
+            "city_name": "Jasper",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3860",
+            "city_name": "Tuscaloosa",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3861",
+            "city_name": "Cullman",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3862",
+            "city_name": "Oxford",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3863",
+            "city_name": "Gadsden",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3864",
+            "city_name": "Anniston",
+            "state_abbreviation": "AL",
+            "city_latitude": "33.65983",
+            "city_longitude": "-85.83163"
+        },
+        {
+            "city_id": "3865",
+            "city_name": "Fayette",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3866",
+            "city_name": "Guntersville",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3867",
+            "city_name": "Selma",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3868",
+            "city_name": "Hunstville",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3869",
+            "city_name": "Madison",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3870",
+            "city_name": "Montogomery",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3871",
+            "city_name": "Russellville",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3872",
+            "city_name": "Muscle Shoals",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3873",
+            "city_name": "Auburn",
+            "state_abbreviation": "AL",
+            "city_latitude": "32.60986",
+            "city_longitude": "-85.48078"
+        },
+        {
+            "city_id": "3874",
+            "city_name": "Boaz",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3875",
+            "city_name": "Centre",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3876",
+            "city_name": "Daphne",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3877",
+            "city_name": "Dothan",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3878",
+            "city_name": "Opellika",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3879",
+            "city_name": "Florence",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3880",
+            "city_name": "Killen",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3881",
+            "city_name": "Troy",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3882",
+            "city_name": "Enterprise",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3883",
+            "city_name": "Phenix City",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3884",
+            "city_name": "Fairhope",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3885",
+            "city_name": "Mobile",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3886",
+            "city_name": "Point Clear",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3887",
+            "city_name": "Theodore",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3888",
+            "city_name": "Orange Beach",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3889",
+            "city_name": "Gulf Shores",
+            "state_abbreviation": "AL",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3890",
+            "city_name": "Anchorage",
+            "state_abbreviation": "AK",
+            "city_latitude": "61.21806",
+            "city_longitude": "-149.90028"
+        },
+        {
+            "city_id": "3891",
+            "city_name": "North Pole",
+            "state_abbreviation": "AK",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3892",
+            "city_name": "Fairbank",
+            "state_abbreviation": "AK",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3893",
+            "city_name": "Juneau",
+            "state_abbreviation": "AK",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3894",
+            "city_name": "Ketchikan",
+            "state_abbreviation": "AK",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3895",
+            "city_name": "Eagar ",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3896",
+            "city_name": "Show Low",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3897",
+            "city_name": "Anthem",
+            "state_abbreviation": "AZ",
+            "city_latitude": "33.85672",
+            "city_longitude": "-112.09831"
+        },
+        {
+            "city_id": "3898",
+            "city_name": "Scottsdale",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3899",
+            "city_name": "Phoenix",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3900",
+            "city_name": "Glendale",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3901",
+            "city_name": "Sun City",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3902",
+            "city_name": "Paradise Valley",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3903",
+            "city_name": "Surprise",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3904",
+            "city_name": "Rio Verde",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3905",
+            "city_name": "EL Mirage",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3906",
+            "city_name": "Tolleson",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3907",
+            "city_name": "Litchfield Park",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3908",
+            "city_name": "Tempe",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3909",
+            "city_name": "Mesa",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3910",
+            "city_name": "Avondale",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3911",
+            "city_name": "Chandler",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3912",
+            "city_name": "Gilbert",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3913",
+            "city_name": "Higley",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3914",
+            "city_name": "Dewey",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3915",
+            "city_name": "Payson",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3916",
+            "city_name": "Presscott",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3917",
+            "city_name": "Cottonwood ",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3918",
+            "city_name": "Sedona",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3919",
+            "city_name": "Flagstaff",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3920",
+            "city_name": "Marana",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3921",
+            "city_name": "Tuscon",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3922",
+            "city_name": "Apache Junction",
+            "state_abbreviation": "AZ",
+            "city_latitude": "33.41505",
+            "city_longitude": "-111.54958"
+        },
+        {
+            "city_id": "3923",
+            "city_name": "Sedona",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3924",
+            "city_name": "Green Valley",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3925",
+            "city_name": "Sahuarita",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3926",
+            "city_name": "Rio Rico",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3927",
+            "city_name": "Nogales",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3928",
+            "city_name": "Sierra Vista",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3929",
+            "city_name": "Kingman",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3930",
+            "city_name": "Lake Havasu",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3931",
+            "city_name": "Page",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3932",
+            "city_name": "Yuma",
+            "state_abbreviation": "AZ",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3933",
+            "city_name": "Arkadelphia",
+            "state_abbreviation": "AR",
+            "city_latitude": "34.12093",
+            "city_longitude": "-93.05378"
+        },
+        {
+            "city_id": "3934",
+            "city_name": "Hot Springs",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3935",
+            "city_name": "Little Rock",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3936",
+            "city_name": "Pine Bluff",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3937",
+            "city_name": "EL Dorado",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3938",
+            "city_name": "North Little Rock",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3939",
+            "city_name": "Sherwood",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3940",
+            "city_name": "Texarkana",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3941",
+            "city_name": "Morrilton",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3942",
+            "city_name": "Conway",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3943",
+            "city_name": "Russellville",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3944",
+            "city_name": "Beebe",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3945",
+            "city_name": "Batesville",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3946",
+            "city_name": "Fairfield Bay",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3947",
+            "city_name": "Jonesboro",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3948",
+            "city_name": "Mountain Home",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3949",
+            "city_name": "Forrest City",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3950",
+            "city_name": "Harrison",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3951",
+            "city_name": "Stuttgart",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3952",
+            "city_name": "Blythville",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3953",
+            "city_name": "Bella Vista",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3954",
+            "city_name": "Bentonville",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3955",
+            "city_name": "Rogers",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3956",
+            "city_name": "Springdale",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3957",
+            "city_name": "Fayetteville",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3958",
+            "city_name": "Van Buren",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3959",
+            "city_name": "Fort Smith",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3960",
+            "city_name": "Lake Village",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3961",
+            "city_name": "Mc Gehhe",
+            "state_abbreviation": "AR",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3962",
+            "city_name": "Agoura Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.15334",
+            "city_longitude": "-118.76168"
+        },
+        {
+            "city_id": "3963",
+            "city_name": "Westlake Village",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3964",
+            "city_name": "West Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3965",
+            "city_name": "Calabasas",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3966",
+            "city_name": "Thousand Oaks",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3967",
+            "city_name": "Malibu",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3968",
+            "city_name": "Woodland Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3969",
+            "city_name": "Canoga Park",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3970",
+            "city_name": "Simi Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3971",
+            "city_name": "Newbury Park",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3972",
+            "city_name": "Moorpark",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3973",
+            "city_name": "Winnetka",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3974",
+            "city_name": "Chatsworth",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3975",
+            "city_name": "Tarzana",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3976",
+            "city_name": "Glendale",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3977",
+            "city_name": "Reseda",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3978",
+            "city_name": "Northridge",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3979",
+            "city_name": "Encino",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3980",
+            "city_name": "Palisades",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3981",
+            "city_name": "Camarillo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3982",
+            "city_name": "Los Angeles",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3983",
+            "city_name": "Monica",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3984",
+            "city_name": "Somis",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3985",
+            "city_name": "Brentwood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3986",
+            "city_name": "Santa Monica",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3987",
+            "city_name": "North Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3988",
+            "city_name": "Granada Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3989",
+            "city_name": "Sherman Oaks",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3990",
+            "city_name": "Panorama City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3991",
+            "city_name": "Westwood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3992",
+            "city_name": "Van Nuys",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3993",
+            "city_name": "Venice",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3994",
+            "city_name": "Beverly Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3995",
+            "city_name": "Studio City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3996",
+            "city_name": "Marina Del Rey",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3997",
+            "city_name": "Pacoima",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "3998",
+            "city_name": "Arleta",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.25046",
+            "city_longitude": "-118.43383"
+        },
+        {
+            "city_id": "3999",
+            "city_name": "Hollywood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4000",
+            "city_name": "Valencia ",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4001",
+            "city_name": "Sylmar",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4002",
+            "city_name": "Lake View Terrace",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4003",
+            "city_name": "Santa Clarita",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4004",
+            "city_name": "North Hollywood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4005",
+            "city_name": "Culver City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4006",
+            "city_name": "West Hollywood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4007",
+            "city_name": "Oxnard",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4008",
+            "city_name": "Burbank",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4009",
+            "city_name": "Port Hueneme",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4010",
+            "city_name": "EL Segundo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4011",
+            "city_name": "Sunland",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4012",
+            "city_name": "Manhattan Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4013",
+            "city_name": "Harmosa Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4014",
+            "city_name": "Hawthorne",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4015",
+            "city_name": "Ventura",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4016",
+            "city_name": "Redondo Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4017",
+            "city_name": "Gardena",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4018",
+            "city_name": "Torrance",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4019",
+            "city_name": "La Canada Flintridge",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4020",
+            "city_name": "Rolling Hills Estate",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4021",
+            "city_name": "Palos Verdes Estate",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4022",
+            "city_name": "Rolling Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4023",
+            "city_name": "South Pasadena",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4024",
+            "city_name": "Pasadena",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4025",
+            "city_name": "Rancho Palos Verdes",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4026",
+            "city_name": "Lomita",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4027",
+            "city_name": "Carson",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4028",
+            "city_name": "Ojai",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4029",
+            "city_name": "Lynwood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4030",
+            "city_name": "Altadena",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.18973",
+            "city_longitude": "-118.13118"
+        },
+        {
+            "city_id": "4031",
+            "city_name": "Alhambra",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.09529",
+            "city_longitude": "-118.12701"
+        },
+        {
+            "city_id": "4032",
+            "city_name": "San Marino",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4033",
+            "city_name": "Wilmingtom",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4034",
+            "city_name": "Downey",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4035",
+            "city_name": "San Pedro",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4036",
+            "city_name": "Rosemead",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4037",
+            "city_name": "Bellflower",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4038",
+            "city_name": "Lakewood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4039",
+            "city_name": "Temple City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4040",
+            "city_name": "South El Monte",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4041",
+            "city_name": "Whittier",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4042",
+            "city_name": "Norwalk",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4043",
+            "city_name": "Arcadia",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.13973",
+            "city_longitude": "-118.03534"
+        },
+        {
+            "city_id": "4044",
+            "city_name": "Cerritos",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4045",
+            "city_name": "Long Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4046",
+            "city_name": "Palmdale",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4047",
+            "city_name": "La Mirada",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4048",
+            "city_name": "La Palma",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4049",
+            "city_name": "Los Alamitos",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4050",
+            "city_name": "Hacienda Heights",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4051",
+            "city_name": "Cypress",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4052",
+            "city_name": "Carpinteria",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4053",
+            "city_name": "La Puente",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4054",
+            "city_name": "Seal Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4055",
+            "city_name": "Buena Park",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4056",
+            "city_name": "Covina",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4057",
+            "city_name": "La Habra",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4058",
+            "city_name": "Garden Grove",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4059",
+            "city_name": "West Covina",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4060",
+            "city_name": "Westminster",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4061",
+            "city_name": "Fullerton",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4062",
+            "city_name": "Rowland Heights",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4063",
+            "city_name": "Huntington Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4064",
+            "city_name": "Glendora",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4065",
+            "city_name": "Lancaster",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4066",
+            "city_name": "Midway City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4067",
+            "city_name": "Anaheim",
+            "state_abbreviation": "CA",
+            "city_latitude": "33.83529",
+            "city_longitude": "-117.9145"
+        },
+        {
+            "city_id": "4068",
+            "city_name": "Diamond Bar",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4069",
+            "city_name": "San Dimas",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4070",
+            "city_name": "Placentia",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4071",
+            "city_name": "Fountain Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4072",
+            "city_name": "Santa Barbara",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4073",
+            "city_name": "Santa Ana",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4074",
+            "city_name": "Pomona",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4075",
+            "city_name": "Orange",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4076",
+            "city_name": "Costa Mesa",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4077",
+            "city_name": "Yorba Linda",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4078",
+            "city_name": "Rosamond",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4079",
+            "city_name": "Claremont",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4080",
+            "city_name": "Newport Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4081",
+            "city_name": "Tustin",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4082",
+            "city_name": "North Tustin",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4083",
+            "city_name": "Upland",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4084",
+            "city_name": "Chino",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4085",
+            "city_name": "Irvine",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4086",
+            "city_name": "Goleta",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4087",
+            "city_name": "Alta Loma",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.1064",
+            "city_longitude": "-117.59311"
+        },
+        {
+            "city_id": "4088",
+            "city_name": "Laguna Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4089",
+            "city_name": "Lake Forest",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4090",
+            "city_name": "Aliso Viejo",
+            "state_abbreviation": "CA",
+            "city_latitude": "33.5751",
+            "city_longitude": "-117.72543"
+        },
+        {
+            "city_id": "4091",
+            "city_name": "Corona",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4092",
+            "city_name": "Laguna Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4093",
+            "city_name": "Norco",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4094",
+            "city_name": "Mission Viejo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4095",
+            "city_name": "Fontana",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4096",
+            "city_name": "Laguna Niguel",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4097",
+            "city_name": "Ladera Ranch",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4098",
+            "city_name": "San Bernardino",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4099",
+            "city_name": "Coto de Caza",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4100",
+            "city_name": "Riverside",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4101",
+            "city_name": "Dana Point",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4102",
+            "city_name": "San Clemente",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4103",
+            "city_name": "Bakersfield",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4104",
+            "city_name": "Solvang",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4105",
+            "city_name": "Lake Arrowhead",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4106",
+            "city_name": "Moreno Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4107",
+            "city_name": "Victorville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4108",
+            "city_name": "Redlands",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4109",
+            "city_name": "Apple Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "34.50083",
+            "city_longitude": "-117.18588"
+        },
+        {
+            "city_id": "4110",
+            "city_name": "Yucaipa",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4111",
+            "city_name": "Murrieta",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4112",
+            "city_name": "Alameda",
+            "state_abbreviation": "CA",
+            "city_latitude": "37.76521",
+            "city_longitude": "-122.24164"
+        },
+        {
+            "city_id": "4113",
+            "city_name": "Oakland",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4114",
+            "city_name": "Piedmont",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4115",
+            "city_name": "Berkeley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4116",
+            "city_name": "Alamo",
+            "state_abbreviation": "CA",
+            "city_latitude": "37.8502",
+            "city_longitude": "-122.03218"
+        },
+        {
+            "city_id": "4117",
+            "city_name": "Albany",
+            "state_abbreviation": "CA",
+            "city_latitude": "37.88687",
+            "city_longitude": "-122.29775"
+        },
+        {
+            "city_id": "4118",
+            "city_name": "Altaville",
+            "state_abbreviation": "CA",
+            "city_latitude": "38.08381",
+            "city_longitude": "-120.56187"
+        },
+        {
+            "city_id": "4119",
+            "city_name": "Antelope",
+            "state_abbreviation": "CA",
+            "city_latitude": "44.91068",
+            "city_longitude": "-120.72282"
+        },
+        {
+            "city_id": "4120",
+            "city_name": "Aptos",
+            "state_abbreviation": "CA",
+            "city_latitude": "36.97717",
+            "city_longitude": "-121.8994"
+        },
+        {
+            "city_id": "4121",
+            "city_name": "Arcata",
+            "state_abbreviation": "CA",
+            "city_latitude": "40.86652",
+            "city_longitude": "-124.08284"
+        },
+        {
+            "city_id": "4122",
+            "city_name": "Arnold",
+            "state_abbreviation": "CA",
+            "city_latitude": "38.25547",
+            "city_longitude": "-120.35103"
+        },
+        {
+            "city_id": "4123",
+            "city_name": "Arroyo Grande",
+            "state_abbreviation": "CA",
+            "city_latitude": "35.11859",
+            "city_longitude": "-120.59073"
+        },
+        {
+            "city_id": "4124",
+            "city_name": "Atherton",
+            "state_abbreviation": "CA",
+            "city_latitude": "37.46133",
+            "city_longitude": "-122.19774"
+        },
+        {
+            "city_id": "4125",
+            "city_name": "Atwater",
+            "state_abbreviation": "CA",
+            "city_latitude": "37.34772",
+            "city_longitude": "-120.60908"
+        },
+        {
+            "city_id": "4126",
+            "city_name": "Auburn",
+            "state_abbreviation": "CA",
+            "city_latitude": "38.89657",
+            "city_longitude": "-121.07689"
+        },
+        {
+            "city_id": "4127",
+            "city_name": "Avila Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4128",
+            "city_name": "Beale AFB",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4129",
+            "city_name": "Belmont",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4130",
+            "city_name": "Benicia",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4131",
+            "city_name": "Big Bear",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4132",
+            "city_name": "Bonita",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4133",
+            "city_name": "Bonsall",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4134",
+            "city_name": "Boulder Crrek",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4135",
+            "city_name": "Brea",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4136",
+            "city_name": "Brentwood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4137",
+            "city_name": "Burlingame",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4138",
+            "city_name": "Cambria",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4139",
+            "city_name": "Campbell",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4140",
+            "city_name": "Encinitas",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4141",
+            "city_name": "Carmel",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4142",
+            "city_name": "Carmel Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4143",
+            "city_name": "Carmichael",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4144",
+            "city_name": "Castro Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4145",
+            "city_name": "Cathedral City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4146",
+            "city_name": "Ceres",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4147",
+            "city_name": "Chico",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4148",
+            "city_name": "Chula Vista",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4149",
+            "city_name": "Citrus Heights",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4150",
+            "city_name": "Clayton",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4151",
+            "city_name": "Cloverdale",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4152",
+            "city_name": "Concord",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4153",
+            "city_name": "Coronado",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4154",
+            "city_name": "Corral DeTierra",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4155",
+            "city_name": "Crescent City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4156",
+            "city_name": "Cupertino",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4157",
+            "city_name": "Daly City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4158",
+            "city_name": "Danville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4159",
+            "city_name": "Davis",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4160",
+            "city_name": "Del Mar",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4161",
+            "city_name": "Downieville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4162",
+            "city_name": "Durham",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4163",
+            "city_name": "El Cajon",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4164",
+            "city_name": "El Cerrito",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4165",
+            "city_name": "El Dorado Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4166",
+            "city_name": "El Granada",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4167",
+            "city_name": "El Sobrante",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4168",
+            "city_name": "Fair Oaks",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4169",
+            "city_name": "Fairfax",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4170",
+            "city_name": "Fairfield",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4171",
+            "city_name": "Elk Grove",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4172",
+            "city_name": "Emerald Hills",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4173",
+            "city_name": "Escondido",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4174",
+            "city_name": "Etna",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4175",
+            "city_name": "Eureka",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4176",
+            "city_name": "Fallbrook",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4177",
+            "city_name": "Ferndale",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4178",
+            "city_name": "Firebaugh",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4179",
+            "city_name": "Folsom",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4180",
+            "city_name": "Foster City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4181",
+            "city_name": "Fremont",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4182",
+            "city_name": "Fresno",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4183",
+            "city_name": "Gilroy",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4184",
+            "city_name": "Gold River",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4185",
+            "city_name": "Grass Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4186",
+            "city_name": "Gridley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4187",
+            "city_name": "Hanford",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4188",
+            "city_name": "Hayward",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4189",
+            "city_name": "Healdsburg",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4190",
+            "city_name": "Hillsborough",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4191",
+            "city_name": "Hollister",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4192",
+            "city_name": "India Wells",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4193",
+            "city_name": "Indio",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4194",
+            "city_name": "Inglewood",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4195",
+            "city_name": "Jackson",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4196",
+            "city_name": "Joshua Tree",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4197",
+            "city_name": "Kenfield",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4198",
+            "city_name": "Kingsburg",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4199",
+            "city_name": "La Jolla",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4200",
+            "city_name": "La Mesa",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4201",
+            "city_name": "La Quinta",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4202",
+            "city_name": "Lafayette",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4203",
+            "city_name": "Lake Almanor",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4204",
+            "city_name": "Lakeport",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4205",
+            "city_name": "Lakeside",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4206",
+            "city_name": "Larkspur",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4207",
+            "city_name": "Lathrop",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4208",
+            "city_name": "Lindsay",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4209",
+            "city_name": "Livermore",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4210",
+            "city_name": "Lodi",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4211",
+            "city_name": "Lompoc",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4212",
+            "city_name": "Loomis",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4213",
+            "city_name": "Los Altos",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4214",
+            "city_name": "Los Gatos",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4215",
+            "city_name": "Manmmoth Lakes",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4216",
+            "city_name": "Manteca",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4217",
+            "city_name": "Mather",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4218",
+            "city_name": "Meadow Vista",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4219",
+            "city_name": "Menlo Park",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4220",
+            "city_name": "Merced",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4221",
+            "city_name": "Mill Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4222",
+            "city_name": "Millbrae",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4223",
+            "city_name": "Milpitas",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4224",
+            "city_name": "Modesto",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4225",
+            "city_name": "Monterey",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4226",
+            "city_name": "Moraga",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4227",
+            "city_name": "Mountain View",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4228",
+            "city_name": "Napa",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4229",
+            "city_name": "Nevada City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4230",
+            "city_name": "Newark",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4231",
+            "city_name": "Nipomo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4232",
+            "city_name": "Novato",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4233",
+            "city_name": "Oakdale",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4234",
+            "city_name": "Oakhurst",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4235",
+            "city_name": "Oakley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4236",
+            "city_name": "Oceanside",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4237",
+            "city_name": "Orinda",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4238",
+            "city_name": "Oroville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4239",
+            "city_name": "Pacific Grove",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4240",
+            "city_name": "Pacifica",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4241",
+            "city_name": "Palm Desert",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4242",
+            "city_name": "Palm Springs",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4243",
+            "city_name": "Palo Alto",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4244",
+            "city_name": "Penn Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4245",
+            "city_name": "Petaluma",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4246",
+            "city_name": "Pismo Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4247",
+            "city_name": "Pittsburg",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4248",
+            "city_name": "Pleasant Hill",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4249",
+            "city_name": "Pleasanton",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4250",
+            "city_name": "Porterville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4251",
+            "city_name": "Portola Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4252",
+            "city_name": "Poway",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4253",
+            "city_name": "Rancho Cordova",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4254",
+            "city_name": "Rancho Mirage",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4255",
+            "city_name": "Rancho Santa Fe",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4256",
+            "city_name": "Red Bluff",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4257",
+            "city_name": "Redding",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4258",
+            "city_name": "Redwood City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4259",
+            "city_name": "Reedley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4260",
+            "city_name": "Richmond",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4261",
+            "city_name": "Ripon",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4262",
+            "city_name": "Riverbank",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4263",
+            "city_name": "Rocklin",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4264",
+            "city_name": "Rohnert Park",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4265",
+            "city_name": "Roseville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4266",
+            "city_name": "Ross",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4267",
+            "city_name": "Sacramento",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4268",
+            "city_name": "Salinas",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4269",
+            "city_name": "San Andreas",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4270",
+            "city_name": "San Anselmo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4271",
+            "city_name": "San Bruno",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4272",
+            "city_name": "Sun Carlos",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4273",
+            "city_name": "San Diego",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4274",
+            "city_name": "San Francisco",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4275",
+            "city_name": "San Jose",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4276",
+            "city_name": "San Leandro",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4277",
+            "city_name": "San Luis Obispo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4278",
+            "city_name": "San Marcos",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4279",
+            "city_name": "San Mateo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4280",
+            "city_name": "San Rafael",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4281",
+            "city_name": "Santa Clara",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4282",
+            "city_name": "Santa Cruz",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4283",
+            "city_name": "Santa Maria",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4284",
+            "city_name": "Santa Rosa",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4285",
+            "city_name": "Satatoga",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4286",
+            "city_name": "Scotts Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4287",
+            "city_name": "Seaside",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4288",
+            "city_name": "Solvana Beach",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4289",
+            "city_name": "Stockton",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4290",
+            "city_name": "Tamecula",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4291",
+            "city_name": "Tiburon",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4292",
+            "city_name": "Tracy",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4293",
+            "city_name": "Truckee",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4294",
+            "city_name": "Turlock",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4295",
+            "city_name": "Vacaville",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4296",
+            "city_name": "Vallejo",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4297",
+            "city_name": "Valley Springs",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4298",
+            "city_name": "Visalia",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4299",
+            "city_name": "Vista",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4300",
+            "city_name": "Walnut Creek",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4301",
+            "city_name": "Woodbridge",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4302",
+            "city_name": "Woodland",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4303",
+            "city_name": "Yreka",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4304",
+            "city_name": "Yuba City",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4305",
+            "city_name": "Yucca Valley",
+            "state_abbreviation": "CA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4306",
+            "city_name": "Arvada",
+            "state_abbreviation": "CO",
+            "city_latitude": "39.80276",
+            "city_longitude": "-105.08748"
+        },
+        {
+            "city_id": "4307",
+            "city_name": "Golden",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4308",
+            "city_name": "Wheat Ridge",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4309",
+            "city_name": "Lakewood",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4310",
+            "city_name": "Denver",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4311",
+            "city_name": "Westminster",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4312",
+            "city_name": "Louisville",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4313",
+            "city_name": "Northglenn",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4314",
+            "city_name": "Thornton",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4315",
+            "city_name": "Lafayette",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4316",
+            "city_name": "Commerce City",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4317",
+            "city_name": "Boulder",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4318",
+            "city_name": "Cherry Hills",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4319",
+            "city_name": "Littleton",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4320",
+            "city_name": "Columbian Valley",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4321",
+            "city_name": "Aurora",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4322",
+            "city_name": "Longmont",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4323",
+            "city_name": "Evergreen",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4324",
+            "city_name": "Greenwood",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4325",
+            "city_name": "Centennial",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4326",
+            "city_name": "Brighton",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4327",
+            "city_name": "Englewood",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4328",
+            "city_name": "Highlands Ranch",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4329",
+            "city_name": "Neederland",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4330",
+            "city_name": "Parker",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4331",
+            "city_name": "Castle Rock",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4332",
+            "city_name": "Fraser",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4333",
+            "city_name": "Loveland",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4334",
+            "city_name": "Evans",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4335",
+            "city_name": "Greeley",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4336",
+            "city_name": "Windsor",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4337",
+            "city_name": "Fort Collins",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4338",
+            "city_name": "Palmer Lake",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4339",
+            "city_name": "Silverthorne",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4340",
+            "city_name": "Monument",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4341",
+            "city_name": "Breckenridge",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4342",
+            "city_name": "Parshall",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4343",
+            "city_name": "Woodland Park",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4344",
+            "city_name": "Colorado Springs",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4345",
+            "city_name": "Vail",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4346",
+            "city_name": "Avon",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4347",
+            "city_name": "Edwards",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4348",
+            "city_name": "Buena Vista",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4349",
+            "city_name": "Aspen",
+            "state_abbreviation": "CO",
+            "city_latitude": "39.1911",
+            "city_longitude": "-106.81754"
+        },
+        {
+            "city_id": "4350",
+            "city_name": "Steamboat Springs",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4351",
+            "city_name": "Basalt",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4352",
+            "city_name": "Broomfield",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4353",
+            "city_name": "Carbondale",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4354",
+            "city_name": "Glendale",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4355",
+            "city_name": "Grand Junction",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4356",
+            "city_name": "Montrose",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4357",
+            "city_name": "Pubelo",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4358",
+            "city_name": "Snowmass Village",
+            "state_abbreviation": "CO",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4359",
+            "city_name": "Avon",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4360",
+            "city_name": "Farmington",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4361",
+            "city_name": "Canton",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4362",
+            "city_name": "Simsbury",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4363",
+            "city_name": "West Hartford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4364",
+            "city_name": "Bristol",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4365",
+            "city_name": "Hardford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4366",
+            "city_name": "Bloomfield",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4367",
+            "city_name": "Newington",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4368",
+            "city_name": "Windsor",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4369",
+            "city_name": "Torrington",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4370",
+            "city_name": "Winsted",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4371",
+            "city_name": "East Hartford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4372",
+            "city_name": "Manchester",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4373",
+            "city_name": "Cromwell",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4374",
+            "city_name": "South Windsor",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4375",
+            "city_name": "Litchfield",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4376",
+            "city_name": "Glastonbury",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4377",
+            "city_name": "Suffield",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4378",
+            "city_name": "Watertown",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4379",
+            "city_name": "Middlebury",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4380",
+            "city_name": "Ellington",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4381",
+            "city_name": "Wallingford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4382",
+            "city_name": "East Hampton",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4383",
+            "city_name": "Enfield",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4384",
+            "city_name": "Washington",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4385",
+            "city_name": "Falls Village",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4386",
+            "city_name": "Hamden",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4387",
+            "city_name": "North Haven",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4388",
+            "city_name": "Woodbridge",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4389",
+            "city_name": "New Milford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4390",
+            "city_name": "Storrs",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4391",
+            "city_name": "New Haven",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4392",
+            "city_name": "Branford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4393",
+            "city_name": "Lebanon",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4394",
+            "city_name": "East Haven",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4395",
+            "city_name": "Newtown",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4396",
+            "city_name": "Guilford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4397",
+            "city_name": "Pine Orchard",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4398",
+            "city_name": "Madison",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4399",
+            "city_name": "Milford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4400",
+            "city_name": "Trumbull",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4401",
+            "city_name": "Danbury",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4402",
+            "city_name": "Easton",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4403",
+            "city_name": "Old Saybrook",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4404",
+            "city_name": "West Redding",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4405",
+            "city_name": "Fairfield",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4406",
+            "city_name": "Stratford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4407",
+            "city_name": "Norwich",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4408",
+            "city_name": "Bridgeport",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4409",
+            "city_name": "Weston",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4410",
+            "city_name": "Woodstock",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4411",
+            "city_name": "Ridgefield",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4412",
+            "city_name": "Brooklyn",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4413",
+            "city_name": "Griswold",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4414",
+            "city_name": "Wilton",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4415",
+            "city_name": "Waterford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4416",
+            "city_name": "Westport",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4417",
+            "city_name": "Groton",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4418",
+            "city_name": "Norwalk",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4419",
+            "city_name": "Mystic",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4420",
+            "city_name": "New Canaan",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4421",
+            "city_name": "East Norwalk",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4422",
+            "city_name": "Darien",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4423",
+            "city_name": "Stamford",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4424",
+            "city_name": "Rowayton",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4425",
+            "city_name": "Pawacatuck",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4426",
+            "city_name": "Greenwich",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4427",
+            "city_name": "Cos Cob",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4428",
+            "city_name": "Old Greenwich",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4429",
+            "city_name": "East Lyme",
+            "state_abbreviation": "CT",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4430",
+            "city_name": "Newark",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4431",
+            "city_name": "Middletown",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4432",
+            "city_name": "New Castle",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4433",
+            "city_name": "Wilmington",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4434",
+            "city_name": "Greenville",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4435",
+            "city_name": "Smyrna",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4436",
+            "city_name": "Camden Wyoming",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4437",
+            "city_name": "Dover",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4438",
+            "city_name": "Milford",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4439",
+            "city_name": "Hockessin",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4440",
+            "city_name": "Seaford",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4441",
+            "city_name": "Washington",
+            "state_abbreviation": "DC",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4442",
+            "city_name": "Acworth",
+            "state_abbreviation": "GA",
+            "city_latitude": "34.06593",
+            "city_longitude": "-84.67688"
+        },
+        {
+            "city_id": "4443",
+            "city_name": "Kennesaw",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4444",
+            "city_name": "Albany",
+            "state_abbreviation": "GA",
+            "city_latitude": "31.57851",
+            "city_longitude": "-84.15574"
+        },
+        {
+            "city_id": "4445",
+            "city_name": "Powder Springs",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4446",
+            "city_name": "Marietta",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4447",
+            "city_name": "Woodstock",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4448",
+            "city_name": "Cartersville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4449",
+            "city_name": "Canton",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4450",
+            "city_name": "Austell",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4451",
+            "city_name": "Roswell",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4452",
+            "city_name": "Douglasville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4453",
+            "city_name": "Atlanta",
+            "state_abbreviation": "GA",
+            "city_latitude": "33.749",
+            "city_longitude": "-84.38798"
+        },
+        {
+            "city_id": "4454",
+            "city_name": "Dunwoody",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4455",
+            "city_name": "Lithia Springs",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4456",
+            "city_name": "Alpharetta",
+            "state_abbreviation": "GA",
+            "city_latitude": "34.07538",
+            "city_longitude": "-84.29409"
+        },
+        {
+            "city_id": "4457",
+            "city_name": "Norcross",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4458",
+            "city_name": "Rome",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4459",
+            "city_name": "Johns Creek",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4460",
+            "city_name": "Cumming",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4461",
+            "city_name": "Jasper",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4462",
+            "city_name": "Lilburn",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4463",
+            "city_name": "Tucker",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4464",
+            "city_name": "Duluth",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4465",
+            "city_name": "College Park",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4466",
+            "city_name": "Calhoun",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4467",
+            "city_name": "Tallapoosa",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4468",
+            "city_name": "Suwanee",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4469",
+            "city_name": "Lawrenceville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4470",
+            "city_name": "Stone Mountain",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4471",
+            "city_name": "Carrollton",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4472",
+            "city_name": "Carrollton",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4473",
+            "city_name": "Sugar Hill",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4474",
+            "city_name": "Shellville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4475",
+            "city_name": "Newnan",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4476",
+            "city_name": "Dawsonville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4477",
+            "city_name": "Jonesboro",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4478",
+            "city_name": "Snellville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4479",
+            "city_name": "Peachtree City",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4480",
+            "city_name": "Bowdon",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4481",
+            "city_name": "Summerville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4482",
+            "city_name": "Stockbridge",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4483",
+            "city_name": "Flowery Branch",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4484",
+            "city_name": "Conyers",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4485",
+            "city_name": "Gainesville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4486",
+            "city_name": "Winder",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4487",
+            "city_name": "Braselton",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4488",
+            "city_name": "Blue Ridge",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4489",
+            "city_name": "Jefferson",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4490",
+            "city_name": "Bogart",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4491",
+            "city_name": "Bishop",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4492",
+            "city_name": "LaGrange",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4493",
+            "city_name": "Athens",
+            "state_abbreviation": "GA",
+            "city_latitude": "34.80287",
+            "city_longitude": "-86.97167"
+        },
+        {
+            "city_id": "4494",
+            "city_name": "Calrkesville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4495",
+            "city_name": "Danielsville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4496",
+            "city_name": "Toccoa",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4497",
+            "city_name": "Greensboro",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4498",
+            "city_name": "Macon",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4499",
+            "city_name": "Augusta",
+            "state_abbreviation": "GA",
+            "city_latitude": "33.47425",
+            "city_longitude": "-82.00967"
+        },
+        {
+            "city_id": "4500",
+            "city_name": "Brunswick",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4501",
+            "city_name": "Columbus",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4502",
+            "city_name": "Dalton",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4503",
+            "city_name": "Evans",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4504",
+            "city_name": "Hampton",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4505",
+            "city_name": "Hartwell",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4506",
+            "city_name": "Martinez",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4507",
+            "city_name": "Perry",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4508",
+            "city_name": "Pine Mountain",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4509",
+            "city_name": "Savannah",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4510",
+            "city_name": "Newark",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4511",
+            "city_name": "Middletown",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4512",
+            "city_name": "New Castle",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4513",
+            "city_name": "Wilmington",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4514",
+            "city_name": "Greenville",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4515",
+            "city_name": "Smyrna",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4516",
+            "city_name": "Camden Wyoming",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4517",
+            "city_name": "Dover",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4518",
+            "city_name": "Milford",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4519",
+            "city_name": "Hockessin",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4520",
+            "city_name": "Seaford",
+            "state_abbreviation": "DE",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4521",
+            "city_name": "Smyrna",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4522",
+            "city_name": "Thomasville",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4523",
+            "city_name": "Valdosta",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4524",
+            "city_name": "Warner Robins",
+            "state_abbreviation": "GA",
+            "city_latitude": "0",
+            "city_longitude": "0"
+        },
+        {
+            "city_id": "4525",
+            "city_name": "Navi Mnumbai",
+            "state_abbreviation": "MAH",
+            "city_latitude": "19.049138",
+            "city_longitude": "-73.030243"
+        }
+    ]
+
+}
