@@ -333,7 +333,7 @@ public class RestClient {
 			// Login magic goes here
 			NewUser user = new NewUser(userName,
 					AuthenticatorActivity.encryptPassword(password), email);
-			RestClient restClient = new RestClient(Constants.LOGIN);
+			RestClient restClient = new RestClient(Constants.ADD_USER);
 			restClient.execute(RequestMethods.POST, user.toJSONObject());
 			Log.d(TAG, userName + " registered successfully");
 		
@@ -346,9 +346,7 @@ public class RestClient {
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());
 			throw e;
-		} finally {
-			//
-		}
+		} 
 	}
 
 	public static boolean isLoggedIn() {
