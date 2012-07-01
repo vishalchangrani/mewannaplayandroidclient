@@ -39,6 +39,8 @@ public class Constants {
     		BASE_URL+"tenniscourtdetails/index/";
     public static final String GET_TENNISCOURT_MESSAGES =
     		BASE_URL+"tenniscourtmessages/index/"; //here index to be passed is courtid 
+    public static final String ADD_USER  =
+    		BASE_URL+"users/add/";
     public static final String LOGIN  =
     		BASE_URL+"users/login/";
     public static final String LOGOUT  =

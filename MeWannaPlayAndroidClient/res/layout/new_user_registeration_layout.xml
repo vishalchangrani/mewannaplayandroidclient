@@ -7,7 +7,7 @@
     android:orientation="vertical"
      >
      <TextView
-                android:id="@+id/message"
+                android:id="@+id/newuser_errormessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dip"
@@ -35,7 +35,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp" 
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp" android:singleLine="true">
                 </EditText>
             </LinearLayout>
              <LinearLayout
@@ -60,7 +60,32 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp" 
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp" android:singleLine="true" android:inputType="textPassword">
+                </EditText>
+            </LinearLayout>
+             <LinearLayout
+              android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+               android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="0dip"
+                    android:text="Confirm Password"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+
+                <EditText
+                    android:id="@+id/confirm_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp" 
+                    android:layout_marginRight="10dp" android:singleLine="true" android:inputType="textPassword">
                 </EditText>
             </LinearLayout>
              <LinearLayout
@@ -74,7 +99,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="0dip"
-                    android:text="Password"
+                    android:text="Email"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -85,7 +110,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp" 
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp"  android:inputType="textEmailAddress">
                 </EditText>
             </LinearLayout>
                <LinearLayout

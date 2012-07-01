@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffff00"
                 android:layout_marginBottom="5dip"
-                android:textSize="10pt"
+                android:textSize="8pt"
                 android:textStyle="bold" />
 
             <TextView
@@ -131,6 +131,7 @@
                 
                 android:background="@drawable/gotext"
                 android:onClick="handleLogin" />
+            <Button android:text="New user register" android:id="@+id/newuser_register_btn" android:onClick="onNewUserRegister" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
             
             
             
