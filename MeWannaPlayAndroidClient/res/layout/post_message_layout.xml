@@ -122,8 +122,6 @@ Contact :"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
-
-           
             </LinearLayout>
         </LinearLayout>
 
@@ -132,26 +130,28 @@ Contact :"
             android:layout_height="fill_parent"
             android:layout_weight="30"
             android:orientation="vertical" >
-     <RadioGroup
-                    android:id="@+id/rgcontact"
+
+            <RadioGroup
+                android:id="@+id/rgcontact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/rbphn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                    android:orientation="horizontal" >
+                    android:checked="true"
+                    android:text="Phone" />
 
-                    <RadioButton
-                        android:id="@+id/rbphn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Phone" />
+                <RadioButton
+                    android:id="@+id/rbemail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email" />
+            </RadioGroup>
 
-                    <RadioButton
-                        android:id="@+id/rbemail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email" />
-                </RadioGroup>
             <EditText
                 android:id="@+id/contact_info"
                 android:layout_width="200dp"
@@ -160,8 +160,7 @@ Contact :"
                 android:layout_marginRight="10dp"
                 android:hint="e.g.9999999999"
                 android:inputType="phone"
-                android:maxLength="10"
-                 >
+                android:maxLength="10" >
             </EditText>
 
             <LinearLayout
@@ -176,28 +175,22 @@ Contact :"
                     android:layout_height="fill_parent"
                     android:layout_weight="2.3" >
 
-                    
-                    
-                     <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:text="*Note: Contact details will be visible to other users"
-                    android:textColor="#000"
-                    android:textSize="10dp"
-                    android:textStyle="italic" />
-                    
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:text="*Note: Contact details will be visible to other users"
+                        android:textColor="#000"
+                        android:textSize="10dp"
+                        android:textStyle="italic" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="0.7" >
-                    
-                    
-                    
-                    
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
@@ -218,13 +211,6 @@ comments :"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:inputType="textMultiLine" />
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 </LinearLayout>
             </LinearLayout>
 
@@ -267,18 +253,23 @@ comments :"
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="9" >
+                android:layout_weight="9"
+                 android:orientation="vertical"
+                android:weightSum="10" >
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
-                    android:textColor="#000"
-                    android:textSize="10dp"
-                    
-                    android:textStyle="italic" />
+             
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
+                        android:textColor="#000"
+                        android:textSize="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="italic" />
+                
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
