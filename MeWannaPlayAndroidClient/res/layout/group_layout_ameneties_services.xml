@@ -1,7 +1,12 @@
-
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="wrap_content" android:text="Ameneties and services"
-	android:textSize="10dp" android:textColor="@android:color/black"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="left"
+    android:paddingLeft="30dp"
+     android:paddingTop="15dp"
+      android:paddingBottom="15dp"
+    android:text="Ameneties and services"
+    android:textColor="@android:color/white"
+    android:textSize="10dp" >
 
-	android:layout_width="wrap_content" android:gravity="left" android:paddingLeft="40dp"></TextView>
-
+</TextView>
