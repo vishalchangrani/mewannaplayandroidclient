@@ -1,7 +1,12 @@
-
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="fill_parent" android:text="Activities"
-	android:textSize="10dp" android:textColor="@android:color/black"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:gravity="left|center_vertical"
+    android:paddingBottom="15dp"
+    android:paddingLeft="30dp"
+    android:paddingTop="15dp"
+    android:text="Activities"
+    android:textColor="@android:color/white"
+    android:textSize="10dp" >
 
-	android:layout_width="wrap_content" android:gravity="left|center_vertical" android:paddingLeft="40dp" android:paddingBottom="15dp" android:paddingTop="15dp"></TextView>
-
+</TextView>
