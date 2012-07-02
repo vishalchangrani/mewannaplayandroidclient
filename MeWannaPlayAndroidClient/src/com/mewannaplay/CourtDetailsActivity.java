@@ -35,6 +35,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -59,7 +60,8 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	private ContentObserver messageContentObserver;
 	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
 	ImageView phone;
-
+	TextView cmark;
+	
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -67,11 +69,13 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
+		 cmark=(TextView)findViewById(R.id.cmessagemark);
 		thisCourtsLocation = (Location) this.getIntent().getExtras().getParcelable(SELECTED_COURTS_GEOPOINT);
 		
 		if (RestClient.isLoggedIn())
-		{
+		{    
 			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
+			postMsgButton.setBackgroundResource(R.drawable.postmessage);
 			postMsgButton.setEnabled(true);
 			TextView cmsg=(TextView)findViewById(R.id.cmessage);
 			cmsg.setVisibility(View.GONE);
@@ -222,12 +226,17 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
     		//and he is in proximity of the court
     	//	boolean isInProximity = currentLocation!= null  ? currentLocation.distanceTo(thisCourtsLocation) <= Constants.PROXIMITY : false;
     	//	if (isInProximity)
-    		{
+    		
     			//then enable markoccupied button
+    			if (RestClient.isLoggedIn()){
     			Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
     			markCourtOccupied.setEnabled(true);
+    			markCourtOccupied.setBackgroundResource(R.drawable.markcourtoccupied);
+    			
+    			cmark.setVisibility(View.GONE);
+    			}
     		}
-    	}
+    	
     	
 	}
 	
@@ -398,6 +407,8 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	       // 	getContentResolver().update(ProviderContract.TennisCourts.CONTENT_URI.buildUpon().appendPath(courtId + "").build(), contentValues, " _id = ?", new String[]{courtId+""});
 	        	progressDialog.setMessage("Court marked occupied");
 	        	progressDialog.dismiss();
+	        	cmark.setText("Not in proximity of the court");
+	        	
 	        	
 	        }
 	    }
