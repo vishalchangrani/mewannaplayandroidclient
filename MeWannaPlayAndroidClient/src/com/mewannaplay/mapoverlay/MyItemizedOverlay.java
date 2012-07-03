@@ -25,6 +25,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
@@ -55,7 +56,8 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	 private static volatile GeoPoint lastLatLon = new GeoPoint(0, 0);
 	 private static volatile GeoPoint currLatLon;
 	 protected volatile static boolean isMapMoving = true;
-	
+	 SharedPreferences preferences;
+		public static String filenames = "courtdetails";
 	public MyItemizedOverlay(Drawable defaultMarker, MapView mapView) {
 		super(boundCenter(defaultMarker), mapView);
 		c = mapView.getContext();
@@ -90,56 +92,23 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	}
 
 	@Override
-	protected boolean onBalloonTap(final int index) {
-//		int id = m_overlays.get(index).getTennisCourt().getId();
-//	    ((MapViewActivity)c).getTennisCourtDetails(id);
+	protected boolean onBalloonTap( int index) {
+		preferences = c.getSharedPreferences(filenames, 0);
+
+		int id = m_overlays.get(index).getTennisCourt().getId();
+	    ((MapViewActivity)c).getTennisCourtDetails(id);
 		
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
+	
 
-		alertDialogBuilder.setTitle("Please select an option");
+		SharedPreferences.Editor editor = preferences.edit();
 
-		alertDialogBuilder
+		editor.putString("courtlat", ""+m_overlays.get(index).getLocation().getLatitude());
+		editor.putString("courtlng", ""+m_overlays.get(index).getLocation().getLongitude());
+		
 
-				.setPositiveButton("View CourtDetails",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int id) {
-								 id = m_overlays.get(index).getTennisCourt().getId();
-							    ((MapViewActivity)c).getTennisCourtDetails(id);
+		editor.commit();					
 								
-							}
-						})
-				.setNegativeButton("View Driving direction",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int id) {
-
-								GPS gps = new GPS();
-								gps.gpsInitializer(c);
-								gps.showCurrentLocation();
-								double lat=gps.getLatitude();
-								double lng=gps.getLongitude();
-								if(lat!=0.0 |lng!=0.0){
-
-								final Intent intent = new Intent(Intent.ACTION_VIEW,
-										Uri.parse("http://maps.google.com/maps?" + "saddr="
-												+ gps.getLatitude() + "," + gps.getLongitude()
-												+ "&daddr="
-												+ m_overlays.get(index).getLocation().getLatitude()
-												+ ","
-												+ m_overlays.get(index).getLocation().getLongitude()));
-								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								c.startActivity(intent);}
-								else{
-									
-									Toast.makeText(c, "Current location is not available", Toast.LENGTH_LONG).show();
-								}
-							}
-						});
-
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		alertDialog.show();
+				
 		return true;
 	}
 
