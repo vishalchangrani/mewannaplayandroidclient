@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.InputFilter;
@@ -44,7 +45,8 @@ public class PostMessageActivity extends Activity implements OnCheckedChangeList
 	    private SliderContainer mContainer;
 	    RadioGroup rgcontactinfo;
 	    EditText econtactinfo;
-	    
+	    SharedPreferences preferences;
+		public static String filenames = "courtdetails";
 	
 	
 	@Override
@@ -67,7 +69,7 @@ public class PostMessageActivity extends Activity implements OnCheckedChangeList
 	        }
 		
 		setContentView(R.layout.post_message_layout);
-
+		preferences = getSharedPreferences(filenames, 0);
 		rgcontactinfo=(RadioGroup)findViewById(R.id.rgcontact);
 		econtactinfo=(EditText)findViewById(R.id.contact_info);
 		rgcontactinfo.setOnCheckedChangeListener(this);
@@ -161,6 +163,14 @@ public class PostMessageActivity extends Activity implements OnCheckedChangeList
 	        {
 	        	progressDialog.setMessage("Message posted successfully");
 	        	progressDialog.dismiss();
+	        	SharedPreferences.Editor editor = preferences.edit();
+
+	    		editor.putBoolean("post", true);
+	    		
+	    		
+
+	    		editor.commit();					
+	    						
 	        	PostMessageActivity.this.finish();
 	        }
 	    }

@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.location.Location;
@@ -39,9 +40,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourtDetails;
+import com.mewannaplay.providers.GPS;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
@@ -61,7 +64,9 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
 	ImageView phone;
 	TextView cmark;
-	
+	 SharedPreferences preferences;
+		public static String filenames = "courtdetails";
+		TextView cmsg;
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -69,6 +74,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
+		preferences = getSharedPreferences(filenames, 0);
 		 cmark=(TextView)findViewById(R.id.cmessagemark);
 		thisCourtsLocation = (Location) this.getIntent().getExtras().getParcelable(SELECTED_COURTS_GEOPOINT);
 		
@@ -77,7 +83,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 			postMsgButton.setBackgroundResource(R.drawable.postmessage);
 			postMsgButton.setEnabled(true);
-			TextView cmsg=(TextView)findViewById(R.id.cmessage);
+			 cmsg=(TextView)findViewById(R.id.cmessage);
 			cmsg.setVisibility(View.GONE);
 		}
 	
@@ -245,7 +251,9 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		  TextView tv = (TextView) this.findViewById(R.id.court_name);
 		  tv.setText(tennisCourtDetails.getName().trim());
 		  tv = (TextView) this.findViewById(R.id.court_addr_1);
+		  
 		  tv.setText(tennisCourtDetails.getAddress().trim());
+		  tv.setOnClickListener(this);
 //		  tv = (TextView) this.findViewById(R.id.court_addr_2);
 //		  tv.setText(tennisCourtDetails.getCity()+","+tennisCourtDetails.getState()+" "+tennisCourtDetails.getZipcode());
 		  tv = (TextView) this.findViewById(R.id.court_phone_1);
@@ -261,6 +269,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		  tv.setText(""+tennisCourtDetails.getSubcourts());
 		  phone=(ImageView)findViewById(R.id.court_phone_icon);
 		  phone.setOnClickListener(this);
+		  
 	}
 	public class ExpadableAdapter extends BaseExpandableListAdapter {
 
@@ -536,35 +545,67 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	@Override
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-				CourtDetailsActivity.this);
+		switch (arg0.getId()) {
+		case R.id.court_phone_icon:
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					CourtDetailsActivity.this);
 
-		alertDialogBuilder.setTitle("Do you want to make a call?");
+			alertDialogBuilder.setTitle("Do you want to make a call?");
 
-		alertDialogBuilder
+			alertDialogBuilder
 
-				.setPositiveButton("okay",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int id) {
-								Intent callIntent = new Intent(
-										Intent.ACTION_CALL);
-								callIntent.setData(Uri.parse("tel:"+tennisCourtDetails.getPhone().trim().toString()));
-								startActivity(callIntent);
+					.setPositiveButton("okay",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									Intent callIntent = new Intent(
+											Intent.ACTION_CALL);
+									callIntent.setData(Uri.parse("tel:"+tennisCourtDetails.getPhone().trim().toString()));
+									startActivity(callIntent);
 
-							}
-						})
-				.setNegativeButton("cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int id) {
+								}
+							})
+					.setNegativeButton("cancel",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
 
-								dialog.cancel();
-							}
-						});
+									dialog.cancel();
+								}
+							});
 
-		AlertDialog alertDialog = alertDialogBuilder.create();
+			AlertDialog alertDialog = alertDialogBuilder.create();
 
-		alertDialog.show();
+			alertDialog.show();
+			break;
+		case R.id.court_addr_1:
+
+			GPS gps = new GPS();
+			gps.gpsInitializer(this);
+			gps.showCurrentLocation();
+			double lat=gps.getLatitude();
+			double lng=gps.getLongitude();
+			if(lat!=0.0 |lng!=0.0){
+
+			final Intent intent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://maps.google.com/maps?" + "saddr="
+							+ gps.getLatitude() + "," + gps.getLongitude()
+							+ "&daddr="
+							+ preferences.getString("courtlat", "")
+							+ ","
+							+ preferences.getString("courtlng", "")));
+			
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	         startActivity(intent);
+			
+			}
+			else{
+				
+				Toast.makeText(getApplicationContext(), "Current location is not available", Toast.LENGTH_LONG).show();
+			}
+			break;
+		
+		}
+	
 	}
 }
