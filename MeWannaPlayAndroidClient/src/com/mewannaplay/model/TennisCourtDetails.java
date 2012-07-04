@@ -309,7 +309,7 @@ public TennisActivity[] getTennisActivities() {
 		contentValues.put("zipcode", nonNullString(zipcode));
 		contentValues.put("url", nonNullString(url));
 		contentValues.put("facility_type", nonNullString(facilityType));
-		contentValues.put("subcourts", subcourts);
+		contentValues.put("subcourts",  subcourts);
 		contentValues.put("timings", nonNullString(timings));
 		contentValues.put("city", nonNullString(city));
 		contentValues.put("state", nonNullString(state));

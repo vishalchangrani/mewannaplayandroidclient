@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.Timer;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -24,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils.TruncateAt;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +36,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -67,6 +66,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	 SharedPreferences preferences;
 		public static String filenames = "courtdetails";
 		TextView cmsg;
+	
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -74,8 +74,8 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		setContentView(R.layout.court_details_layout);
-		preferences = getSharedPreferences(filenames, 0);
-		 cmark=(TextView)findViewById(R.id.cmessagemark);
+		
+		
 		thisCourtsLocation = (Location) this.getIntent().getExtras().getParcelable(SELECTED_COURTS_GEOPOINT);
 		
 		if (RestClient.isLoggedIn())
@@ -83,8 +83,10 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 			postMsgButton.setBackgroundResource(R.drawable.postmessage);
 			postMsgButton.setEnabled(true);
+		
 			 cmsg=(TextView)findViewById(R.id.cmessage);
 			cmsg.setVisibility(View.GONE);
+			
 		}
 	
 		
@@ -239,7 +241,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
     			markCourtOccupied.setEnabled(true);
     			markCourtOccupied.setBackgroundResource(R.drawable.markcourtoccupied);
     			
-    			cmark.setVisibility(View.GONE);
+    			cmsg.setVisibility(View.GONE);
     			}
     		}
     	
@@ -265,10 +267,19 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		  tv.setText(tennisCourtDetails.getFacilityType());
 		  tv = (TextView) this.findViewById(R.id.court_timings);
 		  tv.setText(tennisCourtDetails.getTennisTimings());
+		  tv.setSelected(true);
+		  tv.setEnabled(true);
+
+		 
 		  tv = (TextView) this.findViewById(R.id.no_of_sub_courts);
 		  tv.setText(""+tennisCourtDetails.getSubcourts());
 		  phone=(ImageView)findViewById(R.id.court_phone_icon);
+		 
 		  phone.setOnClickListener(this);
+		  
+		  ImageView onBack=(ImageView)findViewById(R.id.court_back_icon);
+		  onBack.setEnabled(true);
+		
 		  
 	}
 	public class ExpadableAdapter extends BaseExpandableListAdapter {
@@ -382,6 +393,12 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 		ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
 					ProviderContract.AUTHORITY,  SyncAdapter.getMarkOccupiedBundle(courtId));
 	}
+	public void onBack(View v)
+	{
+		Intent back = new Intent(this, MapViewActivity.class);
+	
+		startActivity(back);//fire it up baby		
+	}
 	
 	
 	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
@@ -416,7 +433,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	       // 	getContentResolver().update(ProviderContract.TennisCourts.CONTENT_URI.buildUpon().appendPath(courtId + "").build(), contentValues, " _id = ?", new String[]{courtId+""});
 	        	progressDialog.setMessage("Court marked occupied");
 	        	progressDialog.dismiss();
-	        	cmark.setText("Not in proximity of the court");
+	        	cmsg.setText("Not in proximity of the court");
 	        	
 	        	
 	        }
@@ -604,6 +621,8 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 				Toast.makeText(getApplicationContext(), "Current location is not available", Toast.LENGTH_LONG).show();
 			}
 			break;
+			
+	
 		
 		}
 	
