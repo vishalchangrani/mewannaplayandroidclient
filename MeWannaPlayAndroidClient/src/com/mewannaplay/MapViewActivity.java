@@ -601,9 +601,11 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.map_activity_menu, menu);
-		return true;
+	MenuInflater inflater = getMenuInflater();
+	inflater.inflate(R.menu.map_activity_menu, menu);
+	MenuItem bedMenuItem = menu.findItem(R.id.logout);
+	bedMenuItem.setTitle("Logout "+loggedInUserAccount.name);
+	return true;
 	}
 
 	@Override
