@@ -2,9 +2,12 @@ package com.mewannaplay.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.zip.GZIPInputStream;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -91,7 +94,6 @@ public class RestClient {
 		switch (method) {
 		case GET: {
 			HttpGet request = new HttpGet(url);
-			// request = (HttpGet) addHeaderParams(request);
 			responseString = executeRequest(request);
 			break;
 		}
@@ -155,21 +157,34 @@ public class RestClient {
 	 */
 	public JsonReader excuteGetAndReturnStream() throws IOException {
 		HttpGet request = new HttpGet(url);
+		if (!request.containsHeader("Accept-Encoding")) 
+            request.addHeader("Accept-Encoding", "gzip");
 		HttpResponse httpResponse = null;
 		HttpEntity entity = null;
 		try {
 			maybeCreateHttpClient();
+			long totalTime = System.currentTimeMillis();
 			httpResponse = mHttpClient.execute(request, localContext);
+			totalTime = System.currentTimeMillis() - totalTime;
+			Log.d(TAG," Total time to fetch data "+totalTime+" ms for "+url);
 			responseCode = httpResponse.getStatusLine().getStatusCode();
 			message = httpResponse.getStatusLine().getReasonPhrase();
 			entity = httpResponse.getEntity();
 			if (entity != null) {
-				Log.d(TAG, "Entity not null");
+
+				InputStream inputStream = entity.getContent();
+				//-----------------------------------------------------------------------------------
+				Header contentEncoding = httpResponse.getFirstHeader("Content-Encoding");
+				if (contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+					Log.d(TAG, " response is in gzip");
+					inputStream = new GZIPInputStream(inputStream);
+				}
+				//-----------------------------------------------------------------------------------
 				InputStreamReader inputStreamReader = null;
 				BufferedReader bufferedReader = null;
 				JsonReader jsonReader = null;
+				inputStreamReader = new InputStreamReader(inputStream);
 
-				inputStreamReader = new InputStreamReader(entity.getContent());
 				bufferedReader = new BufferedReader(inputStreamReader);
 				jsonReader = new JsonReader(bufferedReader);
 
