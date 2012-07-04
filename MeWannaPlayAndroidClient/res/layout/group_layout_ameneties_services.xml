@@ -7,6 +7,6 @@
       android:paddingBottom="15dp"
     android:text="Ameneties and services"
     android:textColor="@android:color/white"
-    android:textSize="10dp" >
+    android:textSize="13dp" >
 
 </TextView>

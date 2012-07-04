@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
@@ -72,6 +73,9 @@ public class PostMessageActivity extends Activity implements OnCheckedChangeList
 		preferences = getSharedPreferences(filenames, 0);
 		rgcontactinfo=(RadioGroup)findViewById(R.id.rgcontact);
 		econtactinfo=(EditText)findViewById(R.id.contact_info);
+		ImageView postBack=(ImageView)findViewById(R.id.post_back_icon);
+		postBack.setEnabled(true);
+		
 		rgcontactinfo.setOnCheckedChangeListener(this);
 		
 		 mContainer = (SliderContainer) this.findViewById(R.id.dateSliderContainer);
@@ -101,7 +105,12 @@ public class PostMessageActivity extends Activity implements OnCheckedChangeList
 		    }
 		});
 	}
+	public void postBack(View v)
+	{
+		Intent postback = new Intent(this, CourtDetailsActivity.class);
 	
+		startActivity(postback);//fire it up baby		
+	}
 
 	
 	private void postMessage()
