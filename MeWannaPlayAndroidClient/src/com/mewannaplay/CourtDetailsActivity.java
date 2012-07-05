@@ -15,7 +15,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.location.Location;
@@ -23,7 +22,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils.TruncateAt;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,7 +61,6 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
 	ImageView phone;
 	TextView cmark;
-	 SharedPreferences preferences;
 		public static String filenames = "courtdetails";
 		TextView cmsg;
 	
@@ -395,9 +392,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	}
 	public void onBack(View v)
 	{
-		Intent back = new Intent(this, MapViewActivity.class);
-	
-		startActivity(back);//fire it up baby		
+		this.finish(); //Back should not start another activity but just go back to whats in the activity stack!
 	}
 	
 	
@@ -608,9 +603,9 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 					Uri.parse("http://maps.google.com/maps?" + "saddr="
 							+ gps.getLatitude() + "," + gps.getLongitude()
 							+ "&daddr="
-							+ preferences.getString("courtlat", "")
+							+ thisCourtsLocation.getLatitude()
 							+ ","
-							+ preferences.getString("courtlng", "")));
+							+ thisCourtsLocation.getLongitude()));
 			
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	         startActivity(intent);

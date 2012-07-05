@@ -380,13 +380,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		}
 	};
 
-	public void getTennisCourtDetails(int id) {
+	public void getTennisCourtDetails(int id, Location locationOfSelectedTennisCourt) {
 
 		progressDialog = ProgressDialog.show(this, "",
 				"Fetching court details...", true);
 		Log.d(TAG, " --> Requesting sync for " + id);
 		syncFinishedReceiverForCourtDetails = new SyncFinishedReceiverForCourtDetails(
-				id);
+				id, locationOfSelectedTennisCourt);
 		registerReceiver(syncFinishedReceiverForCourtDetails, new IntentFilter(
 				SyncAdapter.SYNC_FINISHED_ACTION));
 		ContentResolver.requestSync(MapViewActivity.getAccount(this),
@@ -398,9 +398,11 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			BroadcastReceiver {
 
 		final int courtId;
+		final Location locationOfSelectedTennisCourt;
 
-		public SyncFinishedReceiverForCourtDetails(int courtId) {
+		public SyncFinishedReceiverForCourtDetails(int courtId, Location locationOfSelectedTennisCourt) {
 			this.courtId = courtId;
+			this.locationOfSelectedTennisCourt = locationOfSelectedTennisCourt;
 		}
 
 		@Override
@@ -426,18 +428,18 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 				alert = builder.create();
 				alert.show();
 			} else {
-				startTennisCourtDetailActivity(courtId);
+				startTennisCourtDetailActivity(courtId,locationOfSelectedTennisCourt);
 			}
 		}
 	};
 
-	private void startTennisCourtDetailActivity(int id) {
+	private void startTennisCourtDetailActivity(int id, Location locationOfSelectedTennisCourt) {
 		Intent intentForTennisCourtDetails = new Intent(this,
 				CourtDetailsActivity.class);
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.COURT_ID, id);
 		extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT,
-				this.getMyCurrentLocation());
+				locationOfSelectedTennisCourt);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
 	}
