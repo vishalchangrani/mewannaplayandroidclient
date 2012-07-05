@@ -52,7 +52,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
 
-	SharedPreferences sharedPrefs;
+	
 	public static String filename = "MeWanaPlayData";
 
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
@@ -88,7 +88,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		mapViewActivity = this;
 		setContentView(R.layout.mapviewlayout);
-		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); //use default file name (thats the recommended way in android)
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); //use default file name (thats the recommended way in android)
 		// Restore UI state from the savedInstanceState...will be lost when application restarts.
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey("current_city")) {
@@ -798,10 +798,11 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	private void incrementRunCount()
 	{
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		//increment run count..rollover to 0 if it is 5
 		SharedPreferences.Editor editor = sharedPrefs.edit();
 		int currentRunCount = sharedPrefs.getInt("TOTALRUN", 0); 
-		editor.putInt("TOTALRUN", currentRunCount + 1 >=  5  ? 0 : currentRunCount++); //rollover to 0 if 4
+		editor.putInt("TOTALRUN", currentRunCount + 1 >=  5  ? 0 : (currentRunCount + 1)); //rollover to 0 if 4
 		editor.commit();
 	}
 }
