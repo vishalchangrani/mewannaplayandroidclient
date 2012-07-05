@@ -438,6 +438,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		extras.putInt(SyncAdapter.COURT_ID, id);
 		extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT,
 				this.getMyCurrentLocation());
+	     extras.putInt("mark", MapViewActivity.courtMarkedOccupied);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
 	}

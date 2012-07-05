@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -58,7 +59,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	 Cursor messageCursor; 
 	 private ProgressDialog progressDialog;
 	private AlertDialog alert;
-	int courtId;
+	int courtId,postid;
 	private ContentObserver messageContentObserver;
 	private Location thisCourtsLocation; //tennscourtdetails doesnt has this info
 	ImageView phone;
@@ -66,13 +67,16 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	 SharedPreferences preferences;
 		public static String filenames = "courtdetails";
 		TextView cmsg;
-	
+		 String user;
+	//Account loggedinaccount;
 	 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		
+		//Log.i("account", loggedinaccount.name);
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
+		postid=this.getIntent().getExtras().getInt("mark");
+		
 		setContentView(R.layout.court_details_layout);
 		
 		
@@ -237,12 +241,20 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
     		
     			//then enable markoccupied button
     			if (RestClient.isLoggedIn()){
+    				
     			Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
+    			if(postid!=-1){
+    			markCourtOccupied.setEnabled(false);
+    			markCourtOccupied.setBackgroundResource(R.drawable.disablemarkcourtoccupied);
+    			}
+    			else{
     			markCourtOccupied.setEnabled(true);
     			markCourtOccupied.setBackgroundResource(R.drawable.markcourtoccupied);
     			
     			cmsg.setVisibility(View.GONE);
     			}
+    			}
+    			
     		}
     	
     	
@@ -514,7 +526,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	   
 	        
 	        //2
-	        String user = TennisCourtDetails.nonNullString(cursor.getString(cursor.getColumnIndex("user_name")));
+	    user = TennisCourtDetails.nonNullString(cursor.getString(cursor.getColumnIndex("user_name")));
 	        if (user.length() > 20)
 	        	user = user.substring(0, 20);
 	        ((TextView) view.findViewById(R.id.user)).setText(user);
