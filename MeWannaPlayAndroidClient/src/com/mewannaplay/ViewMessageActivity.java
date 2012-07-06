@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mewannaplay.model.Message;
@@ -76,6 +77,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 				.getUserName());
 
 		Button deleteButton = ((Button) findViewById(R.id.delete_message));
+		ImageView viewBack=(ImageView)findViewById(R.id.view_back_icon);
 		Button deleteButtonPartnerFound = ((Button) findViewById(R.id.delete_message_partner_found));
 		viewcontact.setOnClickListener(this);
 		if (message.getUserName().equals(MapViewActivity.getAccount(this).name)) // If
@@ -95,6 +97,11 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		}
 
 	}
+	public void viewBack(View v)
+	{
+		finish();
+	}
+
 
 	public void onDelete(View v) {
 		onDelete(false);

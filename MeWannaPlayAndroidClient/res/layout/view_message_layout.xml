@@ -12,13 +12,24 @@
         android:layout_weight="40" >
         
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="10"
             android:background="@drawable/viewmessage" />
         
-        
+        <ImageView
+                android:id="@+id/view_back_icon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="2dp"
+                android:layout_marginTop="10dp"
+                android:onClick="viewBack"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/backk" />
     </LinearLayout>
     
        
