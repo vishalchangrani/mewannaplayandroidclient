@@ -107,9 +107,7 @@ public class PostMessageActivity extends Activity implements OnCheckedChangeList
 	}
 	public void postBack(View v)
 	{
-		Intent postback = new Intent(this, CourtDetailsActivity.class);
-	
-		startActivity(postback);//fire it up baby		
+		finish();
 	}
 
 	
