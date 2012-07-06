@@ -52,7 +52,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
 
-	SharedPreferences sharedPrefs;
+	
 	public static String filename = "MeWanaPlayData";
 
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
@@ -88,7 +88,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		mapViewActivity = this;
 		setContentView(R.layout.mapviewlayout);
-		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); //use default file name (thats the recommended way in android)
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); //use default file name (thats the recommended way in android)
 		// Restore UI state from the savedInstanceState...will be lost when application restarts.
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey("current_city")) {
@@ -380,13 +380,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		}
 	};
 
-	public void getTennisCourtDetails(int id) {
+	public void getTennisCourtDetails(int id, Location locationOfSelectedTennisCourt) {
 
 		progressDialog = ProgressDialog.show(this, "",
 				"Fetching court details...", true);
 		Log.d(TAG, " --> Requesting sync for " + id);
 		syncFinishedReceiverForCourtDetails = new SyncFinishedReceiverForCourtDetails(
-				id);
+				id, locationOfSelectedTennisCourt);
 		registerReceiver(syncFinishedReceiverForCourtDetails, new IntentFilter(
 				SyncAdapter.SYNC_FINISHED_ACTION));
 		ContentResolver.requestSync(MapViewActivity.getAccount(this),
@@ -398,9 +398,11 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			BroadcastReceiver {
 
 		final int courtId;
+		final Location locationOfSelectedTennisCourt;
 
-		public SyncFinishedReceiverForCourtDetails(int courtId) {
+		public SyncFinishedReceiverForCourtDetails(int courtId, Location locationOfSelectedTennisCourt) {
 			this.courtId = courtId;
+			this.locationOfSelectedTennisCourt = locationOfSelectedTennisCourt;
 		}
 
 		@Override
@@ -426,18 +428,18 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 				alert = builder.create();
 				alert.show();
 			} else {
-				startTennisCourtDetailActivity(courtId);
+				startTennisCourtDetailActivity(courtId,locationOfSelectedTennisCourt);
 			}
 		}
 	};
 
-	private void startTennisCourtDetailActivity(int id) {
+	private void startTennisCourtDetailActivity(int id, Location locationOfSelectedTennisCourt) {
 		Intent intentForTennisCourtDetails = new Intent(this,
 				CourtDetailsActivity.class);
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.COURT_ID, id);
 		extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT,
-				this.getMyCurrentLocation());
+				locationOfSelectedTennisCourt);
 	     extras.putInt("mark", MapViewActivity.courtMarkedOccupied);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
@@ -605,7 +607,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	MenuInflater inflater = getMenuInflater();
 	inflater.inflate(R.menu.map_activity_menu, menu);
 	MenuItem bedMenuItem = menu.findItem(R.id.logout);
-	bedMenuItem.setTitle("Logout "+loggedInUserAccount.name);
+	bedMenuItem.setTitle("Logout "+loggedInUserAccount.name != null ? loggedInUserAccount.name : "");//just for safety
 	return true;
 	}
 
@@ -798,9 +800,10 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	private void incrementRunCount()
 	{
 		//increment run count..rollover to 0 if it is 5
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = sharedPrefs.edit();
 		int currentRunCount = sharedPrefs.getInt("TOTALRUN", 0); 
-		editor.putInt("TOTALRUN", currentRunCount + 1 >=  5  ? 0 : currentRunCount++); //rollover to 0 if 4
+		editor.putInt("TOTALRUN", currentRunCount + 1 >=  5  ? 0 : (currentRunCount + 1)); //rollover to 0 if 4
 		editor.commit();
 	}
 }

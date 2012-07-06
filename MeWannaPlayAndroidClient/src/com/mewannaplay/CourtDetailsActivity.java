@@ -407,9 +407,7 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 	}
 	public void onBack(View v)
 	{
-		Intent back = new Intent(this, MapViewActivity.class);
-	
-		startActivity(back);//fire it up baby		
+		this.finish();	
 	}
 	
 	
@@ -620,9 +618,9 @@ public class CourtDetailsActivity extends ListActivity implements OnClickListene
 					Uri.parse("http://maps.google.com/maps?" + "saddr="
 							+ gps.getLatitude() + "," + gps.getLongitude()
 							+ "&daddr="
-							+ preferences.getString("courtlat", "")
+							+ thisCourtsLocation.getLatitude()
 							+ ","
-							+ preferences.getString("courtlng", "")));
+							+  thisCourtsLocation.getLongitude()));
 			
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	         startActivity(intent);
