@@ -18,31 +18,18 @@ package com.mewannaplay.mapoverlay;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Canvas;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.location.Location;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
-import com.mewannaplay.CourtDetailsActivity;
 import com.mewannaplay.MapViewActivity;
-import com.mewannaplay.model.TennisCourt;
-import com.mewannaplay.providers.GPS;
-import com.mewannaplay.providers.ProviderContract;
 import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
 public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
@@ -96,19 +83,10 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		preferences = c.getSharedPreferences(filenames, 0);
 
 		int id = m_overlays.get(index).getTennisCourt().getId();
-	    ((MapViewActivity)c).getTennisCourtDetails(id);
-		
-	
-
-		SharedPreferences.Editor editor = preferences.edit();
-
-		editor.putString("courtlat", ""+m_overlays.get(index).getLocation().getLatitude());
-		editor.putString("courtlng", ""+m_overlays.get(index).getLocation().getLongitude());
-		
-
-		editor.commit();					
-								
-				
+	    Location location = new Location("Select tennis court");
+		location.setLatitude(m_overlays.get(index).getLocation().getLatitude());
+		location.setLongitude(m_overlays.get(index).getLocation().getLongitude());
+		((MapViewActivity)c).getTennisCourtDetails(id, location);
 		return true;
 	}
 
