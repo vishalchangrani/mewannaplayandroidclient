@@ -175,7 +175,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		mapView.setBuiltInZoomControls(true);
 
 		myItemizedOverlay = new MyItemizedOverlay(getResources().getDrawable(
-				R.drawable.tennisball_yellow_16), mapView);
+				R.drawable.currentlocation), mapView);
 		mapView.getOverlays().add(myItemizedOverlay);
 		myLocationOverlay = new MyMyLocationOverlay(this, mapView);
 		mapView.getOverlays().add(myLocationOverlay);
