@@ -607,7 +607,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	MenuInflater inflater = getMenuInflater();
 	inflater.inflate(R.menu.map_activity_menu, menu);
 	MenuItem bedMenuItem = menu.findItem(R.id.logout);
-	bedMenuItem.setTitle("Logout "+loggedInUserAccount.name != null ? loggedInUserAccount.name : "");//just for safety
+	bedMenuItem.setTitle("Logout "+(loggedInUserAccount.name != null ? loggedInUserAccount.name : ""));//just for safety
 	return true;
 	}
 
