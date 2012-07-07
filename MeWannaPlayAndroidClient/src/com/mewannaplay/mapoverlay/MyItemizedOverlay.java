@@ -19,14 +19,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 
-import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 import com.mewannaplay.MapViewActivity;
@@ -36,8 +33,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	private ArrayList<TennisCourtOverlayItemAdapter> m_overlays = new ArrayList<TennisCourtOverlayItemAdapter>();
 	private final Context c;
-	private final MapView mapView;
-	private static final String TAG = "MyItemizedOverlay";
+
 
 	 protected volatile static boolean isMapMoving = true;
 
@@ -45,7 +41,6 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	public MyItemizedOverlay(Drawable defaultMarker, MapView mapView) {
 		super(boundCenter(defaultMarker), mapView);
 		c = mapView.getContext();
-		this.mapView = mapView;
 		populate();//fix for google bug
 	}
 
