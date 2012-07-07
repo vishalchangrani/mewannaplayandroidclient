@@ -38,12 +38,9 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	private final Context c;
 	private final MapView mapView;
 	private static final String TAG = "MyItemizedOverlay";
-	private ProgressDialog progressDialog;
-	
-	 private static volatile GeoPoint lastLatLon = new GeoPoint(0, 0);
-	 private static volatile GeoPoint currLatLon;
+
 	 protected volatile static boolean isMapMoving = true;
-	 SharedPreferences preferences;
+
 		public static String filenames = "courtdetails";
 	public MyItemizedOverlay(Drawable defaultMarker, MapView mapView) {
 		super(boundCenter(defaultMarker), mapView);
@@ -80,8 +77,6 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 
 	@Override
 	protected boolean onBalloonTap( int index) {
-		preferences = c.getSharedPreferences(filenames, 0);
-
 		int id = m_overlays.get(index).getTennisCourt().getId();
 	    Location location = new Location("Select tennis court");
 		location.setLatitude(m_overlays.get(index).getLocation().getLatitude());

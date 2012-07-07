@@ -131,7 +131,7 @@ public abstract class BalloonItemizedOverlay<Item> extends ItemizedOverlay<Overl
 			mapView.addView(balloonView, params);
 		}
 		
-	//	mc.animateTo(point);
+		mc.animateTo(point);
 		
 		return true;
 	}
