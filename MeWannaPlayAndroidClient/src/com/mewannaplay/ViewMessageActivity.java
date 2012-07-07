@@ -217,8 +217,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 
 			break;
 
-		default:
-			break;
+	
 		}
 
 	}

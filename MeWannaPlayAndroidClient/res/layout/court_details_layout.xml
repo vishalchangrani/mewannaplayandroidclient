@@ -428,16 +428,29 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:orientation="vertical"
             android:layout_weight="5" >
-
-            <TextView
+  <TextView
                 android:id="@+id/cmessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="Cannot post message or mark a court occupied when logged in as anonymous"
+               
                 android:textColor="#ff0000"
-                android:textSize="5pt"
+               
+                android:textSize="4.5pt"
+                android:textStyle="bold" />
+          
+            <TextView
+                android:id="@+id/cmessageprox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+               
+                
+           
+                android:textColor="#ff0000"
+                android:textSize="4.5pt"
                 android:textStyle="bold" />
         </LinearLayout>
 
