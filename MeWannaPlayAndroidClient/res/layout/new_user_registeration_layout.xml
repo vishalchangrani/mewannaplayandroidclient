@@ -134,8 +134,9 @@
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                          android:onClick="onRegister"
-                     android:text="Register"
-                        android:textSize="10sp" />
+                         android:layout_marginLeft="100dp"
+                        android:background="@drawable/gotext"
+                         />
                      <!--  Put the correct register button image here  android:background="@drawable/cancelbtn"  -->
                      
                      

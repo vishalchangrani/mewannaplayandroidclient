@@ -175,7 +175,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		mapView.setBuiltInZoomControls(true);
 
 		myItemizedOverlay = new MyItemizedOverlay(getResources().getDrawable(
-				R.drawable.currentlocation), mapView);
+				R.drawable.ic_maps_indicator_current_position), mapView);
 		mapView.getOverlays().add(myItemizedOverlay);
 		myLocationOverlay = new MyMyLocationOverlay(this, mapView);
 		mapView.getOverlays().add(myLocationOverlay);
@@ -441,6 +441,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT,
 				locationOfSelectedTennisCourt);
 	     extras.putInt("mark", MapViewActivity.courtMarkedOccupied);
+	     extras.putInt("post", MapViewActivity.courtPostedMessageOn);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
 	}
