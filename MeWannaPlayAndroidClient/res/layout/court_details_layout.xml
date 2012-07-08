@@ -60,7 +60,8 @@
                 android:text="645 B 2002"
                 android:textColor="#000"
                 android:textSize="12sp"
-                android:typeface="serif" />
+                android:typeface="serif"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/court_addr_2"
@@ -68,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/court_addr_1"
                 android:paddingRight="20dip"
-                android:text="NY-432321"
+               
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:typeface="serif" />
@@ -79,10 +80,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/court_addr_1"
                 android:layout_toRightOf="@id/court_addr_2"
-                android:paddingLeft="70dip"
+                android:paddingLeft="100dip"
                 android:paddingRight="05dip"
                 android:text="(080)-3242-2341"
                 android:textColor="#000000"
+                android:textStyle="italic"
                 android:textSize="12sp"
                 android:typeface="serif" />
 

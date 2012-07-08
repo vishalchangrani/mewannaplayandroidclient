@@ -93,7 +93,8 @@
                      android:textColor="#000"
                        android:clickable="true"
                       android:onClick="viewcontact"
-                     android:textStyle="bold" />
+                      android:textStyle="italic"
+                    />
              </LinearLayout>
 
              <LinearLayout
