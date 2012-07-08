@@ -91,6 +91,8 @@
                      android:layout_marginLeft="50dp"
                      android:text="abcdefgh@gmail.com"
                      android:textColor="#fff"
+                       android:clickable="true"
+                      android:onClick="viewcontact"
                      android:textStyle="bold" />
              </LinearLayout>
 
