@@ -18,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mewannaplay.model.Message;
 import com.mewannaplay.providers.ProviderContract;
@@ -33,6 +34,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 	TextView viewcontact;
 	int courtId; // HACK Alert - court id should be part of message object but
 					// its not hence need to be passed around seperately
+	EmailValidator validator;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 			return;
 		}
 		setContentView(R.layout.view_message_layout);
+		validator = new EmailValidator();
 		viewcontact = (TextView) findViewById(R.id.contact_info_view);
 
 		Cursor cursor = getContentResolver().query(Messages.CONTENT_URI, null,
@@ -77,9 +80,9 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 				.getUserName());
 
 		Button deleteButton = ((Button) findViewById(R.id.delete_message));
-		ImageView viewBack=(ImageView)findViewById(R.id.view_back_icon);
+		ImageView viewBack = (ImageView) findViewById(R.id.view_back_icon);
 		Button deleteButtonPartnerFound = ((Button) findViewById(R.id.delete_message_partner_found));
-		viewcontact.setOnClickListener(this);
+
 		if (message.getUserName().equals(MapViewActivity.getAccount(this).name)) // If
 																					// the
 																					// message
@@ -97,11 +100,10 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		}
 
 	}
-	public void viewBack(View v)
-	{
+
+	public void viewBack(View v) {
 		finish();
 	}
-
 
 	public void onDelete(View v) {
 		onDelete(false);
@@ -178,46 +180,46 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		}
 	};
 
+	public void viewcontact(View v) {
+		Toast.makeText(getApplicationContext(), "yess", Toast.LENGTH_LONG)
+				.show();
+		if (!viewcontact.getText().toString().contentEquals("")) {
+
+			if (viewcontact.getText().toString().matches("[0-9]+")) {
+
+				Intent callIntent = new Intent(Intent.ACTION_CALL);
+				callIntent.setData(Uri.parse("tel:"
+						+ viewcontact.getText().toString().trim()));
+				startActivity(callIntent);
+
+			}
+			if (validator.validate(viewcontact.getText().toString())) {
+
+				String[] emailaddress = { viewcontact.getText().toString() };
+				Intent emailintent = new Intent(
+						android.content.Intent.ACTION_SEND);
+
+				emailintent.putExtra(android.content.Intent.EXTRA_EMAIL,
+						emailaddress);
+				emailintent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+						"Responding to your message in MeWannaPlay.");
+				emailintent.setType("plain/text");
+
+				startActivity(Intent.createChooser(emailintent, "Email Via..."));
+
+			}
+
+		}
+	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.contact_info_view:
-			if (!viewcontact.getText().toString().contentEquals("")) {
-
-				if (viewcontact.getText().toString().matches("[0-9]+")) {
-					
-					
-					Intent callIntent = new Intent(
-							Intent.ACTION_CALL);
-					callIntent.setData(Uri.parse("tel:"+viewcontact.getText().toString().trim()));
-					startActivity(callIntent);
-
-				}
-				if (viewcontact.getText().toString()
-						.matches("[a-zA-Z0-9]+@[a-zA-Z].com")) {
-					
-					String[] emailaddress={viewcontact.getText().toString()};
-					Intent emailintent = new Intent(
-							android.content.Intent.ACTION_SEND);
-					
-					emailintent.putExtra(android.content.Intent.EXTRA_EMAIL,
-							emailaddress);
-					emailintent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-							"Responding to your message in MeWannaPlay.");
-					emailintent.setType("plain/text");
-					
-					
-					startActivity(Intent.createChooser(emailintent, "Email Via..."));
-					
-
-				}
-
-			}
 
 			break;
 
-	
 		}
 
 	}
