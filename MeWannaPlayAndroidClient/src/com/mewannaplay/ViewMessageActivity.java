@@ -181,8 +181,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 	};
 
 	public void viewcontact(View v) {
-		Toast.makeText(getApplicationContext(), "yess", Toast.LENGTH_LONG)
-				.show();
+	
 		if (!viewcontact.getText().toString().contentEquals("")) {
 
 			if (viewcontact.getText().toString().matches("[0-9]+")) {
