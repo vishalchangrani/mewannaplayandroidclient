@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="0dip"
                 android:text="645 B 2002"
-                android:textColor="#ff0000"
+                android:textColor="#000"
                 android:textSize="12sp"
                 android:typeface="serif" />
 

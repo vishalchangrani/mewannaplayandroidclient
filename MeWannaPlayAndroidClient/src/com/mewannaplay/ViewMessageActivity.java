@@ -12,6 +12,8 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,7 +74,10 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		((TextView) findViewById(R.id.level_view)).setText(message.getLevel());
 		((TextView) findViewById(R.id.players_needed_view)).setText(message
 				.getPlayerNeeded());
-		viewcontact.setText(message.getContactInfo());
+		SpannableString content = new SpannableString((message.getContactInfo()));
+		content.setSpan(new UnderlineSpan(), 0, (message.getContactInfo().length()), 0);
+
+		viewcontact.setText(content);
 		((TextView) findViewById(R.id.message)).setText(message.getText());
 		((TextView) findViewById(R.id.posted_on_view)).setText(message
 				.getTimeposted());

@@ -90,7 +90,7 @@
                      android:layout_height="wrap_content"
                      android:layout_marginLeft="50dp"
                      android:text="abcdefgh@gmail.com"
-                     android:textColor="#fff"
+                     android:textColor="#000"
                        android:clickable="true"
                       android:onClick="viewcontact"
                      android:textStyle="bold" />
