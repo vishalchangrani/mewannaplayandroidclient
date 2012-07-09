@@ -157,11 +157,11 @@
 
                     <Button
                         android:id="@+id/newuser_register_btn"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/buttons"
+                        android:layout_width="140dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/newuserreg"
                         android:onClick="onNewUserRegister"
-                        android:text="New user register"
+                        
                         android:textColor="#fff" >
                     </Button>
                 </LinearLayout>

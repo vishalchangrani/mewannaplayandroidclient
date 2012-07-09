@@ -72,6 +72,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		TextView nameTextView = (TextView) findViewById(R.id.schedule_time_view);
 		nameTextView.setText(message.getScheduleTime());
 		((TextView) findViewById(R.id.level_view)).setText(message.getLevel());
+	
 		((TextView) findViewById(R.id.players_needed_view)).setText(message
 				.getPlayerNeeded());
 		SpannableString content = new SpannableString((message.getContactInfo()));
