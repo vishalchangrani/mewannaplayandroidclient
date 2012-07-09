@@ -348,6 +348,9 @@ GPS gps;
 
 		ImageView onBack = (ImageView) findViewById(R.id.court_back_icon);
 		onBack.setEnabled(true);
+		
+		ImageView clickdriving=(ImageView)findViewById(R.id.court_driving_icon);
+		clickdriving.setEnabled(true);
 
 	}
 
@@ -477,7 +480,28 @@ GPS gps;
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);// fire it up baby
 	}
+	public void clickdriving(View v) {
+		
+		
+		if (lat != 0.0 | lng != 0.0) {
 
+			final Intent intent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://maps.google.com/maps?" + "saddr="
+							+ gps.getLatitude() + "," + gps.getLongitude()
+							+ "&daddr=" + thisCourtsLocation.getLatitude()
+							+ "," + thisCourtsLocation.getLongitude()));
+
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+
+		} else {
+
+			Toast.makeText(getApplicationContext(),
+					"Current location is not available", Toast.LENGTH_LONG)
+					.show();
+		}
+		
+	}
 	public void markOccupied(View v) {
 
 		progressDialog = ProgressDialog.show(CourtDetailsActivity.this, "",

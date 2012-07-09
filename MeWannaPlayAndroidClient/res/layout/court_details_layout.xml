@@ -62,6 +62,7 @@
                 android:textSize="12sp"
                 android:typeface="serif"
                 android:textStyle="italic" />
+            
 
             <TextView
                 android:id="@+id/court_addr_2"
@@ -73,6 +74,7 @@
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:typeface="serif" />
+          
 
             <TextView
                 android:id="@+id/court_phone_1"
@@ -87,6 +89,7 @@
                 android:textStyle="italic"
                 android:textSize="12sp"
                 android:typeface="serif" />
+              
 
             <ImageView
                 android:id="@+id/court_phone_icon"
@@ -97,8 +100,18 @@
                 android:paddingTop="2dip"
                 android:src="@drawable/callicon16" />
         </RelativeLayout>
+        
+    
     </TableLayout>
-
+        <ImageView
+                android:id="@+id/court_driving_icon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="280dp"
+                android:layout_marginTop="24dp"
+                 android:onClick="clickdriving"
+               
+                android:src="@drawable/drivingdirection" />
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/court_addr_rel_layout"
