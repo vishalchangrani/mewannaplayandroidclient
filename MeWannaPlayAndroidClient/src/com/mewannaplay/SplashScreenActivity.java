@@ -3,7 +3,9 @@ package com.mewannaplay;
 import java.io.IOException;
 
 import com.mewannaplay.authenticator.ConnectivityReceiver;
-import com.mewannaplay.providers.GPS;
+
+
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
@@ -11,13 +13,13 @@ import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 //There are two types of account we support - 1. Anonymous 2. Actual
 //Anonymous account doesn't require password and its not authenticated against the server. With anonymous account user can only view the map, court details and messages but cannot 
@@ -157,6 +159,7 @@ public class SplashScreenActivity extends Activity {
 													DialogInterface dialog,
 													int id) {
 												finish();
+											
 
 											}
 										});

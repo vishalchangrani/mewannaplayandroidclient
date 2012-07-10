@@ -75,6 +75,7 @@ public class CourtDetailsActivity extends ListActivity implements
 	String user;
 double lat, lng;
 GPS gps;
+Location lc;
 	// Account loggedinaccount;
 
 	@Override
@@ -91,16 +92,18 @@ GPS gps;
 		gps = new GPS();
 		gps.gpsInitializer(this);
 		gps.showCurrentLocation();
+		lc=gps.getCurrentLocation();
 		lat = gps.getLatitude();
 		lng = gps.getLongitude();
-		if(lat==0.0 | lng==0.0){
+		thisCourtsLocation = (Location) this.getIntent().getExtras()
+				.getParcelable(SELECTED_COURTS_GEOPOINT);
+		if((lat==0.0 | lng==0.0) | lc.distanceTo(thisCourtsLocation)>=Constants.PROXIMITY ){
 			
 			cmsgprox.setText("You are not in proximity of the court");
 			
 		}
 		
-		thisCourtsLocation = (Location) this.getIntent().getExtras()
-				.getParcelable(SELECTED_COURTS_GEOPOINT);
+		
 
 		if (RestClient.isLoggedIn()) {
 
@@ -123,7 +126,7 @@ GPS gps;
 		} else {
 
 			cmsg.setVisibility(View.VISIBLE);
-			cmsg.setText("Anonymus");
+			cmsg.setText("Cannot post message or mark a court occupied when logged in as anonymous");
 		}
 
 		// TODO this should ideally be not done on the UI thread..but
