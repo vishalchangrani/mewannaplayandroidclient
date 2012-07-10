@@ -66,12 +66,20 @@ public double getLongitude(){
 		if (location != null) {
 			latitude =  (location.getLatitude() );
 			longitude =  (location.getLongitude() );
-			Log.i("LOGLATshow", "" + (int) (location.getLatitude() ));
+			//Log.i("LOGLATshow", "" + (int) (location.getLatitude() ));
 		}
 		
 
 	}
+	public Location getCurrentLocation() {
 
+		Location location = locationManager
+				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		if (location != null) {
+			return location;
+		}
+		return null;
+	}
 	private class MyLocationListener implements LocationListener {
 
 		public void onLocationChanged(Location location) {
