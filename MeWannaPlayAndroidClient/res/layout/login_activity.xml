@@ -18,7 +18,7 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:layout_gravity="center"
     android:background="@drawable/bg"
     android:orientation="vertical" >
@@ -38,14 +38,10 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1" >
-
+  
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:orientation="vertical"
             android:paddingBottom="17dp"
@@ -56,7 +52,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="50"
+                android:layout_weight="35"
                 android:orientation="vertical" >
 
                 <TextView
@@ -85,6 +81,7 @@
                     android:gravity="center"
                     android:inputType="textEmailAddress"
                     android:minWidth="250dip"
+                     android:imeOptions="actionDone"
                     android:scrollHorizontally="true"
                     android:singleLine="true" />
 
@@ -108,7 +105,7 @@
                 <EditText
                     android:id="@+id/password_edit"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:autoText="false"
                     android:background="@drawable/passbox"
                     android:capitalize="none"
@@ -117,6 +114,7 @@
                     android:minWidth="250dip"
                     android:password="true"
                     android:scrollHorizontally="true"
+                     android:imeOptions="actionDone"
                     android:singleLine="true" />
 
                 <TextView
@@ -130,7 +128,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="50"
+                android:layout_weight="65"
                 android:orientation="horizontal"
                 android:weightSum="50" >
 
@@ -167,7 +165,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    
 
     <Button
         android:id="@+id/anonymous_login"
