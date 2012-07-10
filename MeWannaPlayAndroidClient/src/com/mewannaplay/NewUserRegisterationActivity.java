@@ -31,7 +31,7 @@ public class NewUserRegisterationActivity extends Activity {
 	private NewUserRegisterTask newUserRegisterationTask = null;
 	private ProgressDialog mProgressDialog = null;
 	
-	
+	String regexStr = "[a-zA-Z0-9]+";
 	private static final String TAG = "NewUserRegisterationActivity";
 	
 	@Override
@@ -66,10 +66,19 @@ public class NewUserRegisterationActivity extends Activity {
 		 {
 			    // Show a progress dialog, and kick off a background task to perform
 	            // the user login attempt.
+			 if (new EmailValidator().validate(email)){
+					if (userName.matches(regexStr) == true) {
 	            showProgress();
 	            newUserRegisterationTask = new NewUserRegisterTask();
 	            newUserRegisterationTask.execute();
-		
+	            }else{
+	            	
+	            	errorMessage.setText("Invalid Username");
+	            }
+			 }else{
+				 
+				 errorMessage.setText("Invalid Email");
+			 }
 		 }
 	 
 	 }
