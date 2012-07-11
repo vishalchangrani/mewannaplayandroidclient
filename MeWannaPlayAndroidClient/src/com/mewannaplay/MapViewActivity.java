@@ -52,7 +52,6 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	private BroadcastReceiver syncFinishedReceiverForCourtDetails;
 	private MyItemizedOverlay myItemizedOverlay;
 
-	
 	public static String filename = "MeWanaPlayData";
 
 	static final int DIALOG_STATE_CITY_CHOICE = 0;
@@ -88,8 +87,12 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		mapViewActivity = this;
 		setContentView(R.layout.mapviewlayout);
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); //use default file name (thats the recommended way in android)
-		// Restore UI state from the savedInstanceState...will be lost when application restarts.
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(this); // use default file name
+													// (thats the recommended
+													// way in android)
+		// Restore UI state from the savedInstanceState...will be lost when
+		// application restarts.
 		if (savedInstanceState != null
 				&& savedInstanceState.containsKey("current_city")) {
 			setCurrentCity((City) savedInstanceState
@@ -99,18 +102,19 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 					.getName() + "," + currentCity.getAbbreviation());
 		}
 
-	
-		//android developer starts
-		// In this section application is checked how many times the app is running, and in every 5 runs,
+		// android developer starts
+		// In this section application is checked how many times the app is
+		// running, and in every 5 runs,
 		// the app calls the getallcourts and getallcity methods
-		
-		
-		int totalRunsSoFar = sharedPrefs.getInt("TOTALRUN", 0) ;
-		Log.d(TAG, " Total runs so far -"+totalRunsSoFar);
-		if (totalRunsSoFar == 0) //Total runs rolls over to 0 after every fifth run...so it goes from 0,1,2,3,4 and then to 0 again
-			 {
-	
-			Log.d(TAG," Fetching courts ..");
+
+		int totalRunsSoFar = sharedPrefs.getInt("TOTALRUN", 0);
+		Log.d(TAG, " Total runs so far -" + totalRunsSoFar);
+		if (totalRunsSoFar == 0) // Total runs rolls over to 0 after every fifth
+									// run...so it goes from 0,1,2,3,4 and then
+									// to 0 again
+		{
+
+			Log.d(TAG, " Fetching courts ..");
 			progressDialog = ProgressDialog.show(MapViewActivity.this, "",
 					"Fetching courts...", true);
 			progressDialog.show();
@@ -123,9 +127,9 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 					SyncAdapter.getAllCourtsBundle());
 
 		} else {
-			Log.d(TAG," Skipping fetch courts");
+			Log.d(TAG, " Skipping fetch courts");
 			incrementRunCount();
-			
+
 			final MapView mapView = (MapView) findViewById(R.id.mapview);
 			Runnable waitForMapTimeTask = new Runnable() {
 				public void run() {
@@ -151,9 +155,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			mapView.postDelayed(waitForMapTimeTask, 100);
 
 		}
-		//android developer ends
-		
-		
+		// android developer ends
+
 		initMap();
 		info = (Button) findViewById(R.id.ImageInfoButton01);
 		info.setOnClickListener(this);
@@ -230,15 +233,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	}
 
-	public void onDestroy()
-	 {
+	public void onDestroy() {
 		super.onDestroy();
 		myLocationOverlay.disableCompass();
 		myLocationOverlay.disableMyLocation();
 
-	 }
-	
-	
+	}
+
 	private void startBackGroundRefresh() {
 		if (!fetchedAllcourts)
 			return;// First time when the activity starts we have no courts
@@ -356,7 +357,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 				alert = builder.create();
 				alert.show();
 			} else {
-			
+
 				final MapView mapView = (MapView) findViewById(R.id.mapview);
 				Runnable waitForMapTimeTask = new Runnable() {
 					public void run() {
@@ -364,7 +365,10 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 								|| mapView.getLongitudeSpan() == 360000000) {
 							mapView.postDelayed(this, 100);
 						} else {
-							incrementRunCount(); //Only on a successful getcourt operation we actually increment the run count.
+							incrementRunCount(); // Only on a successful
+													// getcourt operation we
+													// actually increment the
+													// run count.
 							progressDialog.dismiss();
 							MapViewActivity.this
 									.showDialog(DIALOG_STATE_CITY_CHOICE);
@@ -385,7 +389,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		}
 	};
 
-	public void getTennisCourtDetails(int id, Location locationOfSelectedTennisCourt) {
+	public void getTennisCourtDetails(int id,
+			Location locationOfSelectedTennisCourt) {
 
 		progressDialog = ProgressDialog.show(this, "",
 				"Fetching court details...", true);
@@ -405,7 +410,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		final int courtId;
 		final Location locationOfSelectedTennisCourt;
 
-		public SyncFinishedReceiverForCourtDetails(int courtId, Location locationOfSelectedTennisCourt) {
+		public SyncFinishedReceiverForCourtDetails(int courtId,
+				Location locationOfSelectedTennisCourt) {
 			this.courtId = courtId;
 			this.locationOfSelectedTennisCourt = locationOfSelectedTennisCourt;
 		}
@@ -433,20 +439,22 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 				alert = builder.create();
 				alert.show();
 			} else {
-				startTennisCourtDetailActivity(courtId,locationOfSelectedTennisCourt);
+				startTennisCourtDetailActivity(courtId,
+						locationOfSelectedTennisCourt);
 			}
 		}
 	};
 
-	private void startTennisCourtDetailActivity(int id, Location locationOfSelectedTennisCourt) {
+	private void startTennisCourtDetailActivity(int id,
+			Location locationOfSelectedTennisCourt) {
 		Intent intentForTennisCourtDetails = new Intent(this,
 				CourtDetailsActivity.class);
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.COURT_ID, id);
 		extras.putParcelable(CourtDetailsActivity.SELECTED_COURTS_GEOPOINT,
 				locationOfSelectedTennisCourt);
-	     extras.putInt("mark", MapViewActivity.courtMarkedOccupied);
-	     extras.putInt("post", MapViewActivity.courtPostedMessageOn);
+		extras.putInt("mark", MapViewActivity.courtMarkedOccupied);
+		extras.putInt("post", MapViewActivity.courtPostedMessageOn);
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
 	}
@@ -610,11 +618,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	MenuInflater inflater = getMenuInflater();
-	inflater.inflate(R.menu.map_activity_menu, menu);
-	MenuItem bedMenuItem = menu.findItem(R.id.logout);
-	bedMenuItem.setTitle("Logout "+(loggedInUserAccount.name != null ? loggedInUserAccount.name : ""));//just for safety
-	return true;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.map_activity_menu, menu);
+		MenuItem bedMenuItem = menu.findItem(R.id.logout);
+		bedMenuItem.setTitle("Logout "
+				+ (loggedInUserAccount.name != null ? loggedInUserAccount.name
+						: ""));// just for safety
+		return true;
 	}
 
 	@Override
@@ -675,8 +685,9 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		// if message is posted show the shoutout (view message) icon on the map
 		// else remove it
 
-	//	if (messagePosted != MapViewActivity.courtPostedMessageOn) // A changed
-																	// happened
+		// if (messagePosted != MapViewActivity.courtPostedMessageOn) // A
+		// changed
+		// happened
 		{
 			// Enable/disable and visibility on/off needs be done on the thread
 			// that created the view
@@ -803,13 +814,14 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		startActivity(i);
 	}
 
-	private void incrementRunCount()
-	{
-		//increment run count..rollover to 0 if it is 5
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+	private void incrementRunCount() {
+		// increment run count..rollover to 0 if it is 5
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = sharedPrefs.edit();
-		int currentRunCount = sharedPrefs.getInt("TOTALRUN", 0); 
-		editor.putInt("TOTALRUN", currentRunCount + 1 >=  5  ? 0 : (currentRunCount + 1)); //rollover to 0 if 4
+		int currentRunCount = sharedPrefs.getInt("TOTALRUN", 0);
+		editor.putInt("TOTALRUN", currentRunCount + 1 >= 5 ? 0
+				: (currentRunCount + 1)); // rollover to 0 if 4
 		editor.commit();
 	}
 }

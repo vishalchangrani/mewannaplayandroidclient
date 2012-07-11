@@ -67,7 +67,7 @@ public class CourtDetailsActivity extends ListActivity implements
 	TextView cmark;
 	SharedPreferences preferences;
 	public static String filenames = "courtdetails";
-	TextView cmsg,cmsgprox;
+	TextView cmsg, cmsgprox;
 	String user;
 
 	// Account loggedinaccount;
@@ -82,10 +82,9 @@ public class CourtDetailsActivity extends ListActivity implements
 
 		setContentView(R.layout.court_details_layout);
 		cmsg = (TextView) findViewById(R.id.cmessage);
-		cmsgprox=(TextView)findViewById(R.id.cmessageprox);
+		cmsgprox = (TextView) findViewById(R.id.cmessageprox);
 		thisCourtsLocation = (Location) this.getIntent().getExtras()
 				.getParcelable(SELECTED_COURTS_GEOPOINT);
-		
 
 		if (RestClient.isLoggedIn()) {
 
@@ -248,83 +247,64 @@ public class CourtDetailsActivity extends ListActivity implements
 		Location currentLocation = MapViewActivity.mapViewActivity
 				.getMyCurrentLocation();
 
-		Button postMsgButton = (Button) findViewById(R.id.post_msg_button);	
+		Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 		Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
 		postMsgButton.setEnabled(false);
 		markCourtOccupied.setEnabled(false);
 		cmsg.setVisibility(View.GONE);
-		
-		if (!RestClient.isLoggedIn())
-		{
-			//If the user has not logged in
-			cmsg.setVisibility(View.VISIBLE);
-			cmsg.setText("Cannot post message or mark a court occupied when logged in as anonymous");			
-		}
-		else
-		{	//If the user has logged in	
-			
-			 if (MapViewActivity.getCourtMarkedOccupied() != -1)
-			 { 	
-				 //User has marked a court occupied
-				 
-				 markCourtOccupied.setEnabled(false);
-				 if (MapViewActivity.getCourtPostedMessageOn() != -1)
-				 {
-						//User has also posted a message
-						cmsg.setText("You have already posted a message and marked a court occupied.");
-						cmsg.setVisibility(View.VISIBLE);
-				 }
-				 else
-				 {
-						//User has not posted a message but marked a court occupied
-					 	postMsgButton.setEnabled(true);
-						cmsg.setText("You have already mark court occupied.");
-						cmsg.setVisibility(View.VISIBLE);
-				 }
-				 
-			 }
-			 else 
-			 { 
-				 //User has not marked a court occupied
-				 boolean isInProximity = currentLocation!= null ?
-							 currentLocation.distanceTo(thisCourtsLocation) <=
-							 Constants.PROXIMITY : false;
-				 
-				 
-				 markCourtOccupied.setEnabled(isInProximity);
-				 
-				 if (MapViewActivity.getCourtPostedMessageOn() != -1)
-				 {
-						//User has posted a message
-						cmsg.setText("You have already posted a message");
-						if (!isInProximity)
-						{
-							cmsg.setText(cmsg.getText()+"\n");
-							cmsg.setText(cmsg.getText()+"You are not in proximity of a court to mark it occupied");
-						}
-						
-						cmsg.setVisibility(View.VISIBLE);
-				 }
-				 else
-				 {
-						//User has not posted a message and not marked a court occupied
-					 	postMsgButton.setEnabled(true);
-					 	if (!isInProximity)
-					 	{
-							cmsg.setText("You are not in proximity of a court to mark it occupied");
-							cmsg.setVisibility(View.VISIBLE);
-					 	}
-				 }
-				 
-			 }
-						
-		
-		
-		}
-			
-	
 
-		
+		if (!RestClient.isLoggedIn()) {
+			// If the user has not logged in
+			cmsg.setVisibility(View.VISIBLE);
+			cmsg.setText("Cannot post message or mark a court occupied when logged in as anonymous");
+		} else { // If the user has logged in
+
+			if (MapViewActivity.getCourtMarkedOccupied() != -1) {
+				// User has marked a court occupied
+
+				markCourtOccupied.setEnabled(false);
+				if (MapViewActivity.getCourtPostedMessageOn() != -1) {
+					// User has also posted a message
+					cmsg.setText("You have already posted a message and marked a court occupied.");
+					cmsg.setVisibility(View.VISIBLE);
+				} else {
+					// User has not posted a message but marked a court occupied
+					postMsgButton.setEnabled(true);
+					cmsg.setText("You have already mark court occupied.");
+					cmsg.setVisibility(View.VISIBLE);
+				}
+
+			} else {
+				// User has not marked a court occupied
+				boolean isInProximity = currentLocation != null ? currentLocation
+						.distanceTo(thisCourtsLocation) <= Constants.PROXIMITY
+						: false;
+
+				markCourtOccupied.setEnabled(isInProximity);
+
+				if (MapViewActivity.getCourtPostedMessageOn() != -1) {
+					// User has posted a message
+					cmsg.setText("You have already posted a message");
+					if (!isInProximity) {
+						cmsg.setText(cmsg.getText() + "\n");
+						cmsg.setText(cmsg.getText()
+								+ "You are not in proximity of a court to mark it occupied");
+					}
+
+					cmsg.setVisibility(View.VISIBLE);
+				} else {
+					// User has not posted a message and not marked a court
+					// occupied
+					postMsgButton.setEnabled(true);
+					if (!isInProximity) {
+						cmsg.setText("You are not in proximity of a court to mark it occupied");
+						cmsg.setVisibility(View.VISIBLE);
+					}
+				}
+
+			}
+
+		}
 
 	}
 
@@ -332,15 +312,19 @@ public class CourtDetailsActivity extends ListActivity implements
 		TextView tv = (TextView) this.findViewById(R.id.court_name);
 		tv.setText(tennisCourtDetails.getName().trim());
 		tv = (TextView) this.findViewById(R.id.court_addr_1);
-		SpannableString content = new SpannableString((tennisCourtDetails.getAddress().trim()));
-		content.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails.getAddress().trim().length()), 0);
+		SpannableString content = new SpannableString(
+				(tennisCourtDetails.getAddress().trim()));
+		content.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails
+				.getAddress().trim().length()), 0);
 		tv.setText(content);
 		tv.setOnClickListener(this);
 		// tv = (TextView) this.findViewById(R.id.court_addr_2);
 		// tv.setText(tennisCourtDetails.getCity()+","+tennisCourtDetails.getState()+" "+tennisCourtDetails.getZipcode());
 		tv = (TextView) this.findViewById(R.id.court_phone_1);
-		SpannableString content1 = new SpannableString((tennisCourtDetails.getPhone().trim()));
-		content1.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails.getPhone().trim().length()), 0);
+		SpannableString content1 = new SpannableString(
+				(tennisCourtDetails.getPhone().trim()));
+		content1.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails.getPhone()
+				.trim().length()), 0);
 		tv.setText(content1);
 		tv = (TextView) this.findViewById(R.id.text_sub_courts);
 		tv.setText("" + tennisCourtDetails.getSubcourts());
@@ -361,8 +345,8 @@ public class CourtDetailsActivity extends ListActivity implements
 
 		ImageView onBack = (ImageView) findViewById(R.id.court_back_icon);
 		onBack.setEnabled(true);
-		
-		ImageView clickdriving=(ImageView)findViewById(R.id.court_driving_icon);
+
+		ImageView clickdriving = (ImageView) findViewById(R.id.court_driving_icon);
 		clickdriving.setEnabled(true);
 
 	}
@@ -493,17 +477,20 @@ public class CourtDetailsActivity extends ListActivity implements
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);// fire it up baby
 	}
+
 	public void clickdriving(View v) {
-		
+
 		Location currentLocation = MapViewActivity.mapViewActivity
 				.getMyCurrentLocation();
-		if (currentLocation != null && currentLocation.getLatitude() != 0  && currentLocation.getLongitude() != 0)  {
+		if (currentLocation != null && currentLocation.getLatitude() != 0
+				&& currentLocation.getLongitude() != 0) {
 
 			final Intent intent = new Intent(Intent.ACTION_VIEW,
 					Uri.parse("http://maps.google.com/maps?" + "saddr="
-							+  currentLocation.getLatitude() + "," + currentLocation.getLongitude()
-							+ "&daddr=" + thisCourtsLocation.getLatitude()
-							+ "," + thisCourtsLocation.getLongitude()));
+							+ currentLocation.getLatitude() + ","
+							+ currentLocation.getLongitude() + "&daddr="
+							+ thisCourtsLocation.getLatitude() + ","
+							+ thisCourtsLocation.getLongitude()));
 
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
@@ -514,8 +501,9 @@ public class CourtDetailsActivity extends ListActivity implements
 					"Current location is not available", Toast.LENGTH_LONG)
 					.show();
 		}
-		
+
 	}
+
 	public void markOccupied(View v) {
 
 		progressDialog = ProgressDialog.show(CourtDetailsActivity.this, "",
@@ -584,7 +572,6 @@ public class CourtDetailsActivity extends ListActivity implements
 		intentForTennisCourtDetails.putExtras(extras);
 		startActivity(intentForTennisCourtDetails);
 	}
-
 
 	/*
 	 * @Override public void onReceiveResult(int resultCode, Bundle
@@ -715,15 +702,17 @@ public class CourtDetailsActivity extends ListActivity implements
 			break;
 		case R.id.court_addr_1:
 			Location currentLocation = MapViewActivity.mapViewActivity
-			.getMyCurrentLocation();
-			
-			if (currentLocation != null && currentLocation.getLatitude() != 0  && currentLocation.getLongitude() != 0) {
+					.getMyCurrentLocation();
+
+			if (currentLocation != null && currentLocation.getLatitude() != 0
+					&& currentLocation.getLongitude() != 0) {
 
 				final Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("http://maps.google.com/maps?" + "saddr="
-								+ currentLocation.getLatitude() + "," + currentLocation.getLongitude()
-								+ "&daddr=" + thisCourtsLocation.getLatitude()
-								+ "," + thisCourtsLocation.getLongitude()));
+								+ currentLocation.getLatitude() + ","
+								+ currentLocation.getLongitude() + "&daddr="
+								+ thisCourtsLocation.getLatitude() + ","
+								+ thisCourtsLocation.getLongitude()));
 
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
