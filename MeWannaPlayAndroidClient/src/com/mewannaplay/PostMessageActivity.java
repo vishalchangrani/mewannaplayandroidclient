@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +53,7 @@ public class PostMessageActivity extends Activity implements
         public static String filenames = "courtdetails";
         String contactInfo;
         String regexStr = "^[+][0-9]{8,20}$";
+        private TextView errorMessage;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class PostMessageActivity extends Activity implements
                 preferences = getSharedPreferences(filenames, 0);
                 rgcontactinfo = (RadioGroup) findViewById(R.id.rgcontact);
                 econtactinfo = (EditText) findViewById(R.id.contact_info);
+                errorMessage = (TextView) findViewById(R.id.txterrormsg);
                 ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
                 postBack.setEnabled(true);
 
@@ -104,18 +107,23 @@ public class PostMessageActivity extends Activity implements
 
                                 contactInfo = econtactinfo.getText().toString();
                                 //----------- Validation ------------------------
+                                
+                                String userErrorMessage = getMessage();
+                       		 if (userErrorMessage != null)
+                       			 errorMessage.setText(userErrorMessage);
+                       		 else{
                                 if (rgPhone.isChecked()) //phone selected
                                 {
                                         if(!contactInfo.matches(regexStr) == true) { 
                                                 //TODO REMOVE TOAST! USE TEXT MESSAGE
-                                                Toast.makeText(getApplicationContext(), "Not a valid phone", Toast.LENGTH_LONG).show();
+                                              errorMessage.setText("Not a Valid Phone");
                                         return;
                                         }
                                 } 
                                 else //email selected
                                 {
                                         if(!new EmailValidator().validate(contactInfo)) {
-                                                Toast.makeText(getApplicationContext(), "Not a valid email", Toast.LENGTH_LONG).show();
+                                        	 errorMessage.setText("Not a Valid Email");
                                                 return;
                                         }
                                 }
@@ -127,7 +135,7 @@ public class PostMessageActivity extends Activity implements
                                         postMessage();
                                 
 
-                                
+                       		 }
 
                         }
                 });
@@ -252,4 +260,14 @@ public class PostMessageActivity extends Activity implements
                 }
 
         }
+        /**
+	     * Returns the message to be displayed at the top of the login dialog box.
+	     */
+	    private String getMessage() {
+	        if (TextUtils.isEmpty(contactInfo)) {
+	            return "Invalid Phone or Email";
+	        }
+	        else
+	        	return null;
+	    }
 }
