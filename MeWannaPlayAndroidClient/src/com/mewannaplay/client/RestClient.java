@@ -94,6 +94,8 @@ public class RestClient {
 		switch (method) {
 		case GET: {
 			HttpGet request = new HttpGet(url);
+			if (!request.containsHeader("Accept-Encoding")) 
+	            request.addHeader("Accept-Encoding", "gzip");
 			responseString = executeRequest(request);
 			break;
 		}
@@ -194,13 +196,13 @@ public class RestClient {
 			}
 			Log.d(TAG, "Entity null!!");
 			return null;
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			mHttpClient.getConnectionManager().shutdown();
 			mHttpClient = null;
 			if (entity != null)
 				entity.consumeContent();
 			Log.e(TAG, e.getMessage(), e);
-			throw e;
+			throw new IOException(e);
 		}
 	}
 
@@ -227,18 +229,36 @@ public class RestClient {
 			entity = httpResponse.getEntity();
 			if (entity != null) {
 				Log.d(TAG, "Entity not null");
-				String response = EntityUtils.toString(entity);
-				return response;
+
+				//-----------------------------------------------------------------------------------
+				Header contentEncoding = httpResponse.getFirstHeader("Content-Encoding");
+				if (contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+					Log.d(TAG, " response is in gzip");
+					InputStream inputStream = entity.getContent();
+					inputStream = new GZIPInputStream(inputStream);
+					InputStreamReader inputStreamReader = null;
+					BufferedReader bufferedReader = null;
+					inputStreamReader = new InputStreamReader(inputStream);
+					bufferedReader = new BufferedReader(inputStreamReader);
+					StringBuilder response = new StringBuilder();
+					String line;
+					while ((line = bufferedReader.readLine()) != null) {
+						response.append(line);
+		            }
+					return response.toString();
+				}//------------------------------------------------------------------------
+				else
+			     return EntityUtils.toString(entity);
 			}
 			Log.d(TAG, "Entity null!!");
 			return "";
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			mHttpClient.getConnectionManager().shutdown();
 			mHttpClient = null;
 			if (entity != null)
 				entity.consumeContent();
 			Log.e(TAG, e.getMessage(), e);
-			throw e;
+			throw new IOException(e);
 		}
 	}
 
