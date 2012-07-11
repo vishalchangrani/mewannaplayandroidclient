@@ -21,8 +21,12 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 	final private TennisCourt tc;
 
 	// Store these as global instances so we don't keep reloading every time
+
 	private static Drawable privateCourt, publicSemiOccupiedCourt,
 			publicNotOccupiedCourt, publicFullyOccupiedCourt;
+
+	//Samudra - Please add the private court drawables here as well..private occupied in proximity , private 
+	//semi occupied etc.....do same as has been done for public courts..just add new ones and update getMarker below
 	private static Drawable privateCourtInProximity,
 			publicSemiOccupiedCourtInProximity,
 			publicNotOccupiedCourtInProximity,
@@ -129,7 +133,25 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 																	// flag
 			return flagOccupied;
 		if (tc.isPrivate())
+		{
+			
+			
 			return isInProximity ? privateCourtInProximity : privateCourt;
+			//Samudra - Please fix the following and add the new resources for privat court
+//DO here what has done for public court below..basically the same if,else if and else just that you need
+			// to add private not occupied, private occupied in proximity etc icons...
+		/*	if (tc.isNotOccupied())
+				return isInProximity ? publicNotOccupiedCourtInProximity
+						: publicNotOccupiedCourt;
+			else if (tc.isPartiallyOccupied())
+				return isInProximity ? publicSemiOccupiedCourtInProximity
+						: publicSemiOccupiedCourt;
+			else
+				// if (tc.isOccupied())
+				return isInProximity ? publicFullyOccupiedCourtInProximity
+						: publicFullyOccupiedCourt; */
+		}	
+			
 		else {
 			if (tc.isNotOccupied())
 				return isInProximity ? publicNotOccupiedCourtInProximity

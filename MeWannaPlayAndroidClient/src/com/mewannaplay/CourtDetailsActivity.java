@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -21,15 +20,12 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
-import android.text.TextUtils.TruncateAt;
 import android.text.format.DateUtils;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,9 +69,7 @@ public class CourtDetailsActivity extends ListActivity implements
 	public static String filenames = "courtdetails";
 	TextView cmsg,cmsgprox;
 	String user;
-double lat, lng;
-GPS gps;
-Location lc;
+
 	// Account loggedinaccount;
 
 	@Override
@@ -89,20 +83,8 @@ Location lc;
 		setContentView(R.layout.court_details_layout);
 		cmsg = (TextView) findViewById(R.id.cmessage);
 		cmsgprox=(TextView)findViewById(R.id.cmessageprox);
-		gps = new GPS();
-		gps.gpsInitializer(this);
-		gps.showCurrentLocation();
-		lc=gps.getCurrentLocation();
-		lat = gps.getLatitude();
-		lng = gps.getLongitude();
 		thisCourtsLocation = (Location) this.getIntent().getExtras()
 				.getParcelable(SELECTED_COURTS_GEOPOINT);
-		if((lat==0.0 | lng==0.0) | lc.distanceTo(thisCourtsLocation)>=Constants.PROXIMITY ){
-			
-			cmsgprox.setText("You are not in proximity of the court");
-			
-		}
-		
 		
 
 		if (RestClient.isLoggedIn()) {
@@ -257,64 +239,92 @@ Location lc;
 		messageContentObserver = new MessagesContentObserver(null);
 		getContentResolver().registerContentObserver(Messages.CONTENT_URI,
 				true, messageContentObserver);
-		// messageRefreshTimer = new Timer("message refresher for "+courtId);
-		// messageRefreshTimer.schedule(new MessageRefresh(), new Date(),
-		// 60*1000);
-		// getMessageTask = new GetMessagesTask();
-		// getMessageTask.execute();
+
 		ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY, true);
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
 				SyncAdapter.getAllMessagesBundle(courtId), 10);
-		// ContentResolver.requestSync(MapViewActivity.getAccount(CourtDetailsActivity.this),
-		// ProviderContract.AUTHORITY,
-		// SyncAdapter.getAllMessagesBundle(courtId));
 		Location currentLocation = MapViewActivity.mapViewActivity
 				.getMyCurrentLocation();
-		// If no court has been marked occupied by this user and current
-		// location is known and he is not an anonymous user
-		// if (MapViewActivity.getCourtMarkedOccupied() == -1 && currentLocation
-		// != null && RestClient.isLoggedIn())
+
+		Button postMsgButton = (Button) findViewById(R.id.post_msg_button);	
+		Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
+		postMsgButton.setEnabled(false);
+		markCourtOccupied.setEnabled(false);
+		cmsg.setVisibility(View.GONE);
+		
+		if (!RestClient.isLoggedIn())
 		{
-			// and he is in proximity of the court
-			// boolean isInProximity = currentLocation!= null ?
-			// currentLocation.distanceTo(thisCourtsLocation) <=
-			// Constants.PROXIMITY : false;
-			// if (isInProximity)
-
-			// then enable markoccupied button
-			if (RestClient.isLoggedIn()) {
-
-				Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
-				if (markid != -1 && messageposted) {
-					markCourtOccupied.setEnabled(false);
-					markCourtOccupied
-							.setBackgroundResource(R.drawable.disablemarkcourtoccupied);
-					cmsg.setVisibility(View.VISIBLE);
-					cmsg.setText("You have posted a message and you have already mark court occupied.");
-					Log.i("markid not minus one?", "yes");
-				}
-
-				else if (markid != -1 && messageposted==false) {
-					markCourtOccupied.setEnabled(false);
-					markCourtOccupied
-							.setBackgroundResource(R.drawable.disablemarkcourtoccupied);
-					cmsg.setVisibility(View.VISIBLE);
-					cmsg.setText("You have already mark court occupied.");
-					Log.i("markid not minus one?", "yes");
-				}
-
-				else {
-					markCourtOccupied.setEnabled(true);
-					markCourtOccupied
-							.setBackgroundResource(R.drawable.markcourtoccupied);
-
-					//cmsg.setVisibility(View.GONE);
-				}
-			}
-
+			//If the user has not logged in
+			cmsg.setVisibility(View.VISIBLE);
+			cmsg.setText("Cannot post message or mark a court occupied when logged in as anonymous");			
 		}
+		else
+		{	//If the user has logged in	
+			
+			 if (MapViewActivity.getCourtMarkedOccupied() != -1)
+			 { 	
+				 //User has marked a court occupied
+				 
+				 markCourtOccupied.setEnabled(false);
+				 if (MapViewActivity.getCourtPostedMessageOn() != -1)
+				 {
+						//User has also posted a message
+						cmsg.setText("You have already posted a message and marked a court occupied.");
+						cmsg.setVisibility(View.VISIBLE);
+				 }
+				 else
+				 {
+						//User has not posted a message but marked a court occupied
+					 	postMsgButton.setEnabled(true);
+						cmsg.setText("You have already mark court occupied.");
+						cmsg.setVisibility(View.VISIBLE);
+				 }
+				 
+			 }
+			 else 
+			 { 
+				 //User has not marked a court occupied
+				 boolean isInProximity = currentLocation!= null ?
+							 currentLocation.distanceTo(thisCourtsLocation) <=
+							 Constants.PROXIMITY : false;
+				 
+				 
+				 markCourtOccupied.setEnabled(isInProximity);
+				 
+				 if (MapViewActivity.getCourtPostedMessageOn() != -1)
+				 {
+						//User has posted a message
+						cmsg.setText("You have already posted a message");
+						if (!isInProximity)
+						{
+							cmsg.setText(cmsg.getText()+"\n");
+							cmsg.setText(cmsg.getText()+"You are not in proximity of a court to mark it occupied");
+						}
+						
+						cmsg.setVisibility(View.VISIBLE);
+				 }
+				 else
+				 {
+						//User has not posted a message and not marked a court occupied
+					 	postMsgButton.setEnabled(true);
+					 	if (!isInProximity)
+					 	{
+							cmsg.setText("You are not in proximity of a court to mark it occupied");
+							cmsg.setVisibility(View.VISIBLE);
+					 	}
+				 }
+				 
+			 }
+						
+		
+		
+		}
+			
+	
+
+		
 
 	}
 
@@ -485,12 +495,13 @@ Location lc;
 	}
 	public void clickdriving(View v) {
 		
-		
-		if (lat != 0.0 | lng != 0.0) {
+		Location currentLocation = MapViewActivity.mapViewActivity
+				.getMyCurrentLocation();
+		if (currentLocation != null && currentLocation.getLatitude() != 0  && currentLocation.getLongitude() != 0)  {
 
 			final Intent intent = new Intent(Intent.ACTION_VIEW,
 					Uri.parse("http://maps.google.com/maps?" + "saddr="
-							+ gps.getLatitude() + "," + gps.getLongitude()
+							+  currentLocation.getLatitude() + "," + currentLocation.getLongitude()
 							+ "&daddr=" + thisCourtsLocation.getLatitude()
 							+ "," + thisCourtsLocation.getLongitude()));
 
@@ -574,26 +585,6 @@ Location lc;
 		startActivity(intentForTennisCourtDetails);
 	}
 
-	/*
-	 * class MessageRefresh extends TimerTask { public void run() { Log.d(TAG,
-	 * "scheduling timertask to get messages ");
-	 * ContentResolver.requestSync(MapViewActivity
-	 * .getAccount(CourtDetailsActivity.this), ProviderContract.AUTHORITY,
-	 * SyncAdapter.getAllMessagesBundle(courtId)); } }
-	 */
-
-	private class GetMessagesTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... arg0) {
-			Log.d(TAG, "scheduling timertask to get messages ");
-			ContentResolver.requestSync(
-					MapViewActivity.getAccount(CourtDetailsActivity.this),
-					ProviderContract.AUTHORITY,
-					SyncAdapter.getAllMessagesBundle(courtId));
-			return null;
-		}
-
-	}
 
 	/*
 	 * @Override public void onReceiveResult(int resultCode, Bundle
@@ -723,13 +714,14 @@ Location lc;
 			alertDialog.show();
 			break;
 		case R.id.court_addr_1:
-
+			Location currentLocation = MapViewActivity.mapViewActivity
+			.getMyCurrentLocation();
 			
-			if (lat != 0.0 | lng != 0.0) {
+			if (currentLocation != null && currentLocation.getLatitude() != 0  && currentLocation.getLongitude() != 0) {
 
 				final Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("http://maps.google.com/maps?" + "saddr="
-								+ gps.getLatitude() + "," + gps.getLongitude()
+								+ currentLocation.getLatitude() + "," + currentLocation.getLongitude()
 								+ "&daddr=" + thisCourtsLocation.getLatitude()
 								+ "," + thisCourtsLocation.getLongitude()));
 

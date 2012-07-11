@@ -193,10 +193,6 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	public void onPause() {
 		super.onPause();
 		Log.d(TAG, "Removing GPS update requests to save power");
-		// myLocationOverlay.disableCompass();
-		myLocationOverlay.disableMyLocation();
-		MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.getOverlays().remove(myLocationOverlay);
 		if (syncFinishedReceiverForCourtDetails != null) {
 			unregisterReceiver(syncFinishedReceiverForCourtDetails);
 		}
@@ -234,6 +230,15 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	}
 
+	public void onDestroy()
+	 {
+		super.onDestroy();
+		myLocationOverlay.disableCompass();
+		myLocationOverlay.disableMyLocation();
+
+	 }
+	
+	
 	private void startBackGroundRefresh() {
 		if (!fetchedAllcourts)
 			return;// First time when the activity starts we have no courts
@@ -670,7 +675,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		// if message is posted show the shoutout (view message) icon on the map
 		// else remove it
 
-		if (messagePosted != MapViewActivity.courtPostedMessageOn) // A changed
+	//	if (messagePosted != MapViewActivity.courtPostedMessageOn) // A changed
 																	// happened
 		{
 			// Enable/disable and visibility on/off needs be done on the thread

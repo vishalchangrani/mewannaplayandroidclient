@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
@@ -45,12 +46,12 @@ public class PostMessageActivity extends Activity implements
 	private final static int minuteInterval = 30;
 	private SliderContainer mContainer;
 	RadioGroup rgcontactinfo;
+	RadioButton rgPhone;
 	EditText econtactinfo;
 	SharedPreferences preferences;
 	public static String filenames = "courtdetails";
 	String contactInfo;
 	String regexStr = "^[+][0-9]{8,20}$";
-	Message message;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class PostMessageActivity extends Activity implements
 		}
 
 		setContentView(R.layout.post_message_layout);
-		message = new Message();
+
 		preferences = getSharedPreferences(filenames, 0);
 		rgcontactinfo = (RadioGroup) findViewById(R.id.rgcontact);
 		econtactinfo = (EditText) findViewById(R.id.contact_info);
@@ -82,6 +83,7 @@ public class PostMessageActivity extends Activity implements
 		postBack.setEnabled(true);
 
 		rgcontactinfo.setOnCheckedChangeListener(this);
+		rgPhone = (RadioButton)findViewById(R.id.rbphn);
 
 		mContainer = (SliderContainer) this
 				.findViewById(R.id.dateSliderContainer);
@@ -101,29 +103,29 @@ public class PostMessageActivity extends Activity implements
 			public void onClick(View v) {
 
 				contactInfo = econtactinfo.getText().toString();
-
-				if (contactInfo.matches(regexStr) == true) {
-
-					message.setContactTypeId(0);
-					progressDialog = ProgressDialog.show(PostMessageActivity.this,
-							"", "Posting message...", true);
-					progressDialog.show();
-
-					postMessage();
-
-				} else if (new EmailValidator().validate(contactInfo)) {
-
-					message.setContactTypeId(1);
-					progressDialog = ProgressDialog.show(PostMessageActivity.this,
-							"", "Posting message...", true);
-					progressDialog.show();
-
-					postMessage();
-				}else{
-					
-					Toast.makeText(getApplicationContext(), "Not a valid phone or email", Toast.LENGTH_LONG).show();
-					
+				//----------- Validation ------------------------
+				if (rgPhone.isChecked()) //phone selected
+				{
+					if(!contactInfo.matches(regexStr) == true) { 
+						//TODO REMOVE TOAST! USE TEXT MESSAGE
+						Toast.makeText(getApplicationContext(), "Not a valid phone", Toast.LENGTH_LONG).show();
+					return;
+					}
+				} 
+				else //email selected
+				{
+					if(!new EmailValidator().validate(contactInfo)) {
+						Toast.makeText(getApplicationContext(), "Not a valid email", Toast.LENGTH_LONG).show();
+						return;
+					}
 				}
+				//------------------------------------------------
+					progressDialog = ProgressDialog.show(PostMessageActivity.this,
+							"", "Posting message...", true);
+					progressDialog.show();
+
+					postMessage();
+				
 
 				
 
@@ -136,7 +138,11 @@ public class PostMessageActivity extends Activity implements
 	}
 
 	private void postMessage() {
-
+		Message message = new Message(); //Keep the message object local 
+		if (rgPhone.isChecked())
+			message.setContactTypeId(0);
+		else
+			message.setContactTypeId(1);
 		// hack!courtId should also be a column in message table but its not
 		message.setTennisCourtId(courtId);
 		// -------------------------------
@@ -232,7 +238,7 @@ public class PostMessageActivity extends Activity implements
 			// econtactinfo.setFilters(FilterArray);
 			econtactinfo
 					.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-							20) });
+							10) });
 			break;
 
 		case R.id.rbemail:
@@ -241,7 +247,7 @@ public class PostMessageActivity extends Activity implements
 			econtactinfo.setHint("e.g abcd@efgh.com");
 			econtactinfo
 					.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-							100) });
+							50) });
 			break;
 		}
 
