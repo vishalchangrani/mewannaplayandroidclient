@@ -3,6 +3,7 @@ package com.mewannaplay;
 import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mewannaplay.model.City;
 import com.mewannaplay.providers.ProviderContract;
@@ -22,6 +24,7 @@ public class StateCityChoiceDialog extends Dialog {
 	Spinner citySpinner;
 	Spinner stateSpinner;
 	private int stateSpinnerCurrentPos = -1;
+	
 	
 	public StateCityChoiceDialog(Context context) {
 		super(context);
@@ -84,12 +87,14 @@ public class StateCityChoiceDialog extends Dialog {
 	
 		}
 	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		 
 		stateSpinner = (Spinner) findViewById(R.id.state_spinner);
+		
 		Cursor cur = getContext().getContentResolver().query(ProviderContract.Cities.CONTENT_URI, new String[]{"_id","abbreviation"} , " _id=_id) GROUP BY (abbreviation", null, " abbreviation asc");
 		MapViewActivity.mapViewActivity.startManagingCursor(cur);
 		SimpleCursorAdapter stateAdapter = new SimpleCursorAdapter(this.getContext(),
@@ -153,14 +158,25 @@ public class StateCityChoiceDialog extends Dialog {
 		});
 		
 		button = (Button) findViewById(R.id.choose_current_location);
+		Location currentLocation = MapViewActivity.mapViewActivity
+				.getMyCurrentLocation();
+
+			if (currentLocation != null && currentLocation.getLatitude() != 0
+				&& currentLocation.getLongitude() != 0) {
 		button.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				chooseCurrentLocation(v);
 			}
-		});
+		});}else{
+			
+			TextView errormsg=(TextView)findViewById(R.id.txterror);
+			errormsg.setText("Current Location is Not Available");
+			button.setBackgroundResource(R.drawable.disablestate);
+		}
 		init();
+		
 		getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 	}
 
