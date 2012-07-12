@@ -298,7 +298,7 @@ comments :"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="30dp"
-                        android:background="@drawable/cancelbtn"
+                        android:background="@drawable/cancelbutton"
                         android:onClick="onCancel"
                        
                         android:textSize="10sp" />
@@ -308,7 +308,7 @@ comments :"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                         
-                        android:background="@drawable/postbtn"
+                        android:background="@drawable/postbutton"
                         android:textSize="10sp" />
                 </LinearLayout>
             </LinearLayout>
