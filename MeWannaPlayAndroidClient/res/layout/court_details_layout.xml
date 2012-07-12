@@ -412,7 +412,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/post_message_selector"
-            android:enabled="false"
+            
             android:onClick="postMessage"
             android:paddingLeft="20dip"
             android:paddingRight="25dip"
