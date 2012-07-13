@@ -106,7 +106,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		// In this section application is checked how many times the app is
 		// running, and in every 5 runs,
 		// the app calls the getallcourts and getallcity methods
-
+		
 		int totalRunsSoFar = sharedPrefs.getInt("TOTALRUN", 0);
 		Log.d(TAG, " Total runs so far -" + totalRunsSoFar);
 		if (totalRunsSoFar == 0) // Total runs rolls over to 0 after every fifth
@@ -195,7 +195,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	public void onPause() {
 		super.onPause();
-		Log.d(TAG, "Removing GPS update requests to save power");
+
 		if (syncFinishedReceiverForCourtDetails != null) {
 			unregisterReceiver(syncFinishedReceiverForCourtDetails);
 		}
@@ -220,14 +220,15 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	public void onResume() {
 		super.onResume();
+		
+		
 		Log.i(TAG, "Resuming GPS update requests");
 		// myLocationOverlay.enableCompass();
 		if (!myLocationOverlay.enableMyLocation()) {
 			Toast.makeText(this, "location unavialable", Toast.LENGTH_LONG)
 					.show();
 		}
-		MapView mapView = (MapView) findViewById(R.id.mapview);
-		mapView.getOverlays().add(myLocationOverlay);
+
 
 		startBackGroundRefresh(); // Start background refreshes from syncadapter
 
@@ -259,7 +260,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		// be set to 5 minutes
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
-				SyncAdapter.getAllCourtsStatsBundle(), 60 * 2);
+				SyncAdapter.getAllCourtsStatsBundle(), 5 * 60);
 		// 2.
 		// Also kickoff continuous refresh of court mark occupied by user and
 		// message id posted by user (if user not anonymous)
@@ -272,7 +273,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			// will be set to 5 minutes
 			ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 					ProviderContract.AUTHORITY,
-					SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 60 * 3);
+					SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 7 * 60);
 		}
 	}
 
