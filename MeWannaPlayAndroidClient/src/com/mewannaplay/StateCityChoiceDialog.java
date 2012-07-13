@@ -26,7 +26,7 @@ public class StateCityChoiceDialog extends Dialog {
 	private int stateSpinnerCurrentPos = -1;
 	
 	
-	public StateCityChoiceDialog(Context context) {
+	 public StateCityChoiceDialog(Context context) {
 		super(context);
 		setContentView(R.layout.state_city_choice_layout);
 		
