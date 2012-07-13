@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="100" >
 
-    <LinearLayout
+     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="90"
@@ -33,27 +33,71 @@
  <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="80"
+        android:layout_weight="70"
         android:gravity="center"
-     
+        android:weightSum="20"
         android:orientation="vertical" >
-         <Button
+         <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="5"
+        android:gravity="center"
+      
+        android:orientation="vertical" >
+          <Button
             android:id="@+id/choose_current_location"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:background="@drawable/buttons"
             android:text="Current Location"
             android:textColor="#fff"
-         
+           
             android:textSize="20dp"
+       
             android:textStyle="bold" >
-        </Button></LinearLayout>
+        </Button>
+        
+         </LinearLayout>
+         
+             <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="15"
+        android:gravity="center"
+      
+        android:orientation="vertical" >
+
+            
+                 <TextView
+                     android:id="@+id/txterror"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                  
+                     android:textSize="5pt" />
+
+             </LinearLayout>
+        </LinearLayout>
 <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="20"
+        android:layout_weight="30"
         android:gravity="center"
-     
+        android:weightSum="100"
+        android:orientation="vertical" >
+             
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="99.5"
+        android:gravity="center"
+        android:background="@drawable/yellow"
+        android:orientation="vertical" >  </LinearLayout>
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5"
+        android:gravity="center"
+       
         android:orientation="vertical" >
         <TextView
             android:id="@+id/statetext"
@@ -99,5 +143,5 @@
             android:textStyle="bold" >
         </Button></LinearLayout>
     </LinearLayout>
-
+</LinearLayout>
 </LinearLayout>
