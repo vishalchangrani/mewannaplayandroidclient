@@ -445,7 +445,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static Bundle getAllCourtsBundle() {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
-	//	extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
@@ -457,7 +457,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_DETAILS);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
-	//	extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
@@ -472,7 +472,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_COURT_MESSAGE_BY_ID);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
-	//	extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
@@ -509,7 +509,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	public static Bundle getAllCitiesBundle() {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_CITIES);
-	//	extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
@@ -522,7 +522,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.POST_MESSAGE);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		extras.putString(SyncAdapter.MESSAGE_OBJECT_KEY, messageAsJSONString);
-		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
@@ -537,7 +537,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
 		extras.putInt(SyncAdapter.MESSAGE_ID, messageId);
 		extras.putBoolean(SyncAdapter.PARTNER_FOUND, partnerFound);
-	//	extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
@@ -549,7 +549,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		Bundle extras = new Bundle();
 		extras.putInt(SyncAdapter.OPERATION, SyncAdapter.MARK_COURT_OCCUPIED);
 		extras.putInt(SyncAdapter.COURT_ID, courtId);
-		//extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
