@@ -149,7 +149,7 @@ public class SplashScreenActivity extends Activity {
 										SplashScreenActivity.this);
 
 								alertDialogBuilder
-										.setMessage("Network Connection Not Available");
+										.setMessage("MWP requires active data connection, please enable it via settings and re-launch MWP");
 
 								alertDialogBuilder
 
