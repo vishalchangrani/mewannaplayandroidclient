@@ -27,7 +27,7 @@
                 android:id="@+id/court_name"
                 android:paddingLeft="72dip"
                 android:text="Tennisclub"
-                android:textColor="#000000"
+                android:textColor="#edd008"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -60,9 +60,8 @@
                 android:text="645 B 2002"
                 android:textColor="#000"
                 android:textSize="12sp"
-                android:typeface="serif"
-                android:textStyle="italic" />
-            
+                android:textStyle="italic"
+                android:typeface="serif" />
 
             <TextView
                 android:id="@+id/court_addr_2"
@@ -70,11 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/court_addr_1"
                 android:paddingRight="20dip"
-               
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:typeface="serif" />
-          
 
             <TextView
                 android:id="@+id/court_phone_1"
@@ -86,10 +83,9 @@
                 android:paddingRight="05dip"
                 android:text="(080)-3242-2341"
                 android:textColor="#000000"
-                android:textStyle="italic"
                 android:textSize="12sp"
+                android:textStyle="italic"
                 android:typeface="serif" />
-              
 
             <ImageView
                 android:id="@+id/court_phone_icon"
@@ -100,18 +96,17 @@
                 android:paddingTop="2dip"
                 android:src="@drawable/callicon16" />
         </RelativeLayout>
-        
-    
     </TableLayout>
-        <ImageView
-                android:id="@+id/court_driving_icon"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="280dp"
-                android:layout_marginTop="24dp"
-                 android:onClick="clickdriving"
-               
-                android:src="@drawable/drivingdirection" />
+
+    <ImageView
+        android:id="@+id/court_driving_icon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="24dp"
+        android:onClick="clickdriving"
+        android:src="@drawable/drivingdirection" />
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/court_addr_rel_layout"
@@ -230,39 +225,48 @@
 
             <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_timings"
-                android:ellipsize="marquee" 
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
-            android:scrollHorizontally="true"
-            android:focusable="true" 
-            android:focusableInTouchMode="true" 
-            android:freezesText="true"
-
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="Book Title sad ds sdas das asdas das asd asd sad as"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Book Title sad ds sdas das asdas das asd asd sad as"
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
                 android:typeface="serif" />
         </TableRow>
     </TableLayout>
+
+    <ImageView
+        android:id="@+id/court_back_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/court_sub_table_layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/basicinfo" />
 
     <ExpandableListView
         android:id="@+id/exapandableList"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/court_sub_table_layout"
+        android:layout_below="@+id/court_back_icon"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="5dp"
+       
         android:divider="#00000000"
         android:groupIndicator="@drawable/plus"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        android:paddingBottom="20dp" />
 
     <!--
     <TextView
@@ -270,7 +274,7 @@
     android:layout_below="@id/android:list"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:text="@string/main_no_items"/>
+    android:text="@string/main_no_items"/>
     -->
 
     <TableLayout
@@ -378,7 +382,7 @@
 
 
     </TableRow>
-  </TableLayout>
+  </TableLayout>
     -->
 
     <ListView
@@ -412,12 +416,10 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/post_message_selector"
-            
             android:onClick="postMessage"
             android:paddingLeft="20dip"
             android:paddingRight="25dip"
-            android:paddingTop="10dip"
-  	/>
+            android:paddingTop="10dip" />
 
         <Button
             android:id="@+id/marl_occu_button"
@@ -444,27 +446,23 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:layout_weight="5" >
-  <TextView
+            android:layout_weight="5"
+            android:orientation="vertical" >
+
+            <TextView
                 android:id="@+id/cmessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-               
                 android:textColor="#ff0000"
-               
                 android:textSize="4.5pt"
                 android:textStyle="bold" />
-          
+
             <TextView
                 android:id="@+id/cmessageprox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-               
-                
-           
                 android:textColor="#ff0000"
                 android:textSize="4.5pt"
                 android:textStyle="bold" />
