@@ -333,9 +333,17 @@ public class CourtDetailsActivity extends ListActivity implements
 		tv = (TextView) this.findViewById(R.id.court_facility_type);
 		tv.setText(tennisCourtDetails.getFacilityType());
 		tv = (TextView) this.findViewById(R.id.court_timings);
+		if(!tennisCourtDetails.getTennisTimings().contentEquals("")){
 		tv.setText(tennisCourtDetails.getTennisTimings());
 		tv.setSelected(true);
 		tv.setEnabled(true);
+		
+		}
+		else{
+			
+			tv.setText("N/A");
+			
+		}
 
 		tv = (TextView) this.findViewById(R.id.no_of_sub_courts);
 		tv.setText("" + tennisCourtDetails.getSubcourts());
