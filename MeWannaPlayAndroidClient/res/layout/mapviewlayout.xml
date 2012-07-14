@@ -41,23 +41,45 @@
             android:layout_alignTop="@id/ImageInfoButton01"
             android:text="Current location"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="100dp"
              android:textColor="#fff"
         android:textSize="20dp"
         android:textStyle="bold"
             />
 
         <Button
+           
             android:id="@+id/ShoutOutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/ImageInfoButton01"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/dropdown_city"
             android:background="@drawable/shoutout"
               android:layout_marginTop="8dp"
             android:onClick="onPartnerFound"
-            android:visibility="invisible" />
-"
+            android:visibility="invisible"
+            />
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <Button
+            android:id="@+id/SearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/ImageInfoButton01"
+            android:background="@drawable/searchhhh"
+              android:layout_marginTop="8dp"
+              android:onClick="onSearch"
+              
+            />
+
     </RelativeLayout>
 
 </RelativeLayout>
