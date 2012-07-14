@@ -49,7 +49,8 @@ public class NewUserRegisterationActivity extends Activity {
 	 public void onCancel(View v)
 	 {
 		 
-		 NewUserRegisterationActivity.this.finish();
+		Intent i=new Intent(NewUserRegisterationActivity.this,AuthenticatorActivity.class);
+		startActivity(i);
 	 }
 	 
 	 public void onRegister(View v)
