@@ -681,32 +681,13 @@ public class CourtDetailsActivity extends ListActivity implements
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
 		case R.id.court_phone_icon:
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-					CourtDetailsActivity.this);
-
-			alertDialogBuilder.setTitle("Do you want to make a call?");
-
-			alertDialogBuilder
-
-			.setPositiveButton("okay", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
+		
 					Intent callIntent = new Intent(Intent.ACTION_CALL);
 					callIntent.setData(Uri.parse("tel:"
 							+ tennisCourtDetails.getPhone().trim().toString()));
 					startActivity(callIntent);
 
-				}
-			}).setNegativeButton("cancel",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-
-							dialog.cancel();
-						}
-					});
-
-			AlertDialog alertDialog = alertDialogBuilder.create();
-
-			alertDialog.show();
+		
 			break;
 		case R.id.court_addr_1:
 			Location currentLocation = MapViewActivity.mapViewActivity
