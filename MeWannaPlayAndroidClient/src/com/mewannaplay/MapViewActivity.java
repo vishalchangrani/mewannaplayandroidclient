@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -161,15 +162,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		info = (Button) findViewById(R.id.ImageInfoButton01);
 		info.setOnClickListener(this);
 		TextView dropDownCity = (TextView) findViewById(R.id.dropdown_city);
-		dropDownCity.setOnClickListener(new OnClickListener() {
+		Button search=(Button)findViewById(R.id.SearchButton);
+		
 
-			@Override
-			public void onClick(View arg0) {
-				MapViewActivity.this.showDialog(DIALOG_STATE_CITY_CHOICE);
+		
+			
 
-			}
-
-		});
+		
 
 	}
 
@@ -726,6 +725,12 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 	public static int getCourtPostedMessageOn() {
 		return courtPostedMessageOn;
+	}
+	
+	public void onSearch(View v) {
+		
+		MapViewActivity.this.showDialog(DIALOG_STATE_CITY_CHOICE);
+		
 	}
 
 	public void onPartnerFound(View v) {
