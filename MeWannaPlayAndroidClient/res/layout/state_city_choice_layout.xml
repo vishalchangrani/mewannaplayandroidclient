@@ -14,11 +14,14 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:background="@drawable/zoomto" />
+         <ImageView
+             android:id="@+id/imageView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginRight="80dp"
+             android:src="@drawable/search" />
+
+        
         
        
     </LinearLayout>
@@ -44,6 +47,12 @@
         android:gravity="center"
       
         android:orientation="vertical" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/zoomto" />
           <Button
             android:id="@+id/choose_current_location"
             android:layout_width="200dp"
@@ -53,7 +62,7 @@
             android:textColor="#fff"
            
             android:textSize="20dp"
-       
+            android:layout_marginTop="20dp"
             android:textStyle="bold" >
         </Button>
         
