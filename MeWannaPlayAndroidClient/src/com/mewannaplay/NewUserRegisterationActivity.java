@@ -48,9 +48,7 @@ public class NewUserRegisterationActivity extends Activity {
 	
 	 public void onCancel(View v)
 	 {
-		 
-		Intent i=new Intent(NewUserRegisterationActivity.this,AuthenticatorActivity.class);
-		startActivity(i);
+		finish();
 	 }
 	 
 	 public void onRegister(View v)
@@ -186,6 +184,7 @@ public class NewUserRegisterationActivity extends Activity {
 	        	Log.e(TAG, "onRegisterationResult: failed to create user");
 	            errorMessage.setTextColor(Color.RED);
 	            errorMessage.setText(error);
+	            return;
 	        }
 
 	        setResult(resultCode, resultIntent); //Tell the calling activity what happened

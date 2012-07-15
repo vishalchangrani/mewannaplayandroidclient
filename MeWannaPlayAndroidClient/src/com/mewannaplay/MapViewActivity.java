@@ -245,6 +245,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			return;// First time when the activity starts we have no courts
 					// fetched yet...hence dont start background refresh yet.
 
+		Log.d(TAG, "STARTING background refresh----");
 		// Start the two background periodic refresh
 		// 1.
 		// Kickoff continuous refresh for court statistics which keep changing
@@ -259,7 +260,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		// be set to 5 minutes
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
-				SyncAdapter.getAllCourtsStatsBundle(), 5 * 60);
+				SyncAdapter.getAllCourtsStatsBundle(), 5 * 60 );
 		// 2.
 		// Also kickoff continuous refresh of court mark occupied by user and
 		// message id posted by user (if user not anonymous)
@@ -272,12 +273,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			// will be set to 5 minutes
 			ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 					ProviderContract.AUTHORITY,
-					SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 7 * 60);
+					SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 7 * 60 );
 		}
 	}
 
 	private void stopBackGroundRefresh() {
-		Log.d(TAG, "Stopping background refresh");
+		
+		Log.d(TAG, "STOPPING background refresh -------");
 		ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);// cancel
 																		// all
 																		// syncs
@@ -392,6 +394,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	public void getTennisCourtDetails(int id,
 			Location locationOfSelectedTennisCourt) {
 
+		stopBackGroundRefresh();
 		progressDialog = ProgressDialog.show(this, "",
 				"Fetching court details...", true);
 		Log.d(TAG, " --> Requesting sync for " + id);
@@ -438,6 +441,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 				alert = builder.create();
 				alert.show();
+				startBackGroundRefresh();
 			} else {
 				startTennisCourtDetailActivity(courtId,
 						locationOfSelectedTennisCourt);
@@ -563,6 +567,19 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		return dialog;
 	}
 
+	
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+		switch (id) {
+		case DIALOG_STATE_CITY_CHOICE:
+			((StateCityChoiceDialog) dialog).setCurrentLocationButton();
+
+			break;
+
+		}
+		
+	}; 
+	
 	public City getCurrentCity() {
 		return currentCity;
 	}
@@ -738,6 +755,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			Log.e(TAG, " Court id is invalid " + getCourtPostedMessageOn());
 			return;
 		}
+		stopBackGroundRefresh();
 		progressDialog = ProgressDialog
 				.show(this, "", "Fetching message", true);
 		Log.d(TAG, " --> Requesting sync for message for courtid"
@@ -792,6 +810,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 				alert = builder.create();
 				alert.show();
+				startBackGroundRefresh();
 			} else {
 				progressDialog.dismiss();
 				// Retreive the message id of the message just fetched by
@@ -801,6 +820,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 						null, " _id LIMIT 1");
 				if (cursor.getCount() == 0) {
 					Log.e(TAG, " Court message not found");
+					startBackGroundRefresh();
 					return;
 				}
 				cursor.moveToFirst();
