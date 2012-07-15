@@ -243,7 +243,7 @@ public class CourtDetailsActivity extends ListActivity implements
 				ProviderContract.AUTHORITY, true);
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
-				SyncAdapter.getAllMessagesBundle(courtId), 10);
+				SyncAdapter.getAllMessagesBundle(courtId), 2 * 60);
 		Location currentLocation = MapViewActivity.mapViewActivity
 				.getMyCurrentLocation();
 
@@ -328,8 +328,8 @@ public class CourtDetailsActivity extends ListActivity implements
 		tv.setText(content1);
 		tv = (TextView) this.findViewById(R.id.text_sub_courts);
 		tv.setText("" + tennisCourtDetails.getSubcourts());
-		// tv = (TextView) this.findViewById(R.id.court_type);?? //TODO what do
-		// set here
+		tv = (TextView) this.findViewById(R.id.court_type);
+		tv.setText(""+tennisCourtDetails.getSurfaceType());
 		tv = (TextView) this.findViewById(R.id.court_facility_type);
 		tv.setText(tennisCourtDetails.getFacilityType());
 		tv = (TextView) this.findViewById(R.id.court_timings);

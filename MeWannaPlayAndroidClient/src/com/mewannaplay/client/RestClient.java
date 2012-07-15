@@ -66,7 +66,7 @@ public class RestClient {
 
         // shared instance of httpclient
         private static HttpClient mHttpClient;
-        public static final int REGISTRATION_TIMEOUT = 120 * 1000; // ms
+        public static final int REGISTRATION_TIMEOUT = 60 * 10 * 1000; // ms
 
         // Create a local instance of cookie store
         private final static CookieStore cookieStore = new BasicCookieStore();
@@ -253,7 +253,8 @@ public class RestClient {
                         Log.d(TAG, "Entity null!!");
                         return "";
                 } catch (Throwable e) {
-                        mHttpClient.getConnectionManager().shutdown();
+                        if (mHttpClient != null) 
+                        	mHttpClient.getConnectionManager().shutdown();
                         mHttpClient = null;
                         if (entity != null)
                                 entity.consumeContent();
@@ -287,6 +288,8 @@ public class RestClient {
 
                         // mHttpClient = new DefaultHttpClient();
                         params = mHttpClient.getParams();
+                        
+                        
                         HttpConnectionParams.setConnectionTimeout(params,
                                         REGISTRATION_TIMEOUT);
                         HttpConnectionParams.setSoTimeout(params, REGISTRATION_TIMEOUT);

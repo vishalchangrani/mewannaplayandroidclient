@@ -29,7 +29,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SyncResult;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -109,6 +108,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	Log.d(TAG,"in onPerform sync");
     	boolean isError = false;
     	
+ try {
+	Thread.sleep(5000);
+} catch (InterruptedException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}
  
     	if (!extras.containsKey(OPERATION))
 			return;
@@ -170,7 +175,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			break;
 		}
     	}
-    	catch (Throwable e)
+    	catch (Exception e)
     	{
     		// syncResult.stats.numParseExceptions++; //DO NOT record error..syncadapter otherwise keeps retrying which we dont want.
     		 isError = true;
@@ -449,7 +454,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);
 		return extras;
 	}
 
@@ -461,7 +466,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);
 		
 		 
 		return extras;
@@ -476,7 +481,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);
 		return extras;
 	}
 	
@@ -513,7 +518,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);
 		return extras;
 	}
 	
@@ -526,7 +531,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);
 		
 		return extras;
 	}
@@ -541,7 +546,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);	
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);	
 		return extras;
 	}
 	
@@ -553,7 +558,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
 		extras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , true);
+		extras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY , false);
 		return extras;
 	}
 	

@@ -476,7 +476,10 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 			mPasswordEdit.setText(mPassword);
 			handleLogin(null); // Login this newly created user
 		}
-
+		else if (RESULT_CANCELED == resultCode)
+		{
+			return;
+		}
 		else {
 			finishLoginWithFailure();
 

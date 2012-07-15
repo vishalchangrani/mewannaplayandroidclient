@@ -157,7 +157,15 @@ public class StateCityChoiceDialog extends Dialog {
 			}
 		});
 		
-		button = (Button) findViewById(R.id.choose_current_location);
+
+		init();
+		
+		getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+	}
+
+	public void setCurrentLocationButton()
+	{
+		Button button = (Button) findViewById(R.id.choose_current_location);
 		Location currentLocation = MapViewActivity.mapViewActivity
 				.getMyCurrentLocation();
 
@@ -175,9 +183,6 @@ public class StateCityChoiceDialog extends Dialog {
 			errormsg.setText("Current Location is Not Available");
 			button.setBackgroundResource(R.drawable.disablestate);
 		}
-		init();
-		
-		getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 	}
 
 	private void onOK(View v)

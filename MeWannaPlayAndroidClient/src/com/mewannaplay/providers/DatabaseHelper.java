@@ -57,7 +57,8 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
           		+ " city VARCHAR(30),"
           		+ " state VARCHAR(20),"
           		+ " abbreviation VARCHAR(3),"
-          		+ " phone VARCHAR(20)"
+          		+ " phone VARCHAR(20),"
+          		+ " surface_type VARCHAR(50)"
         		+ ");");
     	db.execSQL("CREATE TABLE " + MESSAGES_TABLE_NAME + " ( _id INTEGER PRIMARY KEY, " 
           		+ " text VARCHAR(500),"

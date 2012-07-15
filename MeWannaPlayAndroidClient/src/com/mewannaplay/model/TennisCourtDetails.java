@@ -49,6 +49,8 @@ public class TennisCourtDetails {
 	@SerializedName("state_abbreviation")
 	private String abbreviation;
 	
+	private String surfaceType;
+	
 	private String phone;
 	
 	 
@@ -238,6 +240,21 @@ public TennisActivity[] getTennisActivities() {
 	public void setTennisAmeneties(TennisAmenity[] tennisAmeneties) {
 		this.tennisAmeneties = tennisAmeneties;
 	}
+	public String getTimings() {
+		return timings;
+	}
+	public void setTimings(String timings) {
+		this.timings = timings;
+	}
+	public String getSurfaceType() {
+		return surfaceType;
+	}
+	public void setSurfaceType(String surfaceType) {
+		this.surfaceType = surfaceType;
+	}
+	
+
+	
 	/*	public boolean[] getActivites() {
 		return activites;
 	}
@@ -296,6 +313,22 @@ public TennisActivity[] getTennisActivities() {
 				break;
 			}
 		}
+		
+		JSONArray surfaceTypeArray = tennisCourtJsonObject.getJSONArray("SurfaceType");
+		if (surfaceTypeArray != null)
+		{
+		StringBuilder sb = new StringBuilder();
+		for (int i=0;i<surfaceTypeArray.length();i++)
+		{
+			if (i!=0)
+				sb.append(",");
+			sb.append(surfaceTypeArray.get(i));		
+		}
+			tennisCourtDetails.setSurfaceType(sb.toString());
+		}
+		else
+			tennisCourtDetails.setSurfaceType("N/A");
+		
 		return tennisCourtDetails;
 	}
 	
@@ -315,6 +348,7 @@ public TennisActivity[] getTennisActivities() {
 		contentValues.put("state", nonNullString(state));
 		contentValues.put("abbreviation", nonNullString(abbreviation));
 		contentValues.put("phone", nonNullString(phone));
+		contentValues.put("surface_type", nonNullString(surfaceType));
 		return contentValues;
 	}
 	
@@ -335,6 +369,7 @@ public TennisActivity[] getTennisActivities() {
 		tdc.setState(cursor.getString(cursor.getColumnIndex("state")));
 		tdc.setAbbreviation(cursor.getString(cursor.getColumnIndex("abbreviation")));
 		tdc.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
+		tdc.setSurfaceType(cursor.getString(cursor.getColumnIndex("surface_type")));
 		
 		for (boolean hasItem = activityCursor.moveToFirst(); hasItem; hasItem = activityCursor.moveToNext()) {
 		    int type = activityCursor.getInt(activityCursor.getColumnIndex("_id"));

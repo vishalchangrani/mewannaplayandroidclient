@@ -105,7 +105,7 @@ public class TennisCourtProvider extends ContentProvider {
 			try {
 				String sql = "insert OR REPLACE into "
 						+ TENNIS_COURT_DETAILS_TABLE_NAME
-						+ " (_id, name,address, zipcode, url,facility_type, subcourts, timings, city, state, abbreviation, phone) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+						+ " (_id, name,address, zipcode, url,facility_type, subcourts, timings, city, state, abbreviation, phone, surface_type) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				insert = db.compileStatement(sql);
 
 				insert.bindLong(1, contentValues.getAsInteger("_id"));
@@ -120,6 +120,7 @@ public class TennisCourtProvider extends ContentProvider {
 				insert.bindString(10, contentValues.getAsString("state"));
 				insert.bindString(11, contentValues.getAsString("abbreviation"));
 				insert.bindString(12, contentValues.getAsString("phone"));
+				insert.bindString(13, contentValues.getAsString("surface_type"));
 				insert.executeInsert();
 				db.setTransactionSuccessful();
 				
@@ -185,7 +186,7 @@ public class TennisCourtProvider extends ContentProvider {
 
 				sql = "insert into "
 						+ TENNIS_COURT_DETAILS_TABLE_NAME
-						+ "(_id, name,address, zipcode, url,facility_type, subcourts, timings, city, state, abbreviation, phone) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+						+ "(_id, name,address, zipcode, url,facility_type, subcourts, timings, city, state, abbreviation, phone, surface_type) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				insert = db.compileStatement(sql);
 
 				for (ContentValues contentValues : values) {
@@ -203,6 +204,7 @@ public class TennisCourtProvider extends ContentProvider {
 					insert.bindString(11,
 							contentValues.getAsString("abbreviation"));
 					insert.bindString(12, contentValues.getAsString("phone"));
+					insert.bindString(13, contentValues.getAsString("surface_type"));
 					insert.executeInsert();
 					count++;
 				}
