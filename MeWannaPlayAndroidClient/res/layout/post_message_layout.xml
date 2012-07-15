@@ -300,16 +300,27 @@ comments :"
                         android:layout_marginLeft="30dp"
                         android:background="@drawable/cancelbutton"
                         android:onClick="onCancel"
-                       
-                        android:textSize="10sp" />
+                         android:text="Cancel>"
+            android:textColor="#edd008"
+            android:textSize="20sp"
+            android:layout_marginTop="7dp"
+            
+            android:textStyle="bold"
+            android:typeface="serif" />
 
                     <Button
                         android:id="@+id/post_message"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
-                        
+                               android:text="Post"
+            android:textColor="#edd008"
+            android:textSize="20sp"
+            android:layout_marginTop="7dp"
+            
+            android:textStyle="bold"
+            android:typeface="serif"
                         android:background="@drawable/postbutton"
-                        android:textSize="10sp" />
+                       />
                 </LinearLayout>
             </LinearLayout>
 
