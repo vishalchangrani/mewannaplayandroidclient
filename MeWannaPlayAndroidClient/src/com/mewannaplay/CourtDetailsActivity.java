@@ -326,10 +326,11 @@ public class CourtDetailsActivity extends ListActivity implements
 		content1.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails.getPhone()
 				.trim().length()), 0);
 		tv.setText(content1);
-		tv = (TextView) this.findViewById(R.id.text_sub_courts);
+		tv = (TextView) this.findViewById(R.id.no_of_sub_courts);
 		tv.setText("" + tennisCourtDetails.getSubcourts());
-		tv = (TextView) this.findViewById(R.id.court_type);
+		tv = (TextView) this.findViewById(R.id.text_sub_courts);
 		tv.setText(""+tennisCourtDetails.getSurfaceType());
+
 		tv = (TextView) this.findViewById(R.id.court_facility_type);
 		tv.setText(tennisCourtDetails.getFacilityType());
 		tv = (TextView) this.findViewById(R.id.court_timings);
