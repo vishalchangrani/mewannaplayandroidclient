@@ -405,7 +405,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="550dp"
         android:background="@drawable/foot" >
 
         <Button
@@ -442,7 +442,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         
-        android:paddingTop="560dp"
+        android:paddingTop="630dp"
         android:orientation="vertical"
         android:weightSum="10" >
 
