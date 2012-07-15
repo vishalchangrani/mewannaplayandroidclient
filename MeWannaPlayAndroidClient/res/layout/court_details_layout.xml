@@ -253,7 +253,7 @@
         android:layout_below="@id/court_sub_table_layout"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/basicinfo" />
+       />
 
     <ExpandableListView
         android:id="@+id/exapandableList"
@@ -264,7 +264,7 @@
         android:layout_marginRight="10dip"
        
         android:divider="#00000000"
-        android:groupIndicator="@drawable/plus"
+        android:groupIndicator="@drawable/list_group_indicator"
         android:scrollbars="none"
         android:paddingBottom="20dp" />
 
