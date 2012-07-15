@@ -315,7 +315,10 @@ public TennisActivity[] getTennisActivities() {
 		}
 		
 		JSONArray surfaceTypeArray = tennisCourtJsonObject.getJSONArray("SurfaceType");
-		if (surfaceTypeArray != null)
+		if (surfaceTypeArray != null && surfaceTypeArray.length() > 0 )
+
+		
+
 		{
 		StringBuilder sb = new StringBuilder();
 		for (int i=0;i<surfaceTypeArray.length();i++)
