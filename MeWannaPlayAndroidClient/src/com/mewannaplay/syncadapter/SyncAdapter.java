@@ -107,14 +107,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
    
     	Log.d(TAG,"in onPerform sync");
     	boolean isError = false;
-    	
- try {
-	Thread.sleep(5000);
-} catch (InterruptedException e1) {
-	// TODO Auto-generated catch block
-	e1.printStackTrace();
-}
- 
+
     	if (!extras.containsKey(OPERATION))
 			return;
     	
