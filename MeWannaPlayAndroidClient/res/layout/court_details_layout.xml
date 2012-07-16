@@ -3,7 +3,7 @@
     android:id="@+id/relative"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bgtwo"
+    android:background="@drawable/bgthree"
     android:orientation="vertical" >
 
     <TableLayout
@@ -137,6 +137,8 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <!-- -weightsum kormu ei jaygay -->
+
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/court_sub_table_layout"
@@ -145,47 +147,49 @@
         android:layout_below="@id/court_addr_rel_layout"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="5dip" >
+        android:paddingTop="2dp"
+   >
 
         <TableRow
-            android:background="@drawable/border"
             android:clickable="true"
+            
             android:paddingRight="0dip" >
 
             <TextView
                 android:id="@+id/court_surface_type"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Surface Type"
+                android:text="Subcourts"
                 android:textColor="#fff"
                 android:textSize="10dp"
                 android:textStyle="normal"
+              
                 android:typeface="serif" />
 
             <TextView
-                android:id="@+id/court_surface_type_1"
-                android:layout_marginLeft="10dp"
-                android:paddingLeft="10dip"
-                android:text="floor"
-                android:textColor="#fff"
-                android:textSize="10dp"
-                android:textStyle="normal"
-                android:typeface="serif" />
-
-            <TextView
-                android:id="@+id/court_type"
-                android:paddingLeft="20dip"
-                android:text="Type"
+                android:id="@+id/no_of_sub_courts"
+                android:layout_width="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="5"
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
 
             <TextView
-                android:id="@+id/court_avail_timings"
-                android:paddingLeft="15dp"
-                android:text="Court available time"
+                android:id="@+id/court_type"
+                android:text="Facility"
                 android:textColor="#fff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+                android:layout_marginRight="10dp"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/court_facility_type"
+                android:layout_marginLeft="5dp"
+                android:text="Club"
+                android:textColor="#00FF00"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
@@ -197,28 +201,39 @@
             android:paddingRight="0dip" >
 
             <TextView
-                android:id="@+id/text_sub_courts"
-                android:paddingLeft="15dp"
-                android:text="SubCourts"
-                android:textColor="#fff"
-                android:textSize="10dp"
-                android:textStyle="normal"
-                android:typeface="serif" />
-
-            <TextView
-                android:id="@+id/no_of_sub_courts"
-                android:layout_width="30dp"
-                android:paddingLeft="15dp"
-                android:text="5"
+                android:id="@+id/court_type"
+                
+                android:text="Type"
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
 
             <TextView
-                android:id="@+id/court_facility_type"
-                android:text="Club"
-                android:textColor="#00FF00"
+                android:id="@+id/text_sub_courts"
+                android:paddingLeft="5dp"
+                android:text="Typevalue"
+                android:textColor="#fff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+                android:typeface="serif" />
+        </TableRow>
+        
+        
+        
+        
+        
+
+        <TableRow
+            android:clickable="true"
+            android:paddingLeft="10dip"
+            android:paddingRight="0dip" >
+
+            <TextView
+                android:id="@+id/court_avail_timings"
+               
+                android:text="Timings"
+                android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
@@ -228,22 +243,29 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
+                  android:paddingLeft="5dp"
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:paddingLeft="5dp"
+               
                 android:paddingRight="5dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Book Title sad ds sdas das asdas das asd asd sad as"
                 android:textColor="#FFFFFF"
-                android:textSize="12dp"
+                 android:textSize="10sp"
                 android:typeface="serif" />
         </TableRow>
+        
+        
+        
+        
+        
+        
+        
     </TableLayout>
 
     <ImageView
@@ -252,8 +274,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/court_sub_table_layout"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-       />
+        android:layout_marginRight="10dp" />
 
     <ExpandableListView
         android:id="@+id/exapandableList"
@@ -262,20 +283,10 @@
         android:layout_below="@+id/court_back_icon"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-       
         android:divider="#00000000"
         android:groupIndicator="@drawable/list_group_indicator"
-        android:scrollbars="none"
-        android:paddingBottom="20dp" />
-
-    <!--
-    <TextView
-    android:id="@+id/android:empty"
-    android:layout_below="@id/android:list"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:text="@string/main_no_items"/>
-    -->
+        android:paddingBottom="20dp"
+        android:scrollbars="none" />
 
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -311,6 +322,26 @@
                 android:paddingTop="5dip" />
         </TableRow>
     </TableLayout>
+
+    <!-- <ImageView -->
+    <!-- android:id="@+id/court_back_icon" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_below="@id/court_sub_table_layout" -->
+    <!-- android:layout_marginLeft="10dp" -->
+    <!-- android:layout_marginRight="10dp" -->
+    <!-- /> -->
+
+
+    <!--
+    <TextView
+    android:id="@+id/android:empty"
+    android:layout_below="@id/android:list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:text="@string/main_no_items"/>
+    -->
+
 
     <!--
   <TableLayout
@@ -382,7 +413,7 @@
 
 
     </TableRow>
-  </TableLayout>
+  </TableLayout>
     -->
 
     <ListView
