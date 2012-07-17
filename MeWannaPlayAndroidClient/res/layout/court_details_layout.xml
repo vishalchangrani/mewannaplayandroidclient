@@ -152,13 +152,21 @@
 
         <TableRow
             android:clickable="true"
-            
+            android:gravity="center_horizontal"
             android:paddingRight="0dip" >
+<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+           
+            android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/court_surface_type"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+     
+                
                 android:text="Subcourts"
                 android:textColor="#fff"
                 android:textSize="10dp"
@@ -169,54 +177,76 @@
             <TextView
                 android:id="@+id/no_of_sub_courts"
                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+               
                 android:paddingLeft="15dp"
                 android:text="5"
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
-
-            <TextView
+               <TextView
                 android:id="@+id/court_type"
                 android:text="Facility"
                 android:textColor="#fff"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:textStyle="normal"
-                android:layout_marginRight="10dp"
+               android:layout_marginLeft="40dp"
                 android:typeface="serif" />
 
             <TextView
                 android:id="@+id/court_facility_type"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Club"
                 android:textColor="#00FF00"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
+
+        </LinearLayout>
+       
+           
         </TableRow>
 
         <TableRow
             android:clickable="true"
-            android:paddingLeft="10dip"
-            android:paddingRight="0dip" >
+          
+            android:paddingRight="0dip" 
 
+            android:gravity="left"
+           >
+<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            
+            android:orientation="horizontal" >
             <TextView
                 android:id="@+id/court_type"
-                
+                 android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
                 android:text="Type"
                 android:textColor="#fff"
+                 android:layout_marginLeft="80dp"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
 
             <TextView
                 android:id="@+id/text_sub_courts"
-                android:paddingLeft="5dp"
+                  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
                 android:text="Typevalue"
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
+            </LinearLayout>
         </TableRow>
         
         
@@ -226,38 +256,45 @@
 
         <TableRow
             android:clickable="true"
-            android:paddingLeft="10dip"
+            android:gravity="left"
+            
             android:paddingRight="0dip" >
-
+<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            
+            android:orientation="horizontal" >
             <TextView
                 android:id="@+id/court_avail_timings"
-               
+               android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
                 android:text="Timings"
                 android:textColor="#fff"
                 android:textSize="10sp"
+              
                 android:textStyle="normal"
                 android:typeface="serif" />
 
             <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_timings"
-                android:layout_width="140dp"
+                android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                  android:paddingLeft="5dp"
+                
                 android:ellipsize="marquee"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
-               
-                android:paddingRight="5dp"
+               android:layout_marginLeft="15dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Book Title sad ds sdas das asdas das asd asd sad as"
                 android:textColor="#FFFFFF"
                  android:textSize="10sp"
-                android:typeface="serif" />
+                android:typeface="serif" /></LinearLayout>
         </TableRow>
         
         
@@ -285,7 +322,7 @@
         android:layout_marginRight="10dip"
         android:divider="#00000000"
         android:groupIndicator="@drawable/list_group_indicator"
-        android:paddingBottom="20dp"
+     
         android:scrollbars="none" />
 
     <TableLayout
@@ -296,7 +333,7 @@
         android:layout_below="@id/exapandableList"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="3dip" >
+      >
 
         <TableRow
             android:clickable="true"

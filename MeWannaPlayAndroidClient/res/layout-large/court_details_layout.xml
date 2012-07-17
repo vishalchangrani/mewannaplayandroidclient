@@ -3,7 +3,7 @@
     android:id="@+id/relative"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
- android:background="@drawable/bgthree"
+ android:background="@drawable/bgfour"
     android:orientation="vertical" >
 
     <TableLayout
