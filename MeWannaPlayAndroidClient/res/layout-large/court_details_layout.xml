@@ -28,7 +28,7 @@
                 android:paddingLeft="72dip"
                 android:text="Tennisclub"
                 android:textColor="#edd008"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
 
@@ -159,7 +159,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="Subcourts"
                 android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="13dp"
                 android:textStyle="normal"
               
                 android:typeface="serif" />
@@ -170,7 +170,7 @@
                 android:paddingLeft="15dp"
                 android:text="5"
                 android:textColor="#fff"
-                android:textSize="10sp"
+                 android:textSize="13dp"
                 android:textStyle="normal"
                 android:typeface="serif" />
 
@@ -178,7 +178,7 @@
                 android:id="@+id/court_type"
                 android:text="Facility"
                 android:textColor="#fff"
-                android:textSize="10sp"
+                 android:textSize="13dp"
                 android:textStyle="normal"
                 android:layout_marginRight="10dp"
                 android:typeface="serif" />
@@ -188,7 +188,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="Club"
                 android:textColor="#00FF00"
-                android:textSize="10sp"
+                 android:textSize="13dp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </TableRow>
@@ -203,7 +203,7 @@
                 
                 android:text="Type"
                 android:textColor="#fff"
-                android:textSize="10sp"
+               android:textSize="13dp"
                 android:textStyle="normal"
                 android:typeface="serif" />
 
@@ -212,7 +212,7 @@
                 android:paddingLeft="5dp"
                 android:text="Typevalue"
                 android:textColor="#fff"
-                android:textSize="10sp"
+                 android:textSize="13dp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </TableRow>
@@ -233,13 +233,13 @@
                
                 android:text="Timings"
                 android:textColor="#fff"
-                android:textSize="10sp"
+                 android:textSize="13dp"
                 android:textStyle="normal"
                 android:typeface="serif" />
 
             <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_timings"
-                android:layout_width="140dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                   android:paddingLeft="5dp"
@@ -255,7 +255,7 @@
                 android:singleLine="true"
                 android:text="Book Title sad ds sdas das asdas das asd asd sad as"
                 android:textColor="#FFFFFF"
-                 android:textSize="10sp"
+                  android:textSize="13dp"
                 android:typeface="serif" />
         </TableRow>
         
@@ -306,7 +306,7 @@
         android:layout_below="@id/exapandableList"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="3dip" >
+       >
 
         <TableRow
             android:clickable="true"
@@ -426,13 +426,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="585dp"
         android:background="@drawable/foot" >
 
         <Button
             android:id="@+id/post_msg_button"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="6dp"
@@ -446,11 +446,11 @@
         <Button
             android:id="@+id/marl_occu_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginLeft="130dp"
+            
             android:layout_toRightOf="@id/post_msg_button"
             android:background="@drawable/mark_court_occupied_selector"
             android:enabled="false"
@@ -463,7 +463,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         
-        android:paddingTop="630dp"
+        android:paddingTop="650dp"
         android:orientation="vertical"
         android:weightSum="10" >
 
@@ -497,7 +497,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:paddingTop="20dp"
+            android:paddingTop="40dp"
             android:layout_weight="5" >
 
             <TextView
