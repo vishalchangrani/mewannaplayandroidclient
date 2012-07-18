@@ -1,7 +1,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/blueline"
+    android:background="@drawable/bluelinetwo"
     android:gravity="left|center_vertical"
     android:paddingLeft="30dp"
     android:text="Activities"

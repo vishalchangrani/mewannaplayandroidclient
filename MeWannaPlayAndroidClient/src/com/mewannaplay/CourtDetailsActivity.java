@@ -18,6 +18,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,8 +68,9 @@ public class CourtDetailsActivity extends ListActivity implements
 	TextView cmark;
 	SharedPreferences preferences;
 	public static String filenames = "courtdetails";
-	TextView cmsg, cmsgprox;
+	TextView cmsg, cmsgprox,surfacetype,courtype,courtfacility,courtimings,message;
 	String user;
+	Typeface bold,heavy,light,normal;
 
 	// Account loggedinaccount;
 
@@ -83,6 +85,20 @@ public class CourtDetailsActivity extends ListActivity implements
 		setContentView(R.layout.court_details_layout);
 		cmsg = (TextView) findViewById(R.id.cmessage);
 		cmsgprox = (TextView) findViewById(R.id.cmessageprox);
+		 bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
+		 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
+		 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
+		 normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
+		 surfacetype=(TextView)findViewById(R.id.court_surface_type);
+		 surfacetype.setTypeface(normal);
+		 courtfacility=(TextView)findViewById(R.id.court_ftype);
+		 courtfacility.setTypeface(normal);
+		 courtype=(TextView)findViewById(R.id.court_type);
+		 courtype.setTypeface(normal);
+		 courtimings=(TextView)findViewById(R.id.court_avail_timings);
+		 courtimings.setTypeface(normal);
+		 message=(TextView)findViewById(R.id.msg_name);
+		 message.setTypeface(bold);
 		thisCourtsLocation = (Location) this.getIntent().getExtras()
 				.getParcelable(SELECTED_COURTS_GEOPOINT);
 
@@ -310,8 +326,10 @@ public class CourtDetailsActivity extends ListActivity implements
 
 	private void populateView() {
 		TextView tv = (TextView) this.findViewById(R.id.court_name);
+		tv.setTypeface(bold);
 		tv.setText(tennisCourtDetails.getName().trim());
 		tv = (TextView) this.findViewById(R.id.court_addr_1);
+		tv.setTypeface(normal);
 		SpannableString content = new SpannableString(
 				(tennisCourtDetails.getAddress().trim()));
 		content.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails
@@ -321,19 +339,24 @@ public class CourtDetailsActivity extends ListActivity implements
 		// tv = (TextView) this.findViewById(R.id.court_addr_2);
 		// tv.setText(tennisCourtDetails.getCity()+","+tennisCourtDetails.getState()+" "+tennisCourtDetails.getZipcode());
 		tv = (TextView) this.findViewById(R.id.court_phone_1);
+		tv.setTypeface(normal);
 		SpannableString content1 = new SpannableString(
 				(tennisCourtDetails.getPhone().trim()));
 		content1.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails.getPhone()
 				.trim().length()), 0);
 		tv.setText(content1);
 		tv = (TextView) this.findViewById(R.id.no_of_sub_courts);
+		tv.setTypeface(normal);
 		tv.setText("" + tennisCourtDetails.getSubcourts());
 		tv = (TextView) this.findViewById(R.id.text_sub_courts);
+		tv.setTypeface(normal);
 		tv.setText(""+tennisCourtDetails.getSurfaceType());
 
 		tv = (TextView) this.findViewById(R.id.court_facility_type);
+		tv.setTypeface(normal);
 		tv.setText(tennisCourtDetails.getFacilityType());
 		tv = (TextView) this.findViewById(R.id.court_timings);
+		tv.setTypeface(normal);
 		if(!tennisCourtDetails.getTennisTimings().contentEquals("")){
 		tv.setText(tennisCourtDetails.getTennisTimings());
 		tv.setSelected(true);

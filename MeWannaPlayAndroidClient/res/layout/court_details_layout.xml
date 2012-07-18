@@ -21,16 +21,16 @@
             android:gravity="center"
             android:paddingBottom="2dip"
             android:paddingLeft="10dip"
-            android:paddingRight="30dip" >
+            android:paddingRight="60dip" >
 
             <TextView
                 android:id="@+id/court_name"
                 android:paddingLeft="72dip"
                 android:text="Tennisclub"
                 android:textColor="#edd008"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:typeface="serif" />
+                android:textSize="19sp"
+              
+                />
 
             <ImageView
                 android:id="@+id/court_back_icon"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/court_addr_1"
                 android:layout_toRightOf="@id/court_addr_2"
-                android:paddingLeft="100dip"
+                android:paddingLeft="50dip"
                 android:paddingRight="05dip"
                 android:text="(080)-3242-2341"
                 android:textColor="#000000"
@@ -147,7 +147,7 @@
         android:layout_below="@id/court_addr_rel_layout"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="2dp"
+        android:paddingTop="5dp"
    >
 
         <TableRow
@@ -165,14 +165,14 @@
                 android:id="@+id/court_surface_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-     
+                android:layout_marginLeft="2dp"
                 
-                android:text="Subcourts"
+                android:text="Subcourts :"
                 android:textColor="#fff"
                 android:textSize="10dp"
                 android:textStyle="normal"
               
-                android:typeface="serif" />
+                />
 
             <TextView
                 android:id="@+id/no_of_sub_courts"
@@ -184,17 +184,17 @@
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
-                android:typeface="serif" />
+              />
                <TextView
-                android:id="@+id/court_type"
-                android:text="Facility"
+                android:id="@+id/court_ftype"
+                android:text="Facility :"
                 android:textColor="#fff"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:textStyle="normal"
                android:layout_marginLeft="40dp"
-                android:typeface="serif" />
+               />
 
             <TextView
                 android:id="@+id/court_facility_type"
@@ -202,10 +202,10 @@
                  android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Club"
-                android:textColor="#00FF00"
+                android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
-                android:typeface="serif" />
+              />
 
         </LinearLayout>
        
@@ -229,12 +229,12 @@
                 android:id="@+id/court_type"
                  android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:text="Type"
+                android:text="Type :"
                 android:textColor="#fff"
-                 android:layout_marginLeft="80dp"
+                 android:layout_marginLeft="10dp"
                 android:textSize="10sp"
                 android:textStyle="normal"
-                android:typeface="serif" />
+                 />
 
             <TextView
                 android:id="@+id/text_sub_courts"
@@ -245,7 +245,7 @@
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
-                android:typeface="serif" />
+                />
             </LinearLayout>
         </TableRow>
         
@@ -257,7 +257,7 @@
         <TableRow
             android:clickable="true"
             android:gravity="left"
-            
+            android:layout_marginTop="3dp"
             android:paddingRight="0dip" >
 <LinearLayout
             android:layout_width="wrap_content"
@@ -269,12 +269,12 @@
                 android:id="@+id/court_avail_timings"
                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:text="Timings"
+                android:text="Timings :"
                 android:textColor="#fff"
                 android:textSize="10sp"
-              
+                 android:layout_marginLeft="10dp"
                 android:textStyle="normal"
-                android:typeface="serif" />
+                />
 
             <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_timings"
@@ -294,7 +294,7 @@
                 android:text="Book Title sad ds sdas das asdas das asd asd sad as"
                 android:textColor="#FFFFFF"
                  android:textSize="10sp"
-                android:typeface="serif" /></LinearLayout>
+                /></LinearLayout>
         </TableRow>
         
         
@@ -322,7 +322,7 @@
         android:layout_marginRight="10dip"
         android:divider="#00000000"
         android:groupIndicator="@drawable/list_group_indicator"
-     
+        android:layout_marginTop="5dp"
         android:scrollbars="none" />
 
     <TableLayout
@@ -338,7 +338,7 @@
         <TableRow
             android:clickable="true"
             android:paddingBottom="0dip"
-            android:paddingLeft="10dip"
+            android:paddingLeft="5dip"
             android:paddingRight="0dip" >
 
             <TextView
@@ -481,11 +481,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/post_message_selector"
             android:onClick="postMessage"
-            android:paddingLeft="20dip"
+            android:paddingLeft="10dip"
             android:paddingRight="25dip"
             android:paddingTop="10dip" />
 
@@ -495,7 +495,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/post_msg_button"
             android:background="@drawable/mark_court_occupied_selector"
@@ -522,7 +522,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textColor="#ff0000"
+                android:textColor="#edd008"
                 android:textSize="4.5pt"
                 android:textStyle="bold" />
 
@@ -531,7 +531,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textColor="#ff0000"
+                android:textColor="#edd008"
                 android:textSize="4.5pt"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -546,7 +546,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textColor="#ff0000"
+                android:textColor="#edd008"
                 android:textSize="5pt"
                 android:textStyle="bold" />
         </LinearLayout>
