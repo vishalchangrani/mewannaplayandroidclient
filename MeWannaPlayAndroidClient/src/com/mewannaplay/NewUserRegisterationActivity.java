@@ -6,17 +6,18 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mewannaplay.authenticator.AuthenticatorActivity;
 import com.mewannaplay.client.RestClient;
-import com.sun.security.auth.UserPrincipal;
 
 public class NewUserRegisterationActivity extends Activity {
 
@@ -33,7 +34,8 @@ public class NewUserRegisterationActivity extends Activity {
 	
 	String regexStr = "[a-zA-Z0-9]+";
 	private static final String TAG = "NewUserRegisterationActivity";
-	
+	Typeface bold,heavy,light,normal;
+	Button cancel,register;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
@@ -43,6 +45,14 @@ public class NewUserRegisterationActivity extends Activity {
 	      newUserPasswordConfirmEditText = (EditText) findViewById(R.id.confirm_password);
 	      newUserEmailEditText = (EditText) findViewById(R.id.newuser_email);
 	      errorMessage = (TextView) findViewById(R.id.newuser_errormessage);
+	      bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
+			 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
+			 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
+			 normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
+			 cancel=(Button)findViewById(R.id.cancel);
+			 cancel.setTypeface(bold);
+			 register=(Button)findViewById(R.id.Register);
+			 register.setTypeface(bold);
 	}
 	
 	

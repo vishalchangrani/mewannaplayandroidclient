@@ -28,6 +28,7 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -82,7 +84,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 	private final Handler mHandler = new Handler();
 
 	private TextView mMessage;
-
+	Typeface bold,heavy,light,normal;
+	Button newuserregi,go;
 	private String mPassword;
 
 	private EditText mPasswordEdit;
@@ -96,6 +99,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 	private EditText mUsernameEdit;
 	private final Handler handler = new Handler();
 	AccountManagerFuture<Bundle> accountManagerFuture = null;
+	
 
 	/**
 	 * {@inheritDoc}
@@ -123,6 +127,15 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 		mMessage = (TextView) findViewById(R.id.message);
 		mUsernameEdit = (EditText) findViewById(R.id.username_edit);
 		mPasswordEdit = (EditText) findViewById(R.id.password_edit);
+		
+	     bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
+				 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
+				 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
+				 normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
+				 newuserregi=(Button)findViewById(R.id.newuser_register_btn);
+				 newuserregi.setTypeface(bold);
+				 go=(Button)findViewById(R.id.ok_button);
+				 go.setTypeface(bold);
 		if (!TextUtils.isEmpty(mUsername))
 			mUsernameEdit.setText(mUsername);
 		if (!TextUtils.isEmpty(mPassword))
