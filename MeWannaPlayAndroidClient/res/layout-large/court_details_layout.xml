@@ -426,13 +426,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="585dp"
+        android:layout_marginTop="600dp"
         android:background="@drawable/foot" >
 
         <Button
             android:id="@+id/post_msg_button"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="6dp"
@@ -446,11 +446,11 @@
         <Button
             android:id="@+id/marl_occu_button"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
             android:layout_marginLeft="130dp"
-            
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@id/post_msg_button"
             android:background="@drawable/mark_court_occupied_selector"
             android:enabled="false"
