@@ -165,8 +165,7 @@
                     android:text="GO>"
                     android:textColor="#edd008"
                     android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:typeface="serif" />
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -186,8 +185,7 @@
                     android:textColor="#edd008"
                      android:layout_marginLeft="50dp"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:typeface="serif" >
+                    >
                 </Button>
             </LinearLayout>
         </LinearLayout>
