@@ -5,7 +5,13 @@
     android:background="@drawable/bgtwo"
     android:gravity="center"
     android:orientation="vertical" >
-
+<TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/userregistrationimage"
+            android:textColor="#fff" />
     <TextView
         android:id="@+id/newuser_errormessage"
         android:layout_width="wrap_content"
