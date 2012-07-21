@@ -7,6 +7,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -26,9 +28,18 @@ public class StateCityChoiceDialog extends Dialog {
 	private int stateSpinnerCurrentPos = -1;
 	
 	
+	
+	
+	
 	  public StateCityChoiceDialog(Context context) {
 		super(context);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.state_city_choice_layout);
+		
+		
+		 
 		
 	}
 	
