@@ -3,7 +3,7 @@
     android:id="@+id/relative"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bgthree"
+    android:background="@drawable/bgtwo"
     android:orientation="vertical" >
 
     <TableLayout
@@ -62,7 +62,7 @@
                 android:textSize="12sp"
                 android:textStyle="italic"
                 android:typeface="serif" />
-
+           
             <TextView
                 android:id="@+id/court_addr_2"
                 android:layout_width="wrap_content"
@@ -97,15 +97,18 @@
                 android:src="@drawable/callicon16" />
         </RelativeLayout>
     </TableLayout>
-
-    <ImageView
+ <ImageView
         android:id="@+id/court_driving_icon"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
+      
+         android:layout_toRightOf="@+id/court_addr_1"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="210dp"
         android:onClick="clickdriving"
         android:src="@drawable/drivingdirection" />
+    
+    
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -152,7 +155,8 @@
 
         <TableRow
             android:clickable="true"
-            android:gravity="center_horizontal"
+            android:id="@+id/court_surface"
+            android:gravity="left"
             android:paddingRight="0dip" >
 <LinearLayout
             android:layout_width="fill_parent"
@@ -165,7 +169,7 @@
                 android:id="@+id/court_surface_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
+               
                 
                 android:text="Subcourts :"
                 android:textColor="#fff"
@@ -211,10 +215,17 @@
        
            
         </TableRow>
-
+   <TableRow
+            android:clickable="true"
+           android:layout_below="@+id/court_surface"
+            android:paddingRight="0dip" 
+            
+            android:gravity="left"
+            android:background="@drawable/yellowborderborder"
+           ></TableRow>
         <TableRow
             android:clickable="true"
-          
+           android:id="@+id/court_typelayout"
             android:paddingRight="0dip" 
 
             android:gravity="left"
@@ -231,7 +242,7 @@
             android:layout_height="wrap_content"
                 android:text="Type :"
                 android:textColor="#fff"
-                 android:layout_marginLeft="10dp"
+               
                 android:textSize="10sp"
                 android:textStyle="normal"
                  />
@@ -250,7 +261,14 @@
         </TableRow>
         
         
-        
+        <TableRow
+            android:clickable="true"
+           android:layout_below="@+id/court_typelayout"
+            android:paddingRight="0dip" 
+            
+            android:gravity="left"
+            android:background="@drawable/yellowborderborder"
+           ></TableRow>
         
         
 
@@ -272,13 +290,13 @@
                 android:text="Timings :"
                 android:textColor="#fff"
                 android:textSize="10sp"
-                 android:layout_marginLeft="10dp"
+                 
                 android:textStyle="normal"
                 />
 
             <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_timings"
-                android:layout_width="220dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 
@@ -471,9 +489,10 @@
     <LinearLayout
         android:id="@+id/lnfoot"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="440dp"
+        android:layout_height="wrap_content"
+        
+        android:layout_below="@android:id/list"
+        
         android:background="@drawable/foot" >
 
         <Button
@@ -507,7 +526,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="480dp"
+          android:layout_below="@+id/lnfoot"
+       
         android:orientation="vertical"
         android:weightSum="10" >
 
