@@ -20,6 +20,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                android:id="@+id/lockerRoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -48,6 +49,7 @@
             </ImageView>
 
             <TextView
+                 android:id="@+id/parkingtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -75,6 +77,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                android:id="@+id/lessonstext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -100,6 +103,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                android:id="@+id/lightstext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -126,6 +130,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                 android:id="@+id/snackBartext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -151,6 +156,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                android:id="@+id/shoptext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
