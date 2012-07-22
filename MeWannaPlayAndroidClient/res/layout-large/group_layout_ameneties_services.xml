@@ -4,7 +4,7 @@
     android:background="@drawable/blueline"
      android:gravity="left|center_vertical"
     android:paddingLeft="30dp"
-    android:text="Ameneties and services"
+    android:text="Ameneties"
     android:textColor="@android:color/white"
     android:textSize="10dp" >
 

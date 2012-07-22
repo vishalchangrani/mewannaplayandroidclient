@@ -68,9 +68,10 @@ public class CourtDetailsActivity extends ListActivity implements
 	TextView cmark;
 	SharedPreferences preferences;
 	public static String filenames = "courtdetails";
-	TextView cmsg, cmsgprox,surfacetype,courtype,courtfacility,courtimings,message;
+	TextView cmsg, cmsgprox,surfacetype,courtype,courtfacility,courtimings,message,lockeroom,parking,lessons,lights,snakbar,shop,adultprog,teamtennis,juniorprog,tournaments,ladders,roundrobin,socialmixers,serniors;
 	String user;
 	Typeface bold,heavy,light,normal;
+	
 
 	// Account loggedinaccount;
 
@@ -99,6 +100,7 @@ public class CourtDetailsActivity extends ListActivity implements
 		 courtimings.setTypeface(normal);
 		 message=(TextView)findViewById(R.id.msg_name);
 		 message.setTypeface(bold);
+
 		thisCourtsLocation = (Location) this.getIntent().getExtras()
 				.getParcelable(SELECTED_COURTS_GEOPOINT);
 
@@ -402,7 +404,18 @@ public class CourtDetailsActivity extends ListActivity implements
 			case 0:
 				View view = infalInflater.inflate(
 						R.layout.child_layout_ameneties_services, null);
-
+				lockeroom=(TextView)view.findViewById(R.id.lockerRoom);
+				lockeroom.setTypeface(normal);
+				parking=(TextView)view.findViewById(R.id.parkingtext);
+				parking.setTypeface(normal);
+				lessons=(TextView)view.findViewById(R.id.lessonstext);
+				lessons.setTypeface(normal);
+				lights=(TextView)view.findViewById(R.id.lightstext);
+				lights.setTypeface(normal);
+				snakbar=(TextView)view.findViewById(R.id.snackBartext);
+				snakbar.setTypeface(normal);
+				shop=(TextView)view.findViewById(R.id.shoptext);
+				shop.setTypeface(normal);
 				((ImageView) (view.findViewById(R.id.lockerRoomIcon)))
 						.setImageLevel(tennisCourtDetails.getTennisAmeneties()[Constants.AMENITY.LOCKER_ROOM
 								.ordinal()] != null ? 1 : 0);
@@ -427,6 +440,23 @@ public class CourtDetailsActivity extends ListActivity implements
 
 				view = infalInflater.inflate(R.layout.child_layout_activities,
 						null);
+				
+				adultprog=(TextView)view.findViewById(R.id.adultProgramtext);
+				adultprog.setTypeface(normal);
+				teamtennis=(TextView)view.findViewById(R.id.teamTennistext);
+				teamtennis.setTypeface(normal);
+				juniorprog=(TextView)view.findViewById(R.id.juniorProgramtext);
+				juniorprog.setTypeface(normal);
+				tournaments=(TextView)view.findViewById(R.id.tournamentstext);
+				tournaments.setTypeface(normal);
+				ladders=(TextView)view.findViewById(R.id.ladderstext);
+				ladders.setTypeface(normal);
+				roundrobin=(TextView)view.findViewById(R.id.roundRobintext);
+				roundrobin.setTypeface(normal);
+				socialmixers=(TextView)view.findViewById(R.id.socialMixerstext);
+				socialmixers.setTypeface(normal);
+				serniors=(TextView)view.findViewById(R.id.seniorstext);
+				serniors.setTypeface(normal);
 				((ImageView) (view.findViewById(R.id.adultProgram)))
 						.setImageLevel(tennisCourtDetails.getTennisActivities()[Constants.ACTIVITY.NEW_PLAYER_ADULT_PROGRAM
 								.ordinal()] != null ? 1 : 0);
@@ -481,6 +511,7 @@ public class CourtDetailsActivity extends ListActivity implements
 							Context.LAYOUT_INFLATER_SERVICE);
 			switch (groupPosition) {
 			case 0:
+			
 				return infalInflater.inflate(
 						R.layout.group_layout_ameneties_services, null);
 			case 1:

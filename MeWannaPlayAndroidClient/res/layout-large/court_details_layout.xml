@@ -353,7 +353,16 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
       >
+ <TableRow
+            android:clickable="true"
+            android:paddingBottom="0dip"
+            android:paddingLeft="5dip"
+             android:layout_marginTop="10dp"
+            android:background="@drawable/yellowborderborder"
+            android:paddingRight="0dip" >
 
+          
+        </TableRow>
         <TableRow
             android:clickable="true"
             android:paddingBottom="0dip"

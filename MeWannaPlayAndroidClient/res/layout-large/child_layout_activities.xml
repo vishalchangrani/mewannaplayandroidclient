@@ -22,6 +22,7 @@
             </ImageView>
 
             <TextView
+                  android:id="@+id/adultProgramtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -49,6 +50,7 @@
             </ImageView>
 
             <TextView
+                   android:id="@+id/teamTennistext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -76,6 +78,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                  android:id="@+id/juniorProgramtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -101,6 +104,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                 android:id="@+id/tournamentstext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -127,6 +131,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                 android:id="@+id/ladderstext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -152,6 +157,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                android:id="@+id/roundRobintext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -178,6 +184,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                android:id="@+id/socialMixerstext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -203,6 +210,7 @@
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
+                  android:id="@+id/seniorstext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
