@@ -146,14 +146,16 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
+            android:paddingBottom="15dp"
             android:paddingLeft="10dip" >
 
             <ImageView
                 android:id="@+id/roundRobin"
                 android:layout_width="15dp"
                 android:layout_height="wrap_content"
+               
                 android:src="@drawable/check_or_uncheck_image" />
 
             <TextView
@@ -163,6 +165,7 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="2dip"
                 android:text="Round robins"
+              
                   android:textColor="#fff"
                 android:textSize="10sp"
                 android:textStyle="normal"
@@ -170,11 +173,13 @@
         </LinearLayout>
     </TableRow>
 
-    <TableRow android:gravity="center_horizontal" >
+    <TableRow android:gravity="center_horizontal" 
+       >
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginBottom="30dp"
             android:orientation="horizontal" >
 
             <ImageView
@@ -199,7 +204,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:orientation="horizontal"
             android:paddingLeft="10dip" >
 
