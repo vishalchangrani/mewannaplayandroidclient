@@ -34,6 +34,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
+import com.mewannaplay.asynctask.GetCourtDetailsAsyncTask;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
 import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
@@ -396,42 +397,73 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		}
 	};
 
+	
+	public void onGetAllCourtsPostExecute(boolean error)
+	{
+		if (error) {
+			progressDialog.dismiss();
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					MapViewActivity.this);
+			builder.setMessage("Error while fetching courts")
+					.setCancelable(false)
+					.setNeutralButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									MapViewActivity.this.finish();
+								}
+							});
+
+			alert = builder.create();
+			alert.show();
+		} else {
+
+			final MapView mapView = (MapView) findViewById(R.id.mapview);
+			Runnable waitForMapTimeTask = new Runnable() {
+				public void run() {
+					if (mapView.getLatitudeSpan() == 0
+							|| mapView.getLongitudeSpan() == 360000000) {
+						mapView.postDelayed(this, 100);
+					} else {
+						incrementRunCount(); // Only on a successful
+												// getcourt operation we
+												// actually increment the
+												// run count.
+						progressDialog.dismiss();
+						MapViewActivity.this
+								.showDialog(DIALOG_STATE_CITY_CHOICE);
+
+						// now that we have fetched all courts..start
+						// background threads to keep refreshing their
+						// status..
+						// Also remember fetch for all courts is done so
+						// next time the activity resume restart the
+						// background thread.
+						fetchedAllcourts = true;
+						startBackGroundRefresh();
+					}
+				}
+			};
+			mapView.postDelayed(waitForMapTimeTask, 100);
+		}
+		
+	}
+	
 	public void getTennisCourtDetails(int id,
 			Location locationOfSelectedTennisCourt) {
 
 		stopBackGroundRefresh();
-		progressDialog = ProgressDialog.show(this, "",
-				"Fetching court details...", true);
-		Log.d(TAG, " --> Requesting sync for " + id);
-		syncFinishedReceiverForCourtDetails = new SyncFinishedReceiverForCourtDetails(
-				id, locationOfSelectedTennisCourt);
-		registerReceiver(syncFinishedReceiverForCourtDetails, new IntentFilter(
-				SyncAdapter.SYNC_FINISHED_ACTION));
-		ContentResolver.requestSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY,
-				SyncAdapter.getAllCourtsDetailBundle(id));
+		Log.d(TAG, " --> Requesting fetch for " + id);
+		
+		new GetCourtDetailsAsyncTask(this, id, locationOfSelectedTennisCourt).execute(null);
 	}
 
-	private final class SyncFinishedReceiverForCourtDetails extends
-			BroadcastReceiver {
 
-		final int courtId;
-		final Location locationOfSelectedTennisCourt;
+		public void onPostExecuteGetCourtDetails(boolean error, int courtId, Location locationOfSelectedTennisCourt) {
+	
 
-		public SyncFinishedReceiverForCourtDetails(int courtId,
-				Location locationOfSelectedTennisCourt) {
-			this.courtId = courtId;
-			this.locationOfSelectedTennisCourt = locationOfSelectedTennisCourt;
-		}
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "Sync finished, should refresh nao!!");
-			unregisterReceiver(this);
-			syncFinishedReceiverForCourtDetails = null;
-			progressDialog.dismiss();
-
-			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
+			if (error) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						MapViewActivity.this);
 				builder.setMessage("Error while fetching court details")
@@ -452,7 +484,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 						locationOfSelectedTennisCourt);
 			}
 		}
-	};
+
 
 	private void startTennisCourtDetailActivity(int id,
 			Location locationOfSelectedTennisCourt) {
