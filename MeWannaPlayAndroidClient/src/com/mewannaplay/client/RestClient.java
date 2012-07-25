@@ -95,7 +95,7 @@ public class RestClient {
                 case GET: {
                         HttpGet request = new HttpGet(url);
                         if (!request.containsHeader("Accept-Encoding")) 
-                        	request.addHeader("Accept-Encoding", "gzip");
+                                request.addHeader("Accept-Encoding", "gzip");
                         responseString = executeRequest(request);
                         break;
                 }
@@ -254,7 +254,7 @@ public class RestClient {
                         return "";
                 } catch (Throwable e) {
                        // if (mHttpClient != null) 
-                       // 	mHttpClient.getConnectionManager().shutdown();
+                       //       mHttpClient.getConnectionManager().shutdown();
                       //  mHttpClient = null;
                         if (entity != null)
                                 entity.consumeContent();

@@ -35,239 +35,242 @@ import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
 public class PostMessageActivity extends Activity implements
-                OnCheckedChangeListener {
+		OnCheckedChangeListener {
 
-        private static final String TAG = "PostMessageActivity";
-        private ProgressDialog progressDialog;
-        private AlertDialog alert;
-        private int courtId;
-        static final int DEFAULTDATESELECTOR_ID = 0;
+	private static final String TAG = "PostMessageActivity";
+	private ProgressDialog progressDialog;
+	private AlertDialog alert;
+	private int courtId;
+	static final int DEFAULTDATESELECTOR_ID = 0;
 
-        protected int mLayoutID;
-        private final static int minuteInterval = 30;
-        private SliderContainer mContainer;
-        RadioGroup rgcontactinfo;
-        RadioButton rgPhone;
-        EditText econtactinfo;
-        SharedPreferences preferences;
-        public static String filenames = "courtdetails";
-        String contactInfo;
-        String regexStr = "^[+][0-9]{8,20}$";
-        private TextView errorMessage;
+	protected int mLayoutID;
+	private final static int minuteInterval = 30;
+	private SliderContainer mContainer;
+	RadioGroup rgcontactinfo;
+	RadioButton rgPhone;
+	EditText econtactinfo;
+	SharedPreferences preferences;
+	public static String filenames = "courtdetails";
+	String contactInfo;
+	String regexStr = "^[0-9]{8,20}$";
+	private TextView errorMessage;
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-                Calendar mInitialTime = Calendar.getInstance();
-                if (savedInstanceState != null
-                                && savedInstanceState.containsKey("time")) {
-                        Calendar c = (Calendar) savedInstanceState.getSerializable("time");
-                        if (c != null && c.after(mInitialTime)) { // TODO Add check for
-                                                                                                                // before
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Calendar mInitialTime = Calendar.getInstance();
+		if (savedInstanceState != null
+				&& savedInstanceState.containsKey("time")) {
+			Calendar c = (Calendar) savedInstanceState.getSerializable("time");
+			if (c != null && c.after(mInitialTime)) { // TODO Add check for
+														// before
 
-                                mInitialTime = c;
-                        }
-                }
+				mInitialTime = c;
+			}
+		}
 
-                if (minuteInterval > 1) {
-                        int minutes = mInitialTime.get(Calendar.MINUTE);
-                        int diff = ((minutes + minuteInterval / 2) / minuteInterval)
-                                        * minuteInterval - minutes;
-                        mInitialTime.add(Calendar.MINUTE, diff);
-                }
+		if (minuteInterval > 1) {
+			int minutes = mInitialTime.get(Calendar.MINUTE);
+			int diff = ((minutes + minuteInterval / 2) / minuteInterval)
+					* minuteInterval - minutes;
+			mInitialTime.add(Calendar.MINUTE, diff);
+		}
 
-                setContentView(R.layout.post_message_layout);
+		setContentView(R.layout.post_message_layout);
 
-                preferences = getSharedPreferences(filenames, 0);
-                rgcontactinfo = (RadioGroup) findViewById(R.id.rgcontact);
-                econtactinfo = (EditText) findViewById(R.id.contact_info);
-                errorMessage = (TextView) findViewById(R.id.txterrormsg);
-                ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
-                postBack.setEnabled(true);
+		preferences = getSharedPreferences(filenames, 0);
+		rgcontactinfo = (RadioGroup) findViewById(R.id.rgcontact);
+		econtactinfo = (EditText) findViewById(R.id.contact_info);
+		errorMessage = (TextView) findViewById(R.id.txterrormsg);
+		ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
+		postBack.setEnabled(true);
 
-                rgcontactinfo.setOnCheckedChangeListener(this);
-                rgPhone = (RadioButton)findViewById(R.id.rbphn);
+		rgcontactinfo.setOnCheckedChangeListener(this);
+		rgPhone = (RadioButton) findViewById(R.id.rbphn);
 
-                mContainer = (SliderContainer) this
-                                .findViewById(R.id.dateSliderContainer);
-                mContainer.setMinuteInterval(minuteInterval);
-                mContainer.setTime(mInitialTime);
-                mContainer.setMinTime(mInitialTime);
+		mContainer = (SliderContainer) this
+				.findViewById(R.id.dateSliderContainer);
+		mContainer.setMinuteInterval(minuteInterval);
+		mContainer.setTime(mInitialTime);
+		mContainer.setMinTime(mInitialTime);
 
-                Calendar maxTime = Calendar.getInstance();
-                maxTime.set(Calendar.HOUR_OF_DAY, 24);
-                maxTime.set(Calendar.MINUTE, 0);
-                maxTime.set(Calendar.SECOND, 0);
-                mContainer.setMaxTime(maxTime);
+		Calendar maxTime = Calendar.getInstance();
+		maxTime.set(Calendar.HOUR_OF_DAY, 24);
+		maxTime.set(Calendar.MINUTE, 0);
+		maxTime.set(Calendar.SECOND, 0);
+		mContainer.setMaxTime(maxTime);
 
-                courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
-                Button cancelButton = (Button) findViewById(R.id.post_message);
-                cancelButton.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
+		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
+		Button cancelButton = (Button) findViewById(R.id.post_message);
+		cancelButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
 
-                                contactInfo = econtactinfo.getText().toString();
-                                //----------- Validation ------------------------
-                                
-                                String userErrorMessage = getMessage();
-                       		 if (userErrorMessage != null)
-                       			 errorMessage.setText(userErrorMessage);
-                       		 else{
-                                if (rgPhone.isChecked()) //phone selected
-                                {
-                                        if(!contactInfo.matches(regexStr) == true) { 
-                                                //TODO REMOVE TOAST! USE TEXT MESSAGE
-                                              errorMessage.setText("Not a Valid Phone");
-                                        return;
-                                        }
-                                } 
-                                else //email selected
-                                {
-                                        if(!new EmailValidator().validate(contactInfo)) {
-                                        	 errorMessage.setText("Not a Valid Email");
-                                                return;
-                                        }
-                                }
-                                //------------------------------------------------
-                                        progressDialog = ProgressDialog.show(PostMessageActivity.this,
-                                                        "", "Posting message...", true);
-                                        progressDialog.show();
+				contactInfo = econtactinfo.getText().toString();
+				// ----------- Validation ------------------------
 
-                                        postMessage();
-                                
+				String userErrorMessage = getMessage();
+				if (userErrorMessage != null)
+					errorMessage.setText(userErrorMessage);
+				else {
+					if (rgPhone.isChecked()) // phone selected
+					{
+						if (!contactInfo.matches(regexStr) == true) {
+							// TODO REMOVE TOAST! USE TEXT MESSAGE
+							errorMessage.setText("Not a Valid Phone");
+							return;
+						}
+					} else // email selected
+					{
+						if (!new EmailValidator().validate(contactInfo)) {
+							errorMessage.setText("Not a Valid Email");
+							return;
+						}
+					}
+					// ------------------------------------------------
+					progressDialog = ProgressDialog.show(
+							PostMessageActivity.this, "", "Posting message...",
+							true);
+					progressDialog.show();
 
-                       		 }
+					postMessage();
 
-                        }
-                });
-        }
+				}
 
-        public void postBack(View v) {
-                finish();
-        }
+			}
+		});
+	}
 
-        private void postMessage() {
-                Message message = new Message(); //Keep the message object local 
-                if (rgPhone.isChecked())
-                        message.setContactTypeId(1);
-                else
-                        message.setContactTypeId(2);
-                // hack!courtId should also be a column in message table but its not
-                message.setTennisCourtId(courtId);
-                // -------------------------------
+	public void postBack(View v) {
+		finish();
+	}
 
-                String utcScheduleTime = Util.getUTCTimeForHourMinute(mContainer
-                                .getTime().get(Calendar.HOUR_OF_DAY),
-                                mContainer.getTime().get(Calendar.MINUTE));
-                message.setScheduleTime(utcScheduleTime);
-                Object item = ((Spinner) this.findViewById(R.id.players_needed))
-                                .getSelectedItem();
-                if (item != null)
-                        message.setPlayerNeeded(item.toString());
-                else
-                        message.setPlayerNeeded("1");
+	private void postMessage() {
+		Message message = new Message(); // Keep the message object local
+		if (rgPhone.isChecked())
+			message.setContactTypeId(1);
+		else
+			message.setContactTypeId(2);
+		// hack!courtId should also be a column in message table but its not
+		message.setTennisCourtId(courtId);
+		// -------------------------------
 
-                message.setContactInfo(contactInfo);
-                item = ((Spinner) this.findViewById(R.id.level)).getSelectedItem();
-                if (item != null)
-                        message.setLevel(item.toString());
-                else
-                        message.setLevel("Beginner");
-                message.setText(((TextView) this.findViewById(R.id.message)).getText()
-                                .toString());
-                registerReceiver(syncFinishedReceiver, new IntentFilter(
-                                SyncAdapter.SYNC_FINISHED_ACTION));
-                ContentResolver.requestSync(MapViewActivity.getAccount(this),
-                                ProviderContract.AUTHORITY, SyncAdapter.getPostMessageBundle(
-                                                courtId, message.toJSONObject().toString()));
-        }
+		String utcScheduleTime = Util.getUTCTimeForHourMinute(mContainer
+				.getTime().get(Calendar.HOUR_OF_DAY),
+				mContainer.getTime().get(Calendar.MINUTE));
+		message.setScheduleTime(utcScheduleTime);
+		Object item = ((Spinner) this.findViewById(R.id.players_needed))
+				.getSelectedItem();
+		if (item != null)
+			message.setPlayerNeeded(item.toString());
+		else
+			message.setPlayerNeeded("1");
 
-        private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
+		message.setContactInfo(contactInfo);
+		item = ((Spinner) this.findViewById(R.id.level)).getSelectedItem();
+		if (item != null)
+			message.setLevel(item.toString());
+		else
+			message.setLevel("Beginner");
+		message.setText(((TextView) this.findViewById(R.id.message)).getText()
+				.toString());
+		registerReceiver(syncFinishedReceiver, new IntentFilter(
+				SyncAdapter.SYNC_FINISHED_ACTION));
+		ContentResolver.requestSync(MapViewActivity.getAccount(this),
+				ProviderContract.AUTHORITY, SyncAdapter.getPostMessageBundle(
+						courtId, message.toJSONObject().toString()));
+	}
 
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                        Log.d(TAG, "sync for post post message done");
+	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
 
-                        unregisterReceiver(this);
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.d(TAG, "sync for post post message done");
 
-                        if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-                                progressDialog.dismiss();
-                                AlertDialog.Builder builder = new AlertDialog.Builder(
-                                                PostMessageActivity.this);
-                                builder.setMessage("Error while posting message")
-                                                .setCancelable(false)
-                                                .setNeutralButton("OK",
-                                                                new DialogInterface.OnClickListener() {
-                                                                        public void onClick(DialogInterface dialog,
-                                                                                        int id) {
-                                                                                PostMessageActivity.this.finish();
-                                                                        }
-                                                                });
+			unregisterReceiver(this);
 
-                                alert = builder.create();
-                                alert.show();
-                        } else {
-                                progressDialog.setMessage("Message posted successfully");
-                                progressDialog.dismiss();
-                                SharedPreferences.Editor editor = preferences.edit();
+			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
+				progressDialog.dismiss();
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						PostMessageActivity.this);
+				builder.setMessage("Error while posting message")
+						.setCancelable(false)
+						.setNeutralButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										PostMessageActivity.this.finish();
+									}
+								});
 
-                                editor.putBoolean("post", true);
+				alert = builder.create();
+				alert.show();
+			} else {
+				progressDialog.setMessage("Message posted successfully");
+				progressDialog.dismiss();
+				SharedPreferences.Editor editor = preferences.edit();
 
-                                editor.commit();
+				editor.putBoolean("post", true);
 
-                                PostMessageActivity.this.finish();
-                        }
-                }
-        };
+				editor.commit();
 
-        public void onCancel(View v) {
-                PostMessageActivity.this.finish();
-        }
+				PostMessageActivity.this.finish();
+			}
+		}
+	};
 
-        @Override
-        protected void onSaveInstanceState(Bundle outState) {
-                super.onSaveInstanceState(outState);
-                if (outState == null)
-                        outState = new Bundle();
-                outState.putSerializable("time", mContainer.getTime());
-        }
+	public void onCancel(View v) {
+		PostMessageActivity.this.finish();
+	}
 
-        @Override
-        public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // TODO Auto-generated method stub
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (outState == null)
+			outState = new Bundle();
+		outState.putSerializable("time", mContainer.getTime());
+	}
 
-                switch (checkedId) {
-                case R.id.rbphn:
-                        econtactinfo.setInputType(InputType.TYPE_CLASS_PHONE);
-                        econtactinfo.setHint("e.g. 9999999999");
-                        // int maxLength = 10;
-                        //
-                        // InputFilter[] FilterArray = new InputFilter[1];
-                        // FilterArray[0] = new InputFilter.LengthFilter(maxLength);
-                        // econtactinfo.setFilters(FilterArray);
-                        econtactinfo
-                                        .setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-                                                        10) });
-                        break;
+	@Override
+	public void onCheckedChanged(RadioGroup group, int checkedId) {
+		// TODO Auto-generated method stub
 
-                case R.id.rbemail:
-                        econtactinfo
-                                        .setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                        econtactinfo.setHint("e.g abcd@efgh.com");
-                        econtactinfo
-                                        .setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-                                                        50) });
-                        break;
-                }
+		switch (checkedId) {
+		case R.id.rbphn:
+			errorMessage.setText("");
+			econtactinfo.setText("");
+			econtactinfo.setInputType(InputType.TYPE_CLASS_PHONE);
+			econtactinfo.setHint("e.g. 9999999999");
+			// int maxLength = 10;
+			//
+			// InputFilter[] FilterArray = new InputFilter[1];
+			// FilterArray[0] = new InputFilter.LengthFilter(maxLength);
+			// econtactinfo.setFilters(FilterArray);
+			econtactinfo
+					.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
+							10) });
+			break;
 
-        }
-        /**
-	     * Returns the message to be displayed at the top of the login dialog box.
-	     */
-	    private String getMessage() {
-	        if (TextUtils.isEmpty(contactInfo)) {
-	            return "Invalid Phone or Email";
-	        }
-	        else
-	        	return null;
-	    }
+		case R.id.rbemail:
+			errorMessage.setText("");
+			econtactinfo.setText("");
+			econtactinfo
+					.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+			econtactinfo.setHint("e.g abcd@efgh.com");
+			econtactinfo
+					.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
+							50) });
+			break;
+		}
+
+	}
+
+	/**
+	 * Returns the message to be displayed at the top of the login dialog box.
+	 */
+	private String getMessage() {
+		if (TextUtils.isEmpty(contactInfo)) {
+			return "Invalid Phone or Email";
+		} else
+			return null;
+	}
 }

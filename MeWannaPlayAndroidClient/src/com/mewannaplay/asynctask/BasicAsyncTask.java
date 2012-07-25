@@ -18,50 +18,50 @@ import com.mewannaplay.client.RestClient;
 
 public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
 
-	protected String TAG = "BasicAsyncTask";
-	protected Activity ownerAcitivty;
-	
-	private volatile boolean running = true;
+        protected String TAG = "BasicAsyncTask";
+        protected Activity ownerAcitivty;
+        
+        private volatile boolean running = true;
     private final ProgressDialog progressDialog;
  
 
-	
-	private final String SERVER_URL;
-	private final RequestMethods httpRequestMethod;
-	private final JSONObject jsonObjectToPost;
-	private boolean isError = false;
-	private String errorMessage = null;
-	
-	
-	
-	public boolean isError() {
-		return isError;
-	}
+        
+        private final String SERVER_URL;
+        private final RequestMethods httpRequestMethod;
+        private final JSONObject jsonObjectToPost;
+        private boolean isError = false;
+        private String errorMessage = null;
+        
+        
+        
+        public boolean isError() {
+                return isError;
+        }
 
 
 
-	public String getErrorMessage() {
-		return errorMessage;
-	}
+        public String getErrorMessage() {
+                return errorMessage;
+        }
 
 
 
-	public BasicAsyncTask(Activity context, String serverUrl,RequestMethods httpRequestMethodToUse, String progressDialogMessage)
-	{
-		this(context,serverUrl,httpRequestMethodToUse, null, progressDialogMessage);
-	}
+        public BasicAsyncTask(Activity context, String serverUrl,RequestMethods httpRequestMethodToUse, String progressDialogMessage)
+        {
+                this(context,serverUrl,httpRequestMethodToUse, null, progressDialogMessage);
+        }
 
-	public BasicAsyncTask(Activity context, String serverUrl,RequestMethods httpRequestMethodToUse, JSONObject jsonObjectToPost, String progressDialogMessage)
-	{
-		SERVER_URL = serverUrl;
-		httpRequestMethod = httpRequestMethodToUse;
-		this.ownerAcitivty = context;
-		this.jsonObjectToPost = jsonObjectToPost;
-	
-		progressDialog = new ProgressDialog(ownerAcitivty);
-		progressDialog.setTitle("");
-		progressDialog.setMessage(progressDialogMessage);
-		progressDialog.setCancelable(true);
+        public BasicAsyncTask(Activity context, String serverUrl,RequestMethods httpRequestMethodToUse, JSONObject jsonObjectToPost, String progressDialogMessage)
+        {
+                SERVER_URL = serverUrl;
+                httpRequestMethod = httpRequestMethodToUse;
+                this.ownerAcitivty = context;
+                this.jsonObjectToPost = jsonObjectToPost;
+        
+                progressDialog = new ProgressDialog(ownerAcitivty);
+                progressDialog.setTitle("");
+                progressDialog.setMessage(progressDialogMessage);
+                progressDialog.setCancelable(true);
         progressDialog.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -72,25 +72,25 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
         });
 
 
-	}
+        }
 
-	
-	
-	@Override
+        
+        
+        @Override
     protected void onCancelled() {
         running = false;
         if (progressDialog.isShowing())
-        	progressDialog.dismiss();
+                progressDialog.dismiss();
     }
 
 
-	@Override
+        @Override
     protected void onPreExecute() {
-		progressDialog.show();
+                progressDialog.show();
     }
 
-	
-	
+        
+        
     @Override
     protected void onPostExecute(Boolean result) {
        super.onPostExecute(result);
@@ -103,22 +103,22 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
        Log.d(TAG, " executing asynctask for server url -"+SERVER_URL);
        JSONObject response = null;
        try {
-    	if (running)
-    		response = sendRequest();
-    	if(running)
-    		parseResponse(response);
-	} catch (Exception e) {
-		isError = true;
-		errorMessage = e.getMessage();
-		return isError;
-	}
+        if (running)
+                response = sendRequest();
+        if(running)
+                parseResponse(response);
+        } catch (Exception e) {
+                isError = true;
+                errorMessage = e.getMessage();
+                return isError;
+        }
        return isError;
     }
     
     protected JSONObject sendRequest() throws IOException
     {
-    	RestClient restClient = new RestClient(SERVER_URL);
-    	return restClient.execute(httpRequestMethod, jsonObjectToPost);		
+        RestClient restClient = new RestClient(SERVER_URL);
+        return restClient.execute(httpRequestMethod, jsonObjectToPost);         
     }
     
     protected abstract void parseResponse(JSONObject jsonObject) throws IOException;
