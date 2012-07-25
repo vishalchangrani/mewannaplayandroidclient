@@ -148,9 +148,9 @@ public class PostMessageActivity extends Activity implements
         private void postMessage() {
                 Message message = new Message(); //Keep the message object local 
                 if (rgPhone.isChecked())
-                        message.setContactTypeId(0);
-                else
                         message.setContactTypeId(1);
+                else
+                        message.setContactTypeId(2);
                 // hack!courtId should also be a column in message table but its not
                 message.setTennisCourtId(courtId);
                 // -------------------------------

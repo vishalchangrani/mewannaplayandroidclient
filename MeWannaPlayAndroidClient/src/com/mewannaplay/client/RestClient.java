@@ -95,7 +95,7 @@ public class RestClient {
                 case GET: {
                         HttpGet request = new HttpGet(url);
                         if (!request.containsHeader("Accept-Encoding")) 
-                    request.addHeader("Accept-Encoding", "gzip");
+                        	request.addHeader("Accept-Encoding", "gzip");
                         responseString = executeRequest(request);
                         break;
                 }
@@ -253,9 +253,9 @@ public class RestClient {
                         Log.d(TAG, "Entity null!!");
                         return "";
                 } catch (Throwable e) {
-                        if (mHttpClient != null) 
-                        	mHttpClient.getConnectionManager().shutdown();
-                        mHttpClient = null;
+                       // if (mHttpClient != null) 
+                       // 	mHttpClient.getConnectionManager().shutdown();
+                      //  mHttpClient = null;
                         if (entity != null)
                                 entity.consumeContent();
                         Log.e(TAG, e.getMessage(), e);
