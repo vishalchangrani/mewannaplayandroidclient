@@ -296,7 +296,7 @@
 
             <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_timings"
-                android:layout_width="230dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 
@@ -523,7 +523,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/post_msg_button"
             android:background="@drawable/mark_court_occupied_selector"

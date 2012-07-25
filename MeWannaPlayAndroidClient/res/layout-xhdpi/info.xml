@@ -42,8 +42,8 @@
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="120dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/infook" />
+                android:layout_marginTop="18dp"
+                android:background="@drawable/okbutton" />
         </LinearLayout>
     </LinearLayout>
 
