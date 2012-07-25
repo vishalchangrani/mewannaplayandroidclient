@@ -820,7 +820,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {
-										MapViewActivity.this.finish();
+										dialog.dismiss();
 									}
 								});
 
