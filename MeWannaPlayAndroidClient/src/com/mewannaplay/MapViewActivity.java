@@ -26,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +34,7 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.mewannaplay.asynctask.GetCourtDetailsAsyncTask;
+import com.mewannaplay.asynctask.GetPostedMessageAsyncTask;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
 import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
@@ -452,7 +452,6 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 	public void getTennisCourtDetails(int id,
 			Location locationOfSelectedTennisCourt) {
 
-		stopBackGroundRefresh();
 		Log.d(TAG, " --> Requesting fetch for " + id);
 		
 		new GetCourtDetailsAsyncTask(this, id, locationOfSelectedTennisCourt).execute(null);
@@ -478,7 +477,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 				alert = builder.create();
 				alert.show();
-				startBackGroundRefresh();
+			
 			} else {
 				startTennisCourtDetailActivity(courtId,
 						locationOfSelectedTennisCourt);
@@ -792,21 +791,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 			Log.e(TAG, " Court id is invalid " + getCourtPostedMessageOn());
 			return;
 		}
-		stopBackGroundRefresh();
-		progressDialog = ProgressDialog
-				.show(this, "", "Fetching message", true);
-		Log.d(TAG, " --> Requesting sync for message for courtid"
-				+ getCourtPostedMessageOn());
-		getContentResolver().delete(ProviderContract.Messages.CONTENT_URI,
-				null, null); // clean message table
-		registerReceiver(postedMessageReceiver, new IntentFilter(
-				SyncAdapter.SYNC_FINISHED_ACTION));
-		ContentResolver
-				.requestSync(
-						MapViewActivity.getAccount(this),
-						ProviderContract.AUTHORITY,
-						SyncAdapter
-								.getMessagePostedByUserBundle(getCourtPostedMessageOn()));
+	
+		new GetPostedMessageAsyncTask(this, getCourtPostedMessageOn()).execute(null);
 
 	}
 
@@ -820,19 +806,12 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 		startActivity(intentForTennisCourtDetails);
 	}
 
-	private BroadcastReceiver postedMessageReceiver = new BroadcastReceiver() {
+	
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "Sync finished, should refresh nao!!");
-
-			if (intent.getExtras().getInt(SyncAdapter.OPERATION) != SyncAdapter.GET_COURT_MESSAGE_BY_ID)
-				return;
-
-			unregisterReceiver(this);
-
-			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-				progressDialog.dismiss();
+		public void onPostExecutePostedMessageTask(boolean error) {
+		
+			if (error) {
+		
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						MapViewActivity.this);
 				builder.setMessage("Error while fetching message")
@@ -847,9 +826,9 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
 				alert = builder.create();
 				alert.show();
-				startBackGroundRefresh();
+			
 			} else {
-				progressDialog.dismiss();
+		
 				// Retreive the message id of the message just fetched by
 				// syncadapter
 				Cursor cursor = getContentResolver().query(
@@ -857,7 +836,6 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 						null, " _id LIMIT 1");
 				if (cursor.getCount() == 0) {
 					Log.e(TAG, " Court message not found");
-					startBackGroundRefresh();
 					return;
 				}
 				cursor.moveToFirst();
@@ -868,7 +846,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 					viewMessage(messageId, getCourtPostedMessageOn());
 			}
 		}
-	};
+
 
 	@Override
 	public void onClick(View v) {
