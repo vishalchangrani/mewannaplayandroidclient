@@ -195,15 +195,21 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 
 		mUsername = mUsernameEdit.getText().toString();
 		mPassword = mPasswordEdit.getText().toString();
+	if(TextUtils.isEmpty(mUsername) && TextUtils.isEmpty(mPassword)){
+		
+		mMessage.setText("Please Enter Username and password");
+	}else{
 		if (TextUtils.isEmpty(mUsername) || TextUtils.isEmpty(mPassword)) {
 			mMessage.setText(getMessage());
-		} else {
+		}
+		
+		else {
 			// Show a progress dialog, and kick off a background task to perform
 			// the user login attempt.
 			showProgress();
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute();
-		}
+		}}
 	}
 
 	public void handleAnnonymousLogin(View view) {
@@ -393,6 +399,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 			// We have an account but no password
 			return getText(R.string.login_activity_loginfail_text_pwmissing);
 		}
+	
 		return null;
 	}
 

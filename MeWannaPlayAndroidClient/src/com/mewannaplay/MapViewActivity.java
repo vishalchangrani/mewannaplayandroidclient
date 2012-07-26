@@ -35,6 +35,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.mewannaplay.asynctask.GetCourtDetailsAsyncTask;
 import com.mewannaplay.asynctask.GetPostedMessageAsyncTask;
+import com.mewannaplay.authenticator.AuthenticatorActivity;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.mapoverlay.MyItemizedOverlay;
 import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
@@ -689,6 +690,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                         this.finish();
                         AccountManager.get(this).removeAccount(
                                         MapViewActivity.getAccount(this), null, null);
+                      
                         return true;
                 default:
                         return super.onOptionsItemSelected(item);
