@@ -150,19 +150,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			getCourtMessageByTennisCourtId(extras.getInt(COURT_ID));
 			break;
 		case GET_ALL_COURTS_STATS:
-			new Thread()
-			{
-				public void run()
-				{
-					this.setName("getAllCourtStatsThread");
-					try {
-						Log.d(TAG, "spawning of thread for getAllCourtStats");
+			//new Thread()
+		//	{
+			//	public void run()
+				///{
+					//this.setName("getAllCourtStatsThread");
+					//try {
+						//Log.d(TAG, "spawning of thread for getAllCourtStats");
 						getAllCourtStats();
-					} catch (IOException e) {
-						Log.e(TAG, "error while doing getcourtstats");
-					}
-				}
-			}.start();
+				//	} catch (IOException e) {
+					//	Log.e(TAG, "error while doing getcourtstats");
+				//	}
+			//	}
+			//}.start();
 			
 			
 			break;
@@ -196,12 +196,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	};
 
 	private void getOccupiedCourtAndPostedMsg() throws IOException {
-		new Thread()
-		{
+		//new Thread()
+	//	{
 			
-		public void run()
+	//	public void run()
 		
-		{
+	//	{
 		Log.d(TAG," getting occupied court id and posted message id");
 		RestClient restClient = new RestClient(
 				Constants.GET_OCCUPIED_COURT_AND_POSTED_MSG);
@@ -239,8 +239,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			// User has not posted any message
 			MapViewActivity.setCourtPostedMessageOn(-1);
 		}
-		}
-		}.start();
+		//}
+		//}.start();
 		
 
 	}
