@@ -1,4 +1,6 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<TableLayout  xmlns:android="http://schemas.android.com/apk/res/android" 
     android:id="@+id/court_sub_table_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -229,3 +231,4 @@
     </TableRow>
 
 </TableLayout>
+

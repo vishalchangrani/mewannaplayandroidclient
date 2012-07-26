@@ -334,7 +334,7 @@
     <ExpandableListView
         android:id="@+id/exapandableList"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_below="@+id/court_back_icon"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
@@ -342,26 +342,32 @@
         android:groupIndicator="@drawable/list_group_indicator"
         android:layout_marginTop="5dp"
         android:scrollbars="none" />
+  <LinearLayout
+       android:id="@+id/exlayout"
+            android:clickable="true"
+            android:paddingBottom="0dip"
+            android:paddingLeft="5dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginBottom="10dp"
+             android:layout_below="@+id/exapandableList"
+            android:background="@drawable/yellowborderborder"
+            android:paddingRight="0dip" >
 
+          
+     </LinearLayout>
     <TableLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/msg_table"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/exapandableList"
+        android:layout_below="@+id/exlayout"
+      
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
+    
       >
-  <TableRow
-            android:clickable="true"
-            android:paddingBottom="0dip"
-            android:paddingLeft="5dip"
-             android:layout_marginTop="10dp"
-            android:background="@drawable/yellowborderborder"
-            android:paddingRight="0dip" >
 
-          
-        </TableRow>
         <TableRow
             android:clickable="true"
             android:paddingBottom="0dip"
@@ -403,7 +409,12 @@
     android:layout_below="@id/android:list"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:text="@string/main_no_items"/>
+    android:text="@string/main_no_items"/>
+
+
+
+
+
     -->
 
 
@@ -461,7 +472,7 @@
         android:typeface="serif"
         android:textColor="#000000"/>
          <TextView
-		 android:text="Comment"
+                 android:text="Comment"
         android:textSize="5dp"
         android:textStyle="bold"
         android:typeface="serif"
@@ -477,7 +488,12 @@
 
 
     </TableRow>
-  </TableLayout>
+  </TableLayout>
+
+
+
+
+
     -->
 
     <ListView
@@ -499,7 +515,7 @@
         android:id="@+id/lnfoot"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+     
         android:layout_below="@android:id/list"
         
         android:background="@drawable/foot" >
