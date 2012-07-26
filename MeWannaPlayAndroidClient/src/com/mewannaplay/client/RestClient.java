@@ -150,7 +150,7 @@ public class RestClient {
        		switch(method)
         	   {
         	   case GET: 	
-        			inputStream = conn.getInputStream();
+        			
         			break; 
 
         	   case POST:
