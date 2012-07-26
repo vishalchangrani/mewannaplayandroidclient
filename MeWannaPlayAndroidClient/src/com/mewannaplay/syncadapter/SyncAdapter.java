@@ -105,7 +105,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority,
         ContentProviderClient provider, SyncResult syncResult) {
    
-    	Log.d(TAG,"in onPerform sync");
+    	
     	boolean isError = false;
 
     	if (!extras.containsKey(OPERATION))
@@ -113,6 +113,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     	
     	int operationRequested = extras.getInt(OPERATION); //what operation is requested?
     	boolean ackNeeded = extras.getBoolean(ACKNOWLEDGEMENT_NEEDED, true); //Is acknowledgment requested for this operation?
+    	
+    	Log.d(TAG,"in onPerform sync doing "+operationRequested);
     	try
     	{
 		switch (operationRequested) {

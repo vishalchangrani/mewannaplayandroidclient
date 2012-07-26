@@ -272,7 +272,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 // message id posted by user (if user not anonymous)
                 if (RestClient.isLoggedIn()) // This is not an anonymous user
                 {
-                        Log.d(TAG, " Adding continous refresh for court statistics");
+                        Log.d(TAG, " Adding continous refresh for message and court occupied");
                         // Periodically update the two flags courtMarkedOccupied and
                         // courtPostedMessageOn
                         // Set to 10 second period for development BUT in production this
