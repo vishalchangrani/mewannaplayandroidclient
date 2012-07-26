@@ -9,12 +9,10 @@ import java.util.TimeZone;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -42,9 +40,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mewannaplay.asynctask.MarkCourtOccupiedAsyncTask;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourtDetails;
-import com.mewannaplay.providers.GPS;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
@@ -58,7 +56,6 @@ public class CourtDetailsActivity extends ListActivity implements
 	public static final String SELECTED_COURTS_GEOPOINT = "SELECTED_COURTS_GEOPOINT";
 	private SimpleCursorAdapter cursorAdapter;
 	Cursor messageCursor;
-	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	int courtId, postid, markid;
 	private ContentObserver messageContentObserver;
@@ -103,30 +100,6 @@ public class CourtDetailsActivity extends ListActivity implements
 
 		thisCourtsLocation = (Location) this.getIntent().getExtras()
 				.getParcelable(SELECTED_COURTS_GEOPOINT);
-
-		if (RestClient.isLoggedIn()) {
-
-			Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
-			cmsg.setVisibility(View.GONE);
-			if (postid != -1) {
-
-				postMsgButton.setEnabled(false);
-				postMsgButton
-						.setBackgroundResource(R.drawable.disablepostmessage);
-				cmsg.setVisibility(View.VISIBLE);
-				cmsg.setText("You have already posted a message.");
-				messageposted = true;
-
-			} else {
-				postMsgButton.setBackgroundResource(R.drawable.postmessage);
-				postMsgButton.setEnabled(true);
-			}
-
-		} else {
-
-			cmsg.setVisibility(View.VISIBLE);
-			cmsg.setText("Cannot post message or mark a court occupied when logged in as anonymous");
-		}
 
 		// TODO this should ideally be not done on the UI thread..but
 		// will fix later
@@ -253,6 +226,7 @@ public class CourtDetailsActivity extends ListActivity implements
 	protected void onResume() {
 
 		super.onResume();
+		enableDisableButtons();
 		messageContentObserver = new MessagesContentObserver(null);
 		getContentResolver().registerContentObserver(Messages.CONTENT_URI,
 				true, messageContentObserver);
@@ -262,21 +236,23 @@ public class CourtDetailsActivity extends ListActivity implements
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
 				SyncAdapter.getAllMessagesBundle(courtId), 2 * 60);
-		Location currentLocation = MapViewActivity.mapViewActivity
-				.getMyCurrentLocation();
+	}
 
+	private void enableDisableButtons()
+	{
 		Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 		Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
 		postMsgButton.setEnabled(false);
 		markCourtOccupied.setEnabled(false);
 		cmsg.setVisibility(View.GONE);
-
+		
 		if (!RestClient.isLoggedIn()) {
 			// If the user has not logged in
 			cmsg.setVisibility(View.VISIBLE);
 			cmsg.setText("Cannot post message or mark a court occupied when logged in as anonymous");
 		} else { // If the user has logged in
-
+			Location currentLocation = MapViewActivity.mapViewActivity
+					.getMyCurrentLocation();
 			if (MapViewActivity.getCourtMarkedOccupied() != -1) {
 				// User has marked a court occupied
 
@@ -323,9 +299,9 @@ public class CourtDetailsActivity extends ListActivity implements
 			}
 
 		}
-
+		markCourtOccupied.setEnabled(true);
 	}
-
+	
 	private void populateView() {
 		TextView tv = (TextView) this.findViewById(R.id.court_name);
 		tv.setTypeface(bold);
@@ -568,33 +544,20 @@ public class CourtDetailsActivity extends ListActivity implements
 	}
 
 	public void markOccupied(View v) {
-
-		progressDialog = ProgressDialog.show(CourtDetailsActivity.this, "",
-				"Marking court occupied...", true);
-		progressDialog.show();
-
-		registerReceiver(syncFinishedReceiver, new IntentFilter(
-				SyncAdapter.SYNC_FINISHED_ACTION));
-		ContentResolver.requestSync(
-				MapViewActivity.getAccount(CourtDetailsActivity.this),
-				ProviderContract.AUTHORITY,
-				SyncAdapter.getMarkOccupiedBundle(courtId));
+		new MarkCourtOccupiedAsyncTask(this, courtId).execute(null);
 	}
 
 	public void onBack(View v) {
 		this.finish();
 	}
 
-	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
+	
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "sync for mark occupied done");
+		public void onPostExecuteMarkCourtOccupiedTask(boolean error) {
+			Log.d(TAG, "mark occupied done");
 
-			unregisterReceiver(this);
-
-			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-				progressDialog.dismiss();
+			if (error) {
+			
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						CourtDetailsActivity.this);
 				builder.setMessage("Error while marking court occupied")
@@ -618,13 +581,15 @@ public class CourtDetailsActivity extends ListActivity implements
 				// getContentResolver().update(ProviderContract.TennisCourts.CONTENT_URI.buildUpon().appendPath(courtId
 				// + "").build(), contentValues, " _id = ?", new
 				// String[]{courtId+""});
+				ProgressDialog progressDialog = new ProgressDialog(this); 
 				progressDialog.setMessage("Court marked occupied");
 				progressDialog.dismiss();
-				cmsg.setText("Not in proximity of the court");
+				progressDialog = null;
+				enableDisableButtons();
 
 			}
 		}
-	};
+
 
 	public final void viewMessage(long rowId) {
 		Intent intentForTennisCourtDetails = new Intent(this,

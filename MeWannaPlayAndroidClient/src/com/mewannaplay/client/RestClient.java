@@ -161,7 +161,7 @@ public class RestClient {
                    break;
                    
         	   case DELETE:
-        		   conn.setDoOutput(true);
+        		 //  conn.setDoOutput(true);
         		   conn.setRequestMethod("DELETE");
         		   break;
         	   }
