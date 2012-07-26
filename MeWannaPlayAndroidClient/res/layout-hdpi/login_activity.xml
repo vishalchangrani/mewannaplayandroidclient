@@ -134,9 +134,15 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="35"
+                android:layout_weight="41"
+                android:weightSum="10"
                 android:orientation="vertical" >
-
+  <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="7"
+              
+                android:orientation="vertical" >
                 <Button
                     android:id="@+id/ok_button"
                     android:layout_width="wrap_content"
@@ -148,13 +154,20 @@
                     android:text="GO>"
                     android:textColor="#edd008"
                     android:textSize="25sp"
-                   />
+                   /></LinearLayout>
+  
+   <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+              
+                android:orientation="vertical" ></LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="15"
+                android:layout_weight="9"
                 android:orientation="vertical" >
 
                 <Button
@@ -166,7 +179,7 @@
                     android:onClick="onNewUserRegister"
                     android:text="New User Registration>"
                     android:textColor="#edd008"
-                   
+                     android:layout_marginLeft="42dp"
                     android:textSize="16sp"
                     >
                 </Button>
