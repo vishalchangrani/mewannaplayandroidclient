@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relative"
     android:layout_width="fill_parent"
@@ -57,7 +58,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingRight="0dip"
-                android:text="645 B 2002"
+                android:text="645 B 2002  HGFHFHGFHFHH GJHGJGHJGHJGJH"
                 android:textColor="#fff"
                 android:textSize="12sp"
                 android:textStyle="italic"
@@ -99,12 +100,12 @@
     </TableLayout>
  <ImageView
         android:id="@+id/court_driving_icon"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
       
          android:layout_toRightOf="@+id/court_addr_1"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="250dp"
+        android:layout_marginLeft="360dp"
         android:onClick="clickdriving"
         android:src="@drawable/drivingdirection" />
     
@@ -510,7 +511,7 @@
         android:id="@+id/lnfoot"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_below="@android:id/list"
         
         android:background="@drawable/foot" >
@@ -520,7 +521,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/post_message_selector"
             android:onClick="postMessage"
@@ -534,7 +535,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/post_msg_button"
             android:background="@drawable/mark_court_occupied_selector"

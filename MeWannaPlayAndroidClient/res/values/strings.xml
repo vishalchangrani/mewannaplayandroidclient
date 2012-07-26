@@ -42,7 +42,7 @@
     -->
     <string
         name="login_activity_newaccount_text">LOGIN </string>
-
+     
     <!-- Button that takes the user to the "sign in" screen -->
     <string
         name="sign_in_button_label">Sign in</string>
