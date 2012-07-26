@@ -31,7 +31,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/help_information" />
+            android:background="@drawable/mapinfobutton" />
 
         <TextView
             android:id="@+id/dropdown_city"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/dropdown_city"
-            android:background="@drawable/shoutout"
+            android:background="@drawable/mapmessagebutton"
               android:layout_marginTop="8dp"
             android:onClick="onPartnerFound"
             android:visibility="invisible"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/ImageInfoButton01"
-            android:background="@drawable/searchhhh"
+            android:background="@drawable/mapsearchbutton"
               android:layout_marginTop="8dp"
               android:onClick="onSearch"
               

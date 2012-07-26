@@ -70,6 +70,7 @@ public class CourtDetailsActivity extends ListActivity implements
 	public static String filenames = "courtdetails";
 	TextView cmsg, cmsgprox,surfacetype,courtype,courtfacility,courtimings,message,lockeroom,parking,lessons,lights,snakbar,shop,adultprog,teamtennis,juniorprog,tournaments,ladders,roundrobin,socialmixers,serniors;
 	String user;
+	String time_posted;
 	Typeface bold,heavy,light,normal;
 	
 
@@ -644,7 +645,6 @@ public class CourtDetailsActivity extends ListActivity implements
 	 */
 
 	private class MessagesCursorAdapter extends SimpleCursorAdapter {
-
 		private final LayoutInflater mInflater;
 		SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -663,6 +663,7 @@ public class CourtDetailsActivity extends ListActivity implements
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 			// 1
+			
 
 			String scheduled_time = cursor.getString(cursor
 					.getColumnIndex("scheduled_time"));
@@ -705,7 +706,7 @@ public class CourtDetailsActivity extends ListActivity implements
 					.setText("Players needed: " + players_needed);
 
 			// 6
-			String time_posted = cursor.getString(cursor
+			time_posted = cursor.getString(cursor
 					.getColumnIndex("time_posted"));
 			Date timePostedDate;
 			try {
@@ -728,7 +729,6 @@ public class CourtDetailsActivity extends ListActivity implements
 			((TextView) view.findViewById(R.id.message_text))
 					.setText(messageText);
 		}
-
 	}
 
 	@Override

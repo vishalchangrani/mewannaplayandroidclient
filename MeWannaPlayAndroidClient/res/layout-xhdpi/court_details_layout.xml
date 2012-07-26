@@ -499,7 +499,7 @@
         android:id="@+id/lnfoot"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:layout_below="@android:id/list"
         
         android:background="@drawable/foot" >
@@ -523,7 +523,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="9dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/post_msg_button"
             android:background="@drawable/mark_court_occupied_selector"
