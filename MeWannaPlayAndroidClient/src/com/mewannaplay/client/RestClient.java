@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
@@ -40,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import android.os.Build;
 import android.util.Log;
 
 import com.google.gson.FieldNamingPolicy;
@@ -66,14 +70,23 @@ public class RestClient {
 
         // shared instance of httpclient
         private static HttpClient mHttpClient;
-        public static final int REGISTRATION_TIMEOUT = 60 * 10 * 1000; // ms
+        public static final int REGISTRATION_TIMEOUT =  1 * 1000; // ms
 
         // Create a local instance of cookie store
         private final static CookieStore cookieStore = new BasicCookieStore();
-
+        private final static CookieManager cookieManager = new CookieManager();
+        
         // Create local HTTP context
         private final static HttpContext localContext = new BasicHttpContext();
 
+        static
+        {
+        	// HTTP connection reuse which was buggy pre-froyo
+            if (Integer.parseInt(Build.VERSION.SDK) < Build.VERSION_CODES.FROYO) {
+                System.setProperty("http.keepAlive", "false");
+            }
+        }
+      
         public RestClient(String url) {
                 this.url = url;
         }
@@ -88,14 +101,14 @@ public class RestClient {
         }
 
         // TODO fix this to better use generics
-        public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend)
+      /*  public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend)
                         throws IOException {
                 String responseString = null;
                 switch (method) {
                 case GET: {
                         HttpGet request = new HttpGet(url);
                         if (!request.containsHeader("Accept-Encoding")) 
-                                request.addHeader("Accept-Encoding", "gzip");
+                        	request.addHeader("Accept-Encoding", "gzip");
                         responseString = executeRequest(request);
                         break;
                 }
@@ -145,7 +158,7 @@ public class RestClient {
 
                 return jsonObject;
 
-        }
+        }*/
 
         /*
          * I had to add this method since for certain operations like
@@ -157,7 +170,7 @@ public class RestClient {
          * created in memory for the response Currently on getAllCourtStats and
          * getAlCourts use this (eventually all Rest calls should use this)
          */
-        public JsonReader excuteGetAndReturnStream() throws IOException {
+  /*      public JsonReader excuteGetAndReturnStream() throws IOException {
                 HttpGet request = new HttpGet(url);
                 if (!request.containsHeader("Accept-Encoding")) 
             request.addHeader("Accept-Encoding", "gzip");
@@ -204,8 +217,142 @@ public class RestClient {
                         Log.e(TAG, e.getMessage(), e);
                         throw new IOException(e);
                 }
-        }
+        } */
 
+      
+        
+        public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend)
+                throws IOException {
+        
+        	InputStreamReader inputStreamReader = null;
+        	BufferedReader bufferedReader = null;
+        	InputStream inputStream = null;
+        	try
+        	{
+        	inputStream = excuteAndReturnInputStream(method,jsonObjectToSend);
+            inputStreamReader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);   
+            
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                    response.append(line);
+            }
+            
+            
+            String responseString = response.toString();
+            if (responseString == null)
+                    throw new IOException("Server response not recevieved for " + url);
+            
+            // responseString =
+            // "{\"status\":{\"error\":\"No\",\"code\":200,\"description\":\"\",\"message\":\"Ok\"},\"tenniscourt\":[{\"tennis_id\":\"13604\",\"tennis_latitude\":\"32.807622\",\"tennis_longitude\":\"-85.971383\",\"tennis_subcourts\":\"4\",\"Occupied\":\"124\",\"tennis_facility_type\":\"Private\",\"tennis_name\":\"Willowpoint Golf & Country Club\",\"message_count\":\"124\"}]}";
+            // First extract status
+            final JSONTokener jsonTokener = new JSONTokener(responseString);
+            Status status = null;
+            JSONObject jsonObject = null;
+            jsonObject = (JSONObject) jsonTokener.nextValue();
+            final GsonBuilder gsonb = new GsonBuilder();
+            final Gson gson = gsonb.setFieldNamingPolicy(
+            FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+            status = gson.fromJson(jsonObject.getJSONObject("status").toString(), Status.class);
+          
+
+            if (status == null)
+                    throw new IOException("Server response not recevieved for " + url);
+            if (status.isNotSuccess())
+                    throw new IOException(status.getMessage());
+
+            return jsonObject;
+        	}
+        	catch (Exception e) {
+                throw new IOException("Conversion error " + url);
+        	}
+        	finally
+        	{
+        		if (bufferedReader != null)
+        			bufferedReader.close();
+                if (inputStreamReader != null)
+                	inputStreamReader.close();
+                if (inputStream != null)
+                	inputStream.close();
+        	}
+        
+        
+        
+        }
+        
+        public JsonReader excuteGetAndReturnStream() throws IOException 
+        {
+        	InputStream inputStream = excuteAndReturnInputStream(RequestMethods.GET,null);
+        	InputStreamReader inputStreamReader = null;
+        	BufferedReader bufferedReader = null;
+            inputStreamReader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);       	
+        	return new JsonReader(bufferedReader);
+        }
+        
+        private InputStream excuteAndReturnInputStream(RequestMethods method, JSONObject jsonObjectToSend) throws IOException 
+        {
+        	 
+        	HttpURLConnection conn = null;
+        	InputStream inputStream = null;
+        	   try
+        	   {
+        	   
+        		URL urlObject = new URL(url);
+       			conn = (HttpURLConnection) urlObject.openConnection();
+       			conn.addRequestProperty("Accept-Encoding", "gzip");
+       			cookieManager.setCookies(conn);	   
+        	   
+       			switch(method)
+        	   {
+        	   case GET: 	
+        			inputStream = conn.getInputStream();
+        			break; 
+
+        	   case POST:
+        		   conn.setDoOutput(true);
+        		   byte[] payload = jsonObjectToSend.toString().getBytes();
+        		   conn.setFixedLengthStreamingMode(payload.length);
+                   conn.getOutputStream().write(payload);
+                   break;
+                   
+        	   case DELETE:
+        		   conn.setDoOutput(true);
+        		   conn.setRequestMethod("DELETE");
+        		   break;
+        	   }
+       			
+       			inputStream = conn.getInputStream();
+       		   responseCode = conn.getResponseCode();
+			   message = conn.getResponseMessage();
+			   
+		
+               String contentEncoding = conn.getContentEncoding();
+              
+               if (contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
+                       Log.d(TAG, " response is in gzip");
+                       inputStream = new GZIPInputStream(inputStream);
+               }
+               
+               return inputStream;
+          
+        	   }
+        	   catch (Throwable t)
+        	   {
+        		   Log.e(TAG,"Exception in RestClient "+t.getMessage());
+        		   throw new IOException("Exception in RestClient "+t.getMessage());
+        	   }
+        	   finally
+        	   {
+        		  if (conn != null)
+        			  cookieManager.storeCookies(conn);
+        		   Log.d(TAG," Done for request "+url+" response code is "+responseCode+" Message is "+message);
+        	   }
+
+        }
+        
+   
         public String getErrorMessage() {
                 return message;
         }
@@ -254,7 +401,7 @@ public class RestClient {
                         return "";
                 } catch (Throwable e) {
                        // if (mHttpClient != null) 
-                       //       mHttpClient.getConnectionManager().shutdown();
+                       // 	mHttpClient.getConnectionManager().shutdown();
                       //  mHttpClient = null;
                         if (entity != null)
                                 entity.consumeContent();
