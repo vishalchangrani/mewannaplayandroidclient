@@ -62,7 +62,7 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
                 progressDialog.setTitle("");
                 progressDialog.setMessage(progressDialogMessage);
                 progressDialog.setCancelable(true);
-        progressDialog.setOnCancelListener(new OnCancelListener() {
+                progressDialog.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 // actually could set running = false; right here, but I'll

@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.googlecode.android.widgets.DateSlider.SliderContainer;
+import com.mewannaplay.asynctask.PostMessageAsyncTask;
 import com.mewannaplay.model.Message;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.syncadapter.SyncAdapter;
@@ -38,7 +39,7 @@ public class PostMessageActivity extends Activity implements
 		OnCheckedChangeListener {
 
 	private static final String TAG = "PostMessageActivity";
-	private ProgressDialog progressDialog;
+
 	private AlertDialog alert;
 	private int courtId;
 	static final int DEFAULTDATESELECTOR_ID = 0;
@@ -49,7 +50,7 @@ public class PostMessageActivity extends Activity implements
 	RadioGroup rgcontactinfo;
 	RadioButton rgPhone;
 	EditText econtactinfo;
-	SharedPreferences preferences;
+	
 	public static String filenames = "courtdetails";
 	String contactInfo;
 	String regexStr = "^[0-9]{8,20}$";
@@ -77,8 +78,6 @@ public class PostMessageActivity extends Activity implements
 		}
 
 		setContentView(R.layout.post_message_layout);
-
-		preferences = getSharedPreferences(filenames, 0);
 		rgcontactinfo = (RadioGroup) findViewById(R.id.rgcontact);
 		econtactinfo = (EditText) findViewById(R.id.contact_info);
 		errorMessage = (TextView) findViewById(R.id.txterrormsg);
@@ -126,11 +125,6 @@ public class PostMessageActivity extends Activity implements
 							return;
 						}
 					}
-					// ------------------------------------------------
-					progressDialog = ProgressDialog.show(
-							PostMessageActivity.this, "", "Posting message...",
-							true);
-					progressDialog.show();
 
 					postMessage();
 
@@ -173,23 +167,16 @@ public class PostMessageActivity extends Activity implements
 			message.setLevel("Beginner");
 		message.setText(((TextView) this.findViewById(R.id.message)).getText()
 				.toString());
-		registerReceiver(syncFinishedReceiver, new IntentFilter(
-				SyncAdapter.SYNC_FINISHED_ACTION));
-		ContentResolver.requestSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, SyncAdapter.getPostMessageBundle(
-						courtId, message.toJSONObject().toString()));
+		new PostMessageAsyncTask(this, message.toJSONObject()).execute(null);
 	}
 
-	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "sync for post post message done");
+		public void onPostExecutePostMessageTask(boolean error) {
+			Log.d(TAG, "post message done");
 
-			unregisterReceiver(this);
 
-			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-				progressDialog.dismiss();
+			if (error) {
+	
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						PostMessageActivity.this);
 				builder.setMessage("Error while posting message")
@@ -205,18 +192,15 @@ public class PostMessageActivity extends Activity implements
 				alert = builder.create();
 				alert.show();
 			} else {
+				ProgressDialog progressDialog = new ProgressDialog(this);
 				progressDialog.setMessage("Message posted successfully");
 				progressDialog.dismiss();
-				SharedPreferences.Editor editor = preferences.edit();
-
-				editor.putBoolean("post", true);
-
-				editor.commit();
-
-				PostMessageActivity.this.finish();
+				progressDialog = null;
+				MapViewActivity.setCourtPostedMessageOn(courtId);
+				this.finish();
 			}
 		}
-	};
+
 
 	public void onCancel(View v) {
 		PostMessageActivity.this.finish();

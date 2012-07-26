@@ -18,7 +18,7 @@ import com.mewannaplay.providers.ProviderContract;
 
 public class GetCourtDetailsAsyncTask extends BasicAsyncTask {
 
-        private String TAG = "GetCourtDetailsAsyncTask";
+        protected String TAG = "GetCourtDetailsAsyncTask";
         private final int courtId;
         private final Location location;
         
