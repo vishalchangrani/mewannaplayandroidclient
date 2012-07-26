@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.http.NameValuePair;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -30,7 +30,7 @@ import com.mewannaplay.model.User;
 
 public class RestClient {
 
-        private final static ArrayList<NameValuePair> headers = new ArrayList<NameValuePair>();
+
         private String message;
         private String response;
         private int responseCode;
@@ -256,7 +256,7 @@ public class RestClient {
                 } catch (Exception e) {
                         Log.e(TAG, e.getMessage());
                 } finally {
-                        headers.clear();
+  
                         cookieManager = null;
                         loggedIn = false;
                 }
@@ -271,7 +271,7 @@ public class RestClient {
                         logout();
 
                 } else {
-                        headers.clear();
+ 
                         cookieManager = new CookieManager();
                 }
                 // Bind custom cookie store to the local context
