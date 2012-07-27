@@ -11,12 +11,10 @@ import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -29,6 +27,7 @@ import android.util.Log;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.mewannaplay.providers.ProviderContract.TennisCourts;
+import com.mewannaplay.syncadapter.SyncAdapter;
 
 /**
  * @author Vishal Changrani
@@ -465,6 +464,12 @@ public class TennisCourtProvider extends ContentProvider {
 		if (jsonReader == null)
 			return;
 
+		 Intent i = new Intent(SyncAdapter.SYNC_FINISHED_ACTION);
+  		  i.putExtra(SyncAdapter.SYNC_IN_PROGRESS, true);
+  		  i.putExtra(SyncAdapter.SYNC_ERROR, false);
+  		  i.putExtra(SyncAdapter.OPERATION, SyncAdapter.GET_ALL_COURTS);
+  		  String message = "Inserted %d courts";
+		
 		int count = 0;
 		SQLiteStatement insert = null;
 		SQLiteDatabase db = null;
@@ -487,6 +492,12 @@ public class TennisCourtProvider extends ContentProvider {
 			// Not reading the whole json object in memory since its
 			// huge..instead parsing it using JSONReader
 			jsonReader.beginObject();
+			
+			
+		 
+   		  
+   		  
+   		  
 			while (jsonReader.hasNext()) {
 
 				final String name = jsonReader.nextName();
@@ -581,6 +592,13 @@ public class TennisCourtProvider extends ContentProvider {
 							count++;
 						}
 						//----------------
+						
+						 if (count % 500 == 0)
+						 {
+							 i.putExtra(SyncAdapter.MESSAGE, String.format(message,count));
+							 this.getContext().sendBroadcast(i);
+						 }
+						
 					}
 					jsonReader.endArray();
 				}
@@ -594,6 +612,12 @@ public class TennisCourtProvider extends ContentProvider {
 			db.setTransactionSuccessful();
 		} finally {
 			Log.d(TAG, " inserted  " + count + " tenniscourts");
+			 i.putExtra(SyncAdapter.MESSAGE, String.format(message,count));
+			 this.getContext().sendBroadcast(i);
+			 
+			 i.putExtra(SyncAdapter.MESSAGE, "Indexing courts");
+			 this.getContext().sendBroadcast(i);
+			 
 			db.execSQL("CREATE INDEX IF NOT EXISTS city_index ON "+ TENNIS_COURT_TABLE_NAME+"(city);");
 	    	db.execSQL("CREATE INDEX IF NOT EXISTS state_index ON "+ TENNIS_COURT_TABLE_NAME+"(abbreviation);");
 			if (db != null)
