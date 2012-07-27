@@ -51,7 +51,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
         private ProgressDialog progressDialog;
         private AlertDialog alert;
-        private BroadcastReceiver syncFinishedReceiverForCourtDetails;
+ 
         private MyItemizedOverlay myItemizedOverlay;
 
         public static String filename = "MeWanaPlayData";
@@ -117,8 +117,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 {
 
                         Log.d(TAG, " Fetching courts ..");
-                        progressDialog = ProgressDialog.show(MapViewActivity.this, "",
-                                        "Fetching courts...", true);
+                        progressDialog = ProgressDialog.show(MapViewActivity.this, "Updating courts",
+                                        "Fetching courts...", true, false);
                         progressDialog.show();
 
                         // Request first sync..
@@ -162,16 +162,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 initMap();
                 info = (Button) findViewById(R.id.ImageInfoButton01);
                 info.setOnClickListener(this);
-                TextView dropDownCity = (TextView) findViewById(R.id.dropdown_city);
-                Button search=(Button)findViewById(R.id.SearchButton);
-                
-
-                
-                        
-
-                
-
-        }
+         }
 
         private final void initMap() {
                 MapView mapView = (MapView) findViewById(R.id.mapview);
@@ -196,11 +187,6 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
         public void onPause() {
                 super.onPause();
 
-                if (syncFinishedReceiverForCourtDetails != null) {
-                        unregisterReceiver(syncFinishedReceiverForCourtDetails);
-                }
-
-                syncFinishedReceiverForCourtDetails = null;
 
                 // Remove all periodic syncs
                 // This should remove the two periodic refreshes and any other sync that
@@ -270,7 +256,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 // 2.
                 // Also kickoff continuous refresh of court mark occupied by user and
                 // message id posted by user (if user not anonymous)
-                if (RestClient.isLoggedIn()) // This is not an anonymous user
+               /* if (RestClient.isLoggedIn()) // This is not an anonymous user
                 {
                         Log.d(TAG, " Adding continous refresh for message and court occupied");
                         // Periodically update the two flags courtMarkedOccupied and
@@ -280,7 +266,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                         ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
                                         ProviderContract.AUTHORITY,
                                         SyncAdapter.getOccupiedCourtAndPostedMsgBundle(), 7 * 60 );
-                }
+                }*/
         }
 
         private void stopBackGroundRefresh() {
@@ -295,11 +281,11 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
                                 ProviderContract.AUTHORITY,
                                 SyncAdapter.getAllCourtsStatsBundle());
-                if (RestClient.isLoggedIn())
+             /*   if (RestClient.isLoggedIn())
                         ContentResolver.removePeriodicSync(
                                         MapViewActivity.getAccount(this),
                                         ProviderContract.AUTHORITY,
-                                        SyncAdapter.getOccupiedCourtAndPostedMsgBundle());
+                                        SyncAdapter.getOccupiedCourtAndPostedMsgBundle()); */
 
                 ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
                                 ProviderContract.AUTHORITY, false);
@@ -346,10 +332,11 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                         if (intent.getExtras().getInt(SyncAdapter.OPERATION) != SyncAdapter.GET_ALL_COURTS)
                                 return;
 
-                        unregisterReceiver(this);
+                      
 
                         if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-                                progressDialog.dismiss();
+                        	  	unregisterReceiver(this);
+                        		progressDialog.dismiss();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(
                                                 MapViewActivity.this);
                                 builder.setMessage("Error while fetching courts")
@@ -364,8 +351,15 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
                                 alert = builder.create();
                                 alert.show();
-                        } else {
-
+                        } 
+                        else if (intent.getExtras().getBoolean(SyncAdapter.SYNC_IN_PROGRESS, false)){
+                        	String message = intent.getExtras().getString(SyncAdapter.MESSAGE); 
+                        	if (message != null)
+                        		progressDialog.setMessage(message);                    		
+                        }
+                        
+                        else {
+                        	  	unregisterReceiver(this);
                                 final MapView mapView = (MapView) findViewById(R.id.mapview);
                                 Runnable waitForMapTimeTask = new Runnable() {
                                         public void run() {

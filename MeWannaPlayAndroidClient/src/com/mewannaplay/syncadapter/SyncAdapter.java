@@ -32,6 +32,7 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.stream.JsonReader;
 import com.mewannaplay.Constants;
 import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.client.RequestMethods;
@@ -65,6 +66,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 	//Keys used in intent extras to communicate back result
 	public static final String SYNC_FINISHED_ACTION = "SYNC_FINISHED";
 	public static final String SYNC_ERROR = "SYNC_ERROR";
+	public static final String SYNC_IN_PROGRESS = "SYNC_IN_PROGRESS";
+	public static final String MESSAGE = "MESSAGE";
+	public static final String PROGRESS = "PROGRESS";
 
 
 	public SyncAdapter(Context context, boolean autoInitialize) {
@@ -146,7 +150,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 			deleteMessage(extras.getInt(COURT_ID), extras.getInt(MESSAGE_ID),  extras.getBoolean(PARTNER_FOUND, false));
 			break;
 		case GET_OCCUPIED_COURT_AND_POSTED_MSG:
-			getOccupiedCourtAndPostedMsg();
+		//	getOccupiedCourtAndPostedMsg();
 			break;
 		case GET_COURT_MESSAGE_BY_ID:
 			getCourtMessageByTennisCourtId(extras.getInt(COURT_ID));
@@ -159,7 +163,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 					//this.setName("getAllCourtStatsThread");
 					//try {
 						//Log.d(TAG, "spawning of thread for getAllCourtStats");
-						getAllCourtStats();
+		    if (RestClient.isLoggedIn()) // This is not an anonymous user
+            {
+                    Log.d(TAG, " Doing message and court occupied");
+                    getOccupiedCourtAndPostedMsg();		
+            }
+			getAllCourtStats();
+						
 				//	} catch (IOException e) {
 					//	Log.e(TAG, "error while doing getcourtstats");
 				//	}
@@ -265,7 +275,18 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 				ContentProviderClient contentProviderClient = this.getContext()
 				.getContentResolver().acquireContentProviderClient(ProviderContract.TennisCourts.CONTENT_URI);
 				TennisCourtProvider tcp = (TennisCourtProvider) contentProviderClient.getLocalContentProvider();
-				tcp.bullkInsertCourts(restClient.excuteGetAndReturnStream());
+
+	    		  Intent i = new Intent(SYNC_FINISHED_ACTION);
+	    		  i.putExtra(SYNC_IN_PROGRESS, true);
+	    		  i.putExtra(SYNC_ERROR, false);
+	    		  i.putExtra(OPERATION, GET_ALL_COURTS);
+	    		  i.putExtra(MESSAGE, "Connecting to mewannaplay.com");
+	    	      this.getContext().sendBroadcast(i);
+
+	    	    JsonReader jsonReader = restClient.excuteGetAndReturnStream();
+	    	    i.putExtra(MESSAGE, "Parsing response and updating cache");
+	    	    this.getContext().sendBroadcast(i);
+				tcp.bullkInsertCourts(jsonReader);
 				
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());

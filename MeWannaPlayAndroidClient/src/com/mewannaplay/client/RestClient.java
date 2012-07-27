@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.mewannaplay.Constants;
+import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.authenticator.AuthenticatorActivity;
 import com.mewannaplay.model.NewUser;
 import com.mewannaplay.model.Status;
@@ -155,7 +156,7 @@ public class RestClient {
 
         	   case POST:
         		   conn.setDoOutput(true);
-        		   byte[] payload = jsonObjectToSend.toString().getBytes();
+        		   byte[] payload = jsonObjectToSend != null ? jsonObjectToSend.toString().getBytes() : new byte[]{};
         		   conn.setFixedLengthStreamingMode(payload.length);
                    conn.getOutputStream().write(payload);
                    break;
@@ -256,7 +257,8 @@ public class RestClient {
                 } catch (Exception e) {
                         Log.e(TAG, e.getMessage());
                 } finally {
-  
+                		MapViewActivity.setCourtMarkedOccupied(-1);
+                		MapViewActivity.setCourtPostedMessageOn(-1);
                         cookieManager = null;
                         loggedIn = false;
                 }

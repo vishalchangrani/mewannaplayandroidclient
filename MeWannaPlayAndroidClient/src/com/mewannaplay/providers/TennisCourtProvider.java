@@ -475,7 +475,8 @@ public class TennisCourtProvider extends ContentProvider {
 			String facility_type = null, tennis_name = null, city = null, county = null, state = null, abbreviation = null;
 
 			db = dbHelper.getWritableDatabase();
-
+			db.execSQL("DROP INDEX IF EXISTS "+TENNIS_COURT_TABLE_NAME+".city_index");
+			db.execSQL("DROP INDEX IF EXISTS "+TENNIS_COURT_TABLE_NAME+".state_index");
 			db.beginTransaction();
 
 			String sql = "insert OR REPLACE into "
@@ -593,12 +594,15 @@ public class TennisCourtProvider extends ContentProvider {
 			db.setTransactionSuccessful();
 		} finally {
 			Log.d(TAG, " inserted  " + count + " tenniscourts");
+			db.execSQL("CREATE INDEX IF NOT EXISTS city_index ON "+ TENNIS_COURT_TABLE_NAME+"(city);");
+	    	db.execSQL("CREATE INDEX IF NOT EXISTS state_index ON "+ TENNIS_COURT_TABLE_NAME+"(abbreviation);");
 			if (db != null)
 				db.endTransaction();
 			if (insert != null)
 				insert.close();
 			if (jsonReader != null)
 				jsonReader.close();
+			
 		}
 
 	}

@@ -299,7 +299,6 @@ public class CourtDetailsActivity extends ListActivity implements
                         }
 
                 }
-                markCourtOccupied.setEnabled(true);
         }
         
         private void populateView() {
