@@ -134,6 +134,29 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="9"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/newuser_register_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/newregibutton"
+                    android:onClick="onNewUserRegister"
+                    android:text="New User Registration>"
+                    android:textColor="#edd008"
+                     android:layout_marginRight="52dp"
+                    android:textSize="16sp"
+                    >
+                </Button>
+            </LinearLayout>
+            
+            
+            
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="41"
                 android:weightSum="10"
                 android:orientation="vertical" >
@@ -163,27 +186,7 @@
               
                 android:orientation="vertical" ></LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="9"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/newuser_register_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/newregibutton"
-                    android:onClick="onNewUserRegister"
-                    android:text="New User Registration>"
-                    android:textColor="#edd008"
-                     android:layout_marginLeft="42dp"
-                    android:textSize="16sp"
-                    >
-                </Button>
-            </LinearLayout>
+            
         </LinearLayout>
     </LinearLayout>
 

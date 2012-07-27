@@ -150,43 +150,13 @@
             android:paddingLeft="30dp"
             android:weightSum="50" >
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="44"
-                android:weightSum="10"
-                android:orientation="vertical" >
-  <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="8"
-              
-                android:orientation="vertical" >
-                <Button
-                    android:id="@+id/ok_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginTop="7dp"
-                    android:background="@drawable/gobutton"
-                    android:onClick="handleLogin"
-                    android:text="GO>"
-                    android:textColor="#edd008"
-                    android:textSize="25sp"
-                   /></LinearLayout>
-  
-   <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="2"
-              
-                android:orientation="vertical" ></LinearLayout>
-            </LinearLayout>
+      
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="6"
+                android:layout_weight="11"
+               
                 android:orientation="vertical" >
 
                 <Button
@@ -198,10 +168,73 @@
                     android:onClick="onNewUserRegister"
                     android:text="New User Registration>"
                     android:textColor="#edd008"
-                     android:layout_marginLeft="122dp"
+                     android:layout_marginRight="100dp"
                     android:textSize="20sp"
                     >
                 </Button>
+            </LinearLayout>
+            
+                  <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="37"
+              
+                android:weightSum="10"
+                android:orientation="vertical" >
+  <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="8"
+             android:weightSum="10"
+                android:orientation="vertical" >
+                <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:weightSum="10"
+                android:orientation="horizontal" >
+                 <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="5"
+            
+                android:orientation="vertical" >
+                <Button
+                    android:id="@+id/ok_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/gobutton"
+                    android:onClick="handleLogin"
+                    android:text="GO>"
+                    android:textColor="#edd008"
+                    android:textSize="27sp"
+                   /></LinearLayout>
+                 
+                    <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="5"
+            
+                android:orientation="vertical" ></LinearLayout>
+                 
+                 </LinearLayout>
+                      <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="8"
+             
+                android:orientation="vertical" ></LinearLayout>
+                
+                </LinearLayout>
+  
+   <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+              
+                android:orientation="vertical" ></LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -42,6 +42,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mewannaplay.Constants;
+import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.NewUserRegisterationActivity;
 import com.mewannaplay.R;
 import com.mewannaplay.client.RestClient;
@@ -309,8 +310,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 		intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, Constants.ACCOUNT_TYPE);
 		setAccountAuthenticatorResult(intent.getExtras());
 		setResult(RESULT_OK, intent);
-		// startActivity(new Intent(AuthenticatorActivity.this,
-		// MapViewActivity.class));
+//		 startActivity(new Intent(AuthenticatorActivity.this,
+//		 MapViewActivity.class));
 
 		finish();
 	}

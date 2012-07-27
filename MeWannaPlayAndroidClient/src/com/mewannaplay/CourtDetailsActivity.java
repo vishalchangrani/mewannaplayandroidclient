@@ -65,10 +65,10 @@ public class CourtDetailsActivity extends ListActivity implements
         TextView cmark;
         SharedPreferences preferences;
         public static String filenames = "courtdetails";
-        TextView cmsg, cmsgprox,surfacetype,courtype,courtfacility,courtimings,message,lockeroom,parking,lessons,lights,snakbar,shop,adultprog,teamtennis,juniorprog,tournaments,ladders,roundrobin,socialmixers,serniors;
+        TextView cmsg, cmsgprox,surfacetype,courtype,courtfacility,courtimings,message,lockeroom,parking,lessons,lights,snakbar,shop,adultprog,teamtennis,juniorprog,tournaments,ladders,roundrobin,socialmixers,serniors,emptymessage;
         String user;
         Typeface bold,heavy,light,normal;
-        
+        Button bpost,bmark;
 
         // Account loggedinaccount;
 
@@ -86,6 +86,7 @@ public class CourtDetailsActivity extends ListActivity implements
                  bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
                  heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
                  light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
+                 
                  normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
                  surfacetype=(TextView)findViewById(R.id.court_surface_type);
                  surfacetype.setTypeface(normal);
@@ -97,7 +98,12 @@ public class CourtDetailsActivity extends ListActivity implements
                  courtimings.setTypeface(normal);
                  message=(TextView)findViewById(R.id.msg_name);
                  message.setTypeface(bold);
-
+                 emptymessage=(TextView)findViewById(android.R.id.empty);
+                 emptymessage.setTypeface(normal);
+bpost=(Button)findViewById(R.id.post_msg_button);
+bpost.setTypeface(bold);
+bmark=(Button)findViewById(R.id.marl_occu_button);
+bmark.setTypeface(bold);
                 thisCourtsLocation = (Location) this.getIntent().getExtras()
                                 .getParcelable(SELECTED_COURTS_GEOPOINT);
 

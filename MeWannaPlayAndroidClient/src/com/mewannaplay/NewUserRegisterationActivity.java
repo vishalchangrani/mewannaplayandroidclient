@@ -27,7 +27,7 @@ public class NewUserRegisterationActivity extends Activity {
 	private String email;
 	
 	private EditText newUserNameEditText,newUserPasswordEditText, newUserEmailEditText, newUserPasswordConfirmEditText;
-	private TextView errorMessage;
+	private TextView errorMessage,txtnewusername,txtnewpass,txtnewusermail,txtpasscon,titleregi;
 	
 	private NewUserRegisterTask newUserRegisterationTask = null;
 	private ProgressDialog mProgressDialog = null;
@@ -40,9 +40,14 @@ public class NewUserRegisterationActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
 		  setContentView(R.layout.new_user_registeration_layout); 
+		  txtnewusername=(TextView)findViewById(R.id.tnewuser_username);
+		  txtnewpass=(TextView)findViewById(R.id.tnewuser_password);
+		  txtnewusermail=(TextView)findViewById(R.id.tnewuser_email);
+		  txtpasscon=(TextView)findViewById(R.id.tconfirm_password);
 		  newUserNameEditText = (EditText) findViewById(R.id.newuser_username);
 	      newUserPasswordEditText = (EditText) findViewById(R.id.newuser_password);
 	      newUserPasswordConfirmEditText = (EditText) findViewById(R.id.confirm_password);
+	      titleregi=(TextView)findViewById(R.id.titleregi);
 	      newUserEmailEditText = (EditText) findViewById(R.id.newuser_email);
 	      errorMessage = (TextView) findViewById(R.id.newuser_errormessage);
 	      bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
@@ -53,6 +58,16 @@ public class NewUserRegisterationActivity extends Activity {
 			 cancel.setTypeface(bold);
 			 register=(Button)findViewById(R.id.Register);
 			 register.setTypeface(bold);
+			 txtnewusername.setTypeface(bold);
+			 txtnewpass.setTypeface(bold);
+			 txtnewusermail.setTypeface(bold);
+			 txtpasscon.setTypeface(bold);
+			 titleregi.setTypeface(bold);
+			 errorMessage.setTypeface(bold);
+			 newUserNameEditText.setTypeface(normal);
+			 newUserEmailEditText.setTypeface(normal);
+			 newUserPasswordEditText.setTypeface(normal);
+			 newUserPasswordConfirmEditText.setTypeface(normal);
 	}
 	
 	

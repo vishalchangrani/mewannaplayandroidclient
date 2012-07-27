@@ -3,6 +3,7 @@ package com.mewannaplay;
 import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mewannaplay.model.City;
 import com.mewannaplay.providers.ProviderContract;
@@ -27,9 +27,9 @@ public class StateCityChoiceDialog extends Dialog {
 	Spinner stateSpinner;
 	private int stateSpinnerCurrentPos = -1;
 	
+	TextView search;
 	
-	
-	
+	Typeface bold,heavy,light,normal;
 	
 	  public StateCityChoiceDialog(Context context) {
 		super(context);
@@ -37,7 +37,12 @@ public class StateCityChoiceDialog extends Dialog {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.state_city_choice_layout);
-		
+		search=(TextView)findViewById(R.id.txtsearch);
+	    bold=Typeface.createFromAsset(context.getAssets(),"Folks-Bold.ttf");
+				 heavy=Typeface.createFromAsset(context.getAssets(),"Folks-Heavy.ttf");
+				 light=Typeface.createFromAsset(context.getAssets(),"Folks-Light.ttf");
+				 normal=Typeface.createFromAsset(context.getAssets(),"Folks-Normal.ttf");
+				 search.setTypeface(bold);
 		
 		 
 		
