@@ -511,12 +511,20 @@
         android:paddingTop="0dip"
         android:scrollbars="vertical" />
 
+	  <TextView android:id="@android:id/empty"
+	  		android:layout_below="@id/msg_table"
+               android:layout_width="fill_parent"
+               android:layout_height="140dip"
+                android:textColor="#FFFFFF"
+        		android:textSize="12dp"
+                android:text="No messages to display"/>
+                
     <LinearLayout
         android:id="@+id/lnfoot"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
      
-        android:layout_below="@android:id/list"
+        android:layout_below="@android:id/empty"
         
         android:background="@drawable/foot" >
 
