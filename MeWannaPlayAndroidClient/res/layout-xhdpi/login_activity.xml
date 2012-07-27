@@ -51,7 +51,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="35"
+            android:layout_weight="55"
             android:orientation="vertical" >
 
             <TextView
@@ -128,21 +128,49 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="65"
+            android:layout_weight="45"
             android:orientation="horizontal"
             android:weightSum="50" >
+
+         
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="42"
+                android:layout_weight="10"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/newuser_register_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/newregibutton"
+                    android:onClick="onNewUserRegister"
+                    android:text="New User Registration>"
+                    android:textColor="#edd008"
+                     android:layout_marginRight="72dp"
+                    android:textSize="16sp"
+                    >
+                </Button>
+            </LinearLayout>
+               <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="38"
                 android:weightSum="10"
                 android:orientation="vertical" >
   <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="7"
-              
+                android:layout_weight="8"
+              android:weightSum="10"
+                android:orientation="horizontal" >
+                 <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+            
                 android:orientation="vertical" >
                 <Button
                     android:id="@+id/ok_button"
@@ -156,34 +184,20 @@
                     android:textColor="#edd008"
                     android:textSize="25sp"
                    /></LinearLayout>
+                  <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="7"
+            
+                android:orientation="vertical" ></LinearLayout>
+                 </LinearLayout>
   
    <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="3"
+                android:layout_weight="2"
               
                 android:orientation="vertical" ></LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="7"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/newuser_register_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/newregibutton"
-                    android:onClick="onNewUserRegister"
-                    android:text="New User Registration>"
-                    android:textColor="#edd008"
-                     android:layout_marginLeft="72dp"
-                    android:textSize="16sp"
-                    >
-                </Button>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

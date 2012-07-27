@@ -335,8 +335,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                       
 
                         if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-                        	  	unregisterReceiver(this);
-                        		progressDialog.dismiss();
+                                        unregisterReceiver(this);
+                                        progressDialog.dismiss();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(
                                                 MapViewActivity.this);
                                 builder.setMessage("Error while fetching courts")
@@ -353,13 +353,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                 alert.show();
                         } 
                         else if (intent.getExtras().getBoolean(SyncAdapter.SYNC_IN_PROGRESS, false)){
-                        	String message = intent.getExtras().getString(SyncAdapter.MESSAGE); 
-                        	if (message != null)
-                        		progressDialog.setMessage(message);                    		
+                                String message = intent.getExtras().getString(SyncAdapter.MESSAGE); 
+                                if (message != null)
+                                        progressDialog.setMessage(message);                             
                         }
                         
                         else {
-                        	  	unregisterReceiver(this);
+                                        unregisterReceiver(this);
                                 final MapView mapView = (MapView) findViewById(R.id.mapview);
                                 Runnable waitForMapTimeTask = new Runnable() {
                                         public void run() {
