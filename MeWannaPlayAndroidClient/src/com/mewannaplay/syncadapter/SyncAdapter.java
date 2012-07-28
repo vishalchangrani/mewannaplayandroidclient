@@ -271,6 +271,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 					Constants.GET_ALL_TENNISCOURTS);
 			
 			try {
+				
+				   this.getContext().getContentResolver().delete(ProviderContract.TennisCourtsDetails.CONTENT_URI,
+                           null, null); // clean tenniscourt details, amenities and services tables.
+				   this.getContext().getContentResolver().delete(ProviderContract.TennisCourts.CONTENT_URI,
+                           null, null); // clean message and amenities and services tables
+				
 			//	JSONObject jsonObject = restClient.execute();
 				ContentProviderClient contentProviderClient = this.getContext()
 				.getContentResolver().acquireContentProviderClient(ProviderContract.TennisCourts.CONTENT_URI);

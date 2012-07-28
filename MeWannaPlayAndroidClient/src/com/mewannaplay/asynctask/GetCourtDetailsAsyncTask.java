@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.location.Location;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import com.mewannaplay.MapViewActivity;
 import com.mewannaplay.client.RequestMethods;
 import com.mewannaplay.model.TennisCourtDetails;
 import com.mewannaplay.providers.ProviderContract;
+import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 
 public class GetCourtDetailsAsyncTask extends BasicAsyncTask {
 
@@ -28,6 +30,22 @@ public class GetCourtDetailsAsyncTask extends BasicAsyncTask {
                 this.location = location;
         }
 
+        @Override
+        protected boolean isInDatabase()
+        {
+        	Cursor cursor = ownerAcitivty.getContentResolver().query(
+                    TennisCourtsDetails.CONTENT_URI, new String[]{"_id"}, " _id = ?",
+                    new String[] { courtId + "" }, null);
+       	 try
+       	 {
+       		 return (cursor.getCount() > 0); //found in local db
+       	 }
+       	 finally
+       	 {
+       		 if (cursor != null)
+       			 cursor.close();
+       	 }
+        }
 
         @Override
         protected void parseResponse(JSONObject jsonObject) throws IOException {
