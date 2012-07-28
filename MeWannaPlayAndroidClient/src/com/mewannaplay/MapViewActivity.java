@@ -191,14 +191,14 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 // Remove all periodic syncs
                 // This should remove the two periodic refreshes and any other sync that
                 // might be happening at this time
-                ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
-                                ProviderContract.AUTHORITY,
-                                SyncAdapter.getOccupiedCourtAndPostedMsgBundle());
-                ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);// cancel
+             //   ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+             //                   ProviderContract.AUTHORITY,
+              //                  SyncAdapter.getOccupiedCourtAndPostedMsgBundle());
+              //  ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);// cancel
                                                                                                                                                 // all
                                                                                                                                                 // syncs
-                ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
-                                ProviderContract.AUTHORITY, false);
+             //   ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
+             //                   ProviderContract.AUTHORITY, false);
 
                 stopBackGroundRefresh();
 
