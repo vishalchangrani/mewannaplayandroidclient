@@ -3,12 +3,8 @@ package com.mewannaplay;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,12 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.mewannaplay.asynctask.DeleteMessageAsyncTask;
 import com.mewannaplay.model.Message;
-import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
@@ -31,7 +25,6 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 
 	private static final String TAG = "ViewMessageActivity";
 	private Message message;
-	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	TextView viewcontact;
 	int courtId; // HACK Alert - court id should be part of message object but
@@ -86,7 +79,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 				.getUserName());
 
 		Button deleteButton = ((Button) findViewById(R.id.delete_message));
-		ImageView viewBack = (ImageView) findViewById(R.id.view_back_icon);
+		
 		Button deleteButtonPartnerFound = ((Button) findViewById(R.id.delete_message_partner_found));
 
 		if (message.getUserName().equals(MapViewActivity.getAccount(this).name)) // If
@@ -98,11 +91,13 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 																					// this
 																					// user
 		{
+			deleteButton.setVisibility(View.VISIBLE);
+			deleteButtonPartnerFound.setVisibility(View.VISIBLE);
 			deleteButton.setEnabled(true); // he can delete, its his message
 			deleteButtonPartnerFound.setEnabled(true);
 		} else {
-			deleteButton.setEnabled(false); // else he can't
-			deleteButtonPartnerFound.setEnabled(false);
+			deleteButton.setVisibility(View.INVISIBLE); //Dont even show the buttons if this is not his message
+			deleteButtonPartnerFound.setVisibility(View.INVISIBLE);
 		}
 
 	}
@@ -132,10 +127,6 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								dialog.dismiss();
-								progressDialog = ProgressDialog.show(
-										ViewMessageActivity.this, "",
-										"Deleting message...", true);
-								progressDialog.show();
 								deleteMessage(partnerFound);
 							}
 						});
@@ -144,23 +135,14 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 	}
 
 	public void deleteMessage(boolean partnerFound) {
-		registerReceiver(syncFinishedReceiver, new IntentFilter(
-				SyncAdapter.SYNC_FINISHED_ACTION));
-		ContentResolver.requestSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, SyncAdapter.getDeleteMessageBundle(
-						courtId, message.getId(), partnerFound));
+		
+		new DeleteMessageAsyncTask(this, courtId, message.getId(), partnerFound);
 	}
 
-	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
+		public void onPostExectureDeleteMessage(boolean isError)
+		{
+			if (isError) {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "sync for delete message done");
-
-			unregisterReceiver(this);
-
-			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-				progressDialog.dismiss();
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						ViewMessageActivity.this);
 				builder.setMessage("Error while deleting message")
@@ -176,6 +158,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 				alert = builder.create();
 				alert.show();
 			} else {
+				ProgressDialog progressDialog = new ProgressDialog(this);
 				progressDialog.setMessage("Message deleted successfully");
 				progressDialog.dismiss();
 				ViewMessageActivity.this.finish();
@@ -184,7 +167,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 															// disappear
 			}
 		}
-	};
+
 
 	public void viewcontact(View v) {
 	
