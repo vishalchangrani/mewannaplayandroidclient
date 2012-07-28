@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <string name="state_prompt">State</string>
+    <string-array name="statess_array">
+       
+    </string-array>
+
+</resources>

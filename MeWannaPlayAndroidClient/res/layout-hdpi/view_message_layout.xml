@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100" 
+    android:background="@drawable/bgtwo">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="40" >
+        
+            <TextView
+         android:id="@+id/titleview"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:textSize="10pt"
+            android:text="View Message"
+             android:textColor="#edd008" />
+        
+        <ImageView
+                android:id="@+id/view_back_icon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="2dp"
+                android:layout_marginTop="10dp"
+                android:onClick="viewBack"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/backk" />
+    </LinearLayout>
+    
+       
+  
+
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:layout_weight="20"
+             android:orientation="vertical"
+             android:weightSum="70" >
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                       android:id="@+id/tuser_name_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="User"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/user_name_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="120dp"
+                     android:text="Unknown"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                      android:id="@+id/tcontact_info_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="Contact info"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/contact_info_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="50dp"
+                     android:text="abcdefgh@gmail.com"
+                     android:textColor="#000"
+                       android:clickable="true"
+                      android:onClick="viewcontact"
+                      android:textStyle="italic"
+                    />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                       android:id="@+id/tposted_on_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="Posted Time"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/posted_on_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="60dp"
+                     android:text="6:30 pm"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                      android:id="@+id/tschedule_time_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="Schedule Time"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/schedule_time_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="40dp"
+                     android:text="6:30 pm"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                      android:id="@+id/tplayers_needed_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="Players needed"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/players_needed_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="30dp"
+                     android:gravity="center"
+                     android:text="3 players"
+                     android:textColor="#fff"
+                     android:textStyle="bold" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                      android:id="@+id/tlevel_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="Level"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/level_view"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="110dp"
+                     android:text="Unknown"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:typeface="serif" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:layout_weight="10" >
+
+                 <TextView
+                      android:id="@+id/tmessage"
+                     android:layout_width="wrap_content"
+                     android:layout_height="fill_parent"
+                     android:layout_marginLeft="10dp"
+                     android:text="Additional comments"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     android:layout_marginRight="20dp"
+                     android:typeface="serif" />
+
+                 <TextView
+                     android:id="@+id/message"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Very Useful"
+                     android:textColor="#fff"
+                     android:textSize="16sp"
+                     android:layout_marginRight="5dp"
+                     android:textStyle="bold" />
+             </LinearLayout>
+         </LinearLayout>
+
+
+    
+    
+    
+    
+    
+ 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="40"
+        android:orientation="horizontal"
+        android:weightSum="20" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="10" >
+
+            <Button
+                android:id="@+id/delete_message"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:onClick="onDelete"
+                android:text="Delete message"
+                android:textSize="10sp" 
+                android:textColor="#fff"
+                android:background="@drawable/buttons"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="10" >
+
+            <Button
+                android:id="@+id/delete_message_partner_found"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:onClick="onDeletePartnerFound"
+                android:text="Partner found.delete message"
+                android:textSize="9sp" 
+                  android:textColor="#fff"
+                android:background="@drawable/buttons">
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
