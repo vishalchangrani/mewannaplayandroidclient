@@ -134,7 +134,7 @@ public class StateCityChoiceDialog extends Dialog {
 				if (arg2 == stateSpinnerCurrentPos)
 					return;
 				stateSpinnerCurrentPos = arg2;
-				String state = ((TextView)arg1).getText().toString();
+				String state = ((TextView)arg1).getText() == null ? null : ((TextView)arg1).getText().toString();
 				if (state != null)
 					initCursorForCitySpinner(state);
 			}
