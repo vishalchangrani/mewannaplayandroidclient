@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -48,13 +49,14 @@ public class PostMessageActivity extends Activity implements
 	private final static int minuteInterval = 30;
 	private SliderContainer mContainer;
 	RadioGroup rgcontactinfo;
-	RadioButton rgPhone;
+	RadioButton rgPhone,rgmail;
 	EditText econtactinfo;
-	
+	Button post,cancel;
 	public static String filenames = "courtdetails";
 	String contactInfo;
 	String regexStr = "^[0-9]{8,20}$";
-	private TextView errorMessage;
+	private TextView errorMessage,title,titleplay,titlenoofplayer,titlelevel,titlecontact,titlecomment;
+	Typeface bold,heavy,light,normal;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,15 +80,38 @@ public class PostMessageActivity extends Activity implements
 		}
 
 		setContentView(R.layout.post_message_layout);
+		  bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
+			 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
+			 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
+			 normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
 		rgcontactinfo = (RadioGroup) findViewById(R.id.rgcontact);
+	
 		econtactinfo = (EditText) findViewById(R.id.contact_info);
 		errorMessage = (TextView) findViewById(R.id.txterrormsg);
+		title=(TextView)findViewById(R.id.titlepost);
+		titleplay=(TextView)findViewById(R.id.titleplayat);
+		titlenoofplayer=(TextView)findViewById(R.id.titlenoofplayer);
+		titlelevel=(TextView)findViewById(R.id.titlelevel);
+		titlecontact=(TextView)findViewById(R.id.titlepreferedcontact);
+titlecomment=(TextView)findViewById(R.id.titlecomment);
+post=(Button)findViewById(R.id.post_message);
+cancel=(Button)findViewById(R.id.cancel);
+post.setTypeface(bold);
+cancel.setTypeface(bold);
+		title.setTypeface(bold);
+		titleplay.setTypeface(bold);
+		titlenoofplayer.setTypeface(bold);
+		titlelevel.setTypeface(bold);
+		titlecontact.setTypeface(bold);
+		titlecomment.setTypeface(bold);
 		ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
 		postBack.setEnabled(true);
 
 		rgcontactinfo.setOnCheckedChangeListener(this);
 		rgPhone = (RadioButton) findViewById(R.id.rbphn);
-
+rgPhone.setTypeface(normal);
+rgmail = (RadioButton) findViewById(R.id.rbemail);
+rgmail.setTypeface(normal);
 		mContainer = (SliderContainer) this
 				.findViewById(R.id.dateSliderContainer);
 		mContainer.setMinuteInterval(minuteInterval);

@@ -19,17 +19,20 @@
       
         android:layout_weight="30" >
         <TextView
+     android:id="@+id/titlepost"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/postmessage"
-            android:textColor="#fff" />
+               android:gravity="left"
+            android:textSize="12pt"
+            android:text="Post Message"
+             android:textColor="#edd008" />
            <ImageView
                 android:id="@+id/post_back_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="80dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingTop="2dp"
@@ -76,6 +79,7 @@
                 android:layout_weight="10" >
 
                 <TextView
+                     android:id="@+id/titleplayat"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -97,6 +101,7 @@
                 android:layout_weight="10" >
 
                 <TextView
+                     android:id="@+id/titlenoofplayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -122,6 +127,7 @@
                 android:layout_weight="10" >
 
                 <TextView
+                    android:id="@+id/titlelevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -153,6 +159,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="7">
                 <TextView
+                     android:id="@+id/titlepreferedcontact"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -206,8 +213,9 @@
                 android:id="@+id/contact_info"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
+                android:layout_marginLeft="140dp"
                 android:layout_marginRight="10dp"
+               
                 android:hint="e.g.9999999999"
                 android:inputType="phone"
                 android:maxLength="10" >
@@ -223,7 +231,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="2.3" >
+                    android:layout_weight="2.5" >
 
                     <TextView
                         android:id="@+id/textView2"
@@ -239,7 +247,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="0.7" 
+                    android:layout_weight="0.5" 
                     android:weightSum="10"
                     >
  <LinearLayout
@@ -249,10 +257,11 @@
                     
                     >
                     <TextView
+                         android:id="@+id/titlecomment"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="3dp"
                         android:text="Additional 
 comments :"
                         android:textColor="#fff"
@@ -271,7 +280,7 @@ comments :"
                         android:layout_height="fill_parent"
                         android:maxLength="100"
                       
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="3dp"
                         android:inputType="textMultiLine" /></LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -296,7 +305,7 @@ comments :"
 
                     <Button
                         android:id="@+id/cancel"
-                        android:layout_width="70dp"
+                        android:layout_width="75dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="30dp"
                         android:background="@drawable/cancelbutton"
@@ -304,7 +313,7 @@ comments :"
                          android:text="Cancel>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="3dp"
             
             android:textStyle="bold"
             android:typeface="serif" />
@@ -313,11 +322,11 @@ comments :"
                         android:id="@+id/post_message"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
-                               android:text="Post"
+                               android:text="Post>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="7dp"
-            
+            android:layout_marginTop="3dp"
+             android:layout_marginLeft="20dp"
             android:textStyle="bold"
             android:typeface="serif"
                         android:background="@drawable/postbutton"

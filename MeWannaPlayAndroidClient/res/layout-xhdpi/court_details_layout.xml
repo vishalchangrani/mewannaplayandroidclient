@@ -20,14 +20,13 @@
             android:clickable="true"
             android:gravity="center"
             android:paddingBottom="2dip"
-            android:paddingLeft="10dip"
-            android:paddingRight="60dip" >
+            >
 
             <com.mewannaplay.ScrollingTextView
                android:id="@+id/court_name"
-                android:layout_width="250dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
-               android:paddingLeft="72dip"
+               
                 
                 android:ellipsize="marquee"
                 android:focusable="true"
@@ -35,7 +34,7 @@
                 android:freezesText="true"
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
-               android:layout_marginLeft="15dp"
+            
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Book Title sad ds sdas das asdas das asd asd sad as"
@@ -43,12 +42,7 @@
                 android:textSize="19sp"
                 />
 
-            <ImageView
-                android:id="@+id/court_back_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="30dip"
-                android:paddingTop="2dip" />
+          
         </TableRow>
 
         <RelativeLayout
@@ -57,23 +51,32 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/court_title_table"
-            android:layout_marginLeft="10dip"
+          
+            android:gravity="center"
             android:layout_marginRight="10dip"
             android:paddingBottom="5dip"
-            android:paddingLeft="10dip"
-            android:paddingRight="10dip" >
+           >
 
-            <TextView
+        
+               <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_addr_1"
-                android:layout_width="fill_parent"
+                android:layout_width="255dp"
                 android:layout_height="wrap_content"
-                android:paddingRight="0dip"
-                android:text="645 B 2002 fggggggggg ghhhhhhggggggg"
+               
+                
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+            
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+             android:text="142 Clubhouse Drive,Fairhope,Al36532"
                 android:textColor="#fff"
-                   android:gravity="center_horizontal"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:typeface="serif" />
+              android:textSize="12sp"
+                />
            
             <TextView
                 android:id="@+id/court_addr_2"
@@ -91,10 +94,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/court_addr_1"
                 android:layout_toRightOf="@id/court_addr_2"
-                android:paddingLeft="50dip"
+                android:layout_marginLeft="70dp"
                 android:paddingRight="05dip"
                 android:text="(080)-3242-2341"
-                android:gravity="center_horizontal"
+                android:gravity="center_vertical"
                 android:textColor="#fff"
                 android:textSize="12sp"
                 android:textStyle="italic"
@@ -117,7 +120,7 @@
       
          android:layout_toRightOf="@+id/court_addr_1"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="250dp"
+        android:layout_marginLeft="230dp"
         android:onClick="clickdriving"
         android:src="@drawable/drivingdirection" />
     
@@ -545,9 +548,10 @@
             android:background="@drawable/post_message_selector"
             android:onClick="postMessage"
             android:text="Post Message"
-            android:paddingLeft="10dip"
+          
+            android:gravity="center"
              android:textColor="#edd008"
-            android:paddingRight="25dip"
+          
             android:paddingTop="3dip" />
 
         <Button

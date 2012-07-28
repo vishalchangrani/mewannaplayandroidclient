@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -33,10 +34,12 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 	private Message message;
 	private ProgressDialog progressDialog;
 	private AlertDialog alert;
-	TextView viewcontact;
+	TextView viewcontact,titleview,titleuser,user,contact,posted,titlecontact,titleposted,titlesheduletime,sheduletime,playersneeded,titleplayersneeded,titlelevel,level,messageinfo,titlemessage;
+	Typeface bold,heavy,light,normal;
 	int courtId; // HACK Alert - court id should be part of message object but
 					// its not hence need to be passed around seperately
 	EmailValidator validator;
+	Button delete,deletepartner;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,54 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		}
 		setContentView(R.layout.view_message_layout);
 		validator = new EmailValidator();
+		  bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
+			 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
+			 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
+			 normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
 		viewcontact = (TextView) findViewById(R.id.contact_info_view);
-
+		titleview = (TextView) findViewById(R.id.titleview);
+		titleuser = (TextView) findViewById(R.id.tuser_name_view);
+		titlecontact = (TextView) findViewById(R.id.tcontact_info_view);
+		titleposted = (TextView) findViewById(R.id.tposted_on_view);
+		titlesheduletime = (TextView) findViewById(R.id.tschedule_time_view);
+		titleplayersneeded = (TextView) findViewById(R.id.tplayers_needed_view);
+		titlelevel = (TextView) findViewById(R.id.tlevel_view);
+		titlemessage = (TextView) findViewById(R.id.tmessage);
+		
+		user = (TextView) findViewById(R.id.user_name_view);
+		
+		posted = (TextView) findViewById(R.id.posted_on_view);
+		sheduletime = (TextView) findViewById(R.id.schedule_time_view);
+		playersneeded = (TextView) findViewById(R.id.players_needed_view);
+		level = (TextView) findViewById(R.id.level_view);
+		messageinfo = (TextView) findViewById(R.id.message);
+		
+		delete=(Button)findViewById(R.id.delete_message);
+		deletepartner=(Button)findViewById(R.id.delete_message_partner_found);
+		
+		viewcontact.setTypeface(bold);
+		
+		
+		viewcontact.setTypeface(bold);
+		titleview.setTypeface(bold);
+		titleuser.setTypeface(bold);
+		titlecontact.setTypeface(bold);
+		titleposted.setTypeface(bold);
+		titlesheduletime.setTypeface(bold);
+		titleplayersneeded.setTypeface(bold);
+		titlelevel.setTypeface(bold);
+		titlemessage.setTypeface(bold);
+		user.setTypeface(bold);
+		posted.setTypeface(bold);
+		sheduletime.setTypeface(bold);
+		playersneeded.setTypeface(bold);
+		level.setTypeface(bold);
+		messageinfo.setTypeface(bold);
+		delete.setTypeface(bold);
+		deletepartner.setTypeface(bold);
+		
+		
+		
 		Cursor cursor = getContentResolver().query(Messages.CONTENT_URI, null,
 				" _id = ?", new String[] { messageId + "" }, null);
 		if (cursor.getCount() == 0) {
