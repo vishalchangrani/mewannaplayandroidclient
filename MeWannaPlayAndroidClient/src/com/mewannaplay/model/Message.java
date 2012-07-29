@@ -26,7 +26,7 @@ public class Message {
 	private String user;
 	@SerializedName("user_name")
 	private String userName;
-	@SerializedName("level")
+	@SerializedName("player_type")
 	private String level;
 	@SerializedName("schedule_time")
 	private String scheduleTime;
