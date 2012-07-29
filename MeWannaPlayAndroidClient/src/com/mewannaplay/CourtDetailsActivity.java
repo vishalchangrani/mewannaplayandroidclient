@@ -399,7 +399,8 @@ LinearLayout yellolayout;
 						R.layout.child_layout_ameneties_services, null);
 				msgtable.setVisibility(View.GONE);
 				msglist.setVisibility(View.GONE);
-				yellolayout.setVisibility(View.GONE);
+				emptymessage.setVisibility(View.GONE);
+			
 				lockeroom = (TextView) view.findViewById(R.id.lockerRoom);
 				lockeroom.setTypeface(normal);
 				parking = (TextView) view.findViewById(R.id.parkingtext);
@@ -438,7 +439,8 @@ LinearLayout yellolayout;
 						null);
 				msgtable.setVisibility(View.GONE);
 				msglist.setVisibility(View.GONE);
-				yellolayout.setVisibility(View.GONE);
+				emptymessage.setVisibility(View.GONE);
+			
 				adultprog = (TextView) view.findViewById(R.id.adultProgramtext);
 				adultprog.setTypeface(normal);
 				teamtennis = (TextView) view.findViewById(R.id.teamTennistext);
@@ -518,13 +520,14 @@ LinearLayout yellolayout;
 			case 0:
 msgtable.setVisibility(View.VISIBLE);
 msglist.setVisibility(View.VISIBLE);
-yellolayout.setVisibility(View.VISIBLE);
+emptymessage.setVisibility(View.VISIBLE);
+
 				return infalInflater.inflate(
 						R.layout.group_layout_ameneties_services, null);
 			case 1:
-				msgtable.setVisibility(View.VISIBLE);
-				msglist.setVisibility(View.VISIBLE);
-				yellolayout.setVisibility(View.VISIBLE);
+//				msgtable.setVisibility(View.VISIBLE);
+//				msglist.setVisibility(View.VISIBLE);
+			
 				return infalInflater.inflate(R.layout.group_layout_activities,
 						null);
 			}
