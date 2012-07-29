@@ -671,7 +671,7 @@ bmark.setTypeface(bold);
 
                         // 4
                         String level = cursor.getString(cursor.getColumnIndex("level"));
-                        ((TextView) view.findViewById(R.id.level)).setText("Beginner");
+                        ((TextView) view.findViewById(R.id.level)).setText(level);
 
                         // 5
                         String players_needed = cursor.getString(cursor

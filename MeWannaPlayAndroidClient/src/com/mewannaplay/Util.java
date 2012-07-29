@@ -3,6 +3,7 @@ package com.mewannaplay;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Util {
 
@@ -28,4 +29,23 @@ public class Util {
 		return finalUTCDateAsString;
 	}
 
+	public static final String getLocalTimeFromUTC(String utcTime)
+	{
+		try
+		{
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		TimeZone utcZone = TimeZone.getTimeZone("UTC");
+		simpleDateFormat.setTimeZone(utcZone);
+		Date myDate = simpleDateFormat.parse(utcTime);
+		simpleDateFormat.setTimeZone(TimeZone.getDefault());
+		String formattedDate = simpleDateFormat.format(myDate);
+		return formattedDate;
+		}
+		catch(Exception e)
+		{
+			return "";
+		}
+
+	}
+	
 }
