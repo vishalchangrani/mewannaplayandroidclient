@@ -25,20 +25,36 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:gravity="left"
-            android:textSize="12pt"
+            android:textSize="10pt"
             android:text="Post Message"
-             android:textColor="#edd008"  />
+             android:textColor="#edd008" />
            <ImageView
                 android:id="@+id/post_back_icon"
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingTop="2dp"
                 android:layout_marginTop="10dp"
                 android:onClick="postBack"
                 android:src="@drawable/backk" /></LinearLayout>
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+      
+        android:layout_weight="70" >
+
+            <TextView
+                android:id="@+id/txterrormsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginLeft="100dp"
+                android:textColor="#FF0000"
+                android:textSize="6pt"/>
+
+        </LinearLayout>
         
     </LinearLayout>
 
@@ -63,7 +79,7 @@
                 android:layout_weight="10" >
 
                 <TextView
-                      android:id="@+id/titleplayat"
+                         android:id="@+id/titleplayat"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -85,7 +101,7 @@
                 android:layout_weight="10" >
 
                 <TextView
-                     android:id="@+id/titlenoofplayer"
+                      android:id="@+id/titlenoofplayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -111,7 +127,7 @@
                 android:layout_weight="10" >
 
                 <TextView
-                     android:id="@+id/titlelevel"
+                      android:id="@+id/titlelevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -143,7 +159,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="7">
                 <TextView
-                     android:id="@+id/titlepreferedcontact"
+                      android:id="@+id/titlepreferedcontact"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -184,21 +200,6 @@
   </LinearLayout>
  
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="70" >
-
-                <TextView
-                    android:id="@+id/txterrormsg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
-                    android:textColor="#FF0000"
-                    android:textSize="6pt" />
-            </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -216,6 +217,8 @@
                 android:layout_marginRight="10dp"
                 android:hint="e.g.9999999999"
                 android:inputType="phone"
+                android:gravity="center"
+                android:background="@drawable/editbox"
                 android:maxLength="10" >
             </EditText>
 
@@ -255,7 +258,7 @@
                     
                     >
                     <TextView
-                         android:id="@+id/titlecomment"
+                          android:id="@+id/titlecomment"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_marginLeft="10dp"
@@ -277,8 +280,8 @@ comments :"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:maxLength="100"
-                      
-                        android:layout_marginTop="3dp"
+                      android:background="@drawable/editbox"
+                        android:layout_marginTop="1dp"
                         android:inputType="textMultiLine" /></LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -311,7 +314,7 @@ comments :"
                          android:text="Cancel>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="7dp"
+     
             
             android:textStyle="bold"
             android:typeface="serif" />
@@ -323,7 +326,7 @@ comments :"
                                android:text="Post>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="7dp"
+       
             
             android:textStyle="bold"
             android:typeface="serif"
