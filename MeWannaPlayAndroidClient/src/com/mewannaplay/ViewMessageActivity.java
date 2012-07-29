@@ -3,12 +3,8 @@ package com.mewannaplay;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -20,13 +16,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mewannaplay.asynctask.DeleteMessageAsyncTask;
 import com.mewannaplay.model.Message;
-import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
@@ -34,7 +27,6 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 
 	private static final String TAG = "ViewMessageActivity";
 	private Message message;
-	private ProgressDialog progressDialog;
 	private AlertDialog alert;
 	TextView viewcontact,titleview,titleuser,user,contact,posted,titlecontact,titleposted,titlesheduletime,sheduletime,playersneeded,titleplayersneeded,titlelevel,level,messageinfo,titlemessage;
 	Typeface bold,heavy,light,normal;
