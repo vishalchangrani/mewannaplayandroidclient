@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.method.ScrollingMovementMethod;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mewannaplay.asynctask.DeleteMessageAsyncTask;
 import com.mewannaplay.model.Message;
 import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
@@ -104,7 +106,8 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		messageinfo.setTypeface(bold);
 		delete.setTypeface(bold);
 		deletepartner.setTypeface(bold);
-		
+		messageinfo.setMovementMethod(ScrollingMovementMethod.getInstance());
+
 		
 		
 		Cursor cursor = getContentResolver().query(Messages.CONTENT_URI, null,
@@ -135,147 +138,136 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 				.getUserName());
 
 		Button deleteButton = ((Button) findViewById(R.id.delete_message));
-		ImageView viewBack = (ImageView) findViewById(R.id.view_back_icon);
-		Button deleteButtonPartnerFound = ((Button) findViewById(R.id.delete_message_partner_found));
+	    Button deleteButtonPartnerFound = ((Button) findViewById(R.id.delete_message_partner_found));
 
-		if (message.getUserName().equals(MapViewActivity.getAccount(this).name)) // If
-																					// the
-																					// message
-																					// was
-																					// posted
-																					// by
-																					// this
-																					// user
-		{
-			deleteButton.setEnabled(true); // he can delete, its his message
-			deleteButtonPartnerFound.setEnabled(true);
-		} else {
-			deleteButton.setEnabled(false); // else he can't
-			deleteButtonPartnerFound.setEnabled(false);
-		}
+        if (message.getUserName().equals(MapViewActivity.getAccount(this).name)) // If
+                                                                                                                                                                // the
+                                                                                                                                                                // message
+                                                                                                                                                                // was
+                                                                                                                                                                // posted
+                                                                                                                                                                // by
+                                                                                                                                                                // this
+                                                                                                                                                                // user
+        {
+                deleteButton.setVisibility(View.VISIBLE);
+                deleteButtonPartnerFound.setVisibility(View.VISIBLE);
+                deleteButton.setEnabled(true); // he can delete, its his message
+                deleteButtonPartnerFound.setEnabled(true);
+        } else {
+                deleteButton.setVisibility(View.INVISIBLE); //Dont even show the buttons if this is not his message
+                deleteButtonPartnerFound.setVisibility(View.INVISIBLE);
+        }
 
-	}
+}
 
-	public void viewBack(View v) {
-		finish();
-	}
+public void viewBack(View v) {
+        finish();
+}
 
-	public void onDelete(View v) {
-		onDelete(false);
-	}
+public void onDelete(View v) {
+        onDelete(false);
+}
 
-	public void onDeletePartnerFound(View v) {
-		onDelete(true);
-	}
+public void onDeletePartnerFound(View v) {
+        onDelete(true);
+}
 
-	public void onDelete(final boolean partnerFound) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(
-				ViewMessageActivity.this);
-		builder.setMessage("Are you sure you want to delete this message? ")
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				})
-				.setPositiveButton("Yes",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.dismiss();
-								progressDialog = ProgressDialog.show(
-										ViewMessageActivity.this, "",
-										"Deleting message...", true);
-								progressDialog.show();
-								deleteMessage(partnerFound);
-							}
-						});
-		builder.create().show();
+public void onDelete(final boolean partnerFound) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                        ViewMessageActivity.this);
+        builder.setMessage("Are you sure you want to delete this message? ")
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                }
+                        })
+                        .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                        dialog.dismiss();
+                                                        deleteMessage(partnerFound);
+                                                }
+                                        });
+        builder.create().show();
 
-	}
+}
 
-	public void deleteMessage(boolean partnerFound) {
-		registerReceiver(syncFinishedReceiver, new IntentFilter(
-				SyncAdapter.SYNC_FINISHED_ACTION));
-		ContentResolver.requestSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, SyncAdapter.getDeleteMessageBundle(
-						courtId, message.getId(), partnerFound));
-	}
+public void deleteMessage(boolean partnerFound) {
+        
+        new DeleteMessageAsyncTask(this, courtId, message.getId(), partnerFound);
+}
 
-	private BroadcastReceiver syncFinishedReceiver = new BroadcastReceiver() {
+        public void onPostExectureDeleteMessage(boolean isError)
+        {
+                if (isError) {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "sync for delete message done");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(
+                                        ViewMessageActivity.this);
+                        builder.setMessage("Error while deleting message")
+                                        .setCancelable(false)
+                                        .setNeutralButton("OK",
+                                                        new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog,
+                                                                                int id) {
+                                                                        ViewMessageActivity.this.finish();
+                                                                }
+                                                        });
 
-			unregisterReceiver(this);
+                        alert = builder.create();
+                        alert.show();
+                } else {
+                        ProgressDialog progressDialog = new ProgressDialog(this);
+                        progressDialog.setMessage("Message deleted successfully");
+                        progressDialog.dismiss();
+                        ViewMessageActivity.this.finish();
+                        MapViewActivity.setCourtPostedMessageOn(-1);// To make the shout
+                                                                                                                // out icon
+                                                                                                                // disappear
+                }
+        }
 
-			if (intent.getExtras().getBoolean(SyncAdapter.SYNC_ERROR)) {
-				progressDialog.dismiss();
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						ViewMessageActivity.this);
-				builder.setMessage("Error while deleting message")
-						.setCancelable(false)
-						.setNeutralButton("OK",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										ViewMessageActivity.this.finish();
-									}
-								});
 
-				alert = builder.create();
-				alert.show();
-			} else {
-				progressDialog.setMessage("Message deleted successfully");
-				progressDialog.dismiss();
-				ViewMessageActivity.this.finish();
-				MapViewActivity.setCourtPostedMessageOn(-1);// To make the shout
-															// out icon
-															// disappear
-			}
-		}
-	};
+public void viewcontact(View v) {
 
-	public void viewcontact(View v) {
-	
-		if (!viewcontact.getText().toString().contentEquals("")) {
+        if (!viewcontact.getText().toString().contentEquals("")) {
 
-			if (viewcontact.getText().toString().matches("[0-9]+")) {
+                if (viewcontact.getText().toString().matches("[0-9]+")) {
 
-				Intent callIntent = new Intent(Intent.ACTION_CALL);
-				callIntent.setData(Uri.parse("tel:"
-						+ viewcontact.getText().toString().trim()));
-				startActivity(callIntent);
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:"
+                                        + viewcontact.getText().toString().trim()));
+                        startActivity(callIntent);
 
-			}
-			if (validator.validate(viewcontact.getText().toString())) {
+                }
+                if (validator.validate(viewcontact.getText().toString())) {
 
-				String[] emailaddress = { viewcontact.getText().toString() };
-				Intent emailintent = new Intent(
-						android.content.Intent.ACTION_SEND);
+                        String[] emailaddress = { viewcontact.getText().toString() };
+                        Intent emailintent = new Intent(
+                                        android.content.Intent.ACTION_SEND);
 
-				emailintent.putExtra(android.content.Intent.EXTRA_EMAIL,
-						emailaddress);
-				emailintent.putExtra(android.content.Intent.EXTRA_SUBJECT,
-						"Responding to your message in MeWannaPlay.");
-				emailintent.setType("plain/text");
+                        emailintent.putExtra(android.content.Intent.EXTRA_EMAIL,
+                                        emailaddress);
+                        emailintent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+                                        "Responding to your message in MeWannaPlay.");
+                        emailintent.setType("plain/text");
 
-				startActivity(Intent.createChooser(emailintent, "Email Via..."));
+                        startActivity(Intent.createChooser(emailintent, "Email Via..."));
 
-			}
+                }
 
-		}
-	}
+        }
+}
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.contact_info_view:
+@Override
+public void onClick(View v) {
+        // TODO Auto-generated method stub
+        switch (v.getId()) {
+        case R.id.contact_info_view:
 
-			break;
+                break;
 
-		}
+        }
 
-	}
+}
 
 }

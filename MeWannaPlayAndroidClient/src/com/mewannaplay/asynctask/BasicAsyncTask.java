@@ -103,12 +103,12 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
        Log.d(TAG, " executing asynctask for server url -"+SERVER_URL);
        JSONObject response = null;
        try {
-    	if (running)
-    			if (isInDatabase())
-    			{
-    				Log.d(TAG, " Found in database");
-    				return false;
-    			}
+        if (running)
+                        if (isInDatabase())
+                        {
+                                Log.d(TAG, " Found in database");
+                                return false;
+                        }
         if (running)
                 response = sendRequest();
         if(running)
@@ -123,7 +123,7 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
     
     protected boolean isInDatabase()
     {
-    	return false;
+        return false;
     }
     protected JSONObject sendRequest() throws IOException
     {

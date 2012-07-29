@@ -503,7 +503,7 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="140dip"
+        android:layout_height="160dip"
         android:layout_below="@id/msg_table"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"

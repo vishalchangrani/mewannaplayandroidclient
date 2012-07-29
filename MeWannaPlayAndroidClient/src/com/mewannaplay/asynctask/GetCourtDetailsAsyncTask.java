@@ -33,18 +33,18 @@ public class GetCourtDetailsAsyncTask extends BasicAsyncTask {
         @Override
         protected boolean isInDatabase()
         {
-        	Cursor cursor = ownerAcitivty.getContentResolver().query(
+                Cursor cursor = ownerAcitivty.getContentResolver().query(
                     TennisCourtsDetails.CONTENT_URI, new String[]{"_id"}, " _id = ?",
                     new String[] { courtId + "" }, null);
-       	 try
-       	 {
-       		 return (cursor.getCount() > 0); //found in local db
-       	 }
-       	 finally
-       	 {
-       		 if (cursor != null)
-       			 cursor.close();
-       	 }
+         try
+         {
+                 return (cursor.getCount() > 0); //found in local db
+         }
+         finally
+         {
+                 if (cursor != null)
+                         cursor.close();
+         }
         }
 
         @Override
