@@ -100,6 +100,10 @@ public class CourtDetailsActivity extends ListActivity implements
                  message.setTypeface(bold);
                  emptymessage=(TextView)findViewById(android.R.id.empty);
                  emptymessage.setTypeface(normal);
+                 emptymessage.setText("Retreiving messages...");
+                
+                 
+                 
 bpost=(Button)findViewById(R.id.post_msg_button);
 bpost.setTypeface(bold);
 bmark=(Button)findViewById(R.id.marl_occu_button);
@@ -201,6 +205,7 @@ bmark.setTypeface(bold);
 
                                 @Override
                                 public void run() {
+                                	emptymessage.setText("No Messages to display");
                                         Log.d(TAG, "In observer for messages");
                                         cursorAdapter.notifyDataSetChanged();
                                 }
