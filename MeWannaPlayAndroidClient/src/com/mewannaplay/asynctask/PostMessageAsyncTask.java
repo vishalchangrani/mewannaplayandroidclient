@@ -29,7 +29,7 @@ public class PostMessageAsyncTask extends BasicAsyncTask {
 	
 	@Override
 	protected void onPostExecute(Boolean result) {
-		super.onPreExecute();
+		super.onPostExecute(result);
 		((PostMessageActivity)ownerAcitivty).onPostExecutePostMessageTask(result);
 	}
 
