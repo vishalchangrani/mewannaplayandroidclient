@@ -242,8 +242,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                 ProviderContract.AUTHORITY, true);
                 boolean value = ContentResolver.getMasterSyncAutomatically();
 
-                ContentResolver.setMasterSyncAutomatically(true);
-
+                
                 ContentResolver.setIsSyncable(MapViewActivity.getAccount(this), ProviderContract.AUTHORITY, 1);
 
                 // Periodically update courts occupied count and message count for all
