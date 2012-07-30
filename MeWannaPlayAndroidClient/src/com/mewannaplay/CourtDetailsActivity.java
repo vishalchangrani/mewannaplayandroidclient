@@ -51,6 +51,7 @@ import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
 
 public class CourtDetailsActivity extends ListActivity implements
 		OnClickListener {
@@ -518,10 +519,10 @@ LinearLayout yellolayout;
 							Context.LAYOUT_INFLATER_SERVICE);
 			switch (groupPosition) {
 			case 0:
-msgtable.setVisibility(View.VISIBLE);
-msglist.setVisibility(View.VISIBLE);
-emptymessage.setVisibility(View.VISIBLE);
-
+				msgtable.setVisibility(View.VISIBLE);
+				msglist.setVisibility(View.VISIBLE);
+				if (msglist.getAdapter().getCount() <= 0)
+					emptymessage.setVisibility(View.VISIBLE);
 				return infalInflater.inflate(
 						R.layout.group_layout_ameneties_services, null);
 			case 1:
