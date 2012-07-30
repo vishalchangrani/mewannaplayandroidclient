@@ -314,68 +314,79 @@
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
+            
         </TableRow>
     </TableLayout>
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip" >
+   
 
-        <TableRow android:gravity="left" >
+       <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="horizontal" >
 
-     
+      <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="6"
+                android:orientation="horizontal" >
+           
 
                 <TextView
                     android:id="@+id/tmessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-            
+                 android:layout_marginLeft="19dp"
+            android:layout_marginTop="10dp"
                     android:text="Additional
 comments"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:typeface="serif" />
+                    android:typeface="serif" /></LinearLayout>
        
 
-         
+           <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="horizontal" >
+           
                 <TextView
                     android:id="@+id/message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:maxLines="4"
-                    android:layout_marginLeft="8.5dp"
+                  android:layout_marginTop="10dp"
                     android:scrollbars="horizontal"
                     android:singleLine="false"
-                    android:text="Very Usefuljvjvjbhjbjbhj"
+                  
+                    android:text="Very Usefuljvjvjbhjbjbhjfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
                     android:textColor="#fff"
                     android:paddingRight="3dp"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-           
-        </TableRow>
-    </TableLayout>
+           </LinearLayout>
+        
+   </LinearLayout>
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="left"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip" >
-
-        <TableRow android:gravity="left" >
+  
+       <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_marginTop="30dp"
+            
+                android:orientation="horizontal" >
+       
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
+                android:layout_weight="5"
                 android:orientation="horizontal" >
 
                 <Button
@@ -384,6 +395,7 @@ comments"
                     android:layout_height="50dp"
                     android:background="@drawable/buttons"
                     android:onClick="onDelete"
+                    android:layout_marginLeft="10dp"
                     android:text="Delete message"
                     android:textColor="#fff"
                     android:textSize="10sp" />
@@ -393,12 +405,14 @@ comments"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="horizontal"
+                    android:layout_weight="5"
                 android:paddingLeft="10dip" >
 
                 <Button
                     android:id="@+id/delete_message_partner_found"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="-10dp"
                     android:background="@drawable/buttons"
                     android:onClick="onDeletePartnerFound"
                     android:text="Partner found.delete message"
@@ -406,7 +420,6 @@ comments"
                     android:textSize="9sp" >
                 </Button>
             </LinearLayout>
-        </TableRow>
-    </TableLayout>
-
+        
+</LinearLayout>
 </LinearLayout>
