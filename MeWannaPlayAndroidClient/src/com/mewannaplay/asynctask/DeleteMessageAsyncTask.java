@@ -41,7 +41,7 @@ public class DeleteMessageAsyncTask extends BasicAsyncTask {
         
         @Override
         protected void onPostExecute(Boolean result) {
-                super.onPreExecute();
+                super.onPostExecute(result);
                 ((ViewMessageActivity)ownerAcitivty).onPostExectureDeleteMessage(result);
         }
 
