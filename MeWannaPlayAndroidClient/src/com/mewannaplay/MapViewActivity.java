@@ -619,7 +619,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                         // redrawMarkers();
                         Log.d(TAG,
                                         " Adding all tenniscourts for the state to which this city belongs to as overlays on the map");
-                        myItemizedOverlay.clear();
+                        if (myItemizedOverlay != null)
+                        	myItemizedOverlay.clear();
                         getAllTennisCourts(currentCity);
 
                         mapView.postDelayed(new Runnable() {
