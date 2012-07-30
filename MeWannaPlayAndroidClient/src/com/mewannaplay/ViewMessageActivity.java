@@ -114,7 +114,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		cursor.close();
 
 		TextView nameTextView = (TextView) findViewById(R.id.schedule_time_view);
-		nameTextView.setText(message.getScheduleTime());
+		nameTextView.setText(Util.getLocalTimeFromUTC(message.getScheduleTime()));
 		((TextView) findViewById(R.id.level_view)).setText(message.getLevel());
 	
 		((TextView) findViewById(R.id.players_needed_view)).setText(message
@@ -124,8 +124,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 
 		viewcontact.setText(content);
 		((TextView) findViewById(R.id.message)).setText(message.getText());
-		((TextView) findViewById(R.id.posted_on_view)).setText(message
-				.getTimeposted());
+		((TextView) findViewById(R.id.posted_on_view)).setText(Util.getLocalTimeFromUTC(message.getTimeposted()));
 		((TextView) findViewById(R.id.user_name_view)).setText(message
 				.getUserName());
 
