@@ -69,14 +69,14 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="40"
+            android:layout_weight="30"
             android:orientation="vertical" >
             
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="7" >
 
                 <TextView
                          android:id="@+id/titleplayat"
@@ -98,7 +98,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="11" >
 
                 <TextView
                       android:id="@+id/titlenoofplayer"
@@ -124,7 +124,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="11" >
 
                 <TextView
                       android:id="@+id/titlelevel"
@@ -151,7 +151,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" 
+                android:layout_weight="11" 
                 android:weightSum="10"
                 >
  <LinearLayout
@@ -205,7 +205,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="30"
+            android:layout_weight="40"
             android:orientation="vertical" >
 
 
@@ -275,14 +275,21 @@ comments :"
                     android:layout_weight="3.5" 
                     
                     >
-                    <EditText
-                        android:id="@+id/message"
+
+     <EditText
+          android:id="@+id/message"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:maxLength="100"
                       android:background="@drawable/editbox"
+                      android:layout_marginRight="5dp"
                         android:layout_marginTop="3dp"
-                        android:inputType="textMultiLine" /></LinearLayout>
+                        android:inputType="textMultiLine"  >
+
+      
+     </EditText>
+
+                   </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -314,7 +321,7 @@ comments :"
                          android:text="Cancel>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="7dp"
+       
             
             android:textStyle="bold"
             android:typeface="serif" />
@@ -326,7 +333,7 @@ comments :"
                                android:text="Post>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="7dp"
+         
             
             android:textStyle="bold"
             android:typeface="serif"
@@ -348,7 +355,7 @@ comments :"
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="10dp"
                         android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
                         android:textColor="#000"
                         android:textSize="10dp"

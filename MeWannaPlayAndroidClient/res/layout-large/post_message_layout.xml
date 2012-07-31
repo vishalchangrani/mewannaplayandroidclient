@@ -69,17 +69,17 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="40"
+            android:layout_weight="30"
             android:orientation="vertical" >
             
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="7" >
 
                 <TextView
-                     android:id="@+id/titleplayat"
+                         android:id="@+id/titleplayat"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -98,10 +98,10 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="11" >
 
                 <TextView
-                     android:id="@+id/titlenoofplayer"
+                      android:id="@+id/titlenoofplayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -124,10 +124,10 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" >
+                android:layout_weight="11" >
 
                 <TextView
-                    android:id="@+id/titlelevel"
+                      android:id="@+id/titlelevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -151,7 +151,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="10" 
+                android:layout_weight="11" 
                 android:weightSum="10"
                 >
  <LinearLayout
@@ -159,7 +159,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="7">
                 <TextView
-                     android:id="@+id/titlepreferedcontact"
+                      android:id="@+id/titlepreferedcontact"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
@@ -205,7 +205,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="30"
+            android:layout_weight="40"
             android:orientation="vertical" >
 
 
@@ -213,11 +213,12 @@
                 android:id="@+id/contact_info"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="140dp"
+                android:layout_marginLeft="150dp"
                 android:layout_marginRight="10dp"
-               
                 android:hint="e.g.9999999999"
                 android:inputType="phone"
+                android:gravity="center"
+                android:background="@drawable/editbox"
                 android:maxLength="10" >
             </EditText>
 
@@ -237,7 +238,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="160dp"
                         android:text="*Note: Contact details will be visible to other users"
                         android:textColor="#000"
                         android:textSize="10dp"
@@ -257,7 +258,7 @@
                     
                     >
                     <TextView
-                         android:id="@+id/titlecomment"
+                          android:id="@+id/titlecomment"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_marginLeft="10dp"
@@ -274,14 +275,21 @@ comments :"
                     android:layout_weight="3.5" 
                     
                     >
-                    <EditText
-                        android:id="@+id/message"
+
+     <EditText
+          android:id="@+id/message"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:maxLength="100"
-                      
+                      android:background="@drawable/editbox"
+                      android:layout_marginRight="7dp"
                         android:layout_marginTop="3dp"
-                        android:inputType="textMultiLine" /></LinearLayout>
+                        android:inputType="textMultiLine"  >
+
+      
+     </EditText>
+
+                   </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -305,7 +313,7 @@ comments :"
 
                     <Button
                         android:id="@+id/cancel"
-                        android:layout_width="75dp"
+                        android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="30dp"
                         android:background="@drawable/cancelbutton"
@@ -313,7 +321,7 @@ comments :"
                          android:text="Cancel>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="3dp"
+       
             
             android:textStyle="bold"
             android:typeface="serif" />
@@ -325,8 +333,8 @@ comments :"
                                android:text="Post>"
             android:textColor="#edd008"
             android:textSize="20sp"
-            android:layout_marginTop="3dp"
-             android:layout_marginLeft="20dp"
+         
+            
             android:textStyle="bold"
             android:typeface="serif"
                         android:background="@drawable/postbutton"
@@ -347,7 +355,7 @@ comments :"
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="10dp"
                         android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
                         android:textColor="#000"
                         android:textSize="10dp"
