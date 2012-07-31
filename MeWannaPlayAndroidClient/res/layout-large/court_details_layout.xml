@@ -13,13 +13,14 @@
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:background="@drawable/header"
+        android:gravity="center_horizontal"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="5dip" >
 
         <TableRow
             android:clickable="true"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:paddingBottom="2dip"
           
            >

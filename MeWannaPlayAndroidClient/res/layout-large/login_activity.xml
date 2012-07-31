@@ -139,6 +139,7 @@
                 android:layout_marginBottom="5dip"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
+           
         </LinearLayout>
 
      
@@ -158,7 +159,19 @@
                 android:layout_weight="11"
                
                 android:orientation="vertical" >
-
+ <Button
+                    android:id="@+id/forgotusername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+             
+                    android:background="@drawable/newregibutton"
+                    android:onClick="onForgotusername"
+                    android:text="Forgot User Name Or Password?"
+                    android:textColor="#edd008"
+               
+                      android:textSize="20sp"
+                    >
+                </Button>
                 <Button
                     android:id="@+id/newuser_register_btn"
                     android:layout_width="wrap_content"
