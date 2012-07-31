@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -101,7 +102,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 	private final Handler handler = new Handler();
 	AccountManagerFuture<Bundle> accountManagerFuture = null;
 	
-
+Button forgotusername;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -128,7 +129,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 		mMessage = (TextView) findViewById(R.id.message);
 		mUsernameEdit = (EditText) findViewById(R.id.username_edit);
 		mPasswordEdit = (EditText) findViewById(R.id.password_edit);
-		
+		forgotusername=(Button)findViewById(R.id.forgotusername);
 	     bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
 				 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
 				 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
@@ -137,11 +138,18 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 				 newuserregi.setTypeface(bold);
 				 go=(Button)findViewById(R.id.ok_button);
 				 go.setTypeface(bold);
+				 forgotusername.setTypeface(bold);
 		if (!TextUtils.isEmpty(mUsername))
 			mUsernameEdit.setText(mUsername);
 		if (!TextUtils.isEmpty(mPassword))
 			mUsernameEdit.setText(mPassword);
 		mMessage.setText(getMessage());
+
+	}
+	public void onForgotusername(View v) {
+		Uri uri = Uri.parse("http://mewannaplay.com");
+		 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		 startActivity(intent);
 
 	}
 
@@ -212,6 +220,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 			mAuthTask.execute();
 		}}
 	}
+	
+	
 
 	public void handleAnnonymousLogin(View view) {
 		Log.i(TAG, "handleAnnonymousLogin");
