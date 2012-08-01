@@ -53,7 +53,9 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="10dp"
             android:maxLength="20"
-              android:gravity="center"
+             android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
             android:background="@drawable/editbox"
             android:singleLine="true" >
         </EditText>
@@ -86,7 +88,9 @@
             android:layout_marginRight="10dp"
             android:inputType="textPassword"
               android:background="@drawable/editbox"
-                android:gravity="center"
+               android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
             android:singleLine="true" >
         </EditText>
     </LinearLayout>
@@ -119,7 +123,9 @@
             android:layout_marginRight="10dp"
             android:inputType="textPassword"
               android:background="@drawable/editbox"
-                android:gravity="center"
+               android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
             android:singleLine="true" >
         </EditText>
     </LinearLayout>
@@ -150,7 +156,9 @@
             android:layout_marginLeft="83dp"
               android:background="@drawable/editbox"
             android:layout_marginRight="10dp"
-              android:gravity="center"
+             android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
             android:inputType="textEmailAddress" >
         </EditText>
     </LinearLayout>

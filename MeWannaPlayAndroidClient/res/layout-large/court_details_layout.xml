@@ -13,14 +13,14 @@
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:background="@drawable/header"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="5dip" >
 
         <TableRow
             android:clickable="true"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:paddingBottom="2dip"
           
            >
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
       
          android:layout_toRightOf="@+id/court_addr_1"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:layout_marginLeft="350dp"
         android:onClick="clickdriving"
         android:src="@drawable/drivingdirection" />

@@ -217,7 +217,9 @@
                 android:layout_marginRight="10dp"
                 android:hint="e.g.9999999999"
                 android:inputType="phone"
-                android:gravity="center"
+                 android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
                 android:background="@drawable/editbox"
                 android:maxLength="10" >
             </EditText>
@@ -282,6 +284,9 @@ comments :"
                         android:layout_height="fill_parent"
                         android:maxLength="100"
                       android:background="@drawable/editbox"
+                       android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
                       android:layout_marginRight="5dp"
                         android:layout_marginTop="3dp"
                         android:inputType="textMultiLine"  >
