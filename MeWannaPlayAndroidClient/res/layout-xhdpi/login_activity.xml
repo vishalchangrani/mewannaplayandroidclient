@@ -144,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                    
-                    android:background="@drawable/newregibutton"
+                   android:background="@drawable/forgotbtn"
                     android:onClick="onForgotusername"
                     android:text="Forgot User Name Or Password?"
                     android:textColor="#edd008"
