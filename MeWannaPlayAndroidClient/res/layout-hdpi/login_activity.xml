@@ -78,6 +78,8 @@
                 android:background="@drawable/usernambox"
                 android:capitalize="none"
                 android:gravity="left"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
                 android:minWidth="250dip"
@@ -108,11 +110,14 @@
                 android:autoText="false"
                 android:background="@drawable/passbox"
                 android:capitalize="none"
-                android:gravity="left"
+                
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:minWidth="250dip"
                 android:password="true"
+                android:gravity="left"
+                  android:paddingLeft="10dp"
+                android:paddingTop="10dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true" />
 

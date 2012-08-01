@@ -75,6 +75,7 @@ public class CourtDetailsActivity extends ListActivity implements
 			adultprog, teamtennis, juniorprog, tournaments, ladders,
 			roundrobin, socialmixers, serniors, emptymessage;
 	String user;
+	ImageView courtphoneicon;
 	Typeface bold, heavy, light, normal;
 	Button bpost, bmark;
 TableLayout msgtable;
@@ -96,6 +97,7 @@ LinearLayout yellolayout;
 		msgtable=(TableLayout)findViewById(R.id.msg_table);
 		msglist=(ListView)findViewById(android.R.id.list);
 		yellolayout=(LinearLayout)findViewById(R.id.exlayout);
+		courtphoneicon=(ImageView)findViewById(R.id.court_phone_icon);
 		bold = Typeface.createFromAsset(this.getAssets(), "Folks-Bold.ttf");
 		heavy = Typeface.createFromAsset(this.getAssets(), "Folks-Heavy.ttf");
 		light = Typeface.createFromAsset(this.getAssets(), "Folks-Light.ttf");
@@ -337,11 +339,15 @@ LinearLayout yellolayout;
 		// tv.setText(tennisCourtDetails.getCity()+","+tennisCourtDetails.getState()+" "+tennisCourtDetails.getZipcode());
 		tv = (TextView) this.findViewById(R.id.court_phone_1);
 		tv.setTypeface(normal);
+		if(!tennisCourtDetails.getPhone().contentEquals("")){
 		SpannableString content1 = new SpannableString(
 				(tennisCourtDetails.getPhone().trim()));
 		content1.setSpan(new UnderlineSpan(), 0, (tennisCourtDetails.getPhone()
 				.trim().length()), 0);
-		tv.setText(content1);
+		tv.setText(content1);}else{
+			courtphoneicon.setVisibility(View.INVISIBLE);
+			
+		}
 		tv = (TextView) this.findViewById(R.id.no_of_sub_courts);
 		tv.setTypeface(normal);
 		tv.setText("" + tennisCourtDetails.getSubcourts());
