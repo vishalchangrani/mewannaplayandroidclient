@@ -34,4 +34,12 @@ public class ScrollingTextView extends TextView {
             super.onWindowFocusChanged(focused);
         }
     }
+    @Override
+
+    public boolean isFocused() {
+
+        return true;
+
+    }
+
 }

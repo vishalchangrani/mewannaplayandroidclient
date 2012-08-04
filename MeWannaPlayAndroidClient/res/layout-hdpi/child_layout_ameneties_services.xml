@@ -44,7 +44,7 @@
             <ImageView
                 android:id="@+id/parking"
                 android:layout_width="15dp"
-                  android:layout_marginTop="10dp"
+                
                 android:layout_height="wrap_content"
                 android:src="@drawable/check_or_uncheck_image" >
             </ImageView>
@@ -57,7 +57,7 @@
                 android:paddingLeft="2dip"
                 android:text="Parking"
                android:textColor="#fff"
-               android:layout_marginTop="7dp"
+            
                 android:textSize="10dp"
                 android:textStyle="normal"
                 android:typeface="serif" >

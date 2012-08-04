@@ -63,7 +63,7 @@ public class NewUserRegisterationActivity extends Activity {
 			 txtnewusermail.setTypeface(bold);
 			 txtpasscon.setTypeface(bold);
 			 titleregi.setTypeface(bold);
-			 errorMessage.setTypeface(bold);
+			 errorMessage.setTypeface(normal);
 			 newUserNameEditText.setTypeface(normal);
 			 newUserEmailEditText.setTypeface(normal);
 			 newUserPasswordEditText.setTypeface(normal);
