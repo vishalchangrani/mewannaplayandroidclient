@@ -27,6 +27,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -97,7 +98,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
 	protected boolean mRequestNewAccount = false;
 
 	private String mUsername;
-
+TextView login;
 	private EditText mUsernameEdit;
 	private final Handler handler = new Handler();
 	AccountManagerFuture<Bundle> accountManagerFuture = null;
@@ -130,6 +131,7 @@ Button forgotusername;
 		mUsernameEdit = (EditText) findViewById(R.id.username_edit);
 		mPasswordEdit = (EditText) findViewById(R.id.password_edit);
 		forgotusername=(Button)findViewById(R.id.forgotusername);
+		login=(TextView)findViewById(R.id.login);
 	     bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
 				 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
 				 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
@@ -138,7 +140,9 @@ Button forgotusername;
 				 newuserregi.setTypeface(bold);
 				 go=(Button)findViewById(R.id.ok_button);
 				 go.setTypeface(bold);
-				 forgotusername.setTypeface(bold);
+				 forgotusername.setTypeface(normal);
+				 mMessage.setTypeface(normal);
+				 login.setTypeface(bold);
 		if (!TextUtils.isEmpty(mUsername))
 			mUsernameEdit.setText(mUsername);
 		if (!TextUtils.isEmpty(mPassword))
@@ -207,11 +211,16 @@ Button forgotusername;
 	if(TextUtils.isEmpty(mUsername) && TextUtils.isEmpty(mPassword)){
 		
 		mMessage.setText("Please Enter Username and password");
+		mMessage.setTextColor(Color.RED);
 	}else{
-		if (TextUtils.isEmpty(mUsername) || TextUtils.isEmpty(mPassword)) {
-			mMessage.setText(getMessage());
+		if (TextUtils.isEmpty(mUsername)) {
+			mMessage.setText("Please Enter UserName");
+			mMessage.setTextColor(Color.RED);
 		}
-		
+		if (TextUtils.isEmpty(mPassword)) {
+			mMessage.setText("Please Enter Password");
+			mMessage.setTextColor(Color.RED);
+		}
 		else {
 			// Show a progress dialog, and kick off a background task to perform
 			// the user login attempt.
@@ -403,12 +412,13 @@ Button forgotusername;
 		if (TextUtils.isEmpty(mUsername)) {
 			// If no username, then we ask the user to log in using an
 			// appropriate service.
-			final CharSequence msg = getText(R.string.login_activity_newaccount_text);
-			return msg;
+//			final CharSequence msg = getText(R.string.login_activity_newaccount_text);
+//	
+//			return msg;
 		}
 		if (TextUtils.isEmpty(mPassword)) {
 			// We have an account but no password
-			return getText(R.string.login_activity_loginfail_text_pwmissing);
+//			return getText(R.string.login_activity_loginfail_text_pwmissing);
 		}
 	
 		return null;

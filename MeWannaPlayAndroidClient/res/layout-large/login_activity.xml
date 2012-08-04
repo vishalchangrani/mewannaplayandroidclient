@@ -66,10 +66,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dip"
-                android:textColor="#ffff00"
+                 android:textColor="#ff0000"
                 android:textSize="8pt"
                 android:textStyle="bold" />
-
+ <TextView
+                 android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:textColor="#edd008"
+                android:text="LOGIN"
+                android:textSize="8pt"
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,7 +179,7 @@
                     android:background="@drawable/forgotbtn"
                     android:onClick="onForgotusername"
                     android:text="Forgot User Name Or Password?"
-                    android:textColor="#edd008"
+                    android:textColor="#C0C0C0"
                
                       android:textSize="20sp"
                     >
@@ -186,7 +194,7 @@
                     android:text="New User Registration>"
                     android:textColor="#edd008"
                      android:layout_marginRight="100dp"
-                    android:textSize="20sp"
+                    android:textSize="21sp"
                     >
                 </Button>
             </LinearLayout>
@@ -221,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:layout_marginTop="7dp"
+                   
                     android:background="@drawable/gobutton"
                     android:onClick="handleLogin"
                     android:text="GO>"

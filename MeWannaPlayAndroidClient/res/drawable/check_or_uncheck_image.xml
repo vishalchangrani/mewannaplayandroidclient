@@ -6,7 +6,7 @@
         android:maxLevel="0"
         android:minLevel="0"/>
     <item
-        android:drawable="@drawable/checkbox_on_background"
+        android:drawable="@drawable/ic_bullet_key_permission"
         android:maxLevel="1"
         android:minLevel="1"/>
 

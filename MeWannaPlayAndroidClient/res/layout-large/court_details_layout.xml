@@ -50,7 +50,7 @@
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/court_addr_rel_layout"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/court_title_table"
           
@@ -59,25 +59,34 @@
             android:paddingBottom="5dip"
            >
 
-            <com.mewannaplay.ScrollingTextView
+                 <com.mewannaplay.ScrollingTextView
                 android:id="@+id/court_addr_1"
-                android:layout_width="335dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                
-                
+                android:layout_marginRight="5dp"
+             
                 android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+              
                 android:freezesText="true"
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
-            
+        
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="142 Clubhouse Drive,Fairhope,Al36532"
-                android:textColor="#fff"
+                android:text="Book Title sad ds sdas das asdas das asd asd sad as"
+                android:textColor="#FFFFFF"
               android:textSize="12sp"
                 />
+           <ImageView
+        android:id="@+id/court_driving_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+ android:gravity="right"
+         android:layout_toRightOf="@+id/court_addr_1"
+       
+        android:onClick="clickdriving"
+        android:src="@drawable/drivingdirection" />
            
             <TextView
                 android:id="@+id/court_addr_2"
@@ -94,8 +103,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/court_addr_1"
-                android:layout_toRightOf="@id/court_addr_2"
-                android:layout_marginLeft="110dp"
+              
+                android:layout_marginLeft="100dp"
                 android:paddingRight="05dip"
                 android:text="(080)-3242-2341"
                 android:textColor="#fff"
@@ -113,16 +122,7 @@
                 android:src="@drawable/callicon16" />
         </RelativeLayout>
     </TableLayout>
- <ImageView
-        android:id="@+id/court_driving_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-      
-         android:layout_toRightOf="@+id/court_addr_1"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="350dp"
-        android:onClick="clickdriving"
-        android:src="@drawable/drivingdirection" />
+
     
     
 
