@@ -35,12 +35,12 @@
 
         <TextView
             android:id="@+id/dropdown_city"
-            android:layout_width="160dp"
+            android:layout_width="310dp"
             android:layout_height="30dp"
-           
+          android:gravity="center"
             android:layout_alignTop="@id/ImageInfoButton01"
             android:text="Current location"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:layout_marginLeft="100dp"
              android:textColor="#fff"
         android:textSize="20dp"
