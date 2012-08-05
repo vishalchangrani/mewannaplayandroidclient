@@ -35,15 +35,16 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:gravity="center"
             android:layout_weight="10" >
 
             <Button
                 android:id="@+id/btnok"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="120dp"
+              
             android:gravity="center_vertical"
-                android:layout_marginTop="18dp"
+             
                 android:background="@drawable/okbutton" />
         </LinearLayout>
     </LinearLayout>
@@ -70,7 +71,7 @@
             android:id="@+id/txtlink"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="90dp"
             android:autoLink="web"
             android:text="www.mewannaplay.com"
             android:textColor="#fff"
