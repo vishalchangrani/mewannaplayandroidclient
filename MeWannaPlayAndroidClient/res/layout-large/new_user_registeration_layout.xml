@@ -103,7 +103,7 @@
 
         <TextView
              android:id="@+id/tconfirm_password"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
@@ -122,7 +122,7 @@
             
             android:layout_marginRight="10dp"
              android:gravity="left"
-                  android:paddingLeft="10dp"
+                  android:paddingLeft="4dp"
                 android:paddingTop="10dp"
             android:background="@drawable/editbox"
             android:inputType="textPassword"
