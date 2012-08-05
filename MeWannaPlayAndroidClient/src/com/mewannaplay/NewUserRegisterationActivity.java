@@ -248,7 +248,7 @@ public class NewUserRegisterationActivity extends Activity {
 	            return "Invalid email";
 	        }
 	        else if (!TextUtils.equals(password, confirmPassword))
-	        	return "Password and confirm password fields dont match" ;
+	        	return "Passwords do not match" ;
 	        else
 	        	return null;
 	    }
