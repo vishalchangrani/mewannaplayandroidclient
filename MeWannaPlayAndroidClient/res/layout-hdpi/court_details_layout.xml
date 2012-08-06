@@ -209,7 +209,7 @@
                  android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:textStyle="normal"
-               android:layout_marginLeft="40dp"
+               android:layout_marginLeft="150dp"
                />
 
             <TextView
@@ -359,6 +359,8 @@
             android:clickable="true"
             android:paddingBottom="0dip"
             android:paddingLeft="5dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
              android:layout_marginTop="10dp"
@@ -409,8 +411,10 @@
         android:choiceMode="singleChoice"
         android:dividerHeight="0dip"
         android:paddingBottom="10dip"
+        android:divider="@android:color/transparent"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
+           android:layout_marginTop="10dp"
         android:paddingTop="0dip"
         android:scrollbars="vertical" />
         <TextView android:id="@android:id/empty"
@@ -419,6 +423,7 @@
                android:layout_height="140dip"
                 android:textColor="#FFFFFF"
                         android:textSize="12dp"
+                           android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                 android:text="No messages to display"/>
     <LinearLayout
