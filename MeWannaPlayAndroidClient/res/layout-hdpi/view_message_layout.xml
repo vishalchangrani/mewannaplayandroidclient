@@ -38,7 +38,9 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
 
-        <TableRow android:gravity="left" >
+        <TableRow android:gravity="left" 
+            
+          >
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -81,7 +83,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -129,7 +131,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -177,7 +179,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -225,7 +227,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -272,7 +274,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -377,7 +379,7 @@ comments"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="10"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
             
                 android:orientation="horizontal" >
        
@@ -396,8 +398,8 @@ comments"
                     android:background="@drawable/buttons"
                     android:onClick="onDelete"
                     android:layout_marginLeft="10dp"
-                    android:text="Delete message"
-                    android:textColor="#fff"
+                    android:text="Delete"
+                    android:textColor="#edd008"
                     android:textSize="10sp" />
             </LinearLayout>
 
@@ -410,13 +412,13 @@ comments"
 
                 <Button
                     android:id="@+id/delete_message_partner_found"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="-10dp"
+                    
                     android:background="@drawable/buttons"
                     android:onClick="onDeletePartnerFound"
-                    android:text="Partner found.delete message"
-                    android:textColor="#fff"
+                    android:text="Partner found! Delete"
+                    android:textColor="#edd008"
                     android:textSize="9sp" >
                 </Button>
             </LinearLayout>
