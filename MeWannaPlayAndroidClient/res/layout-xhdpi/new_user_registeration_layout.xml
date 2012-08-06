@@ -122,7 +122,7 @@
             android:id="@+id/confirm_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
+            android:layout_marginLeft="3dp"
             android:layout_marginRight="10dp"
               android:gravity="left"
                   android:paddingLeft="10dp"
