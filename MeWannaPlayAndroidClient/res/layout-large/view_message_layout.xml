@@ -33,7 +33,7 @@
         android:id="@+id/court_sub_table_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -53,7 +53,7 @@
                    android:layout_marginLeft="10dp"
                     android:text="User"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_marginLeft="85dp"
                     android:text="Unknown"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -81,7 +81,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -101,7 +101,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Contact info"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -121,6 +121,7 @@
                     android:onClick="viewcontact"
                     android:text="abcdefgh@gmail.com"
                     android:textColor="#000"
+                      android:textSize="18sp"
                     android:textStyle="italic" />
             </LinearLayout>
         </TableRow>
@@ -129,7 +130,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -149,7 +150,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Posted Time"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -167,7 +168,8 @@
                     android:layout_marginLeft="40dp"
                     android:text="6:30 pm"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                  
+                      android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -177,7 +179,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -197,7 +199,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Schedule Time"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                   android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -215,7 +217,7 @@
                     android:layout_marginLeft="18dp"
                     android:text="6:30 pm"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                      android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -225,7 +227,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -245,7 +247,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Players needed"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                      android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -263,6 +265,7 @@
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
                     android:text="3 players"
+                      android:textSize="18sp"
                     android:textColor="#fff"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -272,7 +275,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -292,7 +295,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Level"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                   android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -310,7 +313,7 @@
                     android:layout_marginLeft="85dp"
                     android:text="Unknown"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
             </LinearLayout>
@@ -324,6 +327,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="10"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal" >
 
       <LinearLayout
@@ -342,7 +346,7 @@
                     android:text="Additional
 comments"
                     android:textColor="#fff"
-                    android:textSize="16sp"
+                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:typeface="serif" /></LinearLayout>
        
@@ -366,7 +370,7 @@ comments"
                     android:text="Very Usefuljvjvjbhjbjbhjfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
                     android:textColor="#fff"
                     android:paddingRight="3dp"
-                    android:textSize="16sp"
+                      android:textSize="18sp"
                     android:textStyle="bold" />
            </LinearLayout>
         
@@ -377,7 +381,7 @@ comments"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="10"
-                android:layout_marginTop="220dp"
+                android:layout_marginTop="130dp"
             
                 android:orientation="horizontal" >
        
@@ -396,8 +400,8 @@ comments"
                     android:background="@drawable/buttons"
                     android:onClick="onDelete"
                     android:layout_marginLeft="50dp"
-                    android:text="Delete message"
-                    android:textColor="#fff"
+                    android:text="Delete"
+                    android:textColor="#edd008"
                     android:textSize="10sp" />
             </LinearLayout>
 
@@ -412,11 +416,11 @@ comments"
                     android:id="@+id/delete_message_partner_found"
                    android:layout_width="180dp"
                     android:layout_height="70dp"
-                    android:layout_marginLeft="-10dp"
+                   
                     android:background="@drawable/buttons"
                     android:onClick="onDeletePartnerFound"
-                    android:text="Partner found.delete message"
-                    android:textColor="#fff"
+                    android:text="Partner found! Delete"
+                    android:textColor="#edd008"
                     android:textSize="9sp" >
                 </Button>
             </LinearLayout>
