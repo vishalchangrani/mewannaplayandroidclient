@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                
                 
-                android:text="Subcourts :"
+                android:text="Subcourts "
                 android:textColor="#fff"
                 android:textSize="10dp"
                 android:textStyle="normal"
@@ -208,7 +208,7 @@
               />
                <TextView
                 android:id="@+id/court_ftype"
-                android:text="Facility :"
+                android:text="Facility "
                 android:textColor="#fff"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
                 android:id="@+id/court_type"
                  android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:text="Type :"
+                android:text="Type "
                 android:textColor="#fff"
                
                 android:textSize="10sp"
@@ -304,7 +304,7 @@
                 android:id="@+id/court_avail_timings"
                android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:text="Timings :"
+                android:text="Timings "
                 android:textColor="#fff"
                 android:textSize="10sp"
                  
