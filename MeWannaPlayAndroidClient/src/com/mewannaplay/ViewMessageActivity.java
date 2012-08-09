@@ -185,7 +185,7 @@ public void onDelete(final boolean partnerFound) {
 
 public void deleteMessage(boolean partnerFound) {
         
-        new DeleteMessageAsyncTask(this, courtId, message.getId(), partnerFound);
+	new DeleteMessageAsyncTask(this, courtId, message.getId(), partnerFound).execute();
 }
 
         public void onPostExectureDeleteMessage(boolean isError)

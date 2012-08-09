@@ -84,12 +84,36 @@
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="10dp"
                     android:gravity="left"
-                    android:text="Play at :"
+                    android:text="Play at "
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:typeface="serif" />
-
+    <TextView
+                     android:id="@+id/hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   
+                     android:layout_marginTop="30dp"
+                    android:gravity="left"
+                    android:text="Hours"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
+ <TextView
+     
+      android:id="@+id/minutes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  android:layout_marginLeft="-50dp"
+                    android:layout_marginTop="80dp"
+                    android:text="Minutes"
+                
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
                 <include
                     android:gravity="center"
                     layout="@layout/timeslider" />
@@ -105,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="No of players :"
+                    android:text="No of players "
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -131,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Level :"
+                    android:text="Level "
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -165,7 +189,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="0dip"
-                    android:text="Prefered Contact :"
+                    android:text="Preferred Contact "
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -266,7 +290,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="3dp"
                         android:text="Additional 
-comments :"
+comments "
                         android:textColor="#fff"
                         android:textSize="16sp"
                         android:textStyle="bold"

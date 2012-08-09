@@ -55,7 +55,7 @@ public class PostMessageActivity extends Activity implements
 	public static String filenames = "courtdetails";
 	String contactInfo;
 	String regexStr = "^[0-9]{8,20}$";
-	private TextView errorMessage,title,titleplay,titlenoofplayer,titlelevel,titlecontact,titlecomment;
+	private TextView errorMessage,title,titleplay,titlenoofplayer,titlelevel,titlecontact,titlecomment,hours,mintues;
 	Typeface bold,heavy,light,normal;
 
 	@Override
@@ -96,6 +96,8 @@ public class PostMessageActivity extends Activity implements
 titlecomment=(TextView)findViewById(R.id.titlecomment);
 post=(Button)findViewById(R.id.post_message);
 cancel=(Button)findViewById(R.id.cancel);
+hours=(TextView)findViewById(R.id.hours);
+mintues=(TextView)findViewById(R.id.minutes);
 post.setTypeface(bold);
 cancel.setTypeface(bold);
 		title.setTypeface(bold);
@@ -104,6 +106,9 @@ cancel.setTypeface(bold);
 		titlelevel.setTypeface(bold);
 		titlecontact.setTypeface(bold);
 		titlecomment.setTypeface(bold);
+		hours.setTypeface(bold);
+		mintues.setTypeface(bold);
+		
 		ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
 		postBack.setEnabled(true);
 
@@ -140,13 +145,13 @@ rgmail.setTypeface(normal);
 					{
 						if (!contactInfo.matches(regexStr) == true) {
 							// TODO REMOVE TOAST! USE TEXT MESSAGE
-							errorMessage.setText("Not a Valid Phone");
+							errorMessage.setText("Not a valid Phone number");
 							return;
 						}
 					} else // email selected
 					{
 						if (!new EmailValidator().validate(contactInfo)) {
-							errorMessage.setText("Not a Valid Email");
+							errorMessage.setText("Not a valid email address");
 							return;
 						}
 					}
@@ -264,7 +269,7 @@ rgmail.setTypeface(normal);
 			econtactinfo.setText("");
 			econtactinfo
 					.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-			econtactinfo.setHint("e.g abcd@efgh.com");
+			econtactinfo.setHint("e.g johndoe@mwp.com");
 			econtactinfo
 					.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
 							50) });

@@ -25,7 +25,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dip"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+       android:textSize="8pt"
         android:textColor="#ff0000" />
 
     <LinearLayout
