@@ -108,7 +108,7 @@ cancel.setTypeface(bold);
 		titlecomment.setTypeface(bold);
 		hours.setTypeface(bold);
 		mintues.setTypeface(bold);
-		
+		errorMessage.setTypeface(normal);
 		ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
 		postBack.setEnabled(true);
 
@@ -138,8 +138,10 @@ rgmail.setTypeface(normal);
 				// ----------- Validation ------------------------
 
 				String userErrorMessage = getMessage();
-				if (userErrorMessage != null)
-					errorMessage.setText(userErrorMessage);
+				if (rgPhone.isChecked()&&contactInfo.contentEquals("")){
+					errorMessage.setText("Please enter a valid Phone number");}
+				if (rgmail.isChecked()&&contactInfo.contentEquals("")){
+					errorMessage.setText("Please enter a valid Email");}
 				else {
 					if (rgPhone.isChecked()) // phone selected
 					{
