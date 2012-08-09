@@ -112,17 +112,29 @@
                 android:orientation="horizontal"
                 android:paddingLeft="10dip" >
 
-                <TextView
-                    android:id="@+id/contact_info_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:clickable="true"
+                <com.mewannaplay.ScrollingTextView
+              android:id="@+id/contact_info_view"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+               
+                android:layout_marginRight="5dp"
+               
+                android:ellipsize="marquee"
+              
+                android:freezesText="true"
+                android:gravity="left"
+                android:marqueeRepeatLimit="marquee_forever"
+        
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Book Title sad ds sdas das asdas das asd asd sad as"
+                 android:clickable="true"
                        android:layout_marginLeft="30dp"
                     android:onClick="viewcontact"
-                    android:text="abcdefgh@gmail.com"
+                 
                     android:textColor="#000"
-                      android:textSize="18sp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                />
             </LinearLayout>
         </TableRow>
     </TableLayout>
