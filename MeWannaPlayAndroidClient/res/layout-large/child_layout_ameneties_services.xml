@@ -28,7 +28,7 @@
                 android:paddingLeft="2dip"
                 android:text="Locker room"
                 android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" >
             </TextView>
@@ -58,7 +58,7 @@
                 android:text="Parking"
                android:textColor="#fff"
             
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" >
             </TextView>
@@ -87,7 +87,7 @@
                 android:paddingLeft="2dip"
                 android:text="Lessons"
                 android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </LinearLayout>
@@ -140,7 +140,7 @@
                 android:paddingLeft="2dip"
                 android:text="Snack bar"
                android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </LinearLayout>

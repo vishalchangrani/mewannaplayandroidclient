@@ -15,9 +15,9 @@
         android:gravity="left"
         android:text="View Message"
         android:textColor="#edd008"
-        android:textSize="10pt" />
+        android:textSize="19sp" />
 
-    <ImageView
+    <Button
         android:id="@+id/view_back_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,9 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="viewBack"
-        android:src="@drawable/backk" />
+        android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+                   android:textSize="14sp" />
  <TableLayout
         android:id="@+id/court_sub_table_layout"
         android:layout_width="fill_parent"

@@ -142,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <ImageView
+            <Button
                 android:id="@+id/court_back_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +151,10 @@
                 android:focusable="true"
                 android:onClick="onBack"
                 android:paddingTop="2dp"
-                android:src="@drawable/backk" />
+              
+                 android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+                   android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -523,7 +526,7 @@
                android:layout_height="140dip"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="10dp"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         android:layout_marginLeft="10dp"
                 android:text="No messages to display"/>
    <LinearLayout
@@ -587,7 +590,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textColor="#edd008"
-                android:textSize="4.5pt"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -596,7 +599,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textColor="#edd008"
-                android:textSize="4.5pt"
+                android:textSize="10sp"
                 android:textStyle="bold" />
  
 
@@ -606,7 +609,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textColor="#edd008"
-                android:textSize="5pt"
+                android:textSize="10sp"
                 android:textStyle="bold" />
      </LinearLayout>
     </LinearLayout>

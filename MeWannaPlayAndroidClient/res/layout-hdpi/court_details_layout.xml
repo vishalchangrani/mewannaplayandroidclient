@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <ImageView
+            <Button
                 android:id="@+id/court_back_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,7 +148,10 @@
                 android:focusable="true"
                 android:onClick="onBack"
                 android:paddingTop="2dp"
-                android:src="@drawable/backk" />
+                
+                 android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+                    android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -185,7 +188,7 @@
                 
                 android:text="Subcourts "
                 android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
               
                 />
@@ -404,7 +407,7 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="140dip"
+        android:layout_height="120dip"
         android:layout_below="@id/msg_table"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
@@ -416,13 +419,13 @@
         android:paddingRight="10dip"
            android:layout_marginTop="10dp"
         android:paddingTop="0dip"
-        android:scrollbars="vertical" />
+        />
         <TextView android:id="@android:id/empty"
                         android:layout_below="@id/msg_table"
                android:layout_width="fill_parent"
-               android:layout_height="140dip"
+               android:layout_height="120dip"
                 android:textColor="#FFFFFF"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                            android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                 android:text="No messages to display"/>
@@ -430,7 +433,7 @@
         android:id="@+id/lnfoot"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-         android:paddingBottom="90dp"
+         android:paddingBottom="80dp"
          android:weightSum="10"
          android:orientation="vertical"
         android:layout_alignParentBottom="true"
@@ -448,7 +451,7 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="5dp"
+  
             android:background="@drawable/post_message_selector"
             android:onClick="postMessage"
             android:text="Post Message"
@@ -461,7 +464,7 @@
             android:id="@+id/marl_occu_button"
            android:layout_width="155dp"
             android:layout_height="40dp"
-             android:layout_marginTop="3dp"
+ 
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@id/post_msg_button"
             android:layout_marginLeft="2dp"
@@ -486,7 +489,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textColor="#edd008"
-                android:textSize="4.5pt"
+                android:textSize="10sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -495,7 +498,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textColor="#edd008"
-                android:textSize="4.5pt"
+                android:textSize="10sp"
+                
                 android:textStyle="bold" />
  
 
@@ -505,7 +509,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:textColor="#edd008"
-                android:textSize="5pt"
+                android:textSize="10sp"
                 android:textStyle="bold" />
      </LinearLayout>
     </LinearLayout>

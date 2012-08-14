@@ -6,6 +6,6 @@
     android:paddingLeft="30dp"
     android:text="Activities"
     android:textColor="@android:color/white"
-    android:textSize="10dp" >
+    android:textSize="10sp" >
 
 </TextView>

@@ -26,11 +26,12 @@
          
          <ImageView
              android:id="@+id/imageView1"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_width="50dp"
+             android:layout_height="40dp"
            
-             
-             android:src="@drawable/search" /></LinearLayout>
+               android:layout_marginLeft="10dp"
+             android:layout_marginTop="10dp"
+             android:src="@drawable/searchhhh" /></LinearLayout>
   <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -81,11 +82,11 @@
             android:id="@+id/choose_current_location"
             android:layout_width="230dp"
             android:layout_height="80dp"
-            android:background="@drawable/buttons"
+           android:background="@drawable/postbuttonstate"
             android:text="Current Location"
             android:textColor="#fff"
            
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:textStyle="bold" >
         </Button>
@@ -106,7 +107,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                   
-                     android:textSize="5pt" />
+                     android:textSize="12sp" />
 
              </LinearLayout>
         </LinearLayout>
@@ -169,10 +170,10 @@
             android:id="@+id/okstatecity"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:background="@drawable/buttons"
+            android:background="@drawable/postbuttonstate"
             android:text="OK"
             android:textColor="#fff"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" >
         </Button></LinearLayout>
     </LinearLayout>

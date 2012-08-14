@@ -51,7 +51,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50"
+            android:layout_weight="38"
             android:orientation="vertical" >
 
             <TextView
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dip"
                 android:textColor="#ff0000"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_marginBottom="5dip"
                 android:text="LOGIN"
                 android:textColor="#edd008"
-                android:textSize="17sp"
+                android:textSize="19sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,7 +84,7 @@
             <EditText
                 android:id="@+id/username_edit"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:autoText="false"
                 android:background="@drawable/roundedtext"
                 android:capitalize="none"
@@ -120,7 +120,7 @@
             <EditText
                 android:id="@+id/password_edit"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:autoText="false"
                 android:background="@drawable/roundedtext"
                 android:capitalize="none"
@@ -147,7 +147,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50"
+            android:layout_weight="62"
             android:orientation="horizontal"
             android:weightSum="50" >
 
@@ -161,13 +161,12 @@
                     android:id="@+id/forgotusername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                  
-                      android:background="@android:color/transparent"
+                    android:layout_marginTop="3dp"
+                    android:background="@android:color/transparent"
                    android:textColor="@drawable/forgotbtn"
-
                     android:onClick="onForgotusername"
                     android:text="Forgot Password?"
-                    
+                   
                     android:textSize="13sp" >
                 </Button>
             </LinearLayout>
@@ -188,12 +187,12 @@
                     android:id="@+id/newuser_register_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   
-                    android:background="@android:color/transparent"
+                  android:layout_marginTop="3dp"
+                   android:background="@android:color/transparent"
                    android:textColor="@drawable/forgotbtn"
                     android:onClick="onNewUserRegister"
                     android:text="Register me>"
-                     
+                    
                     android:textSize="13sp"
                      android:layout_gravity="right"
                    
@@ -205,12 +204,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginTop="3dp"
-                         android:background="@android:color/transparent"
+                          android:background="@android:color/transparent"
                    android:textColor="@drawable/gobutton"
 
                         android:onClick="handleLogin"
                         android:text="GO>"
-                        
+
                         android:textSize="25sp" />
                     
                     
@@ -223,17 +222,17 @@
         </LinearLayout>
     </LinearLayout>
 
-    
-<Button
+    <Button
         android:id="@+id/anonymous_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginBottom="63dp"
+        android:layout_marginBottom="46dp"
         android:layout_marginRight="87dp"
         android:background="@android:color/transparent"
                    android:textColor="@drawable/gobutton"
    android:text="Sign in"
       android:textSize="12sp"
         android:onClick="handleAnnonymousLogin" />
+
 </LinearLayout>
