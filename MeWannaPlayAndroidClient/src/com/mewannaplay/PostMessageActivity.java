@@ -51,7 +51,7 @@ public class PostMessageActivity extends Activity implements
 	RadioGroup rgcontactinfo;
 	RadioButton rgPhone,rgmail;
 	EditText econtactinfo;
-	Button post,cancel;
+	Button post,cancel,back;
 	public static String filenames = "courtdetails";
 	String contactInfo;
 	String regexStr = "^[0-9]{8,20}$";
@@ -69,6 +69,7 @@ public class PostMessageActivity extends Activity implements
 														// before
 
 				mInitialTime = c;
+			
 			}
 		}
 
@@ -98,6 +99,9 @@ post=(Button)findViewById(R.id.post_message);
 cancel=(Button)findViewById(R.id.cancel);
 hours=(TextView)findViewById(R.id.hours);
 mintues=(TextView)findViewById(R.id.minutes);
+back=(Button)findViewById(R.id.post_back_icon);
+back.setText("<Back");
+back.setTypeface(bold);
 post.setTypeface(bold);
 cancel.setTypeface(bold);
 		title.setTypeface(bold);
@@ -109,7 +113,7 @@ cancel.setTypeface(bold);
 		hours.setTypeface(bold);
 		mintues.setTypeface(bold);
 		errorMessage.setTypeface(normal);
-		ImageView postBack = (ImageView) findViewById(R.id.post_back_icon);
+		Button postBack = (Button) findViewById(R.id.post_back_icon);
 		postBack.setEnabled(true);
 
 		rgcontactinfo.setOnCheckedChangeListener(this);

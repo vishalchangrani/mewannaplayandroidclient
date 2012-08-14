@@ -33,7 +33,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 	int courtId; // HACK Alert - court id should be part of message object but
 					// its not hence need to be passed around seperately
 	EmailValidator validator;
-	Button delete,deletepartner;
+	Button delete,deletepartner,back;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,8 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		
 		delete=(Button)findViewById(R.id.delete_message);
 		deletepartner=(Button)findViewById(R.id.delete_message_partner_found);
-		
+		back=(Button)findViewById(R.id.view_back_icon);
+		back.setTypeface(bold);
 		viewcontact.setTypeface(bold);
 		
 		
