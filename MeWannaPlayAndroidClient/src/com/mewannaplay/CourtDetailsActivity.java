@@ -77,7 +77,7 @@ public class CourtDetailsActivity extends ListActivity implements
 	String user;
 	ImageView courtphoneicon;
 	Typeface bold, heavy, light, normal;
-	Button bpost, bmark;
+	Button bpost, bmark,back;
 TableLayout msgtable;
 ListView msglist;
 LinearLayout yellolayout;
@@ -98,6 +98,8 @@ LinearLayout yellolayout;
 		msglist=(ListView)findViewById(android.R.id.list);
 		yellolayout=(LinearLayout)findViewById(R.id.exlayout);
 		courtphoneicon=(ImageView)findViewById(R.id.court_phone_icon);
+		back=(Button)findViewById(R.id.court_back_icon);
+		back.setText("<Back");
 		bold = Typeface.createFromAsset(this.getAssets(), "Folks-Bold.ttf");
 		heavy = Typeface.createFromAsset(this.getAssets(), "Folks-Heavy.ttf");
 		light = Typeface.createFromAsset(this.getAssets(), "Folks-Light.ttf");
@@ -120,6 +122,7 @@ LinearLayout yellolayout;
 		bpost.setTypeface(bold);
 		bmark = (Button) findViewById(R.id.marl_occu_button);
 		bmark.setTypeface(bold);
+		back.setTypeface(bold);
 		thisCourtsLocation = (Location) this.getIntent().getExtras()
 				.getParcelable(SELECTED_COURTS_GEOPOINT);
 
@@ -377,7 +380,7 @@ LinearLayout yellolayout;
 
 		phone.setOnClickListener(this);
 
-		ImageView onBack = (ImageView) findViewById(R.id.court_back_icon);
+Button onBack = (Button) findViewById(R.id.court_back_icon);
 		onBack.setEnabled(true);
 
 		ImageView clickdriving = (ImageView) findViewById(R.id.court_driving_icon);

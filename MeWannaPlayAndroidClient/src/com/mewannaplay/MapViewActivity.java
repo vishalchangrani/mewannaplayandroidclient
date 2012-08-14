@@ -89,20 +89,21 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 super.onCreate(savedInstanceState);
                 mapViewActivity = this;
                 setContentView(R.layout.mapviewlayout);
+                final boolean stateCitySetEarlier = savedInstanceState != null && savedInstanceState.containsKey("current_city") && savedInstanceState.getSerializable("current_city") != null;
                 SharedPreferences sharedPrefs = PreferenceManager
                                 .getDefaultSharedPreferences(this); // use default file name
                                                                                                         // (thats the recommended
                                                                                                         // way in android)
-                // Restore UI state from the savedInstanceState...will be lost when
-                // application restarts.
-                if (savedInstanceState != null
-                                && savedInstanceState.containsKey("current_city")) {
-                        setCurrentCity((City) savedInstanceState
-                                        .getSerializable("current_city"));
-                        ((TextView) (MapViewActivity.mapViewActivity
-                                        .findViewById(R.id.dropdown_city))).setText(currentCity
-                                        .getName() + "," + currentCity.getAbbreviation());
-                }
+//                // Restore UI state from the savedInstanceState...will be lost when
+//                // application restarts.
+//                if (savedInstanceState != null
+//                                && savedInstanceState.containsKey("current_city")) {
+//                        setCurrentCity((City) savedInstanceState
+//                                        .getSerializable("current_city"));
+//                        ((TextView) (MapViewActivity.mapViewActivity
+//                                        .findViewById(R.id.dropdown_city))).setText(currentCity
+//                                        .getName() + "," + currentCity.getAbbreviation());
+//                }
 
                 // android developer starts
                 // In this section application is checked how many times the app is
@@ -141,9 +142,15 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                         } else {
 
                                                 // progressDialog.dismiss();
-                                                MapViewActivity.this
-                                                                .showDialog(DIALOG_STATE_CITY_CHOICE);
+//                                                MapViewActivity.this
+//                                                                .showDialog(DIALOG_STATE_CITY_CHOICE);
+                                           	 
 
+                                           		// progressDialog.dismiss();
+
+                                                   if (!stateCitySetEarlier)
+
+                                                   	MapViewActivity.this.showDialog(DIALOG_STATE_CITY_CHOICE);
                                                 // now that we have fetched all courts..start background
                                                 // threads to keep refreshing their status..
                                                 // Also remember fetch for all courts is done so next
@@ -160,6 +167,25 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 // android developer ends
 
                 initMap();
+                // Restore UI state from the savedInstanceState...will be lost when
+
+                // application restarts.
+
+                if (stateCitySetEarlier) {
+
+                        setCurrentCity((City) savedInstanceState
+
+                                        .getSerializable("current_city"));
+
+                        ((TextView) (MapViewActivity.mapViewActivity
+
+                                        .findViewById(R.id.dropdown_city))).setText(currentCity
+
+                                        .getName() + "," + currentCity.getAbbreviation());
+
+                }
+
+
                 info = (Button) findViewById(R.id.ImageInfoButton01);
                 info.setOnClickListener(this);
          }

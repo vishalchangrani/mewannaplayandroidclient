@@ -103,7 +103,7 @@ TextView login;
 	private final Handler handler = new Handler();
 	AccountManagerFuture<Bundle> accountManagerFuture = null;
 	
-Button forgotusername;
+Button forgotusername,anologin;
 TextView usertext,passtext;
 	/**
 	 * {@inheritDoc}
@@ -135,17 +135,19 @@ TextView usertext,passtext;
 		usertext=(TextView)findViewById(R.id.usernametext);
 		passtext=(TextView)findViewById(R.id.passwordtext);
 		login=(TextView)findViewById(R.id.login);
+		anologin=(Button)findViewById(R.id.anonymous_login);
 	     bold=Typeface.createFromAsset(this.getAssets(),"Folks-Bold.ttf");
 				 heavy=Typeface.createFromAsset(this.getAssets(),"Folks-Heavy.ttf");
 				 light=Typeface.createFromAsset(this.getAssets(),"Folks-Light.ttf");
 				 normal=Typeface.createFromAsset(this.getAssets(),"Folks-Normal.ttf");
 				 newuserregi=(Button)findViewById(R.id.newuser_register_btn);
-				 newuserregi.setTypeface(bold);
+				 newuserregi.setTypeface(normal);
 				 go=(Button)findViewById(R.id.ok_button);
 				 go.setTypeface(bold);
 				 forgotusername.setTypeface(normal);
 				 mMessage.setTypeface(normal);
 				 login.setTypeface(bold);
+				 anologin.setTypeface(bold);
 				 usertext.setTypeface(normal);
 				 passtext.setTypeface(normal);
 		if (!TextUtils.isEmpty(mUsername))
@@ -215,7 +217,7 @@ TextView usertext,passtext;
 		mPassword = mPasswordEdit.getText().toString();
 	if(TextUtils.isEmpty(mUsername) && TextUtils.isEmpty(mPassword)){
 		
-		mMessage.setText("Please enter Username and password");
+		mMessage.setText("Please enter Username and Password");
 		mMessage.setTextColor(Color.RED);
 	}else{
 		if (TextUtils.isEmpty(mUsername)) {
