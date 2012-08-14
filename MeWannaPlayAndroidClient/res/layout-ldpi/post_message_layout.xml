@@ -24,27 +24,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:gravity="left"
                 android:text="Post Message"
                 android:textColor="#edd008"
                 android:textSize="19sp" />
 
-         <Button
+            <Button
                 android:id="@+id/post_back_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="90dp"
                 android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="postBack"
-                android:paddingTop="2dp"
               
+                android:paddingTop="2dp"
                   android:background="@android:color/transparent"
                    android:textColor="@drawable/gobutton"
-                   android:textSize="14sp"
- />
+                android:textSize="12sp"
+              
+              />
         </LinearLayout>
 
         <LinearLayout
@@ -154,7 +155,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="11" >
+                android:layout_weight="10.7" >
 
                 <TextView
                     android:id="@+id/titlelevel"
@@ -170,7 +171,7 @@
                 <Spinner
                     android:id="@+id/level"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_marginLeft="102dp"
                     android:entries="@array/level_arrays"
                     android:gravity="center"
@@ -310,7 +311,7 @@ comments "
                         <EditText
                             android:id="@+id/message"
                             android:layout_width="fill_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="40dp"
                             android:layout_marginRight="5dp"
                             android:layout_marginTop="3dp"
                             android:background="@drawable/roundedtext"
@@ -347,12 +348,12 @@ comments "
                         android:layout_width="70dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="30dp"
-                        android:background="@android:color/transparent"
+                         android:background="@android:color/transparent"
                    android:textColor="@drawable/gobutton"
 
                         android:onClick="onCancel"
                         android:text="Cancel>"
-                      
+                       
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:typeface="serif" />
@@ -361,7 +362,7 @@ comments "
                         android:id="@+id/post_message"
                         android:layout_width="70dp"
                         android:layout_height="30dp"
-                         android:background="@android:color/transparent"
+                          android:background="@android:color/transparent"
                    android:textColor="@drawable/gobutton"
 
                         android:text="Post>"

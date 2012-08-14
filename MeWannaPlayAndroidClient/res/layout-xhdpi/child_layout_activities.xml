@@ -32,7 +32,7 @@
                 android:paddingLeft="2dip"
                 android:text="New player adult program"
                 android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" >
             </TextView>
@@ -59,7 +59,7 @@
                 android:paddingLeft="2dip"
                 android:text="Team tennis"
                  android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" >
             </TextView>
@@ -88,7 +88,7 @@
                 android:paddingLeft="2dip"
                 android:text="New player junior program"
                  android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </LinearLayout>
@@ -142,7 +142,7 @@
                 android:paddingLeft="2dip"
                 android:text="Ladders"
                 android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </LinearLayout>
@@ -200,7 +200,7 @@
                 android:paddingLeft="2dip"
                 android:text="Social/Mixers"
                   android:textColor="#fff"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="normal"
                 android:typeface="serif" />
         </LinearLayout>

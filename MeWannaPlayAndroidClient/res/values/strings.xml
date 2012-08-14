@@ -2,6 +2,7 @@
 <resources>
 	<string name="app_name">MeWannaPlay</string>
 	<string name="label">MeWannaPlay</string>
+	
 	  <!-- Title string for Login activity-->
     <string
         name="ui_activity_title">Sign-in</string>

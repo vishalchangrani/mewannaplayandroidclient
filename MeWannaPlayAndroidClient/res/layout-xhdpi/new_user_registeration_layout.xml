@@ -14,7 +14,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textSize="12pt"
+            android:textSize="19sp"
             android:text="Registration"
              android:textColor="#edd008"  />
     
@@ -26,7 +26,7 @@
         android:layout_marginBottom="5dip"
            android:layout_gravity="left"
         android:layout_marginLeft="10dp"
-        android:textSize="8pt"
+        android:textSize="12sp"
         android:textColor="#ff0000" />
 
     <LinearLayout
@@ -52,14 +52,14 @@
         <EditText
             android:id="@+id/newuser_username"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="10dp"
             android:maxLength="20"
               android:gravity="left"
                   android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-            android:background="@drawable/editbox"
+            android:background="@drawable/roundedtext"
             android:singleLine="true" >
         </EditText>
     </LinearLayout>
@@ -86,14 +86,14 @@
         <EditText
             android:id="@+id/newuser_password"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="45dp"
             android:layout_marginRight="10dp"
             android:inputType="textPassword"
             android:gravity="left"
                   android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-            android:background="@drawable/editbox"
+            android:background="@drawable/roundedtext"
             android:singleLine="true" >
         </EditText>
     </LinearLayout>
@@ -121,13 +121,13 @@
         <EditText
             android:id="@+id/confirm_password"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="10dp"
               android:gravity="left"
                   android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-            android:background="@drawable/editbox"
+            android:background="@drawable/roundedtext"
             android:inputType="textPassword"
             android:singleLine="true" >
         </EditText>
@@ -155,13 +155,13 @@
         <EditText
             android:id="@+id/newuser_email"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="81dp"
             android:layout_marginRight="10dp"
                android:gravity="left"
                   android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-            android:background="@drawable/editbox"
+            android:background="@drawable/roundedtext"
             android:inputType="textEmailAddress" >
         </EditText>
     </LinearLayout>
@@ -169,7 +169,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_weight="8" >
 
         <Button
@@ -177,10 +177,12 @@
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/cancelbutton"
+              android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+
             android:onClick="onCancel"
             android:text="Cancel>"
-            android:textColor="#edd008"
+          
             android:textSize="25sp"
            />
 
@@ -189,10 +191,12 @@
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_marginLeft="100dp"
-            android:background="@drawable/gobutton"
+            android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+
             android:onClick="onRegister"
             android:text="GO>"
-            android:textColor="#edd008"
+           
             android:textSize="25sp"
            />
         <!-- Put the correct register button image here  android:background="@drawable/cancelbtn" -->

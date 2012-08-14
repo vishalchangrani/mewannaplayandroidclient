@@ -15,9 +15,9 @@
         android:gravity="left"
         android:text="View Message"
         android:textColor="#edd008"
-        android:textSize="10pt" />
+        android:textSize="19sp" />
 
-    <ImageView
+    <Button
         android:id="@+id/view_back_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,10 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="viewBack"
-        android:src="@drawable/backk" />
+       
+          android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+                   android:textSize="14sp" />
 
     <TableLayout
         android:id="@+id/court_sub_table_layout"
@@ -83,7 +86,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -147,7 +150,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -195,7 +198,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -243,7 +246,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -290,7 +293,7 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="left"
         android:paddingLeft="10dip"
         android:paddingRight="10dip" >
@@ -325,7 +328,7 @@
                     android:id="@+id/level_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="85dp"
+                    android:layout_marginLeft="90dp"
                     android:text="Unknown"
                     android:textColor="#fff"
                     android:textSize="16sp"
@@ -380,7 +383,7 @@ comments"
                   android:layout_marginTop="10dp"
                     android:scrollbars="horizontal"
                     android:singleLine="false"
-                  
+                     android:layout_marginLeft="28dp"
                     android:text="Very Usefuljvjvjbhjbjbhjfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
                     android:textColor="#fff"
                     android:paddingRight="3dp"
@@ -409,7 +412,7 @@ comments"
 
                 <Button
                     android:id="@+id/delete_message"
-                    android:layout_width="140dp"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
                     android:background="@drawable/buttons"
                     android:onClick="onDelete"

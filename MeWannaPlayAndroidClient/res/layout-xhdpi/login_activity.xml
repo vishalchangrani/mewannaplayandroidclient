@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dip"
                 android:textColor="#ff0000"
-                android:textSize="8pt"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_marginBottom="5dip"
                 android:text="LOGIN"
                 android:textColor="#edd008"
-                android:textSize="8pt"
+                android:textSize="19sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,16 +84,18 @@
             <EditText
                 android:id="@+id/username_edit"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:autoText="false"
-                android:background="@drawable/usernamboxlarge"
+                android:background="@drawable/roundedtext"
+                 android:drawableRight="@drawable/head"
                 android:capitalize="none"
                 android:gravity="left"
                 android:imeOptions="actionDone"
                 android:inputType="textEmailAddress"
                 android:minWidth="250dip"
                 android:paddingLeft="10dp"
-                android:paddingTop="10dp"
+                android:paddingTop="7dp"
+                 android:paddingRight="5dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true" />
 
@@ -118,16 +120,18 @@
             <EditText
                 android:id="@+id/password_edit"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:autoText="false"
-                android:background="@drawable/passbox"
+                android:background="@drawable/roundedtext"
+                 android:drawableRight="@drawable/lock"
                 android:capitalize="none"
                 android:gravity="left"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:minWidth="250dip"
                 android:paddingLeft="10dp"
-                android:paddingTop="10dp"
+                android:paddingTop="7dp"
+                 android:paddingRight="5dp"
                 android:password="true"
                 android:scrollHorizontally="true"
                 android:singleLine="true" />
@@ -158,11 +162,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                    
-                    android:background="@drawable/forgotbtn"
+                    android:background="@android:color/transparent"
+                   android:textColor="@drawable/forgotbtn"
                     android:onClick="onForgotusername"
                     android:text="Forgot Password?"
-                    android:textColor="#C0C0C0"
-                    android:textSize="12sp" >
+                    
+                    android:textSize="16sp" >
                 </Button>
 
                 
@@ -187,30 +192,34 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="10"
                         android:orientation="vertical" >
-
+       <Button
+                    android:id="@+id/newuser_register_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:layout_gravity="right"
+                 
+                     android:background="@android:color/transparent"
+                   android:textColor="@drawable/forgotbtn"
+                    android:onClick="onNewUserRegister"
+                    android:text="Register me>"
+                    
+                    android:textSize="16sp" >
+                </Button>
                         <Button
                             android:id="@+id/ok_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:background="@drawable/gobutton"
+                           android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+
                             android:onClick="handleLogin"
                             android:text="GO>"
-                            android:textColor="#edd008"
+                           android:layout_marginTop="10dp"
+                          
                             android:textSize="25sp" />
                         
-                        <Button
-                    android:id="@+id/newuser_register_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   android:layout_gravity="right"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/newregibutton"
-                    android:onClick="onNewUserRegister"
-                    android:text="Register me>"
-                    android:textColor="#edd008"
-                    android:textSize="25sp" >
-                </Button>
+                 
                     </LinearLayout>
 
                     
@@ -223,11 +232,15 @@
 
     <Button
         android:id="@+id/anonymous_login"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginBottom="53dp"
-        android:background="@drawable/anon1"
+        android:layout_marginBottom="75dp"
+        android:layout_marginRight="95dp"
+        android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+   android:text="Sign in"
+      android:textSize="16sp"
         android:onClick="handleAnnonymousLogin" />
 
 </LinearLayout>
