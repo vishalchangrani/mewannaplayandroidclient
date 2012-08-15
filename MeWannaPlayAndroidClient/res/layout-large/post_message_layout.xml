@@ -271,7 +271,7 @@
                         android:layout_marginLeft="70dp"
                         android:text="*Note: Contact details will be visible to other users"
                         android:textColor="#000"
-                        android:textSize="10dp"
+                        android:textSize="10sp"
                         android:textStyle="italic" />
                 </LinearLayout>
 
@@ -385,7 +385,7 @@ comments "
                     android:layout_marginLeft="10dp"
                     android:text="*Please note your message will be active upto 20 minutes from the scheduled time"
                     android:textColor="#000"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="italic" />
             </LinearLayout>
         </LinearLayout>
