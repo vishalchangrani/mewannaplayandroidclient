@@ -9,12 +9,12 @@
         style="@style/Scroller"
         app:labelerClass="com.googlecode.android.widgets.DateSlider.labeler.HourLabeler"
         app:labelerFormat="%tk"
-        app:childHeight="20dp"
+        app:childHeight="30dp"
         app:childWidth="90dp"/>
     <com.googlecode.android.widgets.DateSlider.ScrollLayout
         style="@style/Scroller"
         app:labelerClass="com.googlecode.android.widgets.DateSlider.labeler.MinuteLabeler"
         app:labelerFormat="%tM"
-           app:childHeight="20dp"
+           app:childHeight="30dp"
         app:childWidth="45dp"/>
 </com.googlecode.android.widgets.DateSlider.SliderContainer>

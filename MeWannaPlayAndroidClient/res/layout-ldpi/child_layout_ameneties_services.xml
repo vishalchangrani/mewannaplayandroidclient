@@ -5,7 +5,8 @@
     android:gravity="right"
     android:paddingLeft="10dip" >
 
-    <TableRow android:gravity="center_horizontal" >
+    <TableRow android:gravity="center_horizontal" 
+           android:layout_marginTop="-10dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -65,7 +66,8 @@
         </LinearLayout>
     </TableRow>
 
-    <TableRow android:gravity="center_horizontal" >
+    <TableRow android:gravity="center_horizontal" 
+         android:layout_marginTop="-30dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -118,7 +120,8 @@
         </LinearLayout>
     </TableRow>
 
-    <TableRow android:gravity="center_horizontal" >
+    <TableRow android:gravity="center_horizontal"
+         android:layout_marginTop="-30dp" >
 
         <LinearLayout
             android:layout_width="fill_parent"
