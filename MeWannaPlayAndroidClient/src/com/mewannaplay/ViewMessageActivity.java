@@ -78,6 +78,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		delete=(Button)findViewById(R.id.delete_message);
 		deletepartner=(Button)findViewById(R.id.delete_message_partner_found);
 		back=(Button)findViewById(R.id.view_back_icon);
+		back.setText("<Back");
 		back.setTypeface(bold);
 		viewcontact.setTypeface(bold);
 		
