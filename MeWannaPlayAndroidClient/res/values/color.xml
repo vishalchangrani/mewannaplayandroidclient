@@ -1,0 +1,5 @@
+<resources>
+ <drawable name="yellow_color">#edd008</drawable>
+ <drawable name="pressed_yellow_color">#FFFFFF</drawable>
+ <drawable name="grey_color">#C0C0C0</drawable>
+</resources>
