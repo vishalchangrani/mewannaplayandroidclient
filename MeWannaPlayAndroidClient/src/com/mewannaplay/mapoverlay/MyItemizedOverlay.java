@@ -18,6 +18,8 @@ package com.mewannaplay.mapoverlay;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -30,8 +32,9 @@ import com.mewannaplay.MapViewActivity;
 import com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay;
 
 public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
+	
 
-	private ArrayList<TennisCourtOverlayItemAdapter> m_overlays = new ArrayList<TennisCourtOverlayItemAdapter>();
+	private List<TennisCourtOverlayItemAdapter> m_overlays = new CopyOnWriteArrayList<TennisCourtOverlayItemAdapter>();
 	private final Context c;
 
 
@@ -68,6 +71,11 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		
 		
 		return  m_overlays.size();
+	}
+	
+	public List<TennisCourtOverlayItemAdapter> getOverlays()
+	{
+		return m_overlays;
 	}
 
 	@Override

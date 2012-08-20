@@ -163,12 +163,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                         //this.setName("getAllCourtStatsThread");
                                         //try {
                                                 //Log.d(TAG, "spawning of thread for getAllCourtStats");
-                    if (RestClient.isLoggedIn()) // This is not an anonymous user
-            {
-                    Log.d(TAG, " Doing message and court occupied");
-                    getOccupiedCourtAndPostedMsg();             
-            }
+                    
+                	
+                	if (RestClient.isLoggedIn()) // This is not an anonymous user
+                    	{
+                    		Log.d(TAG, " Doing message and court occupied");
+                    		long currentTime = System.currentTimeMillis();
+                    		getOccupiedCourtAndPostedMsg();   
+                    		int totalTime = (int)((System.currentTimeMillis() - currentTime)/1000);
+                    		Log.d(TAG, " -------------------- It took "+totalTime+" to do getoccupiedcourtandpostedmessage");
+                    	}
+                		long currentTime = System.currentTimeMillis();
                         getAllCourtStats();
+                        int totalTime = (int)((System.currentTimeMillis() - currentTime)/1000);
+                		Log.d(TAG, " -------------------- It took "+totalTime+" to do getAllCourtStats");
                                                 
                                 //      } catch (IOException e) {
                                         //      Log.e(TAG, "error while doing getcourtstats");
