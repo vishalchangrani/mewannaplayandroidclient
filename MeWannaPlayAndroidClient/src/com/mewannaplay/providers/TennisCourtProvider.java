@@ -10,6 +10,7 @@ import static com.mewannaplay.providers.ProviderContract.AUTHORITY;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -26,6 +27,10 @@ import android.util.Log;
 
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
+import com.mewannaplay.MapViewActivity;
+import com.mewannaplay.mapoverlay.MyItemizedOverlay;
+import com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter;
+import com.mewannaplay.model.TennisCourt;
 import com.mewannaplay.providers.ProviderContract.TennisCourts;
 import com.mewannaplay.syncadapter.SyncAdapter;
 
@@ -401,7 +406,8 @@ public class TennisCourtProvider extends ContentProvider {
 
 				final String name = jsonReader.nextName();
 				final boolean isNull = jsonReader.peek() == JsonToken.NULL;
-
+				final TennisCourtOverlayItemAdapter tempTennisCourtOverlayItemAdapter = new TennisCourtOverlayItemAdapter(-1);
+				
 				if( name.equals( "tenniscourt" ) && !isNull ) {
 					jsonReader.beginArray();
 					while( jsonReader.hasNext() ) {
@@ -436,7 +442,45 @@ public class TennisCourtProvider extends ContentProvider {
 						if (!values.getAsString("message_count").equals("0") || !values.getAsString("occupied").equals("0"))
 							Log.d(TAG,tennisId +" "+values.toString());
 						if (!tennisId.equals("-1") && !tennisId.trim().equals(""))
+						{
 							count = count + db.update(TENNIS_COURT_TABLE_NAME, values, "  _id = ? ", new String[]{ tennisId}); //Update database
+							try
+							{
+							if (MapViewActivity.mapViewActivity != null)
+							{
+								MyItemizedOverlay myItemizedOverlay = MapViewActivity.mapViewActivity.getMyItemizedOverlay();
+								if (myItemizedOverlay != null)
+								{
+									List<TennisCourtOverlayItemAdapter> currentOverlays =   myItemizedOverlay.getOverlays();
+									if (currentOverlays != null)
+									{
+										tempTennisCourtOverlayItemAdapter.setId(Integer.parseInt(tennisId));
+										int index = currentOverlays.indexOf(tempTennisCourtOverlayItemAdapter);
+										if (index != -1)
+										{
+											TennisCourtOverlayItemAdapter temp = currentOverlays.get(index);
+											if (temp != null)
+											{
+												TennisCourt tc = temp.getTennisCourt();
+												if (tc != null)
+												{
+													Log.d(TAG, " found match in current overlays "+tc.getName()+" message count = "+values.getAsInteger("message_count")+" occupied = "+values.getAsInteger("occupied"));
+													tc.setMessageCount(values.getAsInteger("message_count"));
+													tc.setOccupied(values.getAsInteger("occupied"));
+												}
+												
+											}
+										}
+									}
+											
+								}
+							}
+							}
+							catch(Throwable t)
+							{
+								Log.d(TAG,t.getMessage());
+							}
+						}
 					}
 					jsonReader.endArray();
 				}

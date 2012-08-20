@@ -16,13 +16,22 @@ import com.mewannaplay.model.TennisCourt;
 
 public class TennisCourtOverlayItemAdapter extends OverlayItem {
 
-        private static final String TAG = "TennisCourtOverlayItemAdapter";
-
+		private static final String TAG = "TennisCourtOverlayItemAdapter";
+		private int id;
         final private TennisCourt tc;
+        public static final String SNIPPET = "Messages: %d Occupied: %d of %d";
 
         // Store these as global instances so we don't keep reloading every time
 
-        private static Drawable privateCourt, publicSemiOccupiedCourt,
+        public void setId(int id)
+        {
+        	this.id = id;
+        }
+        public int getId() {
+			return id;
+		}
+
+		private static Drawable privateCourt, publicSemiOccupiedCourt,
                         publicNotOccupiedCourt, publicFullyOccupiedCourt,privateSemiOccupiedCourt,
                         privateNotOccupiedCourt, privateFullyOccupiedCourt;
 
@@ -154,13 +163,24 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
         }
 
         public TennisCourtOverlayItemAdapter(TennisCourt tennisCourt) {
-                super(tennisCourt.getGeoPoint(), tennisCourt.getName(), "Messages :"
-                                + tennisCourt.getMessageCount() + " Occupied: "
-                                + tennisCourt.getOccupied() + " of "
-                                + tennisCourt.getSubcourts());
+        		super(tennisCourt.getGeoPoint(), tennisCourt.getName(),String.format(SNIPPET, tennisCourt.getMessageCount(),tennisCourt.getOccupied(),tennisCourt.getSubcourts()));
                 tc = tennisCourt;
+                id = tc.getId();
         }
 
+        @Override
+        public String getSnippet() {        
+        	return String.format(SNIPPET, tc.getMessageCount(),tc.getOccupied(),tc.getSubcourts());
+        }
+        
+        
+        
+        public TennisCourtOverlayItemAdapter(int id)
+        {
+        	super(null,null,null);
+        	this.id = id;
+        	this.tc = null;
+        }
         @Override
         public Drawable getMarker(int stateBitset) {
                 Location currentLocation = MapViewActivity.mapViewActivity
@@ -259,5 +279,27 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
                 }
 
         }
+
+
+        @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((tc == null) ? 0 : Integer.valueOf(tc.getId()).hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TennisCourtOverlayItemAdapter other = (TennisCourtOverlayItemAdapter) obj;
+		return (this.id == other.id);
+
+	}
 
 }

@@ -95,14 +95,6 @@ public class TennisCourt {
 		this.subcourts = subcourts;
 	}
 
-	public int getOccpied() {
-		return occupied;
-	}
-
-	public void setOccpied(int occpied) {
-		this.occupied = occpied;
-	}
-
 	public String getFacilityType() {
 		return facilityType;
 	}
