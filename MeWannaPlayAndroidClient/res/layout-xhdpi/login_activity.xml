@@ -51,7 +51,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="55"
+            android:layout_weight="45"
             android:orientation="vertical" >
 
             <TextView
@@ -136,18 +136,18 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true" />
 
-            <TextView
+ <!--            <TextView
                 android:id="@+id/message_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dip"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall" /> -->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="45"
+            android:layout_weight="55"
             android:orientation="horizontal"
             android:weightSum="50" >
 
