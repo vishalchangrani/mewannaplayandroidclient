@@ -66,6 +66,7 @@ public class RestClient {
         public JSONObject execute(RequestMethods method, JSONObject jsonObjectToSend)
                 throws IOException {
         
+        	boolean displayableError = false;
         	InputStreamReader inputStreamReader = null;
         	BufferedReader bufferedReader = null;
         	InputStream inputStream = null;
@@ -100,15 +101,39 @@ public class RestClient {
           
 
             if (status == null)
-                    throw new IOException("Server response not recevieved for " + url);
+
+            {
+
+                    Log.e(TAG, " Server response not recevieved for URL "+url);
+
+                    throw new IOException("Server response not recevieved!");
+
+            }
+
             if (status.isNotSuccess())
-                    throw new IOException(status.getMessage());
+
+            {
+
+                displayableError = true;    
+
+            	throw new IOException(status.getMessage());
+
+            }
+
 
             return jsonObject;
+
         	}
+
         	catch (Exception e) {
-                throw new IOException("Conversion error " + url);
+
+        		Log.e(TAG,"Conversion error for URL - "+url+e.getMessage());
+
+                throw new IOException(displayableError ? e.getMessage() : "Our apologies - something went wrong.Please try again");
+
         	}
+
+
         	finally
         	{
         		if (bufferedReader != null)
