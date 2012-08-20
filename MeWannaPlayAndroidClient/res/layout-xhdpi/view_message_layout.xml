@@ -27,6 +27,7 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="viewBack"
+      
         android:background="@android:color/transparent"
                    android:textColor="@drawable/gobutton"
                    android:textSize="14sp" />
@@ -337,7 +338,7 @@
 
        <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="160dp"
                 android:layout_marginTop="20dp"
                 android:weightSum="10"
                 android:orientation="horizontal" >
@@ -352,7 +353,7 @@
                 <TextView
                     android:id="@+id/tmessage"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                  android:layout_marginLeft="19dp"
             android:layout_marginTop="10dp"
                     android:text="Additional
@@ -391,16 +392,16 @@ comments"
   
        <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:weightSum="10"
-                android:layout_marginTop="60dp"
+              
             
                 android:orientation="horizontal" >
        
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:gravity="left"
                 android:layout_weight="5"
                 android:orientation="horizontal" >
