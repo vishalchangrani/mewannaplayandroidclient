@@ -111,11 +111,6 @@ public class NewUserRegisterationActivity extends Activity {
 	     * Shows the progress UI for a lengthy operation.
 	     */
 	    private void showProgress() {
-	        showDialog(0);
-	    }
-
-	 @Override
-	    protected Dialog onCreateDialog(int id, Bundle args) {
 	        final ProgressDialog dialog = new ProgressDialog(this);
 	        dialog.setMessage("Registering new user...");
 	        dialog.setIndeterminate(true);
@@ -132,7 +127,7 @@ public class NewUserRegisterationActivity extends Activity {
 	        // it later. We can't just call dismissDialog(0) because the system
 	        // can lose track of our dialog if there's an orientation change.
 	        mProgressDialog = dialog;
-	        return dialog;
+	        mProgressDialog.show();
 	    }
 
 	    /**
