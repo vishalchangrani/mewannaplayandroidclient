@@ -883,4 +883,10 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                 : (currentRunCount + 1)); // rollover to 0 if 4
                 editor.commit();
         }
+
+        public final MyItemizedOverlay getMyItemizedOverlay()
+        {
+        	return myItemizedOverlay;
+        }
+        
 }
