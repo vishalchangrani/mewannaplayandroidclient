@@ -145,7 +145,7 @@
                     android:id="@+id/players_needed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="5dp"
                     android:entries="@array/players_needed"
                     android:prompt="@string/players_needed_prompt" >
                 </Spinner>
@@ -154,6 +154,7 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+             
                 android:layout_weight="11" >
 
                 <TextView
@@ -171,7 +172,7 @@
                     android:id="@+id/level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="102dp"
+                    android:layout_marginLeft="68dp"
                     android:entries="@array/level_arrays"
                     android:gravity="center"
                    
@@ -207,6 +208,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                   
                     android:layout_weight="3" >
 
                     <RadioGroup
@@ -214,6 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal" >
 
                         <RadioButton
@@ -243,7 +246,7 @@
                 android:id="@+id/contact_info"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="90dp"
+                android:layout_marginLeft="100dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/roundedtext"
                 android:gravity="left"
@@ -270,7 +273,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="70dp"
                         android:text="*Note: Contact details will be visible to other users"
                         android:textColor="#000"
                         android:textSize="10sp"
