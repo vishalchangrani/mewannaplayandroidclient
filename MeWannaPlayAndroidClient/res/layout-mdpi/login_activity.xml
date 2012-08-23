@@ -51,7 +51,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50"
+            android:layout_weight="45"
             android:orientation="vertical" >
 
             <TextView
@@ -147,7 +147,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50"
+            android:layout_weight="55"
             android:orientation="horizontal"
             android:weightSum="50" >
 
