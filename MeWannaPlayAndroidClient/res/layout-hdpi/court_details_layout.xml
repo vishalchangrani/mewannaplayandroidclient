@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bgtwo"
+    android:orientation="vertical" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/court_title_table"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/header"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip" >
+
+        <TableRow
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingBottom="2dip"
+          >
+
+              <com.mewannaplay.ScrollingTextView
+               android:id="@+id/court_name"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+             
+                android:ellipsize="marquee"
+             
+                
+                android:freezesText="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+            
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Book Title sad ds sdas das asdas das asd asd sad as"
+                android:textColor="#edd008"
+                android:textSize="19sp"
+                />
+
+            
+        </TableRow>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/court_addr_rel_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/court_title_table"
+          android:gravity="center"
+            android:layout_marginRight="10dip"
+            android:paddingBottom="5dip"
+             >
+
+            <com.mewannaplay.ScrollingTextView
+                android:id="@+id/court_addr_1"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+               
+                android:layout_marginRight="5dp"
+               
+                android:ellipsize="marquee"
+              
+                android:freezesText="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+        
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Book Title sad ds sdas das asdas das asd asd sad as"
+                android:textColor="#FFFFFF"
+              android:textSize="12sp"
+                />
+           <ImageView
+        android:id="@+id/court_driving_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+  android:gravity="right"
+         android:layout_toRightOf="@+id/court_addr_1"
+       
+        android:onClick="clickdriving"
+        android:src="@drawable/drivingdirection" />
+            <TextView
+                android:id="@+id/court_addr_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/court_addr_1"
+                android:paddingRight="20dip"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/court_phone_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/court_addr_1"
+                android:layout_toRightOf="@id/court_addr_2"
+                android:paddingLeft="50dip"
+                android:paddingRight="05dip"
+                
+                android:text="(080)-3242-2341"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:typeface="serif" />
+
+            <ImageView
+                android:id="@+id/court_phone_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/court_addr_1"
+                android:layout_toRightOf="@id/court_phone_1"
+                android:paddingTop="2dip"
+                android:src="@drawable/callicon16" />
+        </RelativeLayout>
+    </TableLayout>
+ 
+    
+    
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/court_addr_rel_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/court_title_table"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:paddingBottom="5dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" >
+
+        <LinearLayout
+            android:id="@+id/lnfoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/court_back_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="230dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onBack"
+                android:paddingTop="2dp"
+                
+                 android:background="@android:color/transparent"
+                   android:textColor="@drawable/gobutton"
+                    android:textSize="14sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- -weightsum kormu ei jaygay -->
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/court_sub_table_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/court_addr_rel_layout"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dp"
+   >
+
+        <TableRow
+            android:clickable="true"
+            android:id="@+id/court_surface"
+            android:gravity="left"
+            android:paddingRight="0dip" >
+<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+           
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/court_surface_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               
+                
+                android:text="Subcourts "
+                android:textColor="#fff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+              
+                />
+
+            <TextView
+                android:id="@+id/no_of_sub_courts"
+                android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+               
+                android:paddingLeft="15dp"
+                android:text="5"
+                android:textColor="#fff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+              />
+               <TextView
+                android:id="@+id/court_ftype"
+                android:text="Facility "
+                android:textColor="#fff"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textStyle="normal"
+               android:layout_marginLeft="150dp"
+               />
+
+            <TextView
+                android:id="@+id/court_facility_type"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Club"
+                android:textColor="#fff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+              />
+
+        </LinearLayout>
+       
+           
+        </TableRow>
+   <TableRow
+            android:clickable="true"
+           android:layout_below="@+id/court_surface"
+            android:paddingRight="0dip" 
+            
+            android:gravity="left"
+            android:background="@drawable/yellowborderborder"
+           ></TableRow>
+        <TableRow
+            android:clickable="true"
+           android:id="@+id/court_typelayout"
+            android:paddingRight="0dip" 
+
+            android:gravity="left"
+           >
+<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/court_type"
+                 android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:text="Type "
+                android:textColor="#fff"
+               
+                android:textSize="10sp"
+                android:textStyle="normal"
+                 />
+
+            <TextView
+                android:id="@+id/text_sub_courts"
+                  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="Typevalue"
+                android:textColor="#fff"
+                android:textSize="10sp"
+                android:textStyle="normal"
+                />
+            </LinearLayout>
+        </TableRow>
+        
+        
+        <TableRow
+            android:clickable="true"
+           android:layout_below="@+id/court_typelayout"
+            android:paddingRight="0dip" 
+            
+            android:gravity="left"
+            android:background="@drawable/yellowborderborder"
+           ></TableRow>
+        
+        
+
+        <TableRow
+            android:clickable="true"
+            android:gravity="left"
+            android:layout_marginTop="3dp"
+            android:paddingRight="0dip" >
+<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/court_avail_timings"
+               android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:text="Timings "
+                android:textColor="#fff"
+                android:textSize="10sp"
+                 
+                android:textStyle="normal"
+                />
+
+            <com.mewannaplay.ScrollingTextView
+                android:id="@+id/court_timings"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+               android:layout_marginLeft="15dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Book Title sad ds sdas das asdas das asd asd sad as"
+                android:textColor="#FFFFFF"
+                 android:textSize="10sp"
+                /></LinearLayout>
+        </TableRow>
+        
+        
+        
+        
+        
+        
+        
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/court_back_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/court_sub_table_layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <ExpandableListView
+        android:id="@+id/exapandableList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/court_back_icon"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:divider="#00000000"
+        android:groupIndicator="@drawable/list_group_indicator"
+        android:layout_marginTop="5dp"
+        android:scrollbars="none" />
+  <LinearLayout
+       android:id="@+id/exlayout"
+            android:clickable="true"
+            android:paddingBottom="0dip"
+            android:paddingLeft="5dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
+             android:layout_below="@+id/exapandableList"
+            android:background="@drawable/yellowborderborder"
+            android:paddingRight="0dip" >
+
+          
+     </LinearLayout>
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/msg_table"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exlayout"
+      
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+    
+      >
+  
+        <TableRow
+            android:clickable="true"
+            android:paddingBottom="0dip"
+            android:paddingLeft="5dip"
+            android:paddingRight="0dip" >
+
+            <TextView
+                android:id="@+id/msg_name"
+                android:paddingLeft="10dip"
+                android:paddingTop="05dip"
+                android:text="Messages"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+        </TableRow>
+    </TableLayout>
+
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="120dip"
+        android:layout_below="@id/msg_table"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="0dip"
+        android:paddingBottom="10dip"
+        android:divider="@android:color/transparent"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+           android:layout_marginTop="10dp"
+        android:paddingTop="0dip"
+        />
+        <TextView android:id="@android:id/empty"
+                        android:layout_below="@id/msg_table"
+               android:layout_width="fill_parent"
+               android:layout_height="120dip"
+                android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                           android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                android:text="No messages to display"/>
+    <LinearLayout
+        android:id="@+id/lnfoot"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:paddingBottom="80dp"
+         android:weightSum="10"
+         android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+   >
+ <LinearLayout
+       
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+           android:layout_weight="5"
+        android:layout_alignParentBottom="true"
+   >
+        <Button
+            android:id="@+id/post_msg_button"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="4dp"
+  
+            android:background="@drawable/post_message_selector"
+            android:onClick="postMessage"
+            android:text="Post Message"
+          
+             android:textColor="#edd008"
+           android:gravity="center"
+            android:paddingTop="3dip" />
+
+        <Button
+            android:id="@+id/marl_occu_button"
+           android:layout_width="155dp"
+            android:layout_height="40dp"
+ 
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@id/post_msg_button"
+            android:layout_marginLeft="2dp"
+             android:text="Mark Court Occupied"
+            android:layout_toRightOf="@id/post_msg_button"
+            android:background="@drawable/mark_court_occupied_selector"
+            android:enabled="false"
+            android:layout_marginRight="30dp"
+                  android:textColor="#edd008"
+            android:onClick="markOccupied" />
+      </LinearLayout>
+ <LinearLayout
+       
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+           android:layout_weight="5"
+        android:layout_alignParentBottom="true"
+   >
+            <TextView
+                android:id="@+id/cmessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="#edd008"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cmessageprox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="#edd008"
+                android:textSize="10sp"
+                
+                android:textStyle="bold" />
+ 
+
+            <TextView
+                android:id="@+id/cmessagemark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="#edd008"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+     </LinearLayout>
+    </LinearLayout>
+   
+
+    
+
+</RelativeLayout>
