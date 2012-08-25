@@ -188,6 +188,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
                 info = (Button) findViewById(R.id.ImageInfoButton01);
                 info.setOnClickListener(this);
+                
+                startBackGroundRefresh(); // Start background refreshes from syncadapter
          }
 
         private final void initMap() {
@@ -207,6 +209,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 });
                 mapView.invalidate();
                 // mapView.getController().setZoom(5);
+              
 
         }
 
@@ -226,8 +229,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
              //   ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
              //                   ProviderContract.AUTHORITY, false);
 
-                stopBackGroundRefresh();
-
+               
         }
 
         public void onResume() {
@@ -242,12 +244,13 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 }
 
 
-                startBackGroundRefresh(); // Start background refreshes from syncadapter
+               
 
         }
 
         public void onDestroy() {
                 super.onDestroy();
+                stopBackGroundRefresh();
                 myLocationOverlay.disableCompass();
                 myLocationOverlay.disableMyLocation();
 
