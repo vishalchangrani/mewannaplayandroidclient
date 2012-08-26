@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+          android:color="@drawable/pressed_yellow_color"/> <!-- pressed -->
+    <item android:state_focused="true"
+          android:color="@drawable/pressed_yellow_color"/> <!-- focused -->
+    <item android:color="@drawable/grey_color"/> <!-- default -->
+</selector>
