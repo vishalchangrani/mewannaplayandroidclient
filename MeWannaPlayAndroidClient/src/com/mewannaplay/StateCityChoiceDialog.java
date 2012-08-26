@@ -27,7 +27,7 @@ public class StateCityChoiceDialog extends Dialog {
         Spinner stateSpinner;
         private int stateSpinnerCurrentPos = -1;
         
-        TextView search;
+        TextView search,errormsg;
         
         Typeface bold,heavy,light,normal;
         
@@ -180,13 +180,16 @@ public class StateCityChoiceDialog extends Dialog {
         }
 
         public void setCurrentLocationButton()
-        {
+        {errormsg=(TextView)findViewById(R.id.txterror);
                 Button button = (Button) findViewById(R.id.choose_current_location);
                 Location currentLocation = MapViewActivity.mapViewActivity
                                 .getMyCurrentLocation();
 
                         if (currentLocation != null && currentLocation.getLatitude() != 0
                                 && currentLocation.getLongitude() != 0) {
+                        	 
+                        	 button.setBackgroundResource(R.drawable.buttons);
+                        	 errormsg.setText("");
                 button.setOnClickListener(new View.OnClickListener() {
                         
                         @Override
@@ -195,7 +198,7 @@ public class StateCityChoiceDialog extends Dialog {
                         }
                 });}else{
                         
-                        TextView errormsg=(TextView)findViewById(R.id.txterror);
+                       
                         errormsg.setText("Current Location is Not Available");
                         button.setBackgroundResource(R.drawable.disablestate);
                 }
