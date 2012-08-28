@@ -16,7 +16,7 @@
         android:id="@+id/user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/scheduled_time"
         android:focusable="false"
         android:text="Userabcd"
