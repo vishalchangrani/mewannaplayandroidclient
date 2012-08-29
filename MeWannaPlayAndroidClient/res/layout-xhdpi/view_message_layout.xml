@@ -66,11 +66,22 @@
                 android:orientation="horizontal"
                 android:paddingLeft="10dip" >
 
-                <TextView
+              
+                
+                <com.mewannaplay.ScrollingTextView
                     android:id="@+id/user_name_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="96dp"
+                        android:layout_marginLeft="96dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:ellipsize="marquee"
+                    android:freezesText="true"
+                    android:gravity="left"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                   
                     android:text="Unknown"
                     android:textColor="#fff"
                     android:textSize="18sp"
