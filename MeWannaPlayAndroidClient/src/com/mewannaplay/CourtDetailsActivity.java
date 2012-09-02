@@ -812,7 +812,8 @@ LinearLayout yellolayout;
 			alert.show();
 
 		} else {
-			startBackgroundRefresh();
+			if (asyncTask !=null && !asyncTask.isCancelled())
+				startBackgroundRefresh();
 		}
 	}
 }
