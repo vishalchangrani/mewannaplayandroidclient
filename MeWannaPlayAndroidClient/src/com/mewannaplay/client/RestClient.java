@@ -39,6 +39,7 @@ public class RestClient {
 
         private static final String TAG = "RestClient";
         private static boolean loggedIn = false;
+        private static RestClient restClient;
 
 
         // Create a local instance of cookie store
@@ -236,6 +237,8 @@ public class RestClient {
 
 
         public static void login(String username, String password) throws Exception {
+        	
+        		
                 if (loggedIn) {
 
                         Log.e(TAG, " Already logged in. Logging out");
@@ -251,7 +254,7 @@ public class RestClient {
                         // Login magic goes here
                         User user = new User(username,
                                         AuthenticatorActivity.encryptPassword(password));
-                        RestClient restClient = new RestClient(Constants.LOGIN);
+                        restClient = new RestClient(Constants.LOGIN);
                         restClient.execute(RequestMethods.POST, user.toJSONObject());
                         Log.d(TAG, username + " logged in successfully");
                         loggedIn = true;

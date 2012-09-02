@@ -22,7 +22,7 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
         protected Activity ownerAcitivty;
         
         private volatile boolean running = true;
-    private final ProgressDialog progressDialog;
+        private final ProgressDialog progressDialog;
  
 
         
@@ -58,34 +58,39 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
                 this.ownerAcitivty = context;
                 this.jsonObjectToPost = jsonObjectToPost;
         
-                progressDialog = new ProgressDialog(ownerAcitivty);
-                progressDialog.setTitle("");
-                progressDialog.setMessage(progressDialogMessage);
-                progressDialog.setCancelable(true);
-                progressDialog.setOnCancelListener(new OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                // actually could set running = false; right here, but I'll
-                // stick to contract.
-                cancel(true);
-            }
-        });
-
-
-        }
+                if (progressDialogMessage != null)
+                {
+                	progressDialog = new ProgressDialog(ownerAcitivty);
+                	progressDialog.setTitle("");
+                	progressDialog.setMessage(progressDialogMessage);
+                	progressDialog.setCancelable(true);
+                	progressDialog.setOnCancelListener(new OnCancelListener() {
+                		@Override
+                		public void onCancel(DialogInterface dialog) {
+                			// actually could set running = false; right here, but I'll
+                			// 	stick to contract.
+                			cancel(true);
+                		}
+                	});
+                }
+                else
+                	progressDialog = null;
+                	
+         }
 
         
         
         @Override
     protected void onCancelled() {
         running = false;
-        if (progressDialog.isShowing())
+        if (progressDialog != null && progressDialog.isShowing())
                 progressDialog.dismiss();
     }
 
 
         @Override
     protected void onPreExecute() {
+        	if (progressDialog != null)
                 progressDialog.show();
     }
 
@@ -95,7 +100,8 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
     protected void onPostExecute(Boolean result) {
        super.onPostExecute(result);
        Log.d(TAG," executing onPostExecute for server url - "+SERVER_URL+" result is "+result);
-       progressDialog.dismiss();
+       if (progressDialog != null)
+    	   progressDialog.dismiss();
     }
 
     @Override
@@ -104,11 +110,13 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
        JSONObject response = null;
        try {
         if (running)
+        {
                         if (isInDatabase())
                         {
                                 Log.d(TAG, " Found in database");
                                 return false;
                         }
+        }
         if (running)
                 response = sendRequest();
         if(running)

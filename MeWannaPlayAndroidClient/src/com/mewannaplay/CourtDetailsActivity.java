@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-
-
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -44,6 +42,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mewannaplay.asynctask.GetAllMessagesForCourtAsyncTask;
 import com.mewannaplay.asynctask.MarkCourtOccupiedAsyncTask;
 import com.mewannaplay.client.RestClient;
 import com.mewannaplay.model.TennisCourtDetails;
@@ -51,7 +50,6 @@ import com.mewannaplay.providers.ProviderContract;
 import com.mewannaplay.providers.ProviderContract.Messages;
 import com.mewannaplay.providers.ProviderContract.TennisCourtsDetails;
 import com.mewannaplay.syncadapter.SyncAdapter;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages;
 
 public class CourtDetailsActivity extends ListActivity implements
 		OnClickListener {
@@ -81,6 +79,7 @@ public class CourtDetailsActivity extends ListActivity implements
 TableLayout msgtable;
 ListView msglist;
 LinearLayout yellolayout;
+ 	private GetAllMessagesForCourtAsyncTask asyncTask;
 	// Account loggedinaccount;
 
 	@Override
@@ -233,19 +232,16 @@ LinearLayout yellolayout;
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
+		if (asyncTask != null)
+		{
+			asyncTask.cancel(true);
+			asyncTask = null;
+		}
+		
 		super.onPause();
+		stopBackGroudRefresh();
 		getContentResolver().unregisterContentObserver(messageContentObserver);
 		messageContentObserver = null;
-		// messageRefreshTimer.cancel();
-		// messageRefreshTimer = null;
-		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY,
-				SyncAdapter.getAllMessagesBundle(courtId));
-		ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);// cancel
-																		// all
-																		// syncs
-		ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, false);
 	}
 
 	@Override
@@ -256,14 +252,29 @@ LinearLayout yellolayout;
 		messageContentObserver = new MessagesContentObserver(null);
 		getContentResolver().registerContentObserver(Messages.CONTENT_URI,
 				true, messageContentObserver);
+		asyncTask = new GetAllMessagesForCourtAsyncTask(this, courtId);
+		asyncTask.execute(null);	
+	}
 
-		ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
-				ProviderContract.AUTHORITY, true);
+	
+	private void startBackgroundRefresh()
+	{
+		Log.d(TAG, "Starting bckground refresh for messages for court "+courtId);
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
 				SyncAdapter.getAllMessagesBundle(courtId), 2 * 60);
 	}
-
+	
+	private void stopBackGroudRefresh()
+	{
+		Log.d(TAG, "Stopping bckground refresh for messages for court "+courtId);
+		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
+				ProviderContract.AUTHORITY,
+				SyncAdapter.getAllMessagesBundle(courtId));
+		
+	}
+	
+	
 	private void enableDisableButtons() {
 		Button postMsgButton = (Button) findViewById(R.id.post_msg_button);
 		Button markCourtOccupied = (Button) findViewById(R.id.marl_occu_button);
@@ -380,7 +391,7 @@ LinearLayout yellolayout;
 
 		phone.setOnClickListener(this);
 
-Button onBack = (Button) findViewById(R.id.court_back_icon);
+		Button onBack = (Button) findViewById(R.id.court_back_icon);
 		onBack.setEnabled(true);
 
 		ImageView clickdriving = (ImageView) findViewById(R.id.court_driving_icon);
@@ -779,5 +790,30 @@ Button onBack = (Button) findViewById(R.id.court_back_icon);
 
 		}
 
+	}
+
+	public void onPostExecutePostedMessageTask(Boolean result) {
+		if (result) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					CourtDetailsActivity.this);
+			builder.setMessage("Error while fetching messages for this court")
+					.setCancelable(false)
+					.setNeutralButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									dialog.dismiss();
+									emptymessage.setText("No Messages to display");
+									cursorAdapter.notifyDataSetChanged();
+								}
+							});
+
+			alert = builder.create();
+			alert.show();
+
+		} else {
+			if (asyncTask !=null && !asyncTask.isCancelled())
+				startBackgroundRefresh();
+		}
 	}
 }
