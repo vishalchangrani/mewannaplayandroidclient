@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
@@ -134,6 +135,11 @@ public class StateCityChoiceDialog extends Dialog {
                                 if (arg2 == stateSpinnerCurrentPos)
                                         return;
                                 stateSpinnerCurrentPos = arg2;
+                                if (arg1 == null)
+                                {
+                                	Log.e("BUG", "arg1 is null!!!!!!!!");
+                                	return;
+                                }
                                 String state = ((TextView)arg1).getText() == null ? null : ((TextView)arg1).getText().toString();
                                 if (state != null)
                                         initCursorForCitySpinner(state);

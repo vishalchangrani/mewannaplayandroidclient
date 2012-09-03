@@ -5,6 +5,7 @@ import java.util.Comparator;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
@@ -31,28 +32,17 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
 			return id;
 		}
 
-		private static Drawable privateCourt, publicSemiOccupiedCourt,
+		private static Drawable  publicSemiOccupiedCourt,
                         publicNotOccupiedCourt, publicFullyOccupiedCourt,privateSemiOccupiedCourt,
                         privateNotOccupiedCourt, privateFullyOccupiedCourt;
-
-        //Samudra - Please add the private court drawables here as well..private occupied in proximity , private 
-        //semi occupied etc.....do same as has been done for public courts..just add new ones and update getMarker below
-        private static Drawable privateCourtInProximity,
-                        publicSemiOccupiedCourtInProximity,
-                        publicNotOccupiedCourtInProximity,
-                        publicFullyOccupiedCourtInProximity,  privateSemiOccupiedCourtInProximity,
-                        privateNotOccupiedCourtInProximity,
-                        privateFullyOccupiedCourtInProximity;
+		
+        private static Drawable privateCourtInProximity,publicCourtInProximity;
+   
         private static Drawable flagOccupied;
 
         static {
 
-                privateCourt = MeWannaPlay.getAppContext().getResources()
-                                .getDrawable(R.drawable.pavailable);
-                privateCourt.setBounds(privateCourt.getIntrinsicWidth() / -2,
-                                privateCourt.getIntrinsicHeight() / -2,
-                                privateCourt.getIntrinsicWidth() / 2,
-                                privateCourt.getIntrinsicHeight() / 2);
+                
                 publicSemiOccupiedCourt = MeWannaPlay.getAppContext().getResources()
                                 .getDrawable(R.drawable.partiallyoccu);
                 publicSemiOccupiedCourt.setBounds(
@@ -74,34 +64,15 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
                                 publicFullyOccupiedCourt.getIntrinsicHeight() / -2,
                                 publicFullyOccupiedCourt.getIntrinsicWidth() / 2,
                                 publicFullyOccupiedCourt.getIntrinsicHeight() / 2);
-                privateCourtInProximity = MeWannaPlay.getAppContext().getResources()
-                                .getDrawable(R.drawable.pproximity);
-                privateCourtInProximity.setBounds(
-                                privateCourtInProximity.getIntrinsicWidth() / -2,
-                                privateCourtInProximity.getIntrinsicHeight() / -2,
-                                privateCourtInProximity.getIntrinsicWidth() / 2,
-                                privateCourtInProximity.getIntrinsicHeight() / 2);
-                publicFullyOccupiedCourtInProximity = MeWannaPlay.getAppContext()
-                                .getResources().getDrawable(R.drawable.allcourtsoccu);
-                publicFullyOccupiedCourtInProximity.setBounds(
-                                publicFullyOccupiedCourtInProximity.getIntrinsicWidth() / -2,
-                                publicFullyOccupiedCourtInProximity.getIntrinsicHeight() / -2,
-                                publicFullyOccupiedCourtInProximity.getIntrinsicWidth() / 2,
-                                publicFullyOccupiedCourtInProximity.getIntrinsicHeight() / 2);
-                publicSemiOccupiedCourtInProximity = MeWannaPlay.getAppContext()
-                                .getResources().getDrawable(R.drawable.partiallyoccu);
-                publicSemiOccupiedCourtInProximity.setBounds(
-                                publicSemiOccupiedCourtInProximity.getIntrinsicWidth() / -2,
-                                publicSemiOccupiedCourtInProximity.getIntrinsicHeight() / -2,
-                                publicSemiOccupiedCourtInProximity.getIntrinsicWidth() / 2,
-                                publicSemiOccupiedCourtInProximity.getIntrinsicHeight() / 2);
-                publicNotOccupiedCourtInProximity = MeWannaPlay.getAppContext()
-                                .getResources().getDrawable(R.drawable.tenniscourtavailable);
-                publicNotOccupiedCourtInProximity.setBounds(
-                                publicNotOccupiedCourtInProximity.getIntrinsicWidth() / -2,
-                                publicNotOccupiedCourtInProximity.getIntrinsicHeight() / -2,
-                                publicNotOccupiedCourtInProximity.getIntrinsicWidth() / 2,
-                                publicNotOccupiedCourtInProximity.getIntrinsicHeight() / 2);
+                
+                publicCourtInProximity = MeWannaPlay.getAppContext()
+                        .getResources().getDrawable(R.drawable.proximitycourt);
+                publicCourtInProximity.setBounds(
+                		publicCourtInProximity.getIntrinsicWidth() / -2,
+                		publicCourtInProximity.getIntrinsicHeight() / -2,
+                		publicCourtInProximity.getIntrinsicWidth() / 2,
+                		publicCourtInProximity.getIntrinsicHeight() / 2);
+                
                 flagOccupied = MeWannaPlay.getAppContext().getResources()
                                 .getDrawable(R.drawable.flag);
                 flagOccupied.setBounds(flagOccupied.getIntrinsicWidth() / -2,
@@ -110,7 +81,15 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
                                 flagOccupied.getIntrinsicHeight() / 2);
                 
                 
-                //**for private court**// 
+                //**for private court**//
+                privateCourtInProximity = MeWannaPlay.getAppContext().getResources()
+                        .getDrawable(R.drawable.pproximity);
+                privateCourtInProximity.setBounds(
+                        privateCourtInProximity.getIntrinsicWidth() / -2,
+                        privateCourtInProximity.getIntrinsicHeight() / -2,
+                        privateCourtInProximity.getIntrinsicWidth() / 2,
+                        privateCourtInProximity.getIntrinsicHeight() / 2);
+     
                 privateSemiOccupiedCourt = MeWannaPlay.getAppContext().getResources()
                         .getDrawable(R.drawable.ppartialoccu);
         privateSemiOccupiedCourt.setBounds(
@@ -134,32 +113,7 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
         		privateFullyOccupiedCourt.getIntrinsicHeight() / -2,
         		privateFullyOccupiedCourt.getIntrinsicWidth() / 2,
         		privateFullyOccupiedCourt.getIntrinsicHeight() / 2);
-        
-        privateFullyOccupiedCourtInProximity = MeWannaPlay.getAppContext()
-                .getResources().getDrawable(R.drawable.pfullyoccu);
-        privateFullyOccupiedCourtInProximity.setBounds(
-        		privateFullyOccupiedCourtInProximity.getIntrinsicWidth() / -2,
-        		privateFullyOccupiedCourtInProximity.getIntrinsicHeight() / -2,
-        		privateFullyOccupiedCourtInProximity.getIntrinsicWidth() / 2,
-        		privateFullyOccupiedCourtInProximity.getIntrinsicHeight() / 2);
-        
-        privateSemiOccupiedCourtInProximity = MeWannaPlay.getAppContext()
-                .getResources().getDrawable(R.drawable.ppartialoccu);
-        privateSemiOccupiedCourtInProximity.setBounds(
-        		privateSemiOccupiedCourtInProximity.getIntrinsicWidth() / -2,
-        		privateSemiOccupiedCourtInProximity.getIntrinsicHeight() / -2,
-        		privateSemiOccupiedCourtInProximity.getIntrinsicWidth() / 2,
-        		privateSemiOccupiedCourtInProximity.getIntrinsicHeight() / 2);
-        
-        
-        privateNotOccupiedCourtInProximity = MeWannaPlay.getAppContext()
-                .getResources().getDrawable(R.drawable.pavailable);
-        privateNotOccupiedCourtInProximity.setBounds(
-        		privateNotOccupiedCourtInProximity.getIntrinsicWidth() / -2,
-        		privateNotOccupiedCourtInProximity.getIntrinsicHeight() / -2,
-        		privateNotOccupiedCourtInProximity.getIntrinsicWidth() / 2,
-        		privateNotOccupiedCourtInProximity.getIntrinsicHeight() / 2);
-
+   
         }
 
         public TennisCourtOverlayItemAdapter(TennisCourt tennisCourt) {
@@ -188,55 +142,33 @@ public class TennisCourtOverlayItemAdapter extends OverlayItem {
                 Location thisCourtsLocation = this.getLocation();
                 boolean isInProximity = currentLocation != null ? currentLocation
                                 .distanceTo(thisCourtsLocation) <= Constants.PROXIMITY : false;
-                if (isInProximity)
-                        Log.d(TAG,
-                                        currentLocation != null ? currentLocation
-                                                        .distanceTo(thisCourtsLocation) + "meters "
-                                                        : "current location null");
+                
                 
                 // Select the overlay image for this court based on conditions
-                if (tc.getId() == MapViewActivity.getCourtMarkedOccupied()) // If this
-                                                                                                                                        // court has
-                                                                                                                                        // been
-                                                                                                                                        // marked
-                                                                                                                                        // occupied
-                                                                                                                                        // by this
-                                                                                                                                        // user then
-                                                                                                                                        // show
-                                                                                                                                        // occupied
-                                                                                                                                        // flag
+                if (tc.getId() == MapViewActivity.getCourtMarkedOccupied()) 
                         return flagOccupied;
                 if (tc.isPrivate())
                 {
                         
-                        
-                     //   return isInProximity ? privateCourtInProximity : privateCourt;
-                        //Samudra - Please fix the following and add the new resources for privat court
-//DO here what has done for public court below..basically the same if,else if and else just that you need
-                        // to add private not occupied, private occupied in proximity etc icons...
-                     if (tc.isNotOccupied())
-                                return isInProximity ? privateNotOccupiedCourtInProximity
-                                                : privateNotOccupiedCourt;
-                        else if (tc.isPartiallyOccupied())
-                                return isInProximity ? privateSemiOccupiedCourtInProximity
-                                                : privateSemiOccupiedCourt;
-                        else
-                                // if (tc.isOccupied())
-                                return isInProximity ? privateFullyOccupiedCourtInProximity
-                                                : privateFullyOccupiedCourt; 
+                	if (isInProximity)
+                		return privateCourtInProximity;
+                	else if (tc.isNotOccupied())
+                        return privateNotOccupiedCourt;
+                    else if (tc.isPartiallyOccupied())
+                        return privateSemiOccupiedCourt;
+                    else
+                    	return privateFullyOccupiedCourt; 
                 }       
                         
                 else {
-                        if (tc.isNotOccupied())
-                                return isInProximity ? publicNotOccupiedCourtInProximity
-                                                : publicNotOccupiedCourt;
+                		if (isInProximity)
+                			return publicCourtInProximity;
+                		else if (tc.isNotOccupied())
+                                return publicNotOccupiedCourt;
                         else if (tc.isPartiallyOccupied())
-                                return isInProximity ? publicSemiOccupiedCourtInProximity
-                                                : publicSemiOccupiedCourt;
+                                return  publicSemiOccupiedCourt;
                         else
-                                // if (tc.isOccupied())
-                                return isInProximity ? publicFullyOccupiedCourtInProximity
-                                                : publicFullyOccupiedCourt;
+                        	return publicFullyOccupiedCourt;
                 }
 
         }
