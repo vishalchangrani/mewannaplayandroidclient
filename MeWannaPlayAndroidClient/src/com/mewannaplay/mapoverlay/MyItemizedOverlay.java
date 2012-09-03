@@ -56,7 +56,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 	public void addOverlays(Collection<TennisCourtOverlayItemAdapter> overlays)
 	{
 		  	m_overlays.addAll(overlays);
-		  	Collections.sort(m_overlays, new TennisCourtOverlayItemAdapter.TennisCourtComparator());
+		  	//Collections.sort(m_overlays, new TennisCourtOverlayItemAdapter.TennisCourtComparator());
 		  	setLastFocusedIndex(-1);
 		    populate();
 	}

@@ -65,7 +65,7 @@ public class Constants {
     
     public final static int password_salt_length = 8; //MUST MATCH SERVER
 
-	public static final float PROXIMITY = 20f; //METERS
+	public static final float PROXIMITY = 50f; //METERS
     
     public static enum ACTIVITY
     {
