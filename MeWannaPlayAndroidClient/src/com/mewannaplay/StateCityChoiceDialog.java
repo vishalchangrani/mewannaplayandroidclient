@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +29,7 @@ public class StateCityChoiceDialog extends Dialog {
         Spinner citySpinner;
         Spinner stateSpinner;
         private int stateSpinnerCurrentPos = -1;
-        
+        protected LocationManager locationManager;
         TextView search,errormsg;
         
         Typeface bold,heavy,light,normal;
@@ -38,6 +40,7 @@ public class StateCityChoiceDialog extends Dialog {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 setContentView(R.layout.state_city_choice_layout);
+                locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                 search=(TextView)findViewById(R.id.txtsearch);
             bold=Typeface.createFromAsset(context.getAssets(),"Folks-Bold.ttf");
                                  heavy=Typeface.createFromAsset(context.getAssets(),"Folks-Heavy.ttf");
@@ -185,30 +188,47 @@ public class StateCityChoiceDialog extends Dialog {
                 getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
         }
 
-        public void setCurrentLocationButton()
-        {errormsg=(TextView)findViewById(R.id.txterror);
-                Button button = (Button) findViewById(R.id.choose_current_location);
-                Location currentLocation = MapViewActivity.mapViewActivity
-                                .getMyCurrentLocation();
+    	public void setCurrentLocationButton() {
+    		errormsg = (TextView) findViewById(R.id.txterror);
+    		Button button = (Button) findViewById(R.id.choose_current_location);
+    		
+    		Location currentLocation = locationManager
+    				.getLastKnownLocation(getBestProvider());
+    	
+    		
+//    		Location currentLocation = MapViewActivity.mapViewActivity
+//    				.getMyCurrentLocation();
 
-                        if (currentLocation != null && currentLocation.getLatitude() != 0
-                                && currentLocation.getLongitude() != 0) {
-                        	 
-                        	 button.setBackgroundResource(R.drawable.buttons);
-                        	 errormsg.setText("");
-                button.setOnClickListener(new View.OnClickListener() {
-                        
-                        @Override
-                        public void onClick(View v) {
-                                chooseCurrentLocation(v);
-                        }
-                });}else{
-                        
-                       
-                        errormsg.setText("Current Location is Not Available");
-                        button.setBackgroundResource(R.drawable.disablestate);
-                }
-        }
+    		if (currentLocation != null && currentLocation.getLatitude() != 0
+    				&& currentLocation.getLongitude() != 0) {
+
+    			button.setBackgroundResource(R.drawable.buttons);
+    			errormsg.setText("");
+    			button.setOnClickListener(new View.OnClickListener() {
+
+    				@Override
+    				public void onClick(View v) {
+    					chooseCurrentLocation(v);
+    				}
+    			});
+    		} else {
+
+    			errormsg.setText("Current Location is Not Available");
+    			button.setBackgroundResource(R.drawable.disablestate);
+    		}
+    	}
+    	public String getBestProvider() {
+//    		locationManager = (LocationManager) context.
+//    				.getSystemService(Context.LOCATION_SERVICE);
+    		Criteria criteria = new Criteria();
+    		criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
+    		criteria.setAccuracy(Criteria.NO_REQUIREMENT);
+    		String bestProvider = locationManager.getBestProvider(criteria, true);
+    		if(bestProvider!=null){
+    		return bestProvider;}else{
+    			return LocationManager.GPS_PROVIDER;
+    		}
+    	}
 
         private void onOK(View v)
         {

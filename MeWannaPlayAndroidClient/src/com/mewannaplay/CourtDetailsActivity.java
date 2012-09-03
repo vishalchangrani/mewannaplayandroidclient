@@ -757,10 +757,12 @@ LinearLayout yellolayout;
 		switch (arg0.getId()) {
 		case R.id.court_phone_icon:
 
-			Intent callIntent = new Intent(Intent.ACTION_CALL);
-			callIntent.setData(Uri.parse("tel:"
+			Intent dial = new Intent();
+			dial.setAction("android.intent.action.DIAL");
+
+			dial.setData(Uri.parse("tel:"
 					+ tennisCourtDetails.getPhone().trim().toString()));
-			startActivity(callIntent);
+			startActivity(dial);
 
 			break;
 		case R.id.court_addr_1:
