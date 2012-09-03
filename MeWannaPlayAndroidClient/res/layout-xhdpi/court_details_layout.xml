@@ -105,7 +105,7 @@
              
                 android:layout_marginLeft="70dp"
                 android:paddingRight="05dip"
-                android:text="(080)-3242-2341"
+                
                 android:gravity="center_vertical"
                 android:textColor="#fff"
                 android:textSize="12sp"

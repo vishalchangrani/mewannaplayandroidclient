@@ -103,7 +103,7 @@
                 android:paddingLeft="50dip"
                 android:paddingRight="05dip"
                 
-                android:text="(080)-3242-2341"
+               
                 android:textColor="#fff"
                 android:textSize="12sp"
                 android:textStyle="italic"
