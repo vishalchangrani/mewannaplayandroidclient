@@ -112,6 +112,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 
                 int totalRunsSoFar = sharedPrefs.getInt("TOTALRUN", 0);
                 Log.d(TAG, " Total runs so far -" + totalRunsSoFar);
+                initCurrentLocationOverlay();
                 if (totalRunsSoFar == 0) // Total runs rolls over to 0 after every fifth
                                                                         // run...so it goes from 0,1,2,3,4 and then
                                                                         // to 0 again
@@ -199,18 +200,24 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 myItemizedOverlay = new MyItemizedOverlay(getResources().getDrawable(
                                 R.drawable.ic_maps_indicator_current_position), mapView);
                 mapView.getOverlays().add(myItemizedOverlay);
-                myLocationOverlay = new MyMyLocationOverlay(this, mapView);
-                mapView.getOverlays().add(myLocationOverlay);
-                myLocationOverlay.runOnFirstFix(new Runnable() {
-                        public void run() {
-                                if (currentCity == null) // user has not selected any city
-                                        centerLocation(myLocationOverlay.getMyLocation());
-                        }
-                });
+                
                 mapView.invalidate();
                 // mapView.getController().setZoom(5);
               
 
+        }
+        
+        private final void initCurrentLocationOverlay()
+        {
+        	  MapView mapView = (MapView) findViewById(R.id.mapview);
+        	  myLocationOverlay = new MyMyLocationOverlay(this, mapView);
+              mapView.getOverlays().add(myLocationOverlay);
+              myLocationOverlay.runOnFirstFix(new Runnable() {
+                      public void run() {
+                              if (currentCity == null) // user has not selected any city
+                                      centerLocation(myLocationOverlay.getMyLocation());
+                      }
+              });
         }
 
         public void onPause() {
@@ -239,7 +246,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 Log.i(TAG, "Resuming GPS update requests");
                 // myLocationOverlay.enableCompass();
                 if (!myLocationOverlay.enableMyLocation()) {
-                        Toast.makeText(this, "location unavialable", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "Current location unavialable", Toast.LENGTH_SHORT)
                                         .show();
                 }
 

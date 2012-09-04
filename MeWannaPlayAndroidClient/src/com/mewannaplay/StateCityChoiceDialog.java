@@ -192,12 +192,12 @@ public class StateCityChoiceDialog extends Dialog {
     		errormsg = (TextView) findViewById(R.id.txterror);
     		Button button = (Button) findViewById(R.id.choose_current_location);
     		
-    		Location currentLocation = locationManager
-    				.getLastKnownLocation(getBestProvider());
+//    		Location currentLocation = locationManager
+  //  				.getLastKnownLocation(getBestProvider());
     	
     		
-//    		Location currentLocation = MapViewActivity.mapViewActivity
-//    				.getMyCurrentLocation();
+    		Location currentLocation = MapViewActivity.mapViewActivity
+    				.getMyCurrentLocation();
 
     		if (currentLocation != null && currentLocation.getLatitude() != 0
     				&& currentLocation.getLongitude() != 0) {
