@@ -114,6 +114,8 @@ public class StateCityChoiceDialog extends Dialog {
                 super.onCreate(savedInstanceState);
                  
                 stateSpinner = (Spinner) findViewById(R.id.state_spinner);
+                citySpinner = (Spinner) findViewById(R.id.city_spinner);
+                citySpinner.setEnabled(false);
                 
                 Cursor cur = getContext().getContentResolver().query(ProviderContract.Cities.CONTENT_URI, new String[]{"_id","abbreviation"} , " _id=_id) GROUP BY (abbreviation", null, " abbreviation asc");
                 MapViewActivity.mapViewActivity.startManagingCursor(cur);
@@ -135,17 +137,13 @@ public class StateCityChoiceDialog extends Dialog {
                         @Override
                         public void onItemSelected(AdapterView<?> arg0, View arg1,
                                         int arg2, long rowId) {
-                                if (arg2 == stateSpinnerCurrentPos)
+                                if (arg2 == stateSpinnerCurrentPos & citySpinner.isEnabled()) //This is like previous choice and City spinner has been initialized 
                                         return;
                                 stateSpinnerCurrentPos = arg2;
-                                if (arg1 == null)
-                                {
-                                	Log.e("BUG", "arg1 is null!!!!!!!!");
-                                	return;
-                                }
-                                String state = ((TextView)arg1).getText() == null ? null : ((TextView)arg1).getText().toString();
+                                Cursor stateCursor = (Cursor) arg0.getItemAtPosition(arg2);	//Else retrieve the state selected..we need it
+                            	String state = stateCursor.getString(stateCursor.getColumnIndex("abbreviation"));    
                                 if (state != null)
-                                        initCursorForCitySpinner(state);
+                                   initCursorForCitySpinner(state); //This wil enable the city spinner
                         }
 
                         @Override
@@ -156,8 +154,7 @@ public class StateCityChoiceDialog extends Dialog {
                         
                 });
                 
-                citySpinner = (Spinner) findViewById(R.id.city_spinner);
-                citySpinner.setEnabled(false);
+              
                 cur = null; //getContext().getContentResolver().query(ProviderContract.Cities.CONTENT_URI, new String[]{"_id","name"} , null, null, " name asc");
                 SimpleCursorAdapter cityAdapter = new SimpleCursorAdapter(this.getContext(),
                             android.R.layout.simple_spinner_item, // Use a template
@@ -244,7 +241,6 @@ public class StateCityChoiceDialog extends Dialog {
                         city.setLongitude(c.getDouble(c.getColumnIndex("longitude")));
                         MapViewActivity.mapViewActivity.setCurrentCity(city);
                         ((TextView) (MapViewActivity.mapViewActivity.findViewById(R.id.dropdown_city))).setText(city.getName()+","+city.getAbbreviation());
-                        
                         this.dismiss();
         }
 

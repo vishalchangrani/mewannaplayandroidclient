@@ -1,0 +1,38 @@
+curl -i -v --cookie-jar newcookies.txt  -X POST -d '{"user":{"username":"amit","password": "fbd6f1ccYW1pdGdhbmRoaQ=="}}' --location http://api.mewannaplay.com/v1/users/login
+
+curl -v --cookie newcookies.txt  -X DELETE --location http://api.mewannaplay.com/V1/tenniscourtmessage/index/13604/partnerfound/true
+
+curl -v --cookie newcookies.txt  -X GET --location http://api.mewannaplay.com/v1/user
+
+
+curl -v --cookie newcookies.txt   -d '{"data":{"Message":{"contact_type_id":0,"schedule_time":"2012-07-01 23:00:00","level":"Beginner","message_text":"sdf","player_needed":"1","message_id":0,"contact_info":"7133928501","tennis_court_id":108}}}' --location http://api.mewannaplay.com/v1/tenniscourtmessages/add
+
+curl -v --cookie newcookies.txt  -X GET --location http://api.mewannaplay.com/v1/tenniscourtmessage/index/108
+
+
+curl -v  -X  GET --location http://api.mewannaplay.com/V1/tenniscourtstats
+
+curl -v --cookie newcookies.txt  -X GET --location http://api.mewannaplay.com/v1/markoccupied/id/108
+
+
+curl -i -v --cookie-jar newcookies.txt  -X POST -d '{"User":{"user_name":"amit","user_password": "fbd6f1ccYW1pdGdhbmRoaQ==","user_email":"vishal@vishal.com"}}' --location http://api.mewannaplay.com/v1/users/add
+
+curl -i -v --cookie-jar newcookies.txt Ê-X POST -d '{"data":{"User":{"user_name":"amity","user_password": "fbd6f1ccYW1pdGdhbmRoaQ==","user_email":"vishal@vishal1.com"}}}' --location http://api.mewannaplay.com/v1/users/add
+
+curl -i -v --cookie-jar newcookies.txt Ê-X POST -d '{"data":{"User":{"user_email":"test1@test.com","user_name":"amit","user_password":"acbdefghdGVzdA==\n"}}}' --location http://api.mewannaplay.com/v1/users/add
+
+--header "Content-Type: text/xml"
+
+curl -v --header "Accept-Encoding: gzip"  -X GET --location http://api.mewannaplay.com/V1/tenniscourtmessage/index/108
+
+curl -i -v --cookie-jar newcookies.txt  -X POST -d '{"user":{"username":"dum_1","password": "fbd6f1ccYW1pdGdhbmRoaQ=="}}' --location http://api.mewannaplay.com/v1/users/login
+
++919930381538
+
+
+curl -i -v --cookie-jar newcookies.txt  -X POST -d '{"user":{"username":"dummers_9","password": "fbd6f1ccYW1pdGdhbmRoaQ=="}}' --location http://api.mewannaplay.com/v1/users/login
+
+curl -i -v --cookie newcookies.txt --cookie-jar newcookies.txt -X POST --location http://api.mewannaplay.com/v1/users/logout
+
+
+curl -v --cookie newcookies.txt   -d '{"data":{"Message":{"contact_type_id":1,"schedule_time":"2012-07-01 23:00:00","level":"Beginner","message_text":"sdf","player_needed":"1","message_id":0,"contact_info":"7133928501","tennis_court_id":108}}}' --location http://api.mewannaplay.com/v1/tenniscourtmessages/add
