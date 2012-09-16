@@ -245,7 +245,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 
                 Log.i(TAG, "Resuming GPS update requests");
                 // myLocationOverlay.enableCompass();
-                if (!myLocationOverlay.enableMyLocation()) {
+                if (!myLocationOverlay.enableMyLocation() && currentCity == null) {
                         Toast.makeText(this, "Current location unavialable", Toast.LENGTH_SHORT)
                                         .show();
                 }
