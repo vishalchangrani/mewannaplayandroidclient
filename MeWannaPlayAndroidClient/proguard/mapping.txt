@@ -1,0 +1,2754 @@
+com.google.gson.AnonymousAndLocalClassExclusionStrategy -> com.google.gson.AnonymousAndLocalClassExclusionStrategy:
+    27:27:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+    31:31:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+    35:35:boolean isAnonymousOrLocal(java.lang.Class) -> isAnonymousOrLocal
+com.google.gson.Cache -> com.google.gson.Cache:
+    void addElement(java.lang.Object,java.lang.Object) -> addElement
+    java.lang.Object getElement(java.lang.Object) -> getElement
+com.google.gson.CamelCaseSeparatorNamingPolicy -> com.google.gson.CamelCaseSeparatorNamingPolicy:
+    java.lang.String separatorString -> separatorString
+    64:73:java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+com.google.gson.CompositionFieldNamingPolicy -> com.google.gson.CompositionFieldNamingPolicy:
+    com.google.gson.RecursiveFieldNamingPolicy[] fieldPolicies -> fieldPolicies
+    41:44:java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+com.google.gson.DefaultTypeAdapters -> com.google.gson.DefaultTypeAdapters:
+com.google.gson.DefaultTypeAdapters$DefaultDateTypeAdapter -> com.google.gson.DefaultTypeAdapters$DefaultDateTypeAdapter:
+    java.text.DateFormat enUsFormat -> enUsFormat
+    java.text.DateFormat localFormat -> localFormat
+    java.text.DateFormat iso8601Format -> iso8601Format
+    73:76:com.google.gson.JsonElement serialize(java.util.Date,java.lang.reflect.Type,com.google.gson.JsonSerializationContext) -> serialize
+    81:92:java.util.Date deserialize(com.google.gson.JsonElement,java.lang.reflect.Type,com.google.gson.JsonDeserializationContext) -> deserialize
+    97:111:java.util.Date deserializeToDate(com.google.gson.JsonElement) -> deserializeToDate
+    116:119:java.lang.String toString() -> toString
+    40:40:com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type,com.google.gson.JsonSerializationContext) -> serialize
+    40:40:java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type,com.google.gson.JsonDeserializationContext) -> deserialize
+com.google.gson.DisjunctionExclusionStrategy -> com.google.gson.DisjunctionExclusionStrategy:
+    java.util.Collection strategies -> strategies
+    37:42:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+    46:51:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+com.google.gson.ExclusionStrategy -> com.google.gson.ExclusionStrategy:
+    boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+    boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+com.google.gson.ExposeAnnotationDeserializationExclusionStrategy -> com.google.gson.ExposeAnnotationDeserializationExclusionStrategy:
+    28:28:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+    32:36:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+com.google.gson.ExposeAnnotationSerializationExclusionStrategy -> com.google.gson.ExposeAnnotationSerializationExclusionStrategy:
+    28:28:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+    32:36:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+com.google.gson.FieldAttributes -> com.google.gson.FieldAttributes:
+    java.lang.String MAX_CACHE_PROPERTY_NAME -> MAX_CACHE_PROPERTY_NAME
+    com.google.gson.Cache ANNOTATION_CACHE -> ANNOTATION_CACHE
+    java.lang.Class declaringClazz -> declaringClazz
+    java.lang.reflect.Field field -> field
+    java.lang.Class declaredType -> declaredType
+    boolean isSynthetic -> isSynthetic
+    int modifiers -> modifiers
+    java.lang.String name -> name
+    java.lang.reflect.Type genericType -> genericType
+    java.util.Collection annotations -> annotations
+    71:77:int getMaxCacheSize() -> getMaxCacheSize
+    85:85:java.lang.Class getDeclaringClass() -> getDeclaringClass
+    92:92:java.lang.String getName() -> getName
+    112:115:java.lang.reflect.Type getDeclaredType() -> getDeclaredType
+    135:135:java.lang.Class getDeclaredClass() -> getDeclaredClass
+    146:146:java.lang.annotation.Annotation getAnnotation(java.lang.Class) -> getAnnotation
+    156:166:java.util.Collection getAnnotations() -> getAnnotations
+    180:180:boolean hasModifier(int) -> hasModifier
+    191:191:java.lang.Object get(java.lang.Object) -> get
+    200:200:boolean isSynthetic() -> isSynthetic
+    208:208:java.lang.reflect.Field getFieldObject() -> getFieldObject
+    214:219:java.lang.annotation.Annotation getAnnotationFromArray(java.util.Collection,java.lang.Class) -> getAnnotationFromArray
+com.google.gson.FieldNamingPolicy -> com.google.gson.FieldNamingPolicy:
+    com.google.gson.FieldNamingPolicy UPPER_CAMEL_CASE -> UPPER_CAMEL_CASE
+    com.google.gson.FieldNamingPolicy UPPER_CAMEL_CASE_WITH_SPACES -> UPPER_CAMEL_CASE_WITH_SPACES
+    com.google.gson.FieldNamingPolicy LOWER_CASE_WITH_UNDERSCORES -> LOWER_CASE_WITH_UNDERSCORES
+    com.google.gson.FieldNamingPolicy LOWER_CASE_WITH_DASHES -> LOWER_CASE_WITH_DASHES
+    com.google.gson.FieldNamingStrategy2 namingPolicy -> namingPolicy
+    com.google.gson.FieldNamingPolicy[] $VALUES -> $VALUES
+    28:28:com.google.gson.FieldNamingPolicy[] values() -> values
+    28:28:com.google.gson.FieldNamingPolicy valueOf(java.lang.String) -> valueOf
+    97:97:com.google.gson.FieldNamingStrategy2 getFieldNamingPolicy() -> getFieldNamingPolicy
+com.google.gson.FieldNamingStrategy -> com.google.gson.FieldNamingStrategy:
+    java.lang.String translateName(java.lang.reflect.Field) -> translateName
+com.google.gson.FieldNamingStrategy2 -> com.google.gson.FieldNamingStrategy2:
+    java.lang.String translateName(com.google.gson.FieldAttributes) -> translateName
+com.google.gson.FieldNamingStrategy2Adapter -> com.google.gson.FieldNamingStrategy2Adapter:
+    com.google.gson.FieldNamingStrategy adaptee -> adaptee
+    37:37:java.lang.String translateName(com.google.gson.FieldAttributes) -> translateName
+com.google.gson.Gson -> com.google.gson.Gson:
+    com.google.gson.internal.ParameterizedTypeHandlerMap EMPTY_MAP -> EMPTY_MAP
+    boolean DEFAULT_JSON_NON_EXECUTABLE -> DEFAULT_JSON_NON_EXECUTABLE
+    com.google.gson.AnonymousAndLocalClassExclusionStrategy DEFAULT_ANON_LOCAL_CLASS_EXCLUSION_STRATEGY -> DEFAULT_ANON_LOCAL_CLASS_EXCLUSION_STRATEGY
+    com.google.gson.SyntheticFieldExclusionStrategy DEFAULT_SYNTHETIC_FIELD_EXCLUSION_STRATEGY -> DEFAULT_SYNTHETIC_FIELD_EXCLUSION_STRATEGY
+    com.google.gson.ModifierBasedExclusionStrategy DEFAULT_MODIFIER_BASED_EXCLUSION_STRATEGY -> DEFAULT_MODIFIER_BASED_EXCLUSION_STRATEGY
+    com.google.gson.FieldNamingStrategy2 DEFAULT_NAMING_POLICY -> DEFAULT_NAMING_POLICY
+    com.google.gson.ExclusionStrategy DEFAULT_EXCLUSION_STRATEGY -> DEFAULT_EXCLUSION_STRATEGY
+    java.lang.String JSON_NON_EXECUTABLE_PREFIX -> JSON_NON_EXECUTABLE_PREFIX
+    com.google.gson.ExclusionStrategy deserializationExclusionStrategy -> deserializationExclusionStrategy
+    com.google.gson.ExclusionStrategy serializationExclusionStrategy -> serializationExclusionStrategy
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> constructorConstructor
+    com.google.gson.internal.ParameterizedTypeHandlerMap serializers -> serializers
+    com.google.gson.internal.ParameterizedTypeHandlerMap deserializers -> deserializers
+    boolean serializeNulls -> serializeNulls
+    boolean htmlSafe -> htmlSafe
+    boolean generateNonExecutableJson -> generateNonExecutableJson
+    boolean prettyPrinting -> prettyPrinting
+    com.google.gson.internal.bind.MiniGson miniGson -> miniGson
+    281:284:com.google.gson.internal.bind.TypeAdapter doubleAdapter(boolean) -> doubleAdapter
+    305:308:com.google.gson.internal.bind.TypeAdapter floatAdapter(boolean) -> floatAdapter
+    329:334:void checkValidFloatingPoint(double) -> checkValidFloatingPoint
+    337:340:com.google.gson.internal.bind.TypeAdapter longAdapter(com.google.gson.LongSerializationPolicy) -> longAdapter
+    359:363:com.google.gson.ExclusionStrategy createExclusionStrategy() -> createExclusionStrategy
+    380:383:com.google.gson.JsonElement toJsonTree(java.lang.Object) -> toJsonTree
+    404:406:com.google.gson.JsonElement toJsonTree(java.lang.Object,java.lang.reflect.Type) -> toJsonTree
+    423:426:java.lang.String toJson(java.lang.Object) -> toJson
+    445:447:java.lang.String toJson(java.lang.Object,java.lang.reflect.Type) -> toJson
+    465:470:void toJson(java.lang.Object,java.lang.Appendable) -> toJson
+    490:495:void toJson(java.lang.Object,java.lang.reflect.Type,java.lang.Appendable) -> toJson
+    504:520:void toJson(java.lang.Object,java.lang.reflect.Type,com.google.gson.stream.JsonWriter) -> toJson
+    530:532:java.lang.String toJson(com.google.gson.JsonElement) -> toJson
+    545:550:void toJson(com.google.gson.JsonElement,java.lang.Appendable) -> toJson
+    557:565:com.google.gson.stream.JsonWriter newJsonWriter(java.io.Writer) -> newJsonWriter
+    573:588:void toJson(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter) -> toJson
+    608:609:java.lang.Object fromJson(java.lang.String,java.lang.Class) -> fromJson
+    632:637:java.lang.Object fromJson(java.lang.String,java.lang.reflect.Type) -> fromJson
+    659:662:java.lang.Object fromJson(java.io.Reader,java.lang.Class) -> fromJson
+    685:688:java.lang.Object fromJson(java.io.Reader,java.lang.reflect.Type) -> fromJson
+    693:701:void assertFullConsumption(java.lang.Object,com.google.gson.stream.JsonReader) -> assertFullConsumption
+    713:736:java.lang.Object fromJson(com.google.gson.stream.JsonReader,java.lang.reflect.Type) -> fromJson
+    757:758:java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.Class) -> fromJson
+    780:783:java.lang.Object fromJson(com.google.gson.JsonElement,java.lang.reflect.Type) -> fromJson
+    788:798:java.lang.String toString() -> toString
+    102:102:com.google.gson.ExclusionStrategy access$000(com.google.gson.Gson) -> access$000
+    102:102:com.google.gson.ExclusionStrategy access$100(com.google.gson.Gson) -> access$100
+    102:102:void access$200(com.google.gson.Gson,double) -> access$200
+com.google.gson.Gson$1 -> com.google.gson.Gson$1:
+    com.google.gson.FieldNamingStrategy2 val$fieldNamingPolicy -> val$fieldNamingPolicy
+    com.google.gson.Gson this$0 -> this$0
+    213:213:java.lang.String getFieldName(java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Type) -> getFieldName
+    217:218:boolean serializeField(java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Type) -> serializeField
+    224:225:boolean deserializeField(java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Type) -> deserializeField
+com.google.gson.Gson$2 -> com.google.gson.Gson$2:
+    com.google.gson.Gson this$0 -> this$0
+    286:290:java.lang.Double read(com.google.gson.stream.JsonReader) -> read
+    293:300:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    292:292:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    292:292:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.Gson$3 -> com.google.gson.Gson$3:
+    com.google.gson.Gson this$0 -> this$0
+    310:314:java.lang.Float read(com.google.gson.stream.JsonReader) -> read
+    317:324:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    316:316:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    316:316:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.Gson$4 -> com.google.gson.Gson$4:
+    com.google.gson.Gson this$0 -> this$0
+    342:346:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    349:354:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    348:348:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    348:348:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.GsonBuilder -> com.google.gson.GsonBuilder:
+    com.google.gson.InnerClassExclusionStrategy innerClassExclusionStrategy -> innerClassExclusionStrategy
+    com.google.gson.ExposeAnnotationDeserializationExclusionStrategy exposeAnnotationDeserializationExclusionStrategy -> exposeAnnotationDeserializationExclusionStrategy
+    com.google.gson.ExposeAnnotationSerializationExclusionStrategy exposeAnnotationSerializationExclusionStrategy -> exposeAnnotationSerializationExclusionStrategy
+    java.util.Set serializeExclusionStrategies -> serializeExclusionStrategies
+    java.util.Set deserializeExclusionStrategies -> deserializeExclusionStrategies
+    double ignoreVersionsAfter -> ignoreVersionsAfter
+    com.google.gson.ModifierBasedExclusionStrategy modifierBasedExclusionStrategy -> modifierBasedExclusionStrategy
+    boolean serializeInnerClasses -> serializeInnerClasses
+    boolean excludeFieldsWithoutExposeAnnotation -> excludeFieldsWithoutExposeAnnotation
+    com.google.gson.LongSerializationPolicy longSerializationPolicy -> longSerializationPolicy
+    com.google.gson.FieldNamingStrategy2 fieldNamingPolicy -> fieldNamingPolicy
+    com.google.gson.internal.ParameterizedTypeHandlerMap instanceCreators -> instanceCreators
+    com.google.gson.internal.ParameterizedTypeHandlerMap serializers -> serializers
+    com.google.gson.internal.ParameterizedTypeHandlerMap deserializers -> deserializers
+    java.util.List typeAdapterFactories -> typeAdapterFactories
+    boolean serializeNulls -> serializeNulls
+    java.lang.String datePattern -> datePattern
+    int dateStyle -> dateStyle
+    int timeStyle -> timeStyle
+    boolean complexMapKeySerialization -> complexMapKeySerialization
+    boolean serializeSpecialFloatingPointValues -> serializeSpecialFloatingPointValues
+    boolean escapeHtmlChars -> escapeHtmlChars
+    boolean prettyPrinting -> prettyPrinting
+    boolean generateNonExecutableJson -> generateNonExecutableJson
+    144:145:com.google.gson.GsonBuilder setVersion(double) -> setVersion
+    160:161:com.google.gson.GsonBuilder excludeFieldsWithModifiers(int[]) -> excludeFieldsWithModifiers
+    174:175:com.google.gson.GsonBuilder generateNonExecutableJson() -> generateNonExecutableJson
+    185:186:com.google.gson.GsonBuilder excludeFieldsWithoutExposeAnnotation() -> excludeFieldsWithoutExposeAnnotation
+    197:198:com.google.gson.GsonBuilder serializeNulls() -> serializeNulls
+    278:279:com.google.gson.GsonBuilder enableComplexMapKeySerialization() -> enableComplexMapKeySerialization
+    289:290:com.google.gson.GsonBuilder disableInnerClassSerialization() -> disableInnerClassSerialization
+    302:303:com.google.gson.GsonBuilder setLongSerializationPolicy(com.google.gson.LongSerializationPolicy) -> setLongSerializationPolicy
+    315:315:com.google.gson.GsonBuilder setFieldNamingPolicy(com.google.gson.FieldNamingPolicy) -> setFieldNamingPolicy
+    327:327:com.google.gson.GsonBuilder setFieldNamingStrategy(com.google.gson.FieldNamingStrategy) -> setFieldNamingStrategy
+    338:340:com.google.gson.GsonBuilder setFieldNamingStrategy(com.google.gson.FieldNamingStrategy2) -> setFieldNamingStrategy
+    354:357:com.google.gson.GsonBuilder setExclusionStrategies(com.google.gson.ExclusionStrategy[]) -> setExclusionStrategies
+    373:374:com.google.gson.GsonBuilder addSerializationExclusionStrategy(com.google.gson.ExclusionStrategy) -> addSerializationExclusionStrategy
+    390:391:com.google.gson.GsonBuilder addDeserializationExclusionStrategy(com.google.gson.ExclusionStrategy) -> addDeserializationExclusionStrategy
+    401:402:com.google.gson.GsonBuilder setPrettyPrinting() -> setPrettyPrinting
+    413:414:com.google.gson.GsonBuilder disableHtmlEscaping() -> disableHtmlEscaping
+    435:436:com.google.gson.GsonBuilder setDateFormat(java.lang.String) -> setDateFormat
+    454:456:com.google.gson.GsonBuilder setDateFormat(int) -> setDateFormat
+    475:478:com.google.gson.GsonBuilder setDateFormat(int,int) -> setDateFormat
+    495:495:com.google.gson.GsonBuilder registerTypeAdapter(java.lang.reflect.Type,java.lang.Object) -> registerTypeAdapter
+    499:519:com.google.gson.GsonBuilder registerTypeAdapter(java.lang.reflect.Type,java.lang.Object,boolean) -> registerTypeAdapter
+    535:536:com.google.gson.GsonBuilder registerInstanceCreator(java.lang.reflect.Type,com.google.gson.InstanceCreator,boolean) -> registerInstanceCreator
+    551:552:com.google.gson.GsonBuilder registerSerializer(java.lang.reflect.Type,com.google.gson.JsonSerializer,boolean) -> registerSerializer
+    567:568:com.google.gson.GsonBuilder registerDeserializer(java.lang.reflect.Type,com.google.gson.JsonDeserializer,boolean) -> registerDeserializer
+    589:589:com.google.gson.GsonBuilder registerTypeHierarchyAdapter(java.lang.Class,java.lang.Object) -> registerTypeHierarchyAdapter
+    594:605:com.google.gson.GsonBuilder registerTypeHierarchyAdapter(java.lang.Class,java.lang.Object,boolean) -> registerTypeHierarchyAdapter
+    610:611:com.google.gson.GsonBuilder registerInstanceCreatorForTypeHierarchy(java.lang.Class,com.google.gson.InstanceCreator,boolean) -> registerInstanceCreatorForTypeHierarchy
+    616:617:com.google.gson.GsonBuilder registerSerializerForTypeHierarchy(java.lang.Class,com.google.gson.JsonSerializer,boolean) -> registerSerializerForTypeHierarchy
+    622:624:com.google.gson.GsonBuilder registerDeserializerForTypeHierarchy(java.lang.Class,com.google.gson.JsonDeserializer,boolean) -> registerDeserializerForTypeHierarchy
+    648:649:com.google.gson.GsonBuilder serializeSpecialFloatingPointValues() -> serializeSpecialFloatingPointValues
+    659:682:com.google.gson.Gson create() -> create
+    693:708:void addTypeAdaptersForDate(java.lang.String,int,int,com.google.gson.internal.ParameterizedTypeHandlerMap,com.google.gson.internal.ParameterizedTypeHandlerMap) -> addTypeAdaptersForDate
+    712:715:void registerIfAbsent(java.lang.Class,com.google.gson.internal.ParameterizedTypeHandlerMap,java.lang.Object) -> registerIfAbsent
+com.google.gson.GsonToMiniGsonTypeAdapterFactory -> com.google.gson.GsonToMiniGsonTypeAdapterFactory:
+    com.google.gson.internal.ParameterizedTypeHandlerMap serializers -> serializers
+    com.google.gson.internal.ParameterizedTypeHandlerMap deserializers -> deserializers
+    com.google.gson.JsonDeserializationContext deserializationContext -> deserializationContext
+    com.google.gson.JsonSerializationContext serializationContext -> serializationContext
+    57:70:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    28:28:com.google.gson.JsonDeserializationContext access$000(com.google.gson.GsonToMiniGsonTypeAdapterFactory) -> access$000
+    28:28:com.google.gson.JsonSerializationContext access$100(com.google.gson.GsonToMiniGsonTypeAdapterFactory) -> access$100
+com.google.gson.GsonToMiniGsonTypeAdapterFactory$1 -> com.google.gson.GsonToMiniGsonTypeAdapterFactory$1:
+    com.google.gson.Gson val$gson -> val$gson
+    com.google.gson.GsonToMiniGsonTypeAdapterFactory this$0 -> this$0
+    42:42:java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type) -> deserialize
+com.google.gson.GsonToMiniGsonTypeAdapterFactory$2 -> com.google.gson.GsonToMiniGsonTypeAdapterFactory$2:
+    com.google.gson.Gson val$gson -> val$gson
+    com.google.gson.GsonToMiniGsonTypeAdapterFactory this$0 -> this$0
+    48:48:com.google.gson.JsonElement serialize(java.lang.Object) -> serialize
+    51:51:com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type) -> serialize
+com.google.gson.GsonToMiniGsonTypeAdapterFactory$3 -> com.google.gson.GsonToMiniGsonTypeAdapterFactory$3:
+    com.google.gson.internal.bind.TypeAdapter delegate -> delegate
+    com.google.gson.JsonDeserializer val$deserializer -> val$deserializer
+    java.lang.reflect.Type val$type -> val$type
+    com.google.gson.JsonSerializer val$serializer -> val$serializer
+    com.google.gson.internal.bind.MiniGson val$context -> val$context
+    com.google.gson.reflect.TypeToken val$typeToken -> val$typeToken
+    com.google.gson.GsonToMiniGsonTypeAdapterFactory this$0 -> this$0
+    78:85:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    89:99:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    102:103:com.google.gson.internal.bind.TypeAdapter delegate() -> delegate
+com.google.gson.InnerClassExclusionStrategy -> com.google.gson.InnerClassExclusionStrategy:
+    29:29:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+    33:33:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+    37:37:boolean isInnerClass(java.lang.Class) -> isInnerClass
+    41:41:boolean isStatic(java.lang.Class) -> isStatic
+com.google.gson.InstanceCreator -> com.google.gson.InstanceCreator:
+    java.lang.Object createInstance(java.lang.reflect.Type) -> createInstance
+com.google.gson.JavaFieldNamingPolicy -> com.google.gson.JavaFieldNamingPolicy:
+    49:49:java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+com.google.gson.JsonArray -> com.google.gson.JsonArray:
+    java.util.List elements -> elements
+    49:53:void add(com.google.gson.JsonElement) -> add
+    61:62:void addAll(com.google.gson.JsonArray) -> addAll
+    70:70:int size() -> size
+    80:80:java.util.Iterator iterator() -> iterator
+    92:92:com.google.gson.JsonElement get(int) -> get
+    105:108:java.lang.Number getAsNumber() -> getAsNumber
+    121:124:java.lang.String getAsString() -> getAsString
+    137:140:double getAsDouble() -> getAsDouble
+    154:157:java.math.BigDecimal getAsBigDecimal() -> getAsBigDecimal
+    171:174:java.math.BigInteger getAsBigInteger() -> getAsBigInteger
+    187:190:float getAsFloat() -> getAsFloat
+    203:206:long getAsLong() -> getAsLong
+    219:222:int getAsInt() -> getAsInt
+    227:230:byte getAsByte() -> getAsByte
+    235:238:char getAsCharacter() -> getAsCharacter
+    251:254:short getAsShort() -> getAsShort
+    267:270:boolean getAsBoolean() -> getAsBoolean
+    275:275:boolean equals(java.lang.Object) -> equals
+    280:280:int hashCode() -> hashCode
+com.google.gson.JsonDeserializationContext -> com.google.gson.JsonDeserializationContext:
+    java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type) -> deserialize
+com.google.gson.JsonDeserializer -> com.google.gson.JsonDeserializer:
+    java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type,com.google.gson.JsonDeserializationContext) -> deserialize
+com.google.gson.JsonDeserializerExceptionWrapper -> com.google.gson.JsonDeserializerExceptionWrapper:
+    com.google.gson.JsonDeserializer delegate -> delegate
+    51:64:java.lang.Object deserialize(com.google.gson.JsonElement,java.lang.reflect.Type,com.google.gson.JsonDeserializationContext) -> deserialize
+    70:70:java.lang.String toString() -> toString
+com.google.gson.JsonElement -> com.google.gson.JsonElement:
+    40:40:boolean isJsonArray() -> isJsonArray
+    49:49:boolean isJsonObject() -> isJsonObject
+    58:58:boolean isJsonPrimitive() -> isJsonPrimitive
+    68:68:boolean isJsonNull() -> isJsonNull
+    81:84:com.google.gson.JsonObject getAsJsonObject() -> getAsJsonObject
+    97:100:com.google.gson.JsonArray getAsJsonArray() -> getAsJsonArray
+    113:116:com.google.gson.JsonPrimitive getAsJsonPrimitive() -> getAsJsonPrimitive
+    130:133:com.google.gson.JsonNull getAsJsonNull() -> getAsJsonNull
+    146:146:boolean getAsBoolean() -> getAsBoolean
+    159:159:java.lang.Boolean getAsBooleanWrapper() -> getAsBooleanWrapper
+    172:172:java.lang.Number getAsNumber() -> getAsNumber
+    185:185:java.lang.String getAsString() -> getAsString
+    198:198:double getAsDouble() -> getAsDouble
+    211:211:float getAsFloat() -> getAsFloat
+    224:224:long getAsLong() -> getAsLong
+    237:237:int getAsInt() -> getAsInt
+    251:251:byte getAsByte() -> getAsByte
+    265:265:char getAsCharacter() -> getAsCharacter
+    279:279:java.math.BigDecimal getAsBigDecimal() -> getAsBigDecimal
+    293:293:java.math.BigInteger getAsBigInteger() -> getAsBigInteger
+    306:306:short getAsShort() -> getAsShort
+    315:321:java.lang.String toString() -> toString
+com.google.gson.JsonElementVisitor -> com.google.gson.JsonElementVisitor:
+    void visitPrimitive(com.google.gson.JsonPrimitive) -> visitPrimitive
+    void visitNull() -> visitNull
+    void startArray(com.google.gson.JsonArray) -> startArray
+    void visitArrayMember(com.google.gson.JsonArray,com.google.gson.JsonPrimitive,boolean) -> visitArrayMember
+    void visitArrayMember(com.google.gson.JsonArray,com.google.gson.JsonArray,boolean) -> visitArrayMember
+    void visitArrayMember(com.google.gson.JsonArray,com.google.gson.JsonObject,boolean) -> visitArrayMember
+    void visitNullArrayMember(com.google.gson.JsonArray,boolean) -> visitNullArrayMember
+    void endArray(com.google.gson.JsonArray) -> endArray
+    void startObject(com.google.gson.JsonObject) -> startObject
+    void visitObjectMember(com.google.gson.JsonObject,java.lang.String,com.google.gson.JsonPrimitive,boolean) -> visitObjectMember
+    void visitObjectMember(com.google.gson.JsonObject,java.lang.String,com.google.gson.JsonArray,boolean) -> visitObjectMember
+    void visitObjectMember(com.google.gson.JsonObject,java.lang.String,com.google.gson.JsonObject,boolean) -> visitObjectMember
+    void visitNullObjectMember(com.google.gson.JsonObject,java.lang.String,boolean) -> visitNullObjectMember
+    void endObject(com.google.gson.JsonObject) -> endObject
+com.google.gson.JsonIOException -> com.google.gson.JsonIOException:
+    long serialVersionUID -> serialVersionUID
+com.google.gson.JsonNull -> com.google.gson.JsonNull:
+    com.google.gson.JsonNull INSTANCE -> INSTANCE
+    48:48:int hashCode() -> hashCode
+    56:56:boolean equals(java.lang.Object) -> equals
+com.google.gson.JsonObject -> com.google.gson.JsonObject:
+    java.util.Map members -> members
+    54:58:void add(java.lang.String,com.google.gson.JsonElement) -> add
+    68:68:com.google.gson.JsonElement remove(java.lang.String) -> remove
+    79:80:void addProperty(java.lang.String,java.lang.String) -> addProperty
+    90:91:void addProperty(java.lang.String,java.lang.Number) -> addProperty
+    101:102:void addProperty(java.lang.String,java.lang.Boolean) -> addProperty
+    112:113:void addProperty(java.lang.String,java.lang.Character) -> addProperty
+    122:122:com.google.gson.JsonElement createJsonElement(java.lang.Object) -> createJsonElement
+    132:132:java.util.Set entrySet() -> entrySet
+    142:142:boolean has(java.lang.String) -> has
+    152:156:com.google.gson.JsonElement get(java.lang.String) -> get
+    166:166:com.google.gson.JsonPrimitive getAsJsonPrimitive(java.lang.String) -> getAsJsonPrimitive
+    176:176:com.google.gson.JsonArray getAsJsonArray(java.lang.String) -> getAsJsonArray
+    186:186:com.google.gson.JsonObject getAsJsonObject(java.lang.String) -> getAsJsonObject
+    191:191:boolean equals(java.lang.Object) -> equals
+    197:197:int hashCode() -> hashCode
+com.google.gson.JsonParseException -> com.google.gson.JsonParseException:
+    long serialVersionUID -> serialVersionUID
+com.google.gson.JsonParser -> com.google.gson.JsonParser:
+    45:45:com.google.gson.JsonElement parse(java.lang.String) -> parse
+    58:69:com.google.gson.JsonElement parse(java.io.Reader) -> parse
+    81:95:com.google.gson.JsonElement parse(com.google.gson.stream.JsonReader) -> parse
+com.google.gson.JsonPrimitive -> com.google.gson.JsonPrimitive:
+    java.lang.Class[] PRIMITIVE_TYPES -> PRIMITIVE_TYPES
+    java.lang.Object value -> value
+    89:99:void setValue(java.lang.Object) -> setValue
+    107:107:boolean isBoolean() -> isBoolean
+    117:117:java.lang.Boolean getAsBooleanWrapper() -> getAsBooleanWrapper
+    127:131:boolean getAsBoolean() -> getAsBoolean
+    141:141:boolean isNumber() -> isNumber
+    152:152:java.lang.Number getAsNumber() -> getAsNumber
+    161:161:boolean isString() -> isString
+    171:176:java.lang.String getAsString() -> getAsString
+    188:188:double getAsDouble() -> getAsDouble
+    199:199:java.math.BigDecimal getAsBigDecimal() -> getAsBigDecimal
+    210:210:java.math.BigInteger getAsBigInteger() -> getAsBigInteger
+    222:222:float getAsFloat() -> getAsFloat
+    233:233:long getAsLong() -> getAsLong
+    244:244:short getAsShort() -> getAsShort
+    255:255:int getAsInt() -> getAsInt
+    260:260:byte getAsByte() -> getAsByte
+    265:265:char getAsCharacter() -> getAsCharacter
+    269:279:boolean isPrimitiveOrString(java.lang.Object) -> isPrimitiveOrString
+    284:296:int hashCode() -> hashCode
+    301:321:boolean equals(java.lang.Object) -> equals
+    329:334:boolean isIntegral(com.google.gson.JsonPrimitive) -> isIntegral
+com.google.gson.JsonSerializationContext -> com.google.gson.JsonSerializationContext:
+    com.google.gson.JsonElement serialize(java.lang.Object) -> serialize
+    com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type) -> serialize
+com.google.gson.JsonSerializer -> com.google.gson.JsonSerializer:
+    com.google.gson.JsonElement serialize(java.lang.Object,java.lang.reflect.Type,com.google.gson.JsonSerializationContext) -> serialize
+com.google.gson.JsonStreamParser -> com.google.gson.JsonStreamParser:
+    com.google.gson.stream.JsonReader parser -> parser
+    java.lang.Object lock -> lock
+    83:94:com.google.gson.JsonElement next() -> next
+    104:112:boolean hasNext() -> hasNext
+    121:121:void remove() -> remove
+    52:52:java.lang.Object next() -> next
+com.google.gson.JsonSyntaxException -> com.google.gson.JsonSyntaxException:
+    long serialVersionUID -> serialVersionUID
+com.google.gson.LongSerializationPolicy -> com.google.gson.LongSerializationPolicy:
+    com.google.gson.LongSerializationPolicy DEFAULT -> DEFAULT
+    com.google.gson.LongSerializationPolicy STRING -> STRING
+    com.google.gson.LongSerializationPolicy$Strategy strategy -> strategy
+    com.google.gson.LongSerializationPolicy[] $VALUES -> $VALUES
+    27:27:com.google.gson.LongSerializationPolicy[] values() -> values
+    27:27:com.google.gson.LongSerializationPolicy valueOf(java.lang.String) -> valueOf
+    56:56:com.google.gson.JsonElement serialize(java.lang.Long) -> serialize
+com.google.gson.LongSerializationPolicy$1 -> com.google.gson.LongSerializationPolicy$1:
+com.google.gson.LongSerializationPolicy$DefaultStrategy -> com.google.gson.LongSerializationPolicy$DefaultStrategy:
+    65:65:com.google.gson.JsonElement serialize(java.lang.Long) -> serialize
+com.google.gson.LongSerializationPolicy$Strategy -> com.google.gson.LongSerializationPolicy$Strategy:
+    com.google.gson.JsonElement serialize(java.lang.Long) -> serialize
+com.google.gson.LongSerializationPolicy$StringStrategy -> com.google.gson.LongSerializationPolicy$StringStrategy:
+    71:71:com.google.gson.JsonElement serialize(java.lang.Long) -> serialize
+com.google.gson.LowerCamelCaseSeparatorNamingPolicy -> com.google.gson.LowerCamelCaseSeparatorNamingPolicy:
+com.google.gson.LowerCaseNamingPolicy -> com.google.gson.LowerCaseNamingPolicy:
+    48:48:java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+com.google.gson.LruCache -> com.google.gson.LruCache:
+    long serialVersionUID -> serialVersionUID
+    int maxCapacity -> maxCapacity
+    42:43:void addElement(java.lang.Object,java.lang.Object) -> addElement
+    46:46:java.lang.Object getElement(java.lang.Object) -> getElement
+    51:51:boolean removeEldestEntry(java.util.Map$Entry) -> removeEldestEntry
+com.google.gson.ModifierBasedExclusionStrategy -> com.google.gson.ModifierBasedExclusionStrategy:
+    java.util.Collection modifiers -> modifiers
+    42:47:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+    51:51:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+com.google.gson.ModifyFirstLetterNamingPolicy -> com.google.gson.ModifyFirstLetterNamingPolicy:
+    com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier letterModifier -> letterModifier
+    74:99:java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+    104:104:java.lang.String modifyString(char,java.lang.String,int) -> modifyString
+com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier -> com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier:
+    com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier UPPER -> UPPER
+    com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier LOWER -> LOWER
+    com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier[] $VALUES -> $VALUES
+    53:53:com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier[] values() -> values
+    53:53:com.google.gson.ModifyFirstLetterNamingPolicy$LetterModifier valueOf(java.lang.String) -> valueOf
+com.google.gson.RecursiveFieldNamingPolicy -> com.google.gson.RecursiveFieldNamingPolicy:
+    33:33:java.lang.String translateName(com.google.gson.FieldAttributes) -> translateName
+    java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+com.google.gson.SerializedNameAnnotationInterceptingNamingPolicy -> com.google.gson.SerializedNameAnnotationInterceptingNamingPolicy:
+    com.google.gson.FieldNamingStrategy2 delegate -> delegate
+    45:46:java.lang.String translateName(com.google.gson.FieldAttributes) -> translateName
+com.google.gson.SyntheticFieldExclusionStrategy -> com.google.gson.SyntheticFieldExclusionStrategy:
+    boolean skipSyntheticFields -> skipSyntheticFields
+    37:37:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+    41:41:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+com.google.gson.UpperCamelCaseSeparatorNamingPolicy -> com.google.gson.UpperCamelCaseSeparatorNamingPolicy:
+com.google.gson.UpperCaseNamingPolicy -> com.google.gson.UpperCaseNamingPolicy:
+    46:46:java.lang.String translateName(java.lang.String,java.lang.reflect.Type,java.util.Collection) -> translateName
+com.google.gson.VersionConstants -> com.google.gson.VersionConstants:
+    double IGNORE_VERSIONS -> IGNORE_VERSIONS
+com.google.gson.VersionExclusionStrategy -> com.google.gson.VersionExclusionStrategy:
+    double version -> version
+    38:38:boolean shouldSkipField(com.google.gson.FieldAttributes) -> shouldSkipField
+    42:42:boolean shouldSkipClass(java.lang.Class) -> shouldSkipClass
+    46:46:boolean isValidVersion(com.google.gson.annotations.Since,com.google.gson.annotations.Until) -> isValidVersion
+    50:56:boolean isValidSince(com.google.gson.annotations.Since) -> isValidSince
+    60:66:boolean isValidUntil(com.google.gson.annotations.Until) -> isValidUntil
+com.google.gson.annotations.Expose -> com.google.gson.annotations.Expose:
+    boolean serialize() -> serialize
+    boolean deserialize() -> deserialize
+com.google.gson.annotations.SerializedName -> com.google.gson.annotations.SerializedName:
+    java.lang.String value() -> value
+com.google.gson.annotations.Since -> com.google.gson.annotations.Since:
+    double value() -> value
+com.google.gson.annotations.Until -> com.google.gson.annotations.Until:
+    double value() -> value
+com.google.gson.internal.$Gson$Preconditions -> com.google.gson.internal.$Gson$Preconditions:
+    34:37:java.lang.Object checkNotNull(java.lang.Object) -> checkNotNull
+    41:44:void checkArgument(boolean) -> checkArgument
+    47:50:void checkState(boolean) -> checkState
+com.google.gson.internal.$Gson$Types -> com.google.gson.internal.$Gson$Types:
+    java.lang.reflect.Type[] EMPTY_TYPE_ARRAY -> EMPTY_TYPE_ARRAY
+    55:55:java.lang.reflect.ParameterizedType newParameterizedTypeWithOwner(java.lang.reflect.Type,java.lang.reflect.Type,java.lang.reflect.Type[]) -> newParameterizedTypeWithOwner
+    65:65:java.lang.reflect.GenericArrayType arrayOf(java.lang.reflect.Type) -> arrayOf
+    75:75:java.lang.reflect.WildcardType subtypeOf(java.lang.reflect.Type) -> subtypeOf
+    84:84:java.lang.reflect.WildcardType supertypeOf(java.lang.reflect.Type) -> supertypeOf
+    93:112:java.lang.reflect.Type canonicalize(java.lang.reflect.Type) -> canonicalize
+    117:145:java.lang.Class getRawType(java.lang.reflect.Type) -> getRawType
+    151:151:boolean equal(java.lang.Object,java.lang.Object) -> equal
+    158:208:boolean equals(java.lang.reflect.Type,java.lang.reflect.Type) -> equals
+    213:213:int hashCodeOrZero(java.lang.Object) -> hashCodeOrZero
+    217:217:java.lang.String typeToString(java.lang.reflect.Type) -> typeToString
+    226:256:java.lang.reflect.Type getGenericSupertype(java.lang.reflect.Type,java.lang.Class,java.lang.Class) -> getGenericSupertype
+    267:268:java.lang.reflect.Type getSupertype(java.lang.reflect.Type,java.lang.Class,java.lang.Class) -> getSupertype
+    276:276:boolean isArray(java.lang.reflect.Type) -> isArray
+    285:285:java.lang.reflect.Type getArrayComponentType(java.lang.reflect.Type) -> getArrayComponentType
+    295:303:java.lang.reflect.Type getCollectionElementType(java.lang.reflect.Type,java.lang.Class) -> getCollectionElementType
+    316:326:java.lang.reflect.Type[] getMapKeyAndValueTypes(java.lang.reflect.Type,java.lang.Class) -> getMapKeyAndValueTypes
+    332:396:java.lang.reflect.Type resolve(java.lang.reflect.Type,java.lang.Class,java.lang.reflect.Type) -> resolve
+    402:415:java.lang.reflect.Type resolveTypeVariable(java.lang.reflect.Type,java.lang.Class,java.lang.reflect.TypeVariable) -> resolveTypeVariable
+    419:424:int indexOf(java.lang.Object[],java.lang.Object) -> indexOf
+    432:433:java.lang.Class declaringClassOf(java.lang.reflect.TypeVariable) -> declaringClassOf
+    439:440:void checkNotPrimitive(java.lang.reflect.Type) -> checkNotPrimitive
+    42:42:void access$000(java.lang.reflect.Type) -> access$000
+    42:42:int access$100(java.lang.Object) -> access$100
+com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl -> com.google.gson.internal.$Gson$Types$GenericArrayTypeImpl:
+    java.lang.reflect.Type componentType -> componentType
+    long serialVersionUID -> serialVersionUID
+    514:514:java.lang.reflect.Type getGenericComponentType() -> getGenericComponentType
+    518:518:boolean equals(java.lang.Object) -> equals
+    523:523:int hashCode() -> hashCode
+    527:527:java.lang.String toString() -> toString
+com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl -> com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl:
+    java.lang.reflect.Type ownerType -> ownerType
+    java.lang.reflect.Type rawType -> rawType
+    java.lang.reflect.Type[] typeArguments -> typeArguments
+    long serialVersionUID -> serialVersionUID
+    466:466:java.lang.reflect.Type[] getActualTypeArguments() -> getActualTypeArguments
+    470:470:java.lang.reflect.Type getRawType() -> getRawType
+    474:474:java.lang.reflect.Type getOwnerType() -> getOwnerType
+    478:478:boolean equals(java.lang.Object) -> equals
+    483:483:int hashCode() -> hashCode
+    489:500:java.lang.String toString() -> toString
+com.google.gson.internal.$Gson$Types$WildcardTypeImpl -> com.google.gson.internal.$Gson$Types$WildcardTypeImpl:
+    java.lang.reflect.Type upperBound -> upperBound
+    java.lang.reflect.Type lowerBound -> lowerBound
+    long serialVersionUID -> serialVersionUID
+    562:562:java.lang.reflect.Type[] getUpperBounds() -> getUpperBounds
+    566:566:java.lang.reflect.Type[] getLowerBounds() -> getLowerBounds
+    570:570:boolean equals(java.lang.Object) -> equals
+    576:576:int hashCode() -> hashCode
+    581:586:java.lang.String toString() -> toString
+com.google.gson.internal.ConstructorConstructor -> com.google.gson.internal.ConstructorConstructor:
+    com.google.gson.internal.ParameterizedTypeHandlerMap instanceCreators -> instanceCreators
+    50:77:com.google.gson.internal.ObjectConstructor getConstructor(com.google.gson.reflect.TypeToken) -> getConstructor
+    82:106:com.google.gson.internal.ObjectConstructor newDefaultConstructor(java.lang.Class) -> newDefaultConstructor
+    116:153:com.google.gson.internal.ObjectConstructor newDefaultImplementationConstructor(java.lang.Class) -> newDefaultImplementationConstructor
+    158:158:com.google.gson.internal.ObjectConstructor newUnsafeAllocator(java.lang.reflect.Type,java.lang.Class) -> newUnsafeAllocator
+    174:174:java.lang.String toString() -> toString
+com.google.gson.internal.ConstructorConstructor$1 -> com.google.gson.internal.ConstructorConstructor$1:
+    com.google.gson.InstanceCreator val$creator -> val$creator
+    java.lang.reflect.Type val$type -> val$type
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    61:61:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$2 -> com.google.gson.internal.ConstructorConstructor$2:
+    java.lang.reflect.Constructor val$constructor -> val$constructor
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    90:101:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$3 -> com.google.gson.internal.ConstructorConstructor$3:
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    120:120:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$4 -> com.google.gson.internal.ConstructorConstructor$4:
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    126:126:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$5 -> com.google.gson.internal.ConstructorConstructor$5:
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    132:132:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$6 -> com.google.gson.internal.ConstructorConstructor$6:
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    138:138:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$7 -> com.google.gson.internal.ConstructorConstructor$7:
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    147:147:java.lang.Object construct() -> construct
+com.google.gson.internal.ConstructorConstructor$8 -> com.google.gson.internal.ConstructorConstructor$8:
+    com.google.gson.internal.UnsafeAllocator unsafeAllocator -> unsafeAllocator
+    java.lang.Class val$rawType -> val$rawType
+    java.lang.reflect.Type val$type -> val$type
+    com.google.gson.internal.ConstructorConstructor this$0 -> this$0
+    163:166:java.lang.Object construct() -> construct
+com.google.gson.internal.LazilyParsedNumber -> com.google.gson.internal.LazilyParsedNumber:
+    java.lang.String value -> value
+    36:41:int intValue() -> intValue
+    49:51:long longValue() -> longValue
+    57:57:float floatValue() -> floatValue
+    62:62:double doubleValue() -> doubleValue
+    67:67:java.lang.String toString() -> toString
+com.google.gson.internal.ObjectConstructor -> com.google.gson.internal.ObjectConstructor:
+    java.lang.Object construct() -> construct
+com.google.gson.internal.Pair -> com.google.gson.internal.Pair:
+    java.lang.Object first -> first
+    java.lang.Object second -> second
+    39:39:int hashCode() -> hashCode
+    45:50:boolean equals(java.lang.Object) -> equals
+    54:54:boolean equal(java.lang.Object,java.lang.Object) -> equal
+    59:59:java.lang.String toString() -> toString
+com.google.gson.internal.ParameterizedTypeHandlerMap -> com.google.gson.internal.ParameterizedTypeHandlerMap:
+    java.util.logging.Logger logger -> logger
+    java.util.Map systemMap -> systemMap
+    java.util.Map userMap -> userMap
+    java.util.List systemTypeHierarchyList -> systemTypeHierarchyList
+    java.util.List userTypeHierarchyList -> userTypeHierarchyList
+    boolean modifiable -> modifiable
+    53:55:void registerForTypeHierarchy(java.lang.Class,java.lang.Object,boolean) -> registerForTypeHierarchy
+    58:76:void registerForTypeHierarchy(com.google.gson.internal.Pair,boolean) -> registerForTypeHierarchy
+    79:85:int getIndexOfAnOverriddenHandler(java.lang.Class,java.util.List) -> getIndexOfAnOverriddenHandler
+    89:97:void register(java.lang.reflect.Type,java.lang.Object,boolean) -> register
+    100:129:void registerIfAbsent(com.google.gson.internal.ParameterizedTypeHandlerMap) -> registerIfAbsent
+    132:133:com.google.gson.internal.ParameterizedTypeHandlerMap makeUnmodifiable() -> makeUnmodifiable
+    138:157:java.lang.Object getHandlerFor(java.lang.reflect.Type,boolean) -> getHandlerFor
+    161:173:java.lang.Object getHandlerForTypeHierarchy(java.lang.Class,boolean) -> getHandlerForTypeHierarchy
+    177:177:boolean hasSpecificHandlerFor(java.lang.reflect.Type) -> hasSpecificHandlerFor
+    182:187:int getIndexOfSpecificHandlerForTypeHierarchy(java.lang.Class,java.util.List) -> getIndexOfSpecificHandlerForTypeHierarchy
+    191:201:com.google.gson.internal.ParameterizedTypeHandlerMap copyOf() -> copyOf
+    206:215:java.lang.String toString() -> toString
+    219:229:void appendList(java.lang.StringBuilder,java.util.List) -> appendList
+    232:242:void appendMap(java.lang.StringBuilder,java.util.Map) -> appendMap
+    245:245:java.lang.String typeToString(java.lang.reflect.Type) -> typeToString
+com.google.gson.internal.Primitives -> com.google.gson.internal.Primitives:
+    java.util.Map PRIMITIVE_TO_WRAPPER_TYPE -> PRIMITIVE_TO_WRAPPER_TYPE
+    java.util.Map WRAPPER_TO_PRIMITIVE_TYPE -> WRAPPER_TO_PRIMITIVE_TYPE
+    63:65:void add(java.util.Map,java.util.Map,java.lang.Class,java.lang.Class) -> add
+    71:71:boolean isPrimitive(java.lang.reflect.Type) -> isPrimitive
+    81:81:boolean isWrapperType(java.lang.reflect.Type) -> isWrapperType
+    97:99:java.lang.Class wrap(java.lang.Class) -> wrap
+    114:116:java.lang.Class unwrap(java.lang.Class) -> unwrap
+com.google.gson.internal.Streams -> com.google.gson.internal.Streams:
+    40:59:com.google.gson.JsonElement parse(com.google.gson.stream.JsonReader) -> parse
+    67:68:void write(com.google.gson.JsonElement,com.google.gson.stream.JsonWriter) -> write
+    71:71:java.io.Writer writerForAppendable(java.lang.Appendable) -> writerForAppendable
+com.google.gson.internal.Streams$1 -> com.google.gson.internal.Streams$1:
+com.google.gson.internal.Streams$AppendableWriter -> com.google.gson.internal.Streams$AppendableWriter:
+    java.lang.Appendable appendable -> appendable
+    com.google.gson.internal.Streams$AppendableWriter$CurrentWrite currentWrite -> currentWrite
+    87:89:void write(char[],int,int) -> write
+    92:93:void write(int) -> write
+    95:95:void flush() -> flush
+    96:96:void close() -> close
+com.google.gson.internal.Streams$AppendableWriter$CurrentWrite -> com.google.gson.internal.Streams$AppendableWriter$CurrentWrite:
+    char[] chars -> chars
+    104:104:int length() -> length
+    107:107:char charAt(int) -> charAt
+    110:110:java.lang.CharSequence subSequence(int,int) -> subSequence
+com.google.gson.internal.UnsafeAllocator -> com.google.gson.internal.UnsafeAllocator:
+    java.lang.Object newInstance(java.lang.Class) -> newInstance
+    39:97:com.google.gson.internal.UnsafeAllocator create() -> create
+com.google.gson.internal.UnsafeAllocator$1 -> com.google.gson.internal.UnsafeAllocator$1:
+    java.lang.reflect.Method val$allocateInstance -> val$allocateInstance
+    java.lang.Object val$unsafe -> val$unsafe
+    48:48:java.lang.Object newInstance(java.lang.Class) -> newInstance
+com.google.gson.internal.UnsafeAllocator$2 -> com.google.gson.internal.UnsafeAllocator$2:
+    java.lang.reflect.Method val$newInstance -> val$newInstance
+    67:67:java.lang.Object newInstance(java.lang.Class) -> newInstance
+com.google.gson.internal.UnsafeAllocator$3 -> com.google.gson.internal.UnsafeAllocator$3:
+    java.lang.reflect.Method val$newInstance -> val$newInstance
+    int val$constructorId -> val$constructorId
+    90:90:java.lang.Object newInstance(java.lang.Class) -> newInstance
+com.google.gson.internal.UnsafeAllocator$4 -> com.google.gson.internal.UnsafeAllocator$4:
+    100:100:java.lang.Object newInstance(java.lang.Class) -> newInstance
+com.google.gson.internal.bind.ArrayTypeAdapter -> com.google.gson.internal.bind.ArrayTypeAdapter:
+    com.google.gson.internal.bind.TypeAdapter$Factory FACTORY -> FACTORY
+    java.lang.Class componentType -> componentType
+    com.google.gson.internal.bind.TypeAdapter componentTypeAdapter -> componentTypeAdapter
+    63:79:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    84:95:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+com.google.gson.internal.bind.ArrayTypeAdapter$1 -> com.google.gson.internal.bind.ArrayTypeAdapter$1:
+    39:49:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.BigDecimalTypeAdapter -> com.google.gson.internal.bind.BigDecimalTypeAdapter:
+    36:43:java.math.BigDecimal read(com.google.gson.stream.JsonReader) -> read
+    49:50:void write(com.google.gson.stream.JsonWriter,java.math.BigDecimal) -> write
+    32:32:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    32:32:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.BigIntegerTypeAdapter -> com.google.gson.internal.bind.BigIntegerTypeAdapter:
+    35:42:java.math.BigInteger read(com.google.gson.stream.JsonReader) -> read
+    48:49:void write(com.google.gson.stream.JsonWriter,java.math.BigInteger) -> write
+    31:31:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    31:31:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.CollectionTypeAdapterFactory -> com.google.gson.internal.bind.CollectionTypeAdapterFactory:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> constructorConstructor
+    41:54:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.CollectionTypeAdapterFactory$Adapter -> com.google.gson.internal.bind.CollectionTypeAdapterFactory$Adapter:
+    com.google.gson.internal.bind.TypeAdapter elementTypeAdapter -> elementTypeAdapter
+    com.google.gson.internal.ObjectConstructor constructor -> constructor
+    com.google.gson.internal.bind.CollectionTypeAdapterFactory this$0 -> this$0
+    70:82:java.util.Collection read(com.google.gson.stream.JsonReader) -> read
+    86:96:void write(com.google.gson.stream.JsonWriter,java.util.Collection) -> write
+    57:57:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    57:57:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.DateTypeAdapter -> com.google.gson.internal.bind.DateTypeAdapter:
+    com.google.gson.internal.bind.TypeAdapter$Factory FACTORY -> FACTORY
+    java.text.DateFormat enUsFormat -> enUsFormat
+    java.text.DateFormat localFormat -> localFormat
+    java.text.DateFormat iso8601Format -> iso8601Format
+    53:55:java.text.DateFormat buildIso8601Format() -> buildIso8601Format
+    59:63:java.util.Date read(com.google.gson.stream.JsonReader) -> read
+    68:78:java.util.Date deserializeToDate(java.lang.String) -> deserializeToDate
+    83:89:void write(com.google.gson.stream.JsonWriter,java.util.Date) -> write
+    38:38:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    38:38:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.DateTypeAdapter$1 -> com.google.gson.internal.bind.DateTypeAdapter$1:
+    42:42:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.ExcludedTypeAdapterFactory -> com.google.gson.internal.bind.ExcludedTypeAdapterFactory:
+    com.google.gson.ExclusionStrategy serializationExclusionStrategy -> serializationExclusionStrategy
+    com.google.gson.ExclusionStrategy deserializationExclusionStrategy -> deserializationExclusionStrategy
+    40:48:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.ExcludedTypeAdapterFactory$1 -> com.google.gson.internal.bind.ExcludedTypeAdapterFactory$1:
+    com.google.gson.internal.bind.TypeAdapter delegate -> delegate
+    boolean val$skipDeserialize -> val$skipDeserialize
+    boolean val$skipSerialize -> val$skipSerialize
+    com.google.gson.internal.bind.MiniGson val$context -> val$context
+    com.google.gson.reflect.TypeToken val$type -> val$type
+    com.google.gson.internal.bind.ExcludedTypeAdapterFactory this$0 -> this$0
+    56:60:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    64:69:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    72:73:com.google.gson.internal.bind.TypeAdapter delegate() -> delegate
+com.google.gson.internal.bind.JsonElementReader -> com.google.gson.internal.bind.JsonElementReader:
+    java.io.Reader UNREADABLE_READER -> UNREADABLE_READER
+    java.lang.Object SENTINEL_CLOSED -> SENTINEL_CLOSED
+    java.util.List stack -> stack
+    58:61:void beginArray() -> beginArray
+    64:67:void endArray() -> endArray
+    70:73:void beginObject() -> beginObject
+    76:79:void endObject() -> endObject
+    82:83:boolean hasNext() -> hasNext
+    87:125:com.google.gson.stream.JsonToken peek() -> peek
+    130:130:java.lang.Object peekStack() -> peekStack
+    134:134:java.lang.Object popStack() -> popStack
+    138:141:void expect(com.google.gson.stream.JsonToken) -> expect
+    144:148:java.lang.String nextName() -> nextName
+    152:156:java.lang.String nextString() -> nextString
+    160:161:boolean nextBoolean() -> nextBoolean
+    165:167:void nextNull() -> nextNull
+    170:179:double nextDouble() -> nextDouble
+    183:189:long nextLong() -> nextLong
+    193:199:int nextInt() -> nextInt
+    203:205:void close() -> close
+    208:213:void skipValue() -> skipValue
+    216:216:java.lang.String toString() -> toString
+com.google.gson.internal.bind.JsonElementReader$1 -> com.google.gson.internal.bind.JsonElementReader$1:
+    42:42:int read(char[],int,int) -> read
+    45:45:void close() -> close
+com.google.gson.internal.bind.JsonElementWriter -> com.google.gson.internal.bind.JsonElementWriter:
+    java.io.Writer UNWRITABLE_WRITER -> UNWRITABLE_WRITER
+    com.google.gson.JsonPrimitive SENTINEL_CLOSED -> SENTINEL_CLOSED
+    java.util.List stack -> stack
+    java.lang.String pendingName -> pendingName
+    com.google.gson.JsonElement product -> product
+    65:68:com.google.gson.JsonElement get() -> get
+    72:72:com.google.gson.JsonElement peek() -> peek
+    76:92:void put(com.google.gson.JsonElement) -> put
+    95:98:com.google.gson.stream.JsonWriter beginArray() -> beginArray
+    102:110:com.google.gson.stream.JsonWriter endArray() -> endArray
+    114:117:com.google.gson.stream.JsonWriter beginObject() -> beginObject
+    121:129:com.google.gson.stream.JsonWriter endObject() -> endObject
+    133:141:com.google.gson.stream.JsonWriter name(java.lang.String) -> name
+    145:149:com.google.gson.stream.JsonWriter value(java.lang.String) -> value
+    153:154:com.google.gson.stream.JsonWriter nullValue() -> nullValue
+    158:159:com.google.gson.stream.JsonWriter value(boolean) -> value
+    163:167:com.google.gson.stream.JsonWriter value(double) -> value
+    171:172:com.google.gson.stream.JsonWriter value(long) -> value
+    176:188:com.google.gson.stream.JsonWriter value(java.lang.Number) -> value
+    192:192:void flush() -> flush
+    195:199:void close() -> close
+com.google.gson.internal.bind.JsonElementWriter$1 -> com.google.gson.internal.bind.JsonElementWriter$1:
+    36:36:void write(char[],int,int) -> write
+    39:39:void flush() -> flush
+    42:42:void close() -> close
+com.google.gson.internal.bind.MapTypeAdapterFactory -> com.google.gson.internal.bind.MapTypeAdapterFactory:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> constructorConstructor
+    boolean complexMapKeySerialization -> complexMapKeySerialization
+    112:129:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    136:136:com.google.gson.internal.bind.TypeAdapter getKeyAdapter(com.google.gson.internal.bind.MiniGson,java.lang.reflect.Type) -> getKeyAdapter
+    101:101:boolean access$000(com.google.gson.internal.bind.MapTypeAdapterFactory) -> access$000
+com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter -> com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter:
+    com.google.gson.internal.bind.TypeAdapter keyTypeAdapter -> keyTypeAdapter
+    com.google.gson.internal.bind.TypeAdapter valueTypeAdapter -> valueTypeAdapter
+    com.google.gson.internal.ObjectConstructor constructor -> constructor
+    com.google.gson.internal.bind.MapTypeAdapterFactory this$0 -> this$0
+    157:191:java.util.Map read(com.google.gson.stream.JsonReader) -> read
+    195:239:void write(com.google.gson.stream.JsonWriter,java.util.Map) -> write
+    242:256:java.lang.String keyToString(com.google.gson.JsonElement) -> keyToString
+    141:141:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    141:141:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.MiniGson -> com.google.gson.internal.bind.MiniGson:
+    java.lang.ThreadLocal calls -> calls
+    java.util.List factories -> factories
+    81:100:com.google.gson.internal.bind.TypeAdapter getAdapter(com.google.gson.reflect.TypeToken) -> getAdapter
+    112:128:com.google.gson.internal.bind.TypeAdapter getNextAdapter(com.google.gson.internal.bind.TypeAdapter$Factory,com.google.gson.reflect.TypeToken) -> getNextAdapter
+    163:163:com.google.gson.internal.bind.TypeAdapter getAdapter(java.lang.Class) -> getAdapter
+    170:170:java.util.List getFactories() -> getFactories
+com.google.gson.internal.bind.MiniGson$1 -> com.google.gson.internal.bind.MiniGson$1:
+    com.google.gson.internal.bind.MiniGson this$0 -> this$0
+    44:44:java.util.Map initialValue() -> initialValue
+    43:43:java.lang.Object initialValue() -> initialValue
+com.google.gson.internal.bind.MiniGson$Builder -> com.google.gson.internal.bind.MiniGson$Builder:
+    java.util.List factories -> factories
+    boolean addDefaultFactories -> addDefaultFactories
+    178:179:com.google.gson.internal.bind.MiniGson$Builder factory(com.google.gson.internal.bind.TypeAdapter$Factory) -> factory
+    183:184:com.google.gson.internal.bind.MiniGson$Builder withoutDefaultFactories() -> withoutDefaultFactories
+    188:189:com.google.gson.internal.bind.MiniGson$Builder typeAdapter(java.lang.Class,com.google.gson.internal.bind.TypeAdapter) -> typeAdapter
+    193:194:com.google.gson.internal.bind.MiniGson$Builder typeAdapter(com.google.gson.reflect.TypeToken,com.google.gson.internal.bind.TypeAdapter) -> typeAdapter
+    198:199:com.google.gson.internal.bind.MiniGson$Builder typeHierarchyAdapter(java.lang.Class,com.google.gson.internal.bind.TypeAdapter) -> typeHierarchyAdapter
+    203:203:com.google.gson.internal.bind.MiniGson build() -> build
+    173:173:java.util.List access$000(com.google.gson.internal.bind.MiniGson$Builder) -> access$000
+com.google.gson.internal.bind.MiniGson$FutureTypeAdapter -> com.google.gson.internal.bind.MiniGson$FutureTypeAdapter:
+    com.google.gson.internal.bind.TypeAdapter delegate -> delegate
+    135:139:void setDelegate(com.google.gson.internal.bind.TypeAdapter) -> setDelegate
+    142:145:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    149:153:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+com.google.gson.internal.bind.ObjectTypeAdapter -> com.google.gson.internal.bind.ObjectTypeAdapter:
+    com.google.gson.internal.bind.TypeAdapter$Factory FACTORY -> FACTORY
+    com.google.gson.internal.bind.MiniGson miniGson -> miniGson
+    51:85:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    90:103:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+com.google.gson.internal.bind.ObjectTypeAdapter$1 -> com.google.gson.internal.bind.ObjectTypeAdapter$1:
+    37:40:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.ObjectTypeAdapter$2 -> com.google.gson.internal.bind.ObjectTypeAdapter$2:
+    int[] $SwitchMap$com$google$gson$stream$JsonToken -> $SwitchMap$com$google$gson$stream$JsonToken
+com.google.gson.internal.bind.Reflection -> com.google.gson.internal.bind.Reflection:
+    26:30:java.lang.reflect.Type getRuntimeTypeIfMoreSpecific(java.lang.reflect.Type,java.lang.Object) -> getRuntimeTypeIfMoreSpecific
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory -> com.google.gson.internal.bind.ReflectiveTypeAdapterFactory:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> constructorConstructor
+    46:46:boolean serializeField(java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Type) -> serializeField
+    50:50:boolean deserializeField(java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Type) -> deserializeField
+    54:54:java.lang.String getFieldName(java.lang.Class,java.lang.reflect.Field,java.lang.reflect.Type) -> getFieldName
+    58:65:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    71:74:com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$BoundField createBoundField(com.google.gson.internal.bind.MiniGson,java.lang.reflect.Field,java.lang.String,com.google.gson.reflect.TypeToken,boolean,boolean) -> createBoundField
+    96:123:java.util.Map getBoundFields(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken,java.lang.Class) -> getBoundFields
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1 -> com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1:
+    com.google.gson.internal.bind.TypeAdapter typeAdapter -> typeAdapter
+    com.google.gson.internal.bind.MiniGson val$context -> val$context
+    com.google.gson.reflect.TypeToken val$fieldType -> val$fieldType
+    java.lang.reflect.Field val$field -> val$field
+    boolean val$isPrimitive -> val$isPrimitive
+    com.google.gson.internal.bind.ReflectiveTypeAdapterFactory this$0 -> this$0
+    79:83:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    86:90:void read(com.google.gson.stream.JsonReader,java.lang.Object) -> read
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter -> com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter:
+    com.google.gson.internal.ObjectConstructor constructor -> constructor
+    java.util.Map boundFields -> boundFields
+    com.google.gson.internal.bind.ReflectiveTypeAdapterFactory this$0 -> this$0
+    152:179:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    184:201:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$BoundField -> com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$BoundField:
+    java.lang.String name -> name
+    boolean serialized -> serialized
+    boolean deserialized -> deserialized
+    void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    void read(com.google.gson.stream.JsonReader,java.lang.Object) -> read
+com.google.gson.internal.bind.SqlDateTypeAdapter -> com.google.gson.internal.bind.SqlDateTypeAdapter:
+    com.google.gson.internal.bind.TypeAdapter$Factory FACTORY -> FACTORY
+    java.text.DateFormat format -> format
+    48:56:java.sql.Date read(com.google.gson.stream.JsonReader) -> read
+    62:63:void write(com.google.gson.stream.JsonWriter,java.sql.Date) -> write
+    35:35:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    35:35:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.SqlDateTypeAdapter$1 -> com.google.gson.internal.bind.SqlDateTypeAdapter$1:
+    39:39:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.StringToValueMapTypeAdapterFactory -> com.google.gson.internal.bind.StringToValueMapTypeAdapterFactory:
+    com.google.gson.internal.ConstructorConstructor constructorConstructor -> constructorConstructor
+    42:63:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.StringToValueMapTypeAdapterFactory$Adapter -> com.google.gson.internal.bind.StringToValueMapTypeAdapterFactory$Adapter:
+    com.google.gson.internal.bind.TypeAdapter valueTypeAdapter -> valueTypeAdapter
+    com.google.gson.internal.ObjectConstructor constructor -> constructor
+    com.google.gson.internal.bind.StringToValueMapTypeAdapterFactory this$0 -> this$0
+    77:90:java.util.Map read(com.google.gson.stream.JsonReader) -> read
+    94:105:void write(com.google.gson.stream.JsonWriter,java.util.Map) -> write
+    66:66:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    66:66:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TimeTypeAdapter -> com.google.gson.internal.bind.TimeTypeAdapter:
+    com.google.gson.internal.bind.TypeAdapter$Factory FACTORY -> FACTORY
+    java.text.DateFormat format -> format
+    48:56:java.sql.Time read(com.google.gson.stream.JsonReader) -> read
+    61:62:void write(com.google.gson.stream.JsonWriter,java.sql.Time) -> write
+    37:37:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    37:37:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TimeTypeAdapter$1 -> com.google.gson.internal.bind.TimeTypeAdapter$1:
+    41:41:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.TypeAdapter -> com.google.gson.internal.bind.TypeAdapter:
+    java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    35:37:java.lang.String toJson(java.lang.Object) -> toJson
+    41:43:void write(java.io.Writer,java.lang.Object) -> write
+    46:46:java.lang.Object fromJson(java.lang.String) -> fromJson
+    50:52:java.lang.Object read(java.io.Reader) -> read
+    57:62:com.google.gson.JsonElement toJsonElement(java.lang.Object) -> toJsonElement
+    68:72:java.lang.Object fromJsonElement(com.google.gson.JsonElement) -> fromJsonElement
+com.google.gson.internal.bind.TypeAdapter$Factory -> com.google.gson.internal.bind.TypeAdapter$Factory:
+    com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper -> com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper:
+    com.google.gson.internal.bind.MiniGson context -> context
+    com.google.gson.internal.bind.TypeAdapter delegate -> delegate
+    java.lang.reflect.Type type -> type
+    38:38:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+    50:67:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+com.google.gson.internal.bind.TypeAdapters -> com.google.gson.internal.bind.TypeAdapters:
+    com.google.gson.internal.bind.TypeAdapter BIT_SET -> BIT_SET
+    com.google.gson.internal.bind.TypeAdapter$Factory BIT_SET_FACTORY -> BIT_SET_FACTORY
+    com.google.gson.internal.bind.TypeAdapter BOOLEAN -> BOOLEAN
+    com.google.gson.internal.bind.TypeAdapter BOOLEAN_AS_STRING -> BOOLEAN_AS_STRING
+    com.google.gson.internal.bind.TypeAdapter$Factory BOOLEAN_FACTORY -> BOOLEAN_FACTORY
+    com.google.gson.internal.bind.TypeAdapter BYTE -> BYTE
+    com.google.gson.internal.bind.TypeAdapter$Factory BYTE_FACTORY -> BYTE_FACTORY
+    com.google.gson.internal.bind.TypeAdapter SHORT -> SHORT
+    com.google.gson.internal.bind.TypeAdapter$Factory SHORT_FACTORY -> SHORT_FACTORY
+    com.google.gson.internal.bind.TypeAdapter INTEGER -> INTEGER
+    com.google.gson.internal.bind.TypeAdapter$Factory INTEGER_FACTORY -> INTEGER_FACTORY
+    com.google.gson.internal.bind.TypeAdapter LONG -> LONG
+    com.google.gson.internal.bind.TypeAdapter$Factory LONG_FACTORY -> LONG_FACTORY
+    com.google.gson.internal.bind.TypeAdapter FLOAT -> FLOAT
+    com.google.gson.internal.bind.TypeAdapter$Factory FLOAT_FACTORY -> FLOAT_FACTORY
+    com.google.gson.internal.bind.TypeAdapter DOUBLE -> DOUBLE
+    com.google.gson.internal.bind.TypeAdapter$Factory DOUBLE_FACTORY -> DOUBLE_FACTORY
+    com.google.gson.internal.bind.TypeAdapter NUMBER -> NUMBER
+    com.google.gson.internal.bind.TypeAdapter$Factory NUMBER_FACTORY -> NUMBER_FACTORY
+    com.google.gson.internal.bind.TypeAdapter CHARACTER -> CHARACTER
+    com.google.gson.internal.bind.TypeAdapter$Factory CHARACTER_FACTORY -> CHARACTER_FACTORY
+    com.google.gson.internal.bind.TypeAdapter STRING -> STRING
+    com.google.gson.internal.bind.TypeAdapter$Factory STRING_FACTORY -> STRING_FACTORY
+    com.google.gson.internal.bind.TypeAdapter STRING_BUILDER -> STRING_BUILDER
+    com.google.gson.internal.bind.TypeAdapter$Factory STRING_BUILDER_FACTORY -> STRING_BUILDER_FACTORY
+    com.google.gson.internal.bind.TypeAdapter STRING_BUFFER -> STRING_BUFFER
+    com.google.gson.internal.bind.TypeAdapter$Factory STRING_BUFFER_FACTORY -> STRING_BUFFER_FACTORY
+    com.google.gson.internal.bind.TypeAdapter URL -> URL
+    com.google.gson.internal.bind.TypeAdapter$Factory URL_FACTORY -> URL_FACTORY
+    com.google.gson.internal.bind.TypeAdapter URI -> URI
+    com.google.gson.internal.bind.TypeAdapter$Factory URI_FACTORY -> URI_FACTORY
+    com.google.gson.internal.bind.TypeAdapter INET_ADDRESS -> INET_ADDRESS
+    com.google.gson.internal.bind.TypeAdapter$Factory INET_ADDRESS_FACTORY -> INET_ADDRESS_FACTORY
+    com.google.gson.internal.bind.TypeAdapter UUID -> UUID
+    com.google.gson.internal.bind.TypeAdapter$Factory UUID_FACTORY -> UUID_FACTORY
+    com.google.gson.internal.bind.TypeAdapter$Factory TIMESTAMP_FACTORY -> TIMESTAMP_FACTORY
+    com.google.gson.internal.bind.TypeAdapter CALENDAR -> CALENDAR
+    com.google.gson.internal.bind.TypeAdapter$Factory CALENDAR_FACTORY -> CALENDAR_FACTORY
+    com.google.gson.internal.bind.TypeAdapter LOCALE -> LOCALE
+    com.google.gson.internal.bind.TypeAdapter$Factory LOCALE_FACTORY -> LOCALE_FACTORY
+    com.google.gson.internal.bind.TypeAdapter JSON_ELEMENT -> JSON_ELEMENT
+    com.google.gson.internal.bind.TypeAdapter$Factory JSON_ELEMENT_FACTORY -> JSON_ELEMENT_FACTORY
+    com.google.gson.internal.bind.TypeAdapter$Factory ENUM_FACTORY -> ENUM_FACTORY
+    675:675:com.google.gson.internal.bind.TypeAdapter$Factory newEnumTypeHierarchyFactory(java.lang.Class) -> newEnumTypeHierarchyFactory
+    687:687:com.google.gson.internal.bind.TypeAdapter$Factory newFactory(com.google.gson.reflect.TypeToken,com.google.gson.internal.bind.TypeAdapter) -> newFactory
+    697:697:com.google.gson.internal.bind.TypeAdapter$Factory newFactory(java.lang.Class,com.google.gson.internal.bind.TypeAdapter) -> newFactory
+    710:710:com.google.gson.internal.bind.TypeAdapter$Factory newFactory(java.lang.Class,java.lang.Class,com.google.gson.internal.bind.TypeAdapter) -> newFactory
+    725:725:com.google.gson.internal.bind.TypeAdapter$Factory newFactoryForMultipleTypes(java.lang.Class,java.lang.Class,com.google.gson.internal.bind.TypeAdapter) -> newFactoryForMultipleTypes
+    740:740:com.google.gson.internal.bind.TypeAdapter$Factory newTypeHierarchyFactory(java.lang.Class,com.google.gson.internal.bind.TypeAdapter) -> newTypeHierarchyFactory
+com.google.gson.internal.bind.TypeAdapters$1 -> com.google.gson.internal.bind.TypeAdapters$1:
+    54:91:java.util.BitSet read(com.google.gson.stream.JsonReader) -> read
+    95:106:void write(com.google.gson.stream.JsonWriter,java.util.BitSet) -> write
+    94:94:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    94:94:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$10 -> com.google.gson.internal.bind.TypeAdapters$10:
+    282:290:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    295:296:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    294:294:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    294:294:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$11 -> com.google.gson.internal.bind.TypeAdapters$11:
+    304:308:java.lang.Character read(com.google.gson.stream.JsonReader) -> read
+    312:313:void write(com.google.gson.stream.JsonWriter,java.lang.Character) -> write
+    311:311:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    311:311:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$12 -> com.google.gson.internal.bind.TypeAdapters$12:
+    322:331:java.lang.String read(com.google.gson.stream.JsonReader) -> read
+    335:336:void write(com.google.gson.stream.JsonWriter,java.lang.String) -> write
+    334:334:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    334:334:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$13 -> com.google.gson.internal.bind.TypeAdapters$13:
+    344:348:java.lang.StringBuilder read(com.google.gson.stream.JsonReader) -> read
+    352:353:void write(com.google.gson.stream.JsonWriter,java.lang.StringBuilder) -> write
+    351:351:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    351:351:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$14 -> com.google.gson.internal.bind.TypeAdapters$14:
+    362:366:java.lang.StringBuffer read(com.google.gson.stream.JsonReader) -> read
+    370:371:void write(com.google.gson.stream.JsonWriter,java.lang.StringBuffer) -> write
+    369:369:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    369:369:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$15 -> com.google.gson.internal.bind.TypeAdapters$15:
+    380:385:java.net.URL read(com.google.gson.stream.JsonReader) -> read
+    389:390:void write(com.google.gson.stream.JsonWriter,java.net.URL) -> write
+    388:388:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    388:388:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$16 -> com.google.gson.internal.bind.TypeAdapters$16:
+    398:406:java.net.URI read(com.google.gson.stream.JsonReader) -> read
+    411:412:void write(com.google.gson.stream.JsonWriter,java.net.URI) -> write
+    410:410:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    410:410:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$17 -> com.google.gson.internal.bind.TypeAdapters$17:
+    420:424:java.net.InetAddress read(com.google.gson.stream.JsonReader) -> read
+    428:429:void write(com.google.gson.stream.JsonWriter,java.net.InetAddress) -> write
+    427:427:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    427:427:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$18 -> com.google.gson.internal.bind.TypeAdapters$18:
+    438:442:java.util.UUID read(com.google.gson.stream.JsonReader) -> read
+    446:447:void write(com.google.gson.stream.JsonWriter,java.util.UUID) -> write
+    445:445:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    445:445:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$19 -> com.google.gson.internal.bind.TypeAdapters$19:
+    455:460:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.TypeAdapters$19$1 -> com.google.gson.internal.bind.TypeAdapters$19$1:
+    com.google.gson.internal.bind.TypeAdapter val$dateTypeAdapter -> val$dateTypeAdapter
+    com.google.gson.internal.bind.TypeAdapters$19 this$0 -> this$0
+    462:463:java.sql.Timestamp read(com.google.gson.stream.JsonReader) -> read
+    467:468:void write(com.google.gson.stream.JsonWriter,java.sql.Timestamp) -> write
+    466:466:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    466:466:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$2 -> com.google.gson.internal.bind.TypeAdapters$2:
+    114:121:java.lang.Boolean read(com.google.gson.stream.JsonReader) -> read
+    125:130:void write(com.google.gson.stream.JsonWriter,java.lang.Boolean) -> write
+    124:124:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    124:124:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$20 -> com.google.gson.internal.bind.TypeAdapters$20:
+    java.lang.String YEAR -> YEAR
+    java.lang.String MONTH -> MONTH
+    java.lang.String DAY_OF_MONTH -> DAY_OF_MONTH
+    java.lang.String HOUR_OF_DAY -> HOUR_OF_DAY
+    java.lang.String MINUTE -> MINUTE
+    java.lang.String SECOND -> SECOND
+    483:512:java.util.Calendar read(com.google.gson.stream.JsonReader) -> read
+    517:535:void write(com.google.gson.stream.JsonWriter,java.util.Calendar) -> write
+    516:516:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    516:516:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$21 -> com.google.gson.internal.bind.TypeAdapters$21:
+    544:567:java.util.Locale read(com.google.gson.stream.JsonReader) -> read
+    572:573:void write(com.google.gson.stream.JsonWriter,java.util.Locale) -> write
+    571:571:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    571:571:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$22 -> com.google.gson.internal.bind.TypeAdapters$22:
+    580:612:com.google.gson.JsonElement read(com.google.gson.stream.JsonReader) -> read
+    617:647:void write(com.google.gson.stream.JsonWriter,com.google.gson.JsonElement) -> write
+    616:616:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    616:616:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$23 -> com.google.gson.internal.bind.TypeAdapters$23:
+    java.lang.Class val$clazz -> val$clazz
+    678:679:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.TypeAdapters$24 -> com.google.gson.internal.bind.TypeAdapters$24:
+    com.google.gson.reflect.TypeToken val$type -> val$type
+    com.google.gson.internal.bind.TypeAdapter val$typeAdapter -> val$typeAdapter
+    690:690:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+com.google.gson.internal.bind.TypeAdapters$25 -> com.google.gson.internal.bind.TypeAdapters$25:
+    java.lang.Class val$type -> val$type
+    com.google.gson.internal.bind.TypeAdapter val$typeAdapter -> val$typeAdapter
+    700:700:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    703:703:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$26 -> com.google.gson.internal.bind.TypeAdapters$26:
+    java.lang.Class val$unboxed -> val$unboxed
+    java.lang.Class val$boxed -> val$boxed
+    com.google.gson.internal.bind.TypeAdapter val$typeAdapter -> val$typeAdapter
+    713:714:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    717:717:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$27 -> com.google.gson.internal.bind.TypeAdapters$27:
+    java.lang.Class val$base -> val$base
+    java.lang.Class val$sub -> val$sub
+    com.google.gson.internal.bind.TypeAdapter val$typeAdapter -> val$typeAdapter
+    728:729:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    732:732:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$28 -> com.google.gson.internal.bind.TypeAdapters$28:
+    java.lang.Class val$clazz -> val$clazz
+    com.google.gson.internal.bind.TypeAdapter val$typeAdapter -> val$typeAdapter
+    743:743:com.google.gson.internal.bind.TypeAdapter create(com.google.gson.internal.bind.MiniGson,com.google.gson.reflect.TypeToken) -> create
+    746:746:java.lang.String toString() -> toString
+com.google.gson.internal.bind.TypeAdapters$29 -> com.google.gson.internal.bind.TypeAdapters$29:
+    int[] $SwitchMap$com$google$gson$stream$JsonToken -> $SwitchMap$com$google$gson$stream$JsonToken
+com.google.gson.internal.bind.TypeAdapters$3 -> com.google.gson.internal.bind.TypeAdapters$3:
+    139:143:java.lang.Boolean read(com.google.gson.stream.JsonReader) -> read
+    147:148:void write(com.google.gson.stream.JsonWriter,java.lang.Boolean) -> write
+    146:146:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    146:146:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$4 -> com.google.gson.internal.bind.TypeAdapters$4:
+    157:165:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    170:171:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    169:169:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    169:169:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$5 -> com.google.gson.internal.bind.TypeAdapters$5:
+    180:187:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    192:193:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    191:191:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    191:191:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$6 -> com.google.gson.internal.bind.TypeAdapters$6:
+    202:209:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    214:215:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    213:213:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    213:213:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$7 -> com.google.gson.internal.bind.TypeAdapters$7:
+    224:231:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    236:237:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    235:235:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    235:235:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$8 -> com.google.gson.internal.bind.TypeAdapters$8:
+    246:250:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    254:255:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    253:253:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    253:253:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$9 -> com.google.gson.internal.bind.TypeAdapters$9:
+    264:268:java.lang.Number read(com.google.gson.stream.JsonReader) -> read
+    272:273:void write(com.google.gson.stream.JsonWriter,java.lang.Number) -> write
+    271:271:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    271:271:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.internal.bind.TypeAdapters$EnumTypeAdapter -> com.google.gson.internal.bind.TypeAdapters$EnumTypeAdapter:
+    java.lang.Class classOfT -> classOfT
+    660:664:java.lang.Enum read(com.google.gson.stream.JsonReader) -> read
+    668:669:void write(com.google.gson.stream.JsonWriter,java.lang.Enum) -> write
+    653:653:void write(com.google.gson.stream.JsonWriter,java.lang.Object) -> write
+    653:653:java.lang.Object read(com.google.gson.stream.JsonReader) -> read
+com.google.gson.reflect.TypeToken -> com.google.gson.reflect.TypeToken:
+    java.lang.Class rawType -> rawType
+    java.lang.reflect.Type type -> type
+    int hashCode -> hashCode
+    83:88:java.lang.reflect.Type getSuperclassTypeParameter(java.lang.Class) -> getSuperclassTypeParameter
+    95:95:java.lang.Class getRawType() -> getRawType
+    102:102:java.lang.reflect.Type getType() -> getType
+    113:113:boolean isAssignableFrom(java.lang.Class) -> isAssignableFrom
+    124:141:boolean isAssignableFrom(java.lang.reflect.Type) -> isAssignableFrom
+    154:154:boolean isAssignableFrom(com.google.gson.reflect.TypeToken) -> isAssignableFrom
+    162:179:boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.GenericArrayType) -> isAssignableFrom
+    189:232:boolean isAssignableFrom(java.lang.reflect.Type,java.lang.reflect.ParameterizedType,java.util.Map) -> isAssignableFrom
+    241:251:boolean typeEquals(java.lang.reflect.ParameterizedType,java.lang.reflect.ParameterizedType,java.util.Map) -> typeEquals
+    258:266:java.lang.AssertionError buildUnexpectedTypeError(java.lang.reflect.Type,java.lang.Class[]) -> buildUnexpectedTypeError
+    274:274:boolean matches(java.lang.reflect.Type,java.lang.reflect.Type,java.util.Map) -> matches
+    281:281:int hashCode() -> hashCode
+    285:285:boolean equals(java.lang.Object) -> equals
+    290:290:java.lang.String toString() -> toString
+    297:297:com.google.gson.reflect.TypeToken get(java.lang.reflect.Type) -> get
+    304:304:com.google.gson.reflect.TypeToken get(java.lang.Class) -> get
+com.google.gson.stream.JsonReader -> com.google.gson.stream.JsonReader:
+    char[] NON_EXECUTE_PREFIX -> NON_EXECUTE_PREFIX
+    com.google.gson.stream.StringPool stringPool -> stringPool
+    java.io.Reader in -> in
+    boolean lenient -> lenient
+    char[] buffer -> buffer
+    int pos -> pos
+    int limit -> limit
+    int bufferStartLine -> bufferStartLine
+    int bufferStartColumn -> bufferStartColumn
+    java.util.List stack -> stack
+    boolean hasToken -> hasToken
+    com.google.gson.stream.JsonToken token -> token
+    java.lang.String name -> name
+    java.lang.String value -> value
+    boolean skipping -> skipping
+    283:284:void setLenient(boolean) -> setLenient
+    290:290:boolean isLenient() -> isLenient
+    298:299:void beginArray() -> beginArray
+    306:307:void endArray() -> endArray
+    314:315:void beginObject() -> beginObject
+    322:323:void endObject() -> endObject
+    329:334:void expect(com.google.gson.stream.JsonToken) -> expect
+    340:341:boolean hasNext() -> hasNext
+    348:354:com.google.gson.stream.JsonToken peek() -> peek
+    363:402:com.google.gson.stream.JsonToken quickPeek() -> quickPeek
+    411:426:void consumeNonExecutePrefix() -> consumeNonExecutePrefix
+    432:439:com.google.gson.stream.JsonToken advance() -> advance
+    450:456:java.lang.String nextName() -> nextName
+    468:475:java.lang.String nextString() -> nextString
+    486:501:boolean nextBoolean() -> nextBoolean
+    512:522:void nextNull() -> nextNull
+    534:550:double nextDouble() -> nextDouble
+    564:585:long nextLong() -> nextLong
+    599:620:int nextInt() -> nextInt
+    627:633:void close() -> close
+    641:655:void skipValue() -> skipValue
+    658:658:com.google.gson.stream.JsonScope peekStack() -> peekStack
+    662:662:com.google.gson.stream.JsonScope pop() -> pop
+    666:667:void push(com.google.gson.stream.JsonScope) -> push
+    673:674:void replaceTop(com.google.gson.stream.JsonScope) -> replaceTop
+    678:714:com.google.gson.stream.JsonToken nextInArray(boolean) -> nextInArray
+    725:768:com.google.gson.stream.JsonToken nextInObject(boolean) -> nextInObject
+    776:790:com.google.gson.stream.JsonToken objectValue() -> objectValue
+    795:816:com.google.gson.stream.JsonToken nextValue() -> nextValue
+    827:858:boolean fillBuffer(int) -> fillBuffer
+    862:868:int getLineNumber() -> getLineNumber
+    872:880:int getColumnNumber() -> getColumnNumber
+    884:934:int nextNonWhitespace() -> nextNonWhitespace
+    938:941:void checkLenient() -> checkLenient
+    949:955:void skipToEndOfLine() -> skipToEndOfLine
+    959:967:boolean skipTo(java.lang.String) -> skipTo
+    981:1014:java.lang.String nextString(char) -> nextString
+    1023:1066:java.lang.String nextLiteral() -> nextLiteral
+    1070:1070:java.lang.String toString() -> toString
+    1083:1116:char readEscapeCharacter() -> readEscapeCharacter
+    1124:1130:com.google.gson.stream.JsonToken readLiteral() -> readLiteral
+    1137:1151:void decodeLiteral() -> decodeLiteral
+    1158:1158:java.io.IOException syntaxError(java.lang.String) -> syntaxError
+    1163:1168:java.lang.CharSequence getSnippet() -> getSnippet
+com.google.gson.stream.JsonReader$1 -> com.google.gson.stream.JsonReader$1:
+    int[] $SwitchMap$com$google$gson$stream$JsonScope -> $SwitchMap$com$google$gson$stream$JsonScope
+com.google.gson.stream.JsonScope -> com.google.gson.stream.JsonScope:
+    com.google.gson.stream.JsonScope EMPTY_ARRAY -> EMPTY_ARRAY
+    com.google.gson.stream.JsonScope NONEMPTY_ARRAY -> NONEMPTY_ARRAY
+    com.google.gson.stream.JsonScope EMPTY_OBJECT -> EMPTY_OBJECT
+    com.google.gson.stream.JsonScope DANGLING_NAME -> DANGLING_NAME
+    com.google.gson.stream.JsonScope NONEMPTY_OBJECT -> NONEMPTY_OBJECT
+    com.google.gson.stream.JsonScope EMPTY_DOCUMENT -> EMPTY_DOCUMENT
+    com.google.gson.stream.JsonScope NONEMPTY_DOCUMENT -> NONEMPTY_DOCUMENT
+    com.google.gson.stream.JsonScope CLOSED -> CLOSED
+    com.google.gson.stream.JsonScope[] $VALUES -> $VALUES
+    25:25:com.google.gson.stream.JsonScope[] values() -> values
+    25:25:com.google.gson.stream.JsonScope valueOf(java.lang.String) -> valueOf
+com.google.gson.stream.JsonToken -> com.google.gson.stream.JsonToken:
+    com.google.gson.stream.JsonToken BEGIN_ARRAY -> BEGIN_ARRAY
+    com.google.gson.stream.JsonToken END_ARRAY -> END_ARRAY
+    com.google.gson.stream.JsonToken BEGIN_OBJECT -> BEGIN_OBJECT
+    com.google.gson.stream.JsonToken END_OBJECT -> END_OBJECT
+    com.google.gson.stream.JsonToken NAME -> NAME
+    com.google.gson.stream.JsonToken STRING -> STRING
+    com.google.gson.stream.JsonToken NUMBER -> NUMBER
+    com.google.gson.stream.JsonToken BOOLEAN -> BOOLEAN
+    com.google.gson.stream.JsonToken NULL -> NULL
+    com.google.gson.stream.JsonToken END_DOCUMENT -> END_DOCUMENT
+    com.google.gson.stream.JsonToken[] $VALUES -> $VALUES
+    25:25:com.google.gson.stream.JsonToken[] values() -> values
+    25:25:com.google.gson.stream.JsonToken valueOf(java.lang.String) -> valueOf
+com.google.gson.stream.JsonWriter -> com.google.gson.stream.JsonWriter:
+    java.io.Writer out -> out
+    java.util.List stack -> stack
+    java.lang.String indent -> indent
+    java.lang.String separator -> separator
+    boolean lenient -> lenient
+    boolean htmlSafe -> htmlSafe
+    java.lang.String deferredName -> deferredName
+    boolean serializeNulls -> serializeNulls
+    173:180:void setIndent(java.lang.String) -> setIndent
+    195:196:void setLenient(boolean) -> setLenient
+    202:202:boolean isLenient() -> isLenient
+    213:214:void setHtmlSafe(boolean) -> setHtmlSafe
+    221:221:boolean isHtmlSafe() -> isHtmlSafe
+    229:230:void setSerializeNulls(boolean) -> setSerializeNulls
+    237:237:boolean getSerializeNulls() -> getSerializeNulls
+    247:248:com.google.gson.stream.JsonWriter beginArray() -> beginArray
+    257:257:com.google.gson.stream.JsonWriter endArray() -> endArray
+    267:268:com.google.gson.stream.JsonWriter beginObject() -> beginObject
+    277:277:com.google.gson.stream.JsonWriter endObject() -> endObject
+    285:288:com.google.gson.stream.JsonWriter open(com.google.gson.stream.JsonScope,java.lang.String) -> open
+    297:310:com.google.gson.stream.JsonWriter close(com.google.gson.stream.JsonScope,com.google.gson.stream.JsonScope,java.lang.String) -> close
+    317:317:com.google.gson.stream.JsonScope peek() -> peek
+    324:325:void replaceTop(com.google.gson.stream.JsonScope) -> replaceTop
+    334:341:com.google.gson.stream.JsonWriter name(java.lang.String) -> name
+    345:350:void writeDeferredName() -> writeDeferredName
+    359:365:com.google.gson.stream.JsonWriter value(java.lang.String) -> value
+    374:384:com.google.gson.stream.JsonWriter nullValue() -> nullValue
+    393:396:com.google.gson.stream.JsonWriter value(boolean) -> value
+    407:413:com.google.gson.stream.JsonWriter value(double) -> value
+    422:425:com.google.gson.stream.JsonWriter value(long) -> value
+    436:448:com.google.gson.stream.JsonWriter value(java.lang.Number) -> value
+    456:457:void flush() -> flush
+    465:470:void close() -> close
+    473:541:void string(java.lang.String) -> string
+    544:552:void newline() -> newline
+    559:567:void beforeName() -> beforeName
+    578:609:void beforeValue(boolean) -> beforeValue
+com.google.gson.stream.JsonWriter$1 -> com.google.gson.stream.JsonWriter$1:
+    int[] $SwitchMap$com$google$gson$stream$JsonScope -> $SwitchMap$com$google$gson$stream$JsonScope
+com.google.gson.stream.MalformedJsonException -> com.google.gson.stream.MalformedJsonException:
+    long serialVersionUID -> serialVersionUID
+com.google.gson.stream.StringPool -> com.google.gson.stream.StringPool:
+    java.lang.String[] pool -> pool
+    33:58:java.lang.String get(char[],int,int) -> get
+com.googlecode.android.widgets.DateSlider.ScrollLayout -> com.googlecode.android.widgets.DateSlider.ScrollLayout:
+    java.lang.String TAG -> TAG
+    android.widget.Scroller mScroller -> mScroller
+    boolean mDragMode -> mDragMode
+    int childrenWidth -> childrenWidth
+    int mInitialOffset -> mInitialOffset
+    int mLastX -> mLastX
+    int mLastScroll -> mLastScroll
+    int mScrollX -> mScrollX
+    android.view.VelocityTracker mVelocityTracker -> mVelocityTracker
+    int mMinimumVelocity -> mMinimumVelocity
+    int mMaximumVelocity -> mMaximumVelocity
+    long currentTime -> currentTime
+    long minTime -> minTime
+    long maxTime -> maxTime
+    int minuteInterval -> minuteInterval
+    int objWidth -> objWidth
+    int objHeight -> objHeight
+    android.graphics.drawable.Drawable rightShadow -> rightShadow
+    android.graphics.drawable.Drawable leftShadow -> leftShadow
+    com.googlecode.android.widgets.DateSlider.labeler.Labeler mLabeler -> mLabeler
+    com.googlecode.android.widgets.DateSlider.ScrollLayout$OnScrollListener listener -> listener
+    com.googlecode.android.widgets.DateSlider.timeview.TimeView mCenterView -> mCenterView
+    148:205:void onFinishInflate() -> onFinishInflate
+    209:218:void onSizeChanged(int,int,int,int) -> onSizeChanged
+    222:228:void dispatchDraw(android.graphics.Canvas) -> dispatchDraw
+    231:232:void setMinTime(long) -> setMinTime
+    235:236:void setMaxTime(long) -> setMaxTime
+    240:241:void setTime(long) -> setTime
+    252:267:void setMinuteInterval(int) -> setMinuteInterval
+    276:298:void setTime(long,int) -> setTime
+    307:313:void computeScroll() -> computeScroll
+    317:321:void scrollTo(int,int) -> scrollTo
+    333:405:void reScrollTo(int,int,boolean) -> reScrollTo
+    415:459:void moveElements(int) -> moveElements
+    466:505:boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
+    514:518:void fling(int) -> fling
+    521:522:void setOnScrollListener(com.googlecode.android.widgets.DateSlider.ScrollLayout$OnScrollListener) -> setOnScrollListener
+com.googlecode.android.widgets.DateSlider.ScrollLayout$OnScrollListener -> com.googlecode.android.widgets.DateSlider.ScrollLayout$OnScrollListener:
+    void onScroll(long) -> onScroll
+com.googlecode.android.widgets.DateSlider.SliderContainer -> com.googlecode.android.widgets.DateSlider.SliderContainer:
+    java.util.Calendar mTime -> mTime
+    com.googlecode.android.widgets.DateSlider.SliderContainer$OnTimeChangeListener mOnTimeChangeListener -> mOnTimeChangeListener
+    int minuteInterval -> minuteInterval
+    30:44:void onFinishInflate() -> onFinishInflate
+    52:55:void setTime(java.util.Calendar) -> setTime
+    63:63:java.util.Calendar getTime() -> getTime
+    73:84:void setMinTime(java.util.Calendar) -> setMinTime
+    92:103:void setMaxTime(java.util.Calendar) -> setMaxTime
+    110:119:void setMinuteInterval(int) -> setMinuteInterval
+    128:129:void setOnTimeChangeListener(com.googlecode.android.widgets.DateSlider.SliderContainer$OnTimeChangeListener) -> setOnTimeChangeListener
+    139:159:void arrangeScrollers(com.googlecode.android.widgets.DateSlider.ScrollLayout) -> arrangeScrollers
+    19:19:java.util.Calendar access$0(com.googlecode.android.widgets.DateSlider.SliderContainer) -> access$0
+    138:138:void access$1(com.googlecode.android.widgets.DateSlider.SliderContainer,com.googlecode.android.widgets.DateSlider.ScrollLayout) -> access$1
+com.googlecode.android.widgets.DateSlider.SliderContainer$1 -> com.googlecode.android.widgets.DateSlider.SliderContainer$1:
+    com.googlecode.android.widgets.DateSlider.SliderContainer this$0 -> this$0
+    com.googlecode.android.widgets.DateSlider.ScrollLayout val$sl -> val$sl
+    38:40:void onScroll(long) -> onScroll
+com.googlecode.android.widgets.DateSlider.SliderContainer$OnTimeChangeListener -> com.googlecode.android.widgets.DateSlider.SliderContainer$OnTimeChangeListener:
+    void onTimeChange(java.util.Calendar) -> onTimeChange
+com.googlecode.android.widgets.DateSlider.TimeObject -> com.googlecode.android.widgets.DateSlider.TimeObject:
+    java.lang.CharSequence text -> text
+    long startTime -> startTime
+    long endTime -> endTime
+com.googlecode.android.widgets.DateSlider.labeler.HourLabeler -> com.googlecode.android.widgets.DateSlider.labeler.HourLabeler:
+    java.lang.String mFormatString -> mFormatString
+    20:20:com.googlecode.android.widgets.DateSlider.TimeObject add(long,int) -> add
+    25:25:com.googlecode.android.widgets.DateSlider.TimeObject timeObjectfromCalendar(java.util.Calendar) -> timeObjectfromCalendar
+com.googlecode.android.widgets.DateSlider.labeler.Labeler -> com.googlecode.android.widgets.DateSlider.labeler.Labeler:
+    int viewWidthDP -> viewWidthDP
+    int viewHeightDP -> viewHeightDP
+    int minuteInterval -> minuteInterval
+    45:47:com.googlecode.android.widgets.DateSlider.TimeObject getElem(long) -> getElem
+    59:59:com.googlecode.android.widgets.DateSlider.timeview.TimeView createView(android.content.Context,boolean) -> createView
+    com.googlecode.android.widgets.DateSlider.TimeObject add(long,int) -> add
+    com.googlecode.android.widgets.DateSlider.TimeObject timeObjectfromCalendar(java.util.Calendar) -> timeObjectfromCalendar
+    93:93:int getPreferredViewWidth(android.content.Context) -> getPreferredViewWidth
+    103:103:int getPreferredViewHeight(android.content.Context) -> getPreferredViewHeight
+    113:114:void setMinuteInterval(int) -> setMinuteInterval
+com.googlecode.android.widgets.DateSlider.labeler.MinuteLabeler -> com.googlecode.android.widgets.DateSlider.labeler.MinuteLabeler:
+    java.lang.String mFormatString -> mFormatString
+    20:20:com.googlecode.android.widgets.DateSlider.TimeObject add(long,int) -> add
+    25:29:com.googlecode.android.widgets.DateSlider.TimeObject timeObjectfromCalendar(java.util.Calendar) -> timeObjectfromCalendar
+com.googlecode.android.widgets.DateSlider.labeler.Util -> com.googlecode.android.widgets.DateSlider.labeler.Util:
+    15:15:java.util.Calendar addYears(long,int) -> addYears
+    19:19:java.util.Calendar addMonths(long,int) -> addMonths
+    23:23:java.util.Calendar addWeeks(long,int) -> addWeeks
+    27:27:java.util.Calendar addDays(long,int) -> addDays
+    31:31:java.util.Calendar addHours(long,int) -> addHours
+    35:35:java.util.Calendar addMinutes(long,int) -> addMinutes
+    39:39:java.util.Calendar addMinutes(long,int,int) -> addMinutes
+    43:52:com.googlecode.android.widgets.DateSlider.TimeObject getYear(java.util.Calendar,java.lang.String) -> getYear
+    56:66:com.googlecode.android.widgets.DateSlider.TimeObject getMonth(java.util.Calendar,java.lang.String) -> getMonth
+    70:81:com.googlecode.android.widgets.DateSlider.TimeObject getDay(java.util.Calendar,java.lang.String) -> getDay
+    85:97:com.googlecode.android.widgets.DateSlider.TimeObject getHour(java.util.Calendar,java.lang.String) -> getHour
+    101:101:com.googlecode.android.widgets.DateSlider.TimeObject getMinute(java.util.Calendar,java.lang.String) -> getMinute
+    105:118:com.googlecode.android.widgets.DateSlider.TimeObject getMinute(java.util.Calendar,java.lang.String,int) -> getMinute
+    122:135:com.googlecode.android.widgets.DateSlider.TimeObject getTime(java.util.Calendar,java.lang.String,int) -> getTime
+    139:142:java.util.Calendar add(long,int,int) -> add
+com.googlecode.android.widgets.DateSlider.timeview.TimeTextView -> com.googlecode.android.widgets.DateSlider.timeview.TimeTextView:
+    long endTime -> endTime
+    long startTime -> startTime
+    boolean isOutOfBounds -> isOutOfBounds
+    38:46:void setupView(boolean,int) -> setupView
+    50:53:void setVals(com.googlecode.android.widgets.DateSlider.TimeObject) -> setVals
+    57:60:void setVals(com.googlecode.android.widgets.DateSlider.timeview.TimeView) -> setVals
+    63:63:long getStartTime() -> getStartTime
+    68:68:long getEndTime() -> getEndTime
+    73:73:java.lang.String getTimeText() -> getTimeText
+    77:77:boolean isOutOfBounds() -> isOutOfBounds
+    81:88:void setOutOfBounds(boolean) -> setOutOfBounds
+com.googlecode.android.widgets.DateSlider.timeview.TimeView -> com.googlecode.android.widgets.DateSlider.timeview.TimeView:
+    void setVals(com.googlecode.android.widgets.DateSlider.TimeObject) -> setVals
+    void setVals(com.googlecode.android.widgets.DateSlider.timeview.TimeView) -> setVals
+    java.lang.String getTimeText() -> getTimeText
+    long getStartTime() -> getStartTime
+    long getEndTime() -> getEndTime
+    boolean isOutOfBounds() -> isOutOfBounds
+    void setOutOfBounds(boolean) -> setOutOfBounds
+com.mewannaplay.Constants -> com.mewannaplay.Constants:
+    java.lang.String ACCOUNT_TYPE -> ACCOUNT_TYPE
+    java.lang.String AUTHTOKEN_TYPE -> AUTHTOKEN_TYPE
+    java.lang.String ANONYMOUS_USER -> ANONYMOUS_USER
+    java.lang.String FORGOT_PASSWORD_URL -> FORGOT_PASSWORD_URL
+    java.lang.String BASE_URL -> BASE_URL
+    java.lang.String GET_ALL_TENNISCOURTS -> GET_ALL_TENNISCOURTS
+    java.lang.String GET_TENNISCOURT_DETAILS -> GET_TENNISCOURT_DETAILS
+    java.lang.String GET_TENNISCOURT_MESSAGES -> GET_TENNISCOURT_MESSAGES
+    java.lang.String ADD_USER -> ADD_USER
+    java.lang.String LOGIN -> LOGIN
+    java.lang.String LOGOUT -> LOGOUT
+    java.lang.String PARTNERFOUND -> PARTNERFOUND
+    java.lang.String GET_ALL_CITIES -> GET_ALL_CITIES
+    java.lang.String POST_MESSAGE -> POST_MESSAGE
+    java.lang.String DELETE_MESSAGE -> DELETE_MESSAGE
+    java.lang.String MARK_COURT_OCCUPIED -> MARK_COURT_OCCUPIED
+    java.lang.String GET_OCCUPIED_COURT_AND_POSTED_MSG -> GET_OCCUPIED_COURT_AND_POSTED_MSG
+    java.lang.String GET_TENNISCOURT_MESSAGE_BY_COURTID -> GET_TENNISCOURT_MESSAGE_BY_COURTID
+    java.lang.String GET_TENNIS_COURT_STATS -> GET_TENNIS_COURT_STATS
+    int password_salt_length -> password_salt_length
+    float PROXIMITY -> PROXIMITY
+com.mewannaplay.Constants$ACTIVITY -> com.mewannaplay.Constants$ACTIVITY:
+    com.mewannaplay.Constants$ACTIVITY NEW_PLAYER_ADULT_PROGRAM -> NEW_PLAYER_ADULT_PROGRAM
+    com.mewannaplay.Constants$ACTIVITY NEW_PLAYER_JUNIOR_PROGRAM -> NEW_PLAYER_JUNIOR_PROGRAM
+    com.mewannaplay.Constants$ACTIVITY TEAM_TENNIS -> TEAM_TENNIS
+    com.mewannaplay.Constants$ACTIVITY TOURNAMENTS -> TOURNAMENTS
+    com.mewannaplay.Constants$ACTIVITY LADDERS -> LADDERS
+    com.mewannaplay.Constants$ACTIVITY ROUND_ROBINS -> ROUND_ROBINS
+    com.mewannaplay.Constants$ACTIVITY SOCIAL_MIXERS -> SOCIAL_MIXERS
+    com.mewannaplay.Constants$ACTIVITY SENIORS -> SENIORS
+    com.mewannaplay.Constants$ACTIVITY OTHERS -> OTHERS
+    com.mewannaplay.Constants$ACTIVITY[] ENUM$VALUES -> a
+    1:1:com.mewannaplay.Constants$ACTIVITY[] values() -> values
+    1:1:com.mewannaplay.Constants$ACTIVITY valueOf(java.lang.String) -> valueOf
+com.mewannaplay.Constants$AMENITY -> com.mewannaplay.Constants$AMENITY:
+    com.mewannaplay.Constants$AMENITY LOCKER_ROOM -> LOCKER_ROOM
+    com.mewannaplay.Constants$AMENITY PARKING -> PARKING
+    com.mewannaplay.Constants$AMENITY LESSONS -> LESSONS
+    com.mewannaplay.Constants$AMENITY LIGHTS -> LIGHTS
+    com.mewannaplay.Constants$AMENITY SNACK_BAR -> SNACK_BAR
+    com.mewannaplay.Constants$AMENITY SHOWER_ROOM -> SHOWER_ROOM
+    com.mewannaplay.Constants$AMENITY SHOP -> SHOP
+    com.mewannaplay.Constants$AMENITY[] ENUM$VALUES -> a
+    1:1:com.mewannaplay.Constants$AMENITY[] values() -> values
+    1:1:com.mewannaplay.Constants$AMENITY valueOf(java.lang.String) -> valueOf
+com.mewannaplay.CourtDetailsActivity -> com.mewannaplay.CourtDetailsActivity:
+    com.mewannaplay.model.TennisCourtDetails tennisCourtDetails -> Q
+    java.lang.String TAG -> R
+    java.lang.String SELECTED_COURTS_GEOPOINT -> SELECTED_COURTS_GEOPOINT
+    android.widget.SimpleCursorAdapter cursorAdapter -> S
+    android.database.Cursor messageCursor -> a
+    android.app.AlertDialog alert -> T
+    int courtId -> b
+    int postid -> c
+    int markid -> d
+    android.database.ContentObserver messageContentObserver -> U
+    android.location.Location thisCourtsLocation -> V
+    boolean messageposted -> e
+    android.widget.ImageView phone -> f
+    android.widget.TextView cmark -> g
+    android.content.SharedPreferences preferences -> h
+    java.lang.String filenames -> filenames
+    android.widget.TextView cmsg -> i
+    android.widget.TextView cmsgprox -> j
+    android.widget.TextView surfacetype -> k
+    android.widget.TextView courtype -> l
+    android.widget.TextView courtfacility -> m
+    android.widget.TextView courtimings -> n
+    android.widget.TextView message -> o
+    android.widget.TextView lockeroom -> p
+    android.widget.TextView parking -> q
+    android.widget.TextView lessons -> r
+    android.widget.TextView lights -> s
+    android.widget.TextView snakbar -> t
+    android.widget.TextView shop -> u
+    android.widget.TextView adultprog -> v
+    android.widget.TextView teamtennis -> w
+    android.widget.TextView juniorprog -> x
+    android.widget.TextView tournaments -> y
+    android.widget.TextView ladders -> z
+    android.widget.TextView roundrobin -> A
+    android.widget.TextView socialmixers -> B
+    android.widget.TextView serniors -> C
+    android.widget.TextView emptymessage -> D
+    java.lang.String user -> E
+    android.widget.ImageView courtphoneicon -> F
+    android.graphics.Typeface bold -> G
+    android.graphics.Typeface heavy -> H
+    android.graphics.Typeface light -> I
+    android.graphics.Typeface normal -> J
+    android.widget.Button bpost -> K
+    android.widget.Button bmark -> L
+    android.widget.Button back -> M
+    android.widget.TableLayout msgtable -> N
+    android.widget.ListView msglist -> O
+    android.widget.LinearLayout yellolayout -> P
+    com.mewannaplay.asynctask.GetAllMessagesForCourtAsyncTask asyncTask -> W
+    87:205:void onCreate(android.os.Bundle) -> onCreate
+    235:245:void onPause() -> onPause
+    250:257:void onResume() -> onResume
+    263:266:void startBackgroundRefresh() -> a
+    271:275:void stopBackGroudRefresh() -> b
+    279:338:void enableDisableButtons() -> c
+    341:400:void populateView() -> d
+    570:576:void postMessage(android.view.View) -> postMessage
+    580:602:void clickdriving(android.view.View) -> clickdriving
+    605:606:void markOccupied(android.view.View) -> markOccupied
+    609:610:void onBack(android.view.View) -> onBack
+    615:647:void onPostExecuteMarkCourtOccupiedTask(boolean) -> onPostExecuteMarkCourtOccupiedTask
+    650:657:void viewMessage(long) -> viewMessage
+    757:795:void onClick(android.view.View) -> onClick
+    798:820:void onPostExecutePostedMessageTask(java.lang.Boolean) -> onPostExecutePostedMessageTask
+    60:60:android.widget.SimpleCursorAdapter access$0(com.mewannaplay.CourtDetailsActivity) -> a
+    57:57:com.mewannaplay.model.TennisCourtDetails access$1(com.mewannaplay.CourtDetailsActivity) -> b
+com.mewannaplay.CourtDetailsActivity$1 -> com.mewannaplay.q:
+    com.mewannaplay.CourtDetailsActivity this$0 -> a
+    193:194:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+com.mewannaplay.CourtDetailsActivity$2 -> com.mewannaplay.s:
+    com.mewannaplay.CourtDetailsActivity this$0 -> a
+    625:626:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.CourtDetailsActivity$3 -> com.mewannaplay.t:
+    com.mewannaplay.CourtDetailsActivity this$0 -> a
+    807:810:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.CourtDetailsActivity$ExpadableAdapter -> com.mewannaplay.CourtDetailsActivity$ExpadableAdapter:
+    com.mewannaplay.CourtDetailsActivity this$0 -> a
+    405:405:java.lang.Object getChild(int,int) -> getChild
+    409:409:long getChildId(int,int) -> getChildId
+    414:514:android.view.View getChildView(int,int,boolean,android.view.View,android.view.ViewGroup) -> getChildView
+    519:519:int getChildrenCount(int) -> getChildrenCount
+    523:523:java.lang.Object getGroup(int) -> getGroup
+    527:527:int getGroupCount() -> getGroupCount
+    531:531:long getGroupId(int) -> getGroupId
+    537:555:android.view.View getGroupView(int,boolean,android.view.View,android.view.ViewGroup) -> getGroupView
+    560:560:boolean hasStableIds() -> hasStableIds
+    564:564:boolean isChildSelectable(int,int) -> isChildSelectable
+com.mewannaplay.CourtDetailsActivity$MessagesContentObserver -> com.mewannaplay.ai:
+    com.mewannaplay.CourtDetailsActivity this$0 -> a
+    217:228:void onChange(boolean) -> onChange
+    207:207:com.mewannaplay.CourtDetailsActivity access$0(com.mewannaplay.CourtDetailsActivity$MessagesContentObserver) -> a
+com.mewannaplay.CourtDetailsActivity$MessagesContentObserver$1 -> com.mewannaplay.e:
+    com.mewannaplay.CourtDetailsActivity$MessagesContentObserver this$1 -> a
+    222:225:void run() -> run
+com.mewannaplay.CourtDetailsActivity$MessagesCursorAdapter -> com.mewannaplay.a:
+    android.view.LayoutInflater mInflater -> c
+    java.text.SimpleDateFormat sdfDate -> a
+    com.mewannaplay.CourtDetailsActivity this$0 -> b
+    680:680:android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> newView
+    687:750:void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
+com.mewannaplay.EmailValidator -> com.mewannaplay.EmailValidator:
+    java.util.regex.Pattern pattern -> a
+    java.util.regex.Matcher matcher -> b
+    java.lang.String EMAIL_PATTERN -> c
+    15:18:java.lang.Boolean validate(java.lang.String) -> validate
+com.mewannaplay.Info -> com.mewannaplay.Info:
+    android.widget.Button ok -> a
+    android.widget.TextView link -> b
+    android.widget.TextView title -> c
+    android.graphics.Typeface bold -> d
+    android.graphics.Typeface heavy -> e
+    android.graphics.Typeface light -> f
+    android.graphics.Typeface normal -> g
+    22:39:void onCreate(android.os.Bundle) -> onCreate
+    43:56:void onClick(android.view.View) -> onClick
+com.mewannaplay.MapViewActivity -> com.mewannaplay.MapViewActivity:
+    java.lang.String TAG -> c
+    com.google.android.maps.MyLocationOverlay myLocationOverlay -> d
+    android.app.ProgressDialog progressDialog -> e
+    android.app.AlertDialog alert -> f
+    com.mewannaplay.mapoverlay.MyItemizedOverlay myItemizedOverlay -> g
+    java.lang.String filename -> filename
+    int DIALOG_STATE_CITY_CHOICE -> a
+    android.widget.Button info -> b
+    android.accounts.Account loggedInUserAccount -> h
+    com.mewannaplay.model.City currentCity -> i
+    int courtMarkedOccupied -> j
+    int courtPostedMessageOn -> k
+    com.mewannaplay.MapViewActivity mapViewActivity -> mapViewActivity
+    boolean fetchedAllcourts -> fetchedAllcourts
+    android.content.BroadcastReceiver syncFinishedReceiver -> l
+    89:194:void onCreate(android.os.Bundle) -> onCreate
+    197:208:void initMap() -> b
+    212:221:void initCurrentLocationOverlay() -> c
+    224:240:void onPause() -> onPause
+    243:256:void onResume() -> onResume
+    259:264:void onDestroy() -> onDestroy
+    267:303:void startBackGroundRefresh() -> d
+    308:325:void stopBackGroundRefresh() -> e
+    330:330:boolean isRouteDisplayed() -> isRouteDisplayed
+    334:336:void centerLocation(com.google.android.maps.GeoPoint) -> a
+    339:352:android.accounts.Account getAccount(android.content.Context) -> getAccount
+    356:357:void setAccount(android.accounts.Account) -> setAccount
+    430:477:void onGetAllCourtsPostExecute(boolean) -> onGetAllCourtsPostExecute
+    484:485:void getTennisCourtDetails(int,android.location.Location) -> getTennisCourtDetails
+    492:512:void onPostExecuteGetCourtDetails(boolean,int,android.location.Location) -> onPostExecuteGetCourtDetails
+    517:527:void startTennisCourtDetailActivity(int,android.location.Location) -> a
+    531:536:void getAllTennisCourts(android.location.Location) -> a
+    545:556:void getAllTennisCourts(com.mewannaplay.model.City) -> a
+    560:618:void populateOverlays(android.database.Cursor,android.location.Location) -> a
+    622:630:android.app.Dialog onCreateDialog(int) -> onCreateDialog
+    636:644:void onPrepareDialog(int,android.app.Dialog,android.os.Bundle) -> onPrepareDialog
+    647:647:com.mewannaplay.model.City getCurrentCity() -> getCurrentCity
+    651:687:void setCurrentCity(com.mewannaplay.model.City) -> setCurrentCity
+    691:698:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    702:708:boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    714:722:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    754:754:android.location.Location getMyCurrentLocation() -> getMyCurrentLocation
+    758:758:int getCourtMarkedOccupied() -> getCourtMarkedOccupied
+    762:763:void setCourtMarkedOccupied(int) -> setCourtMarkedOccupied
+    776:805:void setCourtPostedMessageOn(int) -> setCourtPostedMessageOn
+    808:808:int getCourtPostedMessageOn() -> getCourtPostedMessageOn
+    813:815:void onSearch(android.view.View) -> onSearch
+    818:825:void onPartnerFound(android.view.View) -> onPartnerFound
+    828:835:void viewMessage(int,int) -> viewMessage
+    841:876:void onPostExecutePostedMessageTask(boolean) -> onPostExecutePostedMessageTask
+    882:884:void onClick(android.view.View) -> onClick
+    889:895:void incrementRunCount() -> f
+    899:899:com.mewannaplay.mapoverlay.MyItemizedOverlay getMyItemizedOverlay() -> getMyItemizedOverlay
+    52:52:android.app.ProgressDialog access$0(com.mewannaplay.MapViewActivity) -> a
+    53:53:void access$1(com.mewannaplay.MapViewActivity,android.app.AlertDialog) -> a
+    53:53:android.app.AlertDialog access$2(com.mewannaplay.MapViewActivity) -> b
+    886:886:void access$3(com.mewannaplay.MapViewActivity) -> c
+    266:266:void access$4(com.mewannaplay.MapViewActivity) -> d
+    65:65:com.mewannaplay.model.City access$5() -> a
+    333:333:void access$6(com.mewannaplay.MapViewActivity,com.google.android.maps.GeoPoint) -> a
+    50:50:com.google.android.maps.MyLocationOverlay access$7(com.mewannaplay.MapViewActivity) -> e
+com.mewannaplay.MapViewActivity$1 -> com.mewannaplay.v:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    365:424:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    359:359:com.mewannaplay.MapViewActivity access$0(com.mewannaplay.MapViewActivity$1) -> a
+com.mewannaplay.MapViewActivity$1$1 -> com.mewannaplay.ak:
+    com.mewannaplay.MapViewActivity$1 this$1 -> a
+    381:382:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.MapViewActivity$1$2 -> com.mewannaplay.aj:
+    com.mewannaplay.MapViewActivity$1 this$1 -> a
+    com.google.android.maps.MapView val$mapView -> b
+    399:420:void run() -> run
+com.mewannaplay.MapViewActivity$2 -> com.mewannaplay.w:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    com.google.android.maps.MapView val$mapView -> b
+    boolean val$stateCitySetEarlier -> c
+    140:163:void run() -> run
+com.mewannaplay.MapViewActivity$3 -> com.mewannaplay.x:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    217:219:void run() -> run
+com.mewannaplay.MapViewActivity$4 -> com.mewannaplay.y:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    440:441:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.MapViewActivity$5 -> com.mewannaplay.z:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    com.google.android.maps.MapView val$mapView -> b
+    451:472:void run() -> run
+com.mewannaplay.MapViewActivity$6 -> com.mewannaplay.aa:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    502:502:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.MapViewActivity$7 -> com.mewannaplay.ab:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    com.google.android.maps.MapView val$mapView -> b
+    664:666:void run() -> run
+com.mewannaplay.MapViewActivity$8 -> com.mewannaplay.ac:
+    int val$messagePosted -> a
+    779:799:void run() -> run
+com.mewannaplay.MapViewActivity$9 -> com.mewannaplay.ad:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    851:852:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.MapViewActivity$MyMyLocationOverlay -> com.mewannaplay.u:
+    com.mewannaplay.MapViewActivity this$0 -> a
+    735:738:void onLocationChanged(android.location.Location) -> onLocationChanged
+    743:750:void onProviderDisabled(java.lang.String) -> onProviderDisabled
+com.mewannaplay.MeWannaPlay -> com.mewannaplay.MeWannaPlay:
+    android.content.Context context -> a
+    10:12:void onCreate() -> onCreate
+    15:15:android.content.Context getAppContext() -> getAppContext
+com.mewannaplay.NewUserRegisterationActivity -> com.mewannaplay.NewUserRegisterationActivity:
+    java.lang.String userName -> h
+    java.lang.String password -> i
+    java.lang.String confirmPassword -> j
+    java.lang.String email -> k
+    android.widget.EditText newUserNameEditText -> l
+    android.widget.EditText newUserPasswordEditText -> m
+    android.widget.EditText newUserEmailEditText -> n
+    android.widget.EditText newUserPasswordConfirmEditText -> o
+    android.widget.TextView errorMessage -> p
+    android.widget.TextView txtnewusername -> q
+    android.widget.TextView txtnewpass -> r
+    android.widget.TextView txtnewusermail -> s
+    android.widget.TextView txtpasscon -> t
+    android.widget.TextView titleregi -> u
+    com.mewannaplay.NewUserRegisterationActivity$NewUserRegisterTask newUserRegisterationTask -> v
+    android.app.ProgressDialog mProgressDialog -> w
+    java.lang.String regexStr -> a
+    java.lang.String TAG -> x
+    android.graphics.Typeface bold -> b
+    android.graphics.Typeface heavy -> c
+    android.graphics.Typeface light -> d
+    android.graphics.Typeface normal -> e
+    android.widget.Button cancel -> f
+    android.widget.Button register -> g
+    41:71:void onCreate(android.os.Bundle) -> onCreate
+    76:77:void onCancel(android.view.View) -> onCancel
+    81:108:void onRegister(android.view.View) -> onRegister
+    114:131:void showProgress() -> a
+    171:213:void onRegisterationResult() -> b
+    219:223:void hideProgress() -> c
+    229:248:java.lang.String getMessage() -> d
+    25:25:java.lang.String access$0(com.mewannaplay.NewUserRegisterationActivity) -> a
+    26:26:java.lang.String access$1(com.mewannaplay.NewUserRegisterationActivity) -> b
+    27:27:java.lang.String access$2(com.mewannaplay.NewUserRegisterationActivity) -> c
+    169:169:void access$3(com.mewannaplay.NewUserRegisterationActivity) -> d
+    32:32:com.mewannaplay.NewUserRegisterationActivity$NewUserRegisterTask access$4(com.mewannaplay.NewUserRegisterationActivity) -> e
+com.mewannaplay.NewUserRegisterationActivity$1 -> com.mewannaplay.f:
+    com.mewannaplay.NewUserRegisterationActivity this$0 -> a
+    121:124:void onCancel(android.content.DialogInterface) -> onCancel
+com.mewannaplay.NewUserRegisterationActivity$NewUserRegisterTask -> com.mewannaplay.NewUserRegisterationActivity$NewUserRegisterTask:
+    java.lang.String error -> b
+    com.mewannaplay.NewUserRegisterationActivity this$0 -> a
+    143:143:java.lang.String getError() -> getError
+    150:157:java.lang.Void doInBackground(java.lang.Void[]) -> doInBackground
+    163:164:void onPostExecute(java.lang.Void) -> onPostExecute
+    1:1:void onPostExecute(java.lang.Object) -> onPostExecute
+    1:1:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.mewannaplay.PostMessageActivity -> com.mewannaplay.PostMessageActivity:
+    java.lang.String TAG -> o
+    android.app.AlertDialog alert -> p
+    int courtId -> q
+    int DEFAULTDATESELECTOR_ID -> a
+    int mLayoutID -> mLayoutID
+    int minuteInterval -> r
+    com.googlecode.android.widgets.DateSlider.SliderContainer mContainer -> s
+    android.widget.RadioGroup rgcontactinfo -> b
+    android.widget.RadioButton rgPhone -> c
+    android.widget.RadioButton rgmail -> d
+    android.widget.EditText econtactinfo -> e
+    android.widget.Button post -> f
+    android.widget.Button cancel -> g
+    android.widget.Button back -> h
+    java.lang.String filenames -> filenames
+    java.lang.String contactInfo -> i
+    java.lang.String regexStr -> j
+    android.widget.TextView errorMessage -> t
+    android.widget.TextView title -> u
+    android.widget.TextView titleplay -> v
+    android.widget.TextView titlenoofplayer -> w
+    android.widget.TextView titlelevel -> x
+    android.widget.TextView titlecontact -> y
+    android.widget.TextView titlecomment -> z
+    android.widget.TextView hours -> A
+    android.widget.TextView mintues -> B
+    android.graphics.Typeface bold -> k
+    android.graphics.Typeface heavy -> l
+    android.graphics.Typeface light -> m
+    android.graphics.Typeface normal -> n
+    63:171:void onCreate(android.os.Bundle) -> onCreate
+    174:175:void postBack(android.view.View) -> postBack
+    178:207:void postMessage() -> a
+    214:238:void onPostExecutePostMessageTask(boolean) -> onPostExecutePostMessageTask
+    242:243:void onCancel(android.view.View) -> onCancel
+    247:251:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    257:285:void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
+    291:294:java.lang.String getMessage() -> b
+    290:290:java.lang.String access$0(com.mewannaplay.PostMessageActivity) -> a
+    58:58:android.widget.TextView access$1(com.mewannaplay.PostMessageActivity) -> b
+    177:177:void access$2(com.mewannaplay.PostMessageActivity) -> c
+com.mewannaplay.PostMessageActivity$1 -> com.mewannaplay.k:
+    com.mewannaplay.PostMessageActivity this$0 -> a
+    141:169:void onClick(android.view.View) -> onClick
+com.mewannaplay.PostMessageActivity$2 -> com.mewannaplay.j:
+    com.mewannaplay.PostMessageActivity this$0 -> a
+    224:225:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.R -> com.mewannaplay.R:
+com.mewannaplay.R$array -> com.mewannaplay.R$array:
+    int level_arrays -> level_arrays
+    int players_needed -> players_needed
+    int statess_array -> statess_array
+com.mewannaplay.R$attr -> com.mewannaplay.R$attr:
+    int childHeight -> childHeight
+    int childWidth -> childWidth
+    int labelerClass -> labelerClass
+    int labelerFormat -> labelerFormat
+com.mewannaplay.R$drawable -> com.mewannaplay.R$drawable:
+    int allcourtsoccu -> allcourtsoccu
+    int balloon_overlay_bg_selector -> balloon_overlay_bg_selector
+    int balloon_overlay_close -> balloon_overlay_close
+    int balloon_overlay_focused -> balloon_overlay_focused
+    int balloon_overlay_unfocused -> balloon_overlay_unfocused
+    int basicinfo -> basicinfo
+    int bg -> bg
+    int bgfour -> bgfour
+    int bground -> bground
+    int bgroundbottom -> bgroundbottom
+    int bgroundupper -> bgroundupper
+    int bgthree -> bgthree
+    int bgtwo -> bgtwo
+    int blueline -> blueline
+    int bluelinetwo -> bluelinetwo
+    int border -> border
+    int buttons -> buttons
+    int callicon16 -> callicon16
+    int check_or_uncheck_image -> check_or_uncheck_image
+    int checkbox_on_background -> checkbox_on_background
+    int disablestate -> disablestate
+    int drivingdirection -> drivingdirection
+    int flag -> flag
+    int forgotbtn -> forgotbtn
+    int gobutton -> gobutton
+    int grey_color -> grey_color
+    int head -> head
+    int header -> header
+    int help_information -> help_information
+    int ic_bullet_key_permission -> ic_bullet_key_permission
+    int ic_delete -> ic_delete
+    int ic_launcher -> ic_launcher
+    int ic_maps_indicator_current_position -> ic_maps_indicator_current_position
+    int icon -> icon
+    int info -> info
+    int infook -> infook
+    int infor16 -> infor16
+    int largeminus -> largeminus
+    int largeplus -> largeplus
+    int largetlistgroupindicator -> largetlistgroupindicator
+    int left_shadow -> left_shadow
+    int list_group_indicator -> list_group_indicator
+    int lock -> lock
+    int logo -> logo
+    int mapinfobutton -> mapinfobutton
+    int mapmessagebutton -> mapmessagebutton
+    int mapsearchbutton -> mapsearchbutton
+    int mark_court_occupied_selector -> mark_court_occupied_selector
+    int markbuttonstate -> markbuttonstate
+    int minus -> minus
+    int mwpflashscreen -> mwpflashscreen
+    int newregibutton -> newregibutton
+    int okbutton -> okbutton
+    int partiallyoccu -> partiallyoccu
+    int pavailable -> pavailable
+    int pflag -> pflag
+    int pfullyoccu -> pfullyoccu
+    int plus -> plus
+    int post_message_selector -> post_message_selector
+    int postbuttonstate -> postbuttonstate
+    int postmessage -> postmessage
+    int ppartialoccu -> ppartialoccu
+    int pproximity -> pproximity
+    int pressed_yellow_color -> pressed_yellow_color
+    int pressinfook -> pressinfook
+    int pressinfor16 -> pressinfor16
+    int presssearchhhh -> presssearchhhh
+    int pressshoutout -> pressshoutout
+    int proximitycourt -> proximitycourt
+    int right_shadow -> right_shadow
+    int roundedtext -> roundedtext
+    int search -> search
+    int searchhhh -> searchhhh
+    int shoutout -> shoutout
+    int slider_back -> slider_back
+    int smallicon -> smallicon
+    int tenniscourtavailable -> tenniscourtavailable
+    int transparentbackbutton -> transparentbackbutton
+    int yellow -> yellow
+    int yellow_color -> yellow_color
+    int yellowborderborder -> yellowborderborder
+com.mewannaplay.R$id -> com.mewannaplay.R$id:
+    int ImageInfoButton01 -> ImageInfoButton01
+    int Register -> Register
+    int SearchButton -> SearchButton
+    int ShoutOutButton -> ShoutOutButton
+    int adultProgram -> adultProgram
+    int adultProgramtext -> adultProgramtext
+    int anonymous_login -> anonymous_login
+    int balloon_inner_layout -> balloon_inner_layout
+    int balloon_item_snippet -> balloon_item_snippet
+    int balloon_item_title -> balloon_item_title
+    int balloon_main_layout -> balloon_main_layout
+    int btnok -> btnok
+    int cancel -> cancel
+    int choose_current_location -> choose_current_location
+    int city_spinner -> city_spinner
+    int citytext -> citytext
+    int close_img_button -> close_img_button
+    int cmessage -> cmessage
+    int cmessagemark -> cmessagemark
+    int cmessageprox -> cmessageprox
+    int confirm_password -> confirm_password
+    int contact_info -> contact_info
+    int contact_info_view -> contact_info_view
+    int court_addr_1 -> court_addr_1
+    int court_addr_2 -> court_addr_2
+    int court_addr_rel_layout -> court_addr_rel_layout
+    int court_avail_timings -> court_avail_timings
+    int court_back_icon -> court_back_icon
+    int court_driving_icon -> court_driving_icon
+    int court_facility_type -> court_facility_type
+    int court_ftype -> court_ftype
+    int court_name -> court_name
+    int court_phone_1 -> court_phone_1
+    int court_phone_icon -> court_phone_icon
+    int court_sub_table_layout -> court_sub_table_layout
+    int court_surface -> court_surface
+    int court_surface_type -> court_surface_type
+    int court_timings -> court_timings
+    int court_title_table -> court_title_table
+    int court_type -> court_type
+    int court_typelayout -> court_typelayout
+    int dateSliderContainer -> dateSliderContainer
+    int delete_message -> delete_message
+    int delete_message_partner_found -> delete_message_partner_found
+    int dropdown_city -> dropdown_city
+    int exapandableList -> exapandableList
+    int exlayout -> exlayout
+    int forgotusername -> forgotusername
+    int hours -> hours
+    int imageView1 -> imageView1
+    int juniorProgram -> juniorProgram
+    int juniorProgramtext -> juniorProgramtext
+    int ladders -> ladders
+    int ladderstext -> ladderstext
+    int lessons -> lessons
+    int lessonstext -> lessonstext
+    int level -> level
+    int level_view -> level_view
+    int lights -> lights
+    int lightstext -> lightstext
+    int lnfoot -> lnfoot
+    int lockerRoom -> lockerRoom
+    int lockerRoomIcon -> lockerRoomIcon
+    int login -> login
+    int logout -> logout
+    int mapheader -> mapheader
+    int mapview -> mapview
+    int marl_occu_button -> marl_occu_button
+    int message -> message
+    int message_text -> message_text
+    int mewannaplay_container -> mewannaplay_container
+    int minutes -> minutes
+    int msg_info_img -> msg_info_img
+    int msg_name -> msg_name
+    int msg_table -> msg_table
+    int newuser_email -> newuser_email
+    int newuser_errormessage -> newuser_errormessage
+    int newuser_password -> newuser_password
+    int newuser_register_btn -> newuser_register_btn
+    int newuser_username -> newuser_username
+    int no_of_sub_courts -> no_of_sub_courts
+    int ok_button -> ok_button
+    int okstatecity -> okstatecity
+    int parking -> parking
+    int parkingtext -> parkingtext
+    int password_edit -> password_edit
+    int passwordtext -> passwordtext
+    int players_needed -> players_needed
+    int players_needed_view -> players_needed_view
+    int post_back_icon -> post_back_icon
+    int post_message -> post_message
+    int post_msg_button -> post_msg_button
+    int posted_on_view -> posted_on_view
+    int rbemail -> rbemail
+    int rbphn -> rbphn
+    int relative -> relative
+    int rgcontact -> rgcontact
+    int roundRobin -> roundRobin
+    int roundRobintext -> roundRobintext
+    int schedule_time_view -> schedule_time_view
+    int scheduled_time -> scheduled_time
+    int seniors -> seniors
+    int seniorstext -> seniorstext
+    int shop -> shop
+    int shoptext -> shoptext
+    int snackBar -> snackBar
+    int snackBartext -> snackBartext
+    int socialMixers -> socialMixers
+    int socialMixerstext -> socialMixerstext
+    int splashscreen_image -> splashscreen_image
+    int state_spinner -> state_spinner
+    int statetext -> statetext
+    int tconfirm_password -> tconfirm_password
+    int tcontact_info_view -> tcontact_info_view
+    int teamTennis -> teamTennis
+    int teamTennistext -> teamTennistext
+    int textView1 -> textView1
+    int textView2 -> textView2
+    int text_sub_courts -> text_sub_courts
+    int time_posted -> time_posted
+    int titlecomment -> titlecomment
+    int titlelevel -> titlelevel
+    int titlenoofplayer -> titlenoofplayer
+    int titleplayat -> titleplayat
+    int titlepost -> titlepost
+    int titlepreferedcontact -> titlepreferedcontact
+    int titleregi -> titleregi
+    int titleview -> titleview
+    int tlevel_view -> tlevel_view
+    int tmessage -> tmessage
+    int tnewuser_email -> tnewuser_email
+    int tnewuser_password -> tnewuser_password
+    int tnewuser_username -> tnewuser_username
+    int tournaments -> tournaments
+    int tournamentstext -> tournamentstext
+    int tplayers_needed_view -> tplayers_needed_view
+    int tposted_on_view -> tposted_on_view
+    int tschedule_time_view -> tschedule_time_view
+    int tuser_name_view -> tuser_name_view
+    int txt -> txt
+    int txterror -> txterror
+    int txterrormsg -> txterrormsg
+    int txtlink -> txtlink
+    int txtsearch -> txtsearch
+    int user -> user
+    int user_name_view -> user_name_view
+    int username_edit -> username_edit
+    int username_fixed -> username_fixed
+    int usernametext -> usernametext
+    int view_back_icon -> view_back_icon
+com.mewannaplay.R$layout -> com.mewannaplay.R$layout:
+    int balloon_overlay -> balloon_overlay
+    int child_layout_activities -> child_layout_activities
+    int child_layout_ameneties_services -> child_layout_ameneties_services
+    int court_details_layout -> court_details_layout
+    int court_message_row -> court_message_row
+    int group_layout_activities -> group_layout_activities
+    int group_layout_ameneties_services -> group_layout_ameneties_services
+    int info -> info
+    int login_activity -> login_activity
+    int mapviewlayout -> mapviewlayout
+    int new_user_registeration_layout -> new_user_registeration_layout
+    int post_message_layout -> post_message_layout
+    int splash -> splash
+    int state_city_choice_layout -> state_city_choice_layout
+    int timeslider -> timeslider
+    int view_message_layout -> view_message_layout
+com.mewannaplay.R$menu -> com.mewannaplay.R$menu:
+    int map_activity_menu -> map_activity_menu
+com.mewannaplay.R$string -> com.mewannaplay.R$string:
+    int activites -> activites
+    int ameneties_and_services -> ameneties_and_services
+    int anonymous_login -> anonymous_login
+    int apiKey -> apiKey
+    int app_name -> app_name
+    int back_button_label -> back_button_label
+    int cancel_button_label -> cancel_button_label
+    int current_location -> current_location
+    int label -> label
+    int level_prompt -> level_prompt
+    int login_activity_loginfail_text_both -> login_activity_loginfail_text_both
+    int login_activity_loginfail_text_pwmissing -> login_activity_loginfail_text_pwmissing
+    int login_activity_loginfail_text_pwonly -> login_activity_loginfail_text_pwonly
+    int login_activity_newaccount_text -> login_activity_newaccount_text
+    int login_activity_ok_button -> login_activity_ok_button
+    int login_activity_password_label -> login_activity_password_label
+    int login_activity_username_label -> login_activity_username_label
+    int logout -> logout
+    int main_no_items -> main_no_items
+    int players_needed_prompt -> players_needed_prompt
+    int profile_action -> profile_action
+    int sign_in_button_label -> sign_in_button_label
+    int state_prompt -> state_prompt
+    int ui_activity_authenticating -> ui_activity_authenticating
+    int ui_activity_title -> ui_activity_title
+    int view_profile -> view_profile
+com.mewannaplay.R$style -> com.mewannaplay.R$style:
+    int Scroller -> Scroller
+com.mewannaplay.R$styleable -> com.mewannaplay.R$styleable:
+    int[] ScrollLayout -> ScrollLayout
+    int ScrollLayout_childHeight -> ScrollLayout_childHeight
+    int ScrollLayout_childWidth -> ScrollLayout_childWidth
+    int ScrollLayout_labelerClass -> ScrollLayout_labelerClass
+    int ScrollLayout_labelerFormat -> ScrollLayout_labelerFormat
+com.mewannaplay.R$xml -> com.mewannaplay.R$xml:
+    int authenticator -> authenticator
+    int syncadapter -> syncadapter
+com.mewannaplay.ScrollingTextView -> com.mewannaplay.ScrollingTextView:
+    26:29:void onFocusChanged(boolean,int,android.graphics.Rect) -> onFocusChanged
+    33:36:void onWindowFocusChanged(boolean) -> onWindowFocusChanged
+    41:41:boolean isFocused() -> isFocused
+com.mewannaplay.SplashScreenActivity -> com.mewannaplay.SplashScreenActivity:
+    java.lang.String TAG -> d
+    android.os.Handler handler -> e
+    android.accounts.AccountManagerFuture accountManagerFuture -> a
+    java.lang.String DELAY_FOR_SPLASH -> DELAY_FOR_SPLASH
+    com.mewannaplay.authenticator.ConnectivityReceiver connection -> b
+    java.lang.Runnable startMapViewActivity -> c
+    42:105:void onCreate(android.os.Bundle) -> onCreate
+    110:113:void onPause() -> onPause
+    117:120:void onResume() -> onResume
+    135:196:void doAutoSyncSettings() -> a
+    201:286:void continueToApp() -> b
+    133:133:void access$0(com.mewannaplay.SplashScreenActivity) -> a
+    198:198:void access$1(com.mewannaplay.SplashScreenActivity) -> b
+    33:33:android.os.Handler access$2(com.mewannaplay.SplashScreenActivity) -> c
+com.mewannaplay.SplashScreenActivity$1 -> com.mewannaplay.p:
+    com.mewannaplay.SplashScreenActivity this$0 -> a
+    125:128:void run() -> run
+com.mewannaplay.SplashScreenActivity$2 -> com.mewannaplay.n:
+    com.mewannaplay.SplashScreenActivity this$0 -> a
+    50:98:void run() -> run
+    45:45:com.mewannaplay.SplashScreenActivity access$0(com.mewannaplay.SplashScreenActivity$2) -> a
+com.mewannaplay.SplashScreenActivity$2$1 -> com.mewannaplay.ah:
+    com.mewannaplay.SplashScreenActivity$2 this$1 -> a
+    68:92:void run() -> run
+    66:66:com.mewannaplay.SplashScreenActivity$2 access$0(com.mewannaplay.SplashScreenActivity$2$1) -> a
+com.mewannaplay.SplashScreenActivity$2$1$1 -> com.mewannaplay.l:
+    com.mewannaplay.SplashScreenActivity$2$1 this$2 -> a
+    81:84:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.SplashScreenActivity$3 -> com.mewannaplay.o:
+    com.mewannaplay.SplashScreenActivity this$0 -> a
+    140:193:void run() -> run
+    136:136:com.mewannaplay.SplashScreenActivity access$0(com.mewannaplay.SplashScreenActivity$3) -> a
+com.mewannaplay.SplashScreenActivity$3$1 -> com.mewannaplay.ae:
+    com.mewannaplay.SplashScreenActivity$3 this$1 -> a
+    155:158:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.SplashScreenActivity$3$2 -> com.mewannaplay.af:
+    com.mewannaplay.SplashScreenActivity$3 this$1 -> a
+    166:169:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.SplashScreenActivity$3$3 -> com.mewannaplay.ag:
+    com.mewannaplay.SplashScreenActivity$3 this$1 -> a
+    177:179:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.SplashScreenActivity$4 -> com.mewannaplay.m:
+    com.mewannaplay.SplashScreenActivity this$0 -> a
+    android.accounts.AccountManager val$mAccountManager -> b
+    243:282:void run() -> run
+com.mewannaplay.StateCityChoiceDialog -> com.mewannaplay.StateCityChoiceDialog:
+    android.widget.Spinner citySpinner -> a
+    android.widget.Spinner stateSpinner -> b
+    int stateSpinnerCurrentPos -> i
+    android.location.LocationManager locationManager -> locationManager
+    android.widget.TextView search -> c
+    android.widget.TextView errormsg -> d
+    android.graphics.Typeface bold -> e
+    android.graphics.Typeface heavy -> f
+    android.graphics.Typeface light -> g
+    android.graphics.Typeface normal -> h
+    59:109:void init() -> init
+    114:186:void onCreate(android.os.Bundle) -> onCreate
+    189:216:void setCurrentLocationButton() -> setCurrentLocationButton
+    220:226:java.lang.String getBestProvider() -> getBestProvider
+    233:245:void onOK(android.view.View) -> a
+    249:253:void initCursorForCitySpinner(java.lang.String) -> a
+    257:260:void chooseCurrentLocation(android.view.View) -> chooseCurrentLocation
+    31:31:int access$0(com.mewannaplay.StateCityChoiceDialog) -> a
+    31:31:void access$1(com.mewannaplay.StateCityChoiceDialog,int) -> a
+    247:247:void access$2(com.mewannaplay.StateCityChoiceDialog,java.lang.String) -> a
+    230:230:void access$3(com.mewannaplay.StateCityChoiceDialog,android.view.View) -> a
+com.mewannaplay.StateCityChoiceDialog$1 -> com.mewannaplay.c:
+    com.mewannaplay.StateCityChoiceDialog this$0 -> a
+    140:147:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    153:153:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+com.mewannaplay.StateCityChoiceDialog$2 -> com.mewannaplay.d:
+    com.mewannaplay.StateCityChoiceDialog this$0 -> a
+    177:179:void onClick(android.view.View) -> onClick
+com.mewannaplay.StateCityChoiceDialog$3 -> com.mewannaplay.b:
+    com.mewannaplay.StateCityChoiceDialog this$0 -> a
+    208:209:void onClick(android.view.View) -> onClick
+com.mewannaplay.Util -> com.mewannaplay.Util:
+    java.text.SimpleDateFormat fmt -> fmt
+    14:29:java.lang.String getUTCTimeForHourMinute(int,int) -> getUTCTimeForHourMinute
+    36:46:java.lang.String getLocalTimeFromUTC(java.lang.String) -> getLocalTimeFromUTC
+com.mewannaplay.ViewMessageActivity -> com.mewannaplay.ViewMessageActivity:
+    java.lang.String TAG -> z
+    com.mewannaplay.model.Message message -> A
+    android.app.AlertDialog alert -> B
+    android.widget.TextView viewcontact -> a
+    android.widget.TextView titleview -> b
+    android.widget.TextView titleuser -> c
+    android.widget.TextView user -> d
+    android.widget.TextView contact -> e
+    android.widget.TextView posted -> f
+    android.widget.TextView titlecontact -> g
+    android.widget.TextView titleposted -> h
+    android.widget.TextView titlesheduletime -> i
+    android.widget.TextView sheduletime -> j
+    android.widget.TextView playersneeded -> k
+    android.widget.TextView titleplayersneeded -> l
+    android.widget.TextView titlelevel -> m
+    android.widget.TextView level -> n
+    android.widget.TextView messageinfo -> o
+    android.widget.TextView titlemessage -> p
+    android.graphics.Typeface bold -> q
+    android.graphics.Typeface heavy -> r
+    android.graphics.Typeface light -> s
+    android.graphics.Typeface normal -> t
+    int courtId -> u
+    com.mewannaplay.EmailValidator validator -> v
+    android.widget.Button delete -> w
+    android.widget.Button deletepartner -> x
+    android.widget.Button back -> y
+    40:154:void onCreate(android.os.Bundle) -> onCreate
+    157:158:void viewBack(android.view.View) -> viewBack
+    161:162:void onDelete(android.view.View) -> onDelete
+    165:166:void onDeletePartnerFound(android.view.View) -> onDeletePartnerFound
+    169:186:void onDelete(boolean) -> onDelete
+    190:191:void deleteMessage(boolean) -> deleteMessage
+    195:220:void onPostExectureDeleteMessage(boolean) -> onPostExectureDeleteMessage
+    225:252:void viewcontact(android.view.View) -> viewcontact
+    257:264:void onClick(android.view.View) -> onClick
+com.mewannaplay.ViewMessageActivity$1 -> com.mewannaplay.h:
+    com.mewannaplay.ViewMessageActivity this$0 -> a
+    174:175:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.ViewMessageActivity$2 -> com.mewannaplay.g:
+    com.mewannaplay.ViewMessageActivity this$0 -> a
+    boolean val$partnerFound -> b
+    180:182:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.ViewMessageActivity$3 -> com.mewannaplay.i:
+    com.mewannaplay.ViewMessageActivity this$0 -> a
+    205:206:void onClick(android.content.DialogInterface,int) -> onClick
+com.mewannaplay.asynctask.BasicAsyncTask -> com.mewannaplay.asynctask.BasicAsyncTask:
+    java.lang.String TAG -> TAG
+    android.app.Activity ownerAcitivty -> ownerAcitivty
+    boolean running -> a
+    android.app.ProgressDialog progressDialog -> b
+    java.lang.String SERVER_URL -> c
+    com.mewannaplay.client.RequestMethods httpRequestMethod -> d
+    org.json.JSONObject jsonObjectToPost -> e
+    boolean isError -> f
+    java.lang.String errorMessage -> g
+    38:38:boolean isError() -> isError
+    44:44:java.lang.String getErrorMessage() -> getErrorMessage
+    85:88:void onCancelled() -> onCancelled
+    93:95:void onPreExecute() -> onPreExecute
+    101:105:void onPostExecute(java.lang.Boolean) -> onPostExecute
+    110:129:java.lang.Boolean doInBackground(java.lang.Void[]) -> doInBackground
+    134:134:boolean isInDatabase() -> isInDatabase
+    138:139:org.json.JSONObject sendRequest() -> sendRequest
+    void parseResponse(org.json.JSONObject) -> parseResponse
+    1:1:void onPostExecute(java.lang.Object) -> onPostExecute
+    1:1:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.mewannaplay.asynctask.BasicAsyncTask$1 -> com.mewannaplay.asynctask.a:
+    com.mewannaplay.asynctask.BasicAsyncTask this$0 -> a
+    72:73:void onCancel(android.content.DialogInterface) -> onCancel
+com.mewannaplay.asynctask.DeleteMessageAsyncTask -> com.mewannaplay.asynctask.DeleteMessageAsyncTask:
+    java.lang.String TAG -> TAG
+    int messageId -> a
+    30:33:java.lang.Boolean doInBackground(java.lang.Void[]) -> doInBackground
+    38:38:void parseResponse(org.json.JSONObject) -> parseResponse
+    44:46:void onPostExecute(java.lang.Boolean) -> onPostExecute
+com.mewannaplay.asynctask.GetAllMessagesForCourtAsyncTask -> com.mewannaplay.asynctask.GetAllMessagesForCourtAsyncTask:
+    27:29:java.lang.Boolean doInBackground(java.lang.Void[]) -> doInBackground
+    37:54:void parseResponse(org.json.JSONObject) -> parseResponse
+    58:60:void onPostExecute(java.lang.Boolean) -> onPostExecute
+com.mewannaplay.asynctask.GetCourtDetailsAsyncTask -> com.mewannaplay.asynctask.GetCourtDetailsAsyncTask:
+    java.lang.String TAG -> TAG
+    int courtId -> a
+    android.location.Location location -> b
+    36:47:boolean isInDatabase() -> isInDatabase
+    54:73:void parseResponse(org.json.JSONObject) -> parseResponse
+    78:80:void onPostExecute(java.lang.Boolean) -> onPostExecute
+com.mewannaplay.asynctask.GetPostedMessageAsyncTask -> com.mewannaplay.asynctask.GetPostedMessageAsyncTask:
+    27:29:java.lang.Boolean doInBackground(java.lang.Void[]) -> doInBackground
+    37:51:void parseResponse(org.json.JSONObject) -> parseResponse
+    55:57:void onPostExecute(java.lang.Boolean) -> onPostExecute
+com.mewannaplay.asynctask.MarkCourtOccupiedAsyncTask -> com.mewannaplay.asynctask.MarkCourtOccupiedAsyncTask:
+    22:22:void parseResponse(org.json.JSONObject) -> parseResponse
+    29:31:void onPostExecute(java.lang.Boolean) -> onPostExecute
+com.mewannaplay.asynctask.PostMessageAsyncTask -> com.mewannaplay.asynctask.PostMessageAsyncTask:
+    java.lang.String TAG -> TAG
+    26:26:void parseResponse(org.json.JSONObject) -> parseResponse
+    32:34:void onPostExecute(java.lang.Boolean) -> onPostExecute
+com.mewannaplay.authenticator.AuthenticationService -> com.mewannaplay.authenticator.AuthenticationService:
+    java.lang.String TAG -> a
+    com.mewannaplay.authenticator.Authenticator mAuthenticator -> b
+    37:38:void onCreate() -> onCreate
+    45:45:void onDestroy() -> onDestroy
+    54:54:android.os.IBinder onBind(android.content.Intent) -> onBind
+com.mewannaplay.authenticator.Authenticator -> com.mewannaplay.authenticator.a:
+    java.lang.String TAG -> a
+    android.content.Context mContext -> b
+    68:72:android.os.Bundle addAccount(android.accounts.AccountAuthenticatorResponse,java.lang.String,java.lang.String,java.lang.String[],android.os.Bundle) -> addAccount
+    79:79:android.os.Bundle confirmCredentials(android.accounts.AccountAuthenticatorResponse,android.accounts.Account,android.os.Bundle) -> confirmCredentials
+    85:85:android.os.Bundle editProperties(android.accounts.AccountAuthenticatorResponse,java.lang.String) -> editProperties
+    92:136:android.os.Bundle getAuthToken(android.accounts.AccountAuthenticatorResponse,android.accounts.Account,java.lang.String,android.os.Bundle) -> getAuthToken
+    143:143:java.lang.String getAuthTokenLabel(java.lang.String) -> getAuthTokenLabel
+    153:155:android.os.Bundle hasFeatures(android.accounts.AccountAuthenticatorResponse,android.accounts.Account,java.lang.String[]) -> hasFeatures
+    162:162:android.os.Bundle updateCredentials(android.accounts.AccountAuthenticatorResponse,android.accounts.Account,java.lang.String,android.os.Bundle) -> updateCredentials
+com.mewannaplay.authenticator.AuthenticatorActivity -> com.mewannaplay.authenticator.AuthenticatorActivity:
+    java.lang.String PARAM_CONFIRM_CREDENTIALS -> PARAM_CONFIRM_CREDENTIALS
+    java.lang.String PARAM_PASSWORD -> PARAM_PASSWORD
+    java.lang.String PARAM_USERNAME -> PARAM_USERNAME
+    java.lang.String PARAM_AUTHTOKEN_TYPE -> PARAM_AUTHTOKEN_TYPE
+    java.lang.String TAG -> m
+    android.accounts.AccountManager mAccountManager -> n
+    com.mewannaplay.authenticator.AuthenticatorActivity$UserLoginTask mAuthTask -> o
+    android.app.ProgressDialog mProgressDialog -> p
+    java.lang.Boolean mConfirmCredentials -> q
+    android.os.Handler mHandler -> r
+    android.widget.TextView mMessage -> s
+    android.graphics.Typeface bold -> a
+    android.graphics.Typeface heavy -> b
+    android.graphics.Typeface light -> c
+    android.graphics.Typeface normal -> d
+    android.widget.Button newuserregi -> e
+    android.widget.Button go -> f
+    java.lang.String mPassword -> t
+    android.widget.EditText mPasswordEdit -> u
+    com.mewannaplay.authenticator.ConnectivityReceiver connection -> v
+    boolean mRequestNewAccount -> mRequestNewAccount
+    java.lang.String mUsername -> w
+    android.widget.TextView login -> g
+    android.widget.EditText mUsernameEdit -> x
+    android.os.Handler handler -> y
+    android.accounts.AccountManagerFuture accountManagerFuture -> h
+    android.widget.Button forgotusername -> i
+    android.widget.Button anologin -> j
+    android.widget.TextView usertext -> k
+    android.widget.TextView passtext -> l
+    115:159:void onCreate(android.os.Bundle) -> onCreate
+    161:165:void onForgotusername(android.view.View) -> onForgotusername
+    171:173:void onPause() -> onPause
+    178:180:void onResume() -> onResume
+    187:203:android.app.Dialog onCreateDialog(int,android.os.Bundle) -> onCreateDialog
+    216:238:void handleLogin(android.view.View) -> handleLogin
+    244:272:void handleAnnonymousLogin(android.view.View) -> handleAnnonymousLogin
+    284:291:void finishConfirmCredentials(boolean) -> a
+    306:343:void finishLogin() -> a
+    347:362:void finishLoginWithFailure() -> b
+    373:412:void onAuthenticationResult() -> onAuthenticationResult
+    418:431:java.lang.CharSequence getMessage() -> c
+    438:439:void showProgress() -> d
+    445:449:void hideProgress() -> e
+    492:498:java.lang.String encryptPassword(java.lang.String) -> encryptPassword
+    504:506:void onNewUserRegister(android.view.View) -> onNewUserRegister
+    512:535:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    100:100:java.lang.String access$0(com.mewannaplay.authenticator.AuthenticatorActivity) -> a
+    92:92:java.lang.String access$1(com.mewannaplay.authenticator.AuthenticatorActivity) -> b
+    74:74:com.mewannaplay.authenticator.AuthenticatorActivity$UserLoginTask access$2(com.mewannaplay.authenticator.AuthenticatorActivity) -> c
+com.mewannaplay.authenticator.AuthenticatorActivity$1 -> com.mewannaplay.authenticator.b:
+    com.mewannaplay.authenticator.AuthenticatorActivity this$0 -> a
+    194:197:void onCancel(android.content.DialogInterface) -> onCancel
+com.mewannaplay.authenticator.AuthenticatorActivity$UserLoginTask -> com.mewannaplay.authenticator.AuthenticatorActivity$UserLoginTask:
+    java.lang.String error -> b
+    com.mewannaplay.authenticator.AuthenticatorActivity this$0 -> a
+    460:460:java.lang.String getError() -> getError
+    468:476:java.lang.Void doInBackground(java.lang.Void[]) -> doInBackground
+    483:485:void onPostExecute(java.lang.Void) -> onPostExecute
+    1:1:void onPostExecute(java.lang.Object) -> onPostExecute
+    1:1:java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.mewannaplay.authenticator.ConnectivityReceiver -> com.mewannaplay.authenticator.ConnectivityReceiver:
+    android.net.ConnectivityManager connectivityManager -> a
+    com.mewannaplay.authenticator.ConnectivityReceiver$OnNetworkAvailableListener onNetworkAvailableListener -> b
+    boolean connection -> c
+    28:32:void bind(android.content.Context) -> bind
+    35:36:void unbind(android.content.Context) -> unbind
+    39:52:void checkConnectionOnDemand() -> a
+    56:68:void onReceive(android.content.Context,android.content.Intent) -> onReceive
+    71:71:boolean hasConnection() -> hasConnection
+    75:76:void setOnNetworkAvailableListener(com.mewannaplay.authenticator.ConnectivityReceiver$OnNetworkAvailableListener) -> setOnNetworkAvailableListener
+com.mewannaplay.authenticator.ConnectivityReceiver$OnNetworkAvailableListener -> com.mewannaplay.authenticator.ConnectivityReceiver$OnNetworkAvailableListener:
+    void onNetworkAvailable() -> onNetworkAvailable
+    void onNetworkUnavailable() -> onNetworkUnavailable
+com.mewannaplay.client.CookieManager -> com.mewannaplay.client.CookieManager:
+    java.util.Map store -> a
+    java.lang.String SET_COOKIE -> b
+    java.lang.String COOKIE_VALUE_DELIMITER -> c
+    java.lang.String PATH -> d
+    java.lang.String EXPIRES -> e
+    java.lang.String DATE_FORMAT -> f
+    java.lang.String SET_COOKIE_SEPARATOR -> g
+    java.lang.String COOKIE -> h
+    char NAME_VALUE_SEPARATOR -> i
+    char DOT -> j
+    java.text.DateFormat dateFormat -> k
+    69:113:void storeCookies(java.net.URLConnection) -> storeCookies
+    129:156:void setCookies(java.net.URLConnection) -> setCookies
+    159:162:java.lang.String getDomainFromHost(java.lang.String) -> a
+    167:173:boolean isNotExpired(java.lang.String) -> b
+    178:185:boolean comparePaths(java.lang.String,java.lang.String) -> a
+    195:195:java.lang.String toString() -> toString
+    199:210:void main(java.lang.String[]) -> main
+com.mewannaplay.client.RequestMethods -> com.mewannaplay.client.RequestMethods:
+    com.mewannaplay.client.RequestMethods GET -> GET
+    com.mewannaplay.client.RequestMethods POST -> POST
+    com.mewannaplay.client.RequestMethods DELETE -> DELETE
+    com.mewannaplay.client.RequestMethods PUT -> PUT
+    com.mewannaplay.client.RequestMethods[] ENUM$VALUES -> a
+    1:1:com.mewannaplay.client.RequestMethods[] values() -> values
+    1:1:com.mewannaplay.client.RequestMethods valueOf(java.lang.String) -> valueOf
+com.mewannaplay.client.RestClient -> com.mewannaplay.client.RestClient:
+    java.lang.String message -> a
+    java.lang.String response -> b
+    int responseCode -> c
+    java.lang.String url -> d
+    java.lang.String TAG -> e
+    boolean loggedIn -> f
+    com.mewannaplay.client.RestClient restClient -> g
+    com.mewannaplay.client.CookieManager cookieManager -> h
+    int[] $SWITCH_TABLE$com$mewannaplay$client$RequestMethods -> i
+    64:64:org.json.JSONObject execute() -> execute
+    70:146:org.json.JSONObject execute(com.mewannaplay.client.RequestMethods,org.json.JSONObject) -> execute
+    154:159:com.google.gson.stream.JsonReader excuteGetAndReturnStream() -> excuteGetAndReturnStream
+    165:221:java.io.InputStream excuteAndReturnInputStream(com.mewannaplay.client.RequestMethods,org.json.JSONObject) -> a
+    227:227:java.lang.String getErrorMessage() -> getErrorMessage
+    231:231:java.lang.String getResponse() -> getResponse
+    235:235:int getResponseCode() -> getResponseCode
+    242:275:void login(java.lang.String,java.lang.String) -> login
+    279:294:void logout() -> logout
+    298:327:void registerNewUser(java.lang.String,java.lang.String,java.lang.String) -> registerNewUser
+    330:330:boolean isLoggedIn() -> isLoggedIn
+    32:32:int[] $SWITCH_TABLE$com$mewannaplay$client$RequestMethods() -> a
+com.mewannaplay.mapoverlay.MyItemizedOverlay -> com.mewannaplay.mapoverlay.MyItemizedOverlay:
+    java.util.List m_overlays -> b
+    android.content.Context c -> c
+    boolean isMapMoving -> isMapMoving
+    java.lang.String filenames -> filenames
+    58:62:void addOverlays(java.util.Collection) -> addOverlays
+    66:66:com.google.android.maps.OverlayItem createItem(int) -> createItem
+    73:73:int size() -> size
+    78:78:java.util.List getOverlays() -> getOverlays
+    83:88:boolean onBalloonTap(int) -> onBalloonTap
+    110:148:void draw(android.graphics.Canvas,com.google.android.maps.MapView,boolean) -> draw
+    227:233:void clear() -> clear
+    236:236:boolean isMapMoving() -> isMapMoving
+    240:241:void setMapMoving(boolean) -> setMapMoving
+com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter -> com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter:
+    java.lang.String TAG -> a
+    int id -> b
+    com.mewannaplay.model.TennisCourt tc -> c
+    java.lang.String SNIPPET -> SNIPPET
+    android.graphics.drawable.Drawable publicSemiOccupiedCourt -> d
+    android.graphics.drawable.Drawable publicNotOccupiedCourt -> e
+    android.graphics.drawable.Drawable publicFullyOccupiedCourt -> f
+    android.graphics.drawable.Drawable privateSemiOccupiedCourt -> g
+    android.graphics.drawable.Drawable privateNotOccupiedCourt -> h
+    android.graphics.drawable.Drawable privateFullyOccupiedCourt -> i
+    android.graphics.drawable.Drawable privateCourtInProximity -> j
+    android.graphics.drawable.Drawable publicCourtInProximity -> k
+    android.graphics.drawable.Drawable flagOccupied -> l
+    29:30:void setId(int) -> setId
+    32:32:int getId() -> getId
+    127:127:java.lang.String getSnippet() -> getSnippet
+    140:171:android.graphics.drawable.Drawable getMarker(int) -> getMarker
+    177:177:com.mewannaplay.model.TennisCourt getTennisCourt() -> getTennisCourt
+    181:188:android.location.Location getLocation() -> getLocation
+    218:221:int hashCode() -> hashCode
+    226:233:boolean equals(java.lang.Object) -> equals
+com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter$TennisCourtComparator -> com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter$TennisCourtComparator:
+    199:210:int compare(com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter,com.mewannaplay.mapoverlay.TennisCourtOverlayItemAdapter) -> compare
+    1:1:int compare(java.lang.Object,java.lang.Object) -> compare
+com.mewannaplay.model.City -> com.mewannaplay.model.City:
+    long serialVersionUID -> serialVersionUID
+    int id -> id
+    java.lang.String name -> name
+    java.lang.String abbreviation -> abbreviation
+    double latitude -> latitude
+    double longitude -> longitude
+    35:35:int getId() -> getId
+    38:39:void setId(int) -> setId
+    41:41:java.lang.String getName() -> getName
+    44:45:void setName(java.lang.String) -> setName
+    47:47:java.lang.String getAbbreviation() -> getAbbreviation
+    50:51:void setAbbreviation(java.lang.String) -> setAbbreviation
+    53:53:double getLatitude() -> getLatitude
+    56:57:void setLatitude(double) -> setLatitude
+    59:59:double getLongitude() -> getLongitude
+    62:63:void setLongitude(double) -> setLongitude
+    67:71:com.mewannaplay.model.City[] fromJSONObjectArray(org.json.JSONObject) -> fromJSONObjectArray
+    77:83:android.content.ContentValues toContentValue() -> toContentValue
+com.mewannaplay.model.Message -> com.mewannaplay.model.Message:
+    int id -> id
+    java.lang.String text -> text
+    java.lang.String user -> user
+    java.lang.String userName -> userName
+    java.lang.String level -> level
+    java.lang.String scheduleTime -> scheduleTime
+    java.lang.String contactInfo -> contactInfo
+    java.lang.String playerNeeded -> playerNeeded
+    int contactTypeId -> contactTypeId
+    java.lang.String timeposted -> timeposted
+    int tennisCourtId -> tennisCourtId
+    46:46:int getId() -> getId
+    51:52:void setId(int) -> setId
+    56:56:java.lang.String getText() -> getText
+    61:62:void setText(java.lang.String) -> setText
+    66:66:java.lang.String getUser() -> getUser
+    71:72:void setUser(java.lang.String) -> setUser
+    76:76:java.lang.String getUserName() -> getUserName
+    81:82:void setUserName(java.lang.String) -> setUserName
+    86:86:java.lang.String getLevel() -> getLevel
+    91:92:void setLevel(java.lang.String) -> setLevel
+    96:96:java.lang.String getScheduleTime() -> getScheduleTime
+    101:102:void setScheduleTime(java.lang.String) -> setScheduleTime
+    106:106:java.lang.String getContactInfo() -> getContactInfo
+    111:112:void setContactInfo(java.lang.String) -> setContactInfo
+    116:116:java.lang.String getPlayerNeeded() -> getPlayerNeeded
+    121:122:void setPlayerNeeded(java.lang.String) -> setPlayerNeeded
+    126:126:int getContactTypeId() -> getContactTypeId
+    131:132:void setContactTypeId(int) -> setContactTypeId
+    136:136:java.lang.String getTimeposted() -> getTimeposted
+    141:142:void setTimeposted(java.lang.String) -> setTimeposted
+    146:146:int getTennisCourtId() -> getTennisCourtId
+    151:152:void setTennisCourtId(int) -> setTennisCourtId
+    157:161:com.mewannaplay.model.Message[] fromJSONObject(org.json.JSONObject) -> fromJSONObject
+    166:169:com.mewannaplay.model.Message fromSingleJSONObject(org.json.JSONObject) -> fromSingleJSONObject
+    174:187:org.json.JSONObject toJSONObject() -> toJSONObject
+    193:204:android.content.ContentValues toContentValue() -> toContentValue
+    210:221:com.mewannaplay.model.Message fromCursor(android.database.Cursor) -> fromCursor
+com.mewannaplay.model.NewUser -> com.mewannaplay.model.NewUser:
+    java.lang.String userName -> userName
+    java.lang.String password -> password
+    java.lang.String email -> email
+    28:28:java.lang.String getUserName() -> getUserName
+    31:32:void setUserName(java.lang.String) -> setUserName
+    34:34:java.lang.String getPassword() -> getPassword
+    37:38:void setPassword(java.lang.String) -> setPassword
+    41:41:java.lang.String getEmail() -> getEmail
+    44:45:void setEmail(java.lang.String) -> setEmail
+    52:58:org.json.JSONObject toJSONObject() -> toJSONObject
+com.mewannaplay.model.Status -> com.mewannaplay.model.Status:
+    java.lang.String error -> error
+    int code -> code
+    java.lang.String description -> description
+    java.lang.String message -> message
+    10:10:java.lang.String getError() -> getError
+    13:14:void setError(java.lang.String) -> setError
+    16:16:int getCode() -> getCode
+    19:20:void setCode(int) -> setCode
+    22:22:java.lang.String getDescription() -> getDescription
+    25:26:void setDescription(java.lang.String) -> setDescription
+    28:28:java.lang.String getMessage() -> getMessage
+    31:32:void setMessage(java.lang.String) -> setMessage
+    36:36:boolean isNotSuccess() -> isNotSuccess
+com.mewannaplay.model.TennisCourt -> com.mewannaplay.model.TennisCourt:
+    int id -> id
+    double latitude -> latitude
+    double longitude -> longitude
+    int subcourts -> subcourts
+    int occupied -> occupied
+    java.lang.String facilityType -> facilityType
+    java.lang.String name -> name
+    int messageCount -> messageCount
+    java.lang.String city -> city
+    java.lang.String state -> state
+    java.lang.String countyName -> countyName
+    java.lang.String abbreviation -> abbreviation
+    67:67:int getId() -> getId
+    71:72:void setId(int) -> setId
+    75:75:double getLatitude() -> getLatitude
+    79:80:void setLatitude(double) -> setLatitude
+    83:83:double getLongitude() -> getLongitude
+    87:88:void setLongitude(double) -> setLongitude
+    91:91:int getSubcourts() -> getSubcourts
+    95:96:void setSubcourts(int) -> setSubcourts
+    99:99:java.lang.String getFacilityType() -> getFacilityType
+    103:104:void setFacilityType(java.lang.String) -> setFacilityType
+    107:107:java.lang.String getName() -> getName
+    111:112:void setName(java.lang.String) -> setName
+    115:115:int getMessageCount() -> getMessageCount
+    119:120:void setMessageCount(int) -> setMessageCount
+    123:123:boolean isPrivate() -> isPrivate
+    127:127:int getOccupied() -> getOccupied
+    131:131:boolean isOccupied() -> isOccupied
+    135:135:boolean isPartiallyOccupied() -> isPartiallyOccupied
+    140:140:boolean isNotOccupied() -> isNotOccupied
+    144:144:java.lang.String getCity() -> getCity
+    148:149:void setCity(java.lang.String) -> setCity
+    152:152:java.lang.String getState() -> getState
+    156:157:void setState(java.lang.String) -> setState
+    160:160:java.lang.String getCountyName() -> getCountyName
+    164:165:void setCountyName(java.lang.String) -> setCountyName
+    168:168:java.lang.String getAbbreviation() -> getAbbreviation
+    172:173:void setAbbreviation(java.lang.String) -> setAbbreviation
+    176:177:void setOccupied(int) -> setOccupied
+    181:181:com.google.android.maps.GeoPoint getGeoPoint() -> getGeoPoint
+    186:199:android.content.ContentValues toContentValue() -> toContentValue
+    204:206:com.mewannaplay.model.TennisCourt[] fromJSONObjectArray(org.json.JSONObject) -> fromJSONObjectArray
+com.mewannaplay.model.TennisCourtDetails -> com.mewannaplay.model.TennisCourtDetails:
+    int id -> id
+    java.lang.String name -> name
+    java.lang.String address -> address
+    java.lang.String zipcode -> zipcode
+    java.lang.String url -> url
+    java.lang.String facilityType -> facilityType
+    int subcourts -> subcourts
+    java.lang.String timings -> timings
+    java.lang.String city -> city
+    java.lang.String state -> state
+    java.lang.String abbreviation -> abbreviation
+    java.lang.String surfaceType -> surfaceType
+    java.lang.String phone -> phone
+    com.mewannaplay.model.TennisCourtDetails$TennisActivity[] tennisActivities -> tennisActivities
+    com.mewannaplay.model.TennisCourtDetails$TennisAmenity[] tennisAmeneties -> tennisAmeneties
+    159:159:int getId() -> getId
+    162:163:void setId(int) -> setId
+    165:165:java.lang.String getName() -> getName
+    168:169:void setName(java.lang.String) -> setName
+    171:171:java.lang.String getAddress() -> getAddress
+    174:175:void setAddress(java.lang.String) -> setAddress
+    177:177:java.lang.String getZipcode() -> getZipcode
+    180:181:void setZipcode(java.lang.String) -> setZipcode
+    183:183:java.lang.String getUrl() -> getUrl
+    186:187:void setUrl(java.lang.String) -> setUrl
+    189:189:java.lang.String getFacilityType() -> getFacilityType
+    192:193:void setFacilityType(java.lang.String) -> setFacilityType
+    195:195:int getSubcourts() -> getSubcourts
+    198:199:void setSubcourts(int) -> setSubcourts
+    201:201:java.lang.String getTennisTimings() -> getTennisTimings
+    204:205:void setTennisTimings(java.lang.String) -> setTennisTimings
+    207:207:java.lang.String getCity() -> getCity
+    210:211:void setCity(java.lang.String) -> setCity
+    213:213:java.lang.String getState() -> getState
+    216:217:void setState(java.lang.String) -> setState
+    219:219:java.lang.String getAbbreviation() -> getAbbreviation
+    222:223:void setAbbreviation(java.lang.String) -> setAbbreviation
+    226:226:java.lang.String getPhone() -> getPhone
+    229:230:void setPhone(java.lang.String) -> setPhone
+    232:232:com.mewannaplay.model.TennisCourtDetails$TennisActivity[] getTennisActivities() -> getTennisActivities
+    235:236:void setTennisActivities(com.mewannaplay.model.TennisCourtDetails$TennisActivity[]) -> setTennisActivities
+    238:238:com.mewannaplay.model.TennisCourtDetails$TennisAmenity[] getTennisAmeneties() -> getTennisAmeneties
+    241:242:void setTennisAmeneties(com.mewannaplay.model.TennisCourtDetails$TennisAmenity[]) -> setTennisAmeneties
+    244:244:java.lang.String getTimings() -> getTimings
+    247:248:void setTimings(java.lang.String) -> setTimings
+    250:250:java.lang.String getSurfaceType() -> getSurfaceType
+    253:254:void setSurfaceType(java.lang.String) -> setSurfaceType
+    284:335:com.mewannaplay.model.TennisCourtDetails fromJSONObject(org.json.JSONObject) -> fromJSONObject
+    341:355:android.content.ContentValues toContentValue() -> toContentValue
+    362:393:com.mewannaplay.model.TennisCourtDetails fromCursor(android.database.Cursor,android.database.Cursor,android.database.Cursor) -> fromCursor
+    398:400:java.lang.String nonNullString(java.lang.String) -> nonNullString
+    405:418:android.content.ContentValues[] contentValuesForActivity() -> contentValuesForActivity
+    423:436:android.content.ContentValues[] contentValuesForAmenity() -> contentValuesForAmenity
+    30:30:int access$0(com.mewannaplay.model.TennisCourtDetails) -> access$0
+com.mewannaplay.model.TennisCourtDetails$TennisActivity -> com.mewannaplay.model.TennisCourtDetails$TennisActivity:
+    int typeId -> typeId
+    java.lang.String remarks -> remarks
+    com.mewannaplay.model.TennisCourtDetails this$0 -> this$0
+    72:72:int getTypeId() -> getTypeId
+    75:76:void setTypeId(int) -> setTypeId
+    78:78:java.lang.String getRemarks() -> getRemarks
+    81:82:void setRemarks(java.lang.String) -> setRemarks
+    86:90:android.content.ContentValues toContentValue() -> toContentValue
+    95:98:com.mewannaplay.model.TennisCourtDetails$TennisActivity fromCursor(android.database.Cursor) -> fromCursor
+com.mewannaplay.model.TennisCourtDetails$TennisAmenity -> com.mewannaplay.model.TennisCourtDetails$TennisAmenity:
+    int typeId -> typeId
+    java.lang.String remarks -> remarks
+    com.mewannaplay.model.TennisCourtDetails this$0 -> this$0
+    110:110:int getTypeId() -> getTypeId
+    113:114:void setTypeId(int) -> setTypeId
+    116:116:java.lang.String getRemarks() -> getRemarks
+    119:120:void setRemarks(java.lang.String) -> setRemarks
+    123:127:android.content.ContentValues toContentValue() -> toContentValue
+    131:134:com.mewannaplay.model.TennisCourtDetails$TennisAmenity fromCursor(android.database.Cursor) -> fromCursor
+com.mewannaplay.model.TennisCourtDetails$TennisContact -> com.mewannaplay.model.TennisCourtDetails$TennisContact:
+    int typeId -> typeId
+    java.lang.String contactDetails -> contactDetails
+    com.mewannaplay.model.TennisCourtDetails this$0 -> this$0
+    145:145:int getTypeId() -> getTypeId
+    148:149:void setTypeId(int) -> setTypeId
+    151:151:java.lang.String getContactDetails() -> getContactDetails
+    154:155:void setContactDetails(java.lang.String) -> setContactDetails
+com.mewannaplay.model.User -> com.mewannaplay.model.User:
+    java.lang.String userName -> userName
+    java.lang.String password -> password
+    25:25:java.lang.String getUserName() -> getUserName
+    28:29:void setUserName(java.lang.String) -> setUserName
+    31:31:java.lang.String getPassword() -> getPassword
+    34:35:void setPassword(java.lang.String) -> setPassword
+    39:43:org.json.JSONObject toJSONObject() -> toJSONObject
+com.mewannaplay.providers.DatabaseHelper -> com.mewannaplay.providers.DatabaseHelper:
+    java.lang.String DATABASE_NAME -> DATABASE_NAME
+    int DATABASE_VERSION -> DATABASE_VERSION
+    java.lang.String TENNIS_COURT_TABLE_NAME -> TENNIS_COURT_TABLE_NAME
+    java.lang.String TENNIS_COURT_DETAILS_TABLE_NAME -> TENNIS_COURT_DETAILS_TABLE_NAME
+    java.lang.String MESSAGES_TABLE_NAME -> MESSAGES_TABLE_NAME
+    java.lang.String CITIES_TABLE_NAME -> CITIES_TABLE_NAME
+    java.lang.String TENNIS_COURT_ACIVITY_TABLE_NAME -> TENNIS_COURT_ACIVITY_TABLE_NAME
+    java.lang.String TENNIS_COURT_AMENITY_TABLE_NAME -> TENNIS_COURT_AMENITY_TABLE_NAME
+    java.lang.String TAG -> TAG
+    26:95:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    101:102:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+com.mewannaplay.providers.GPS -> com.mewannaplay.providers.GPS:
+    java.lang.String GOOGLE_GEOCODER -> GOOGLE_GEOCODER
+    long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES -> MINIMUM_DISTANCE_CHANGE_FOR_UPDATES
+    long MINIMUM_TIME_BETWEEN_UPDATES -> MINIMUM_TIME_BETWEEN_UPDATES
+    android.location.LocationManager locationManager -> locationManager
+    double latitude -> latitude
+    double longitude -> longitude
+    android.content.Context c -> c
+    40:45:void gpsInitializer(android.content.Context) -> gpsInitializer
+    50:50:double getLatitude() -> getLatitude
+    56:56:double getLongitude() -> getLongitude
+    63:73:void showCurrentLocation() -> showCurrentLocation
+    76:81:android.location.Location getCurrentLocation() -> getCurrentLocation
+com.mewannaplay.providers.GPS$MyLocationListener -> com.mewannaplay.providers.GPS$MyLocationListener:
+    com.mewannaplay.providers.GPS this$0 -> this$0
+    86:90:void onLocationChanged(android.location.Location) -> onLocationChanged
+    94:94:void onStatusChanged(java.lang.String,int,android.os.Bundle) -> onStatusChanged
+    98:98:void onProviderDisabled(java.lang.String) -> onProviderDisabled
+    102:102:void onProviderEnabled(java.lang.String) -> onProviderEnabled
+com.mewannaplay.providers.ProviderContract -> com.mewannaplay.providers.ProviderContract:
+    java.lang.String AUTHORITY -> AUTHORITY
+    android.net.Uri AUTHORITY_URI -> AUTHORITY_URI
+com.mewannaplay.providers.ProviderContract$Acitivity -> com.mewannaplay.providers.ProviderContract$Acitivity:
+    android.net.Uri CONTENT_URI -> CONTENT_URI
+    java.lang.String CITIES_CONTENT_TYPE -> CITIES_CONTENT_TYPE
+com.mewannaplay.providers.ProviderContract$Amenity -> com.mewannaplay.providers.ProviderContract$Amenity:
+    android.net.Uri CONTENT_URI -> CONTENT_URI
+    java.lang.String CITIES_CONTENT_TYPE -> CITIES_CONTENT_TYPE
+com.mewannaplay.providers.ProviderContract$Cities -> com.mewannaplay.providers.ProviderContract$Cities:
+    android.net.Uri CONTENT_URI -> CONTENT_URI
+    java.lang.String CITIES_CONTENT_TYPE -> CITIES_CONTENT_TYPE
+com.mewannaplay.providers.ProviderContract$Messages -> com.mewannaplay.providers.ProviderContract$Messages:
+    android.net.Uri CONTENT_URI -> CONTENT_URI
+    java.lang.String TENNIS_COURTS_CONTENT_TYPE -> TENNIS_COURTS_CONTENT_TYPE
+com.mewannaplay.providers.ProviderContract$TennisCourts -> com.mewannaplay.providers.ProviderContract$TennisCourts:
+    android.net.Uri CONTENT_URI -> CONTENT_URI
+    java.lang.String TENNIS_COURTS_CONTENT_TYPE -> TENNIS_COURTS_CONTENT_TYPE
+    java.lang.String TENNIS_COURT_ID -> TENNIS_COURT_ID
+    java.lang.String TENNIS_LATITUDE -> TENNIS_LATITUDE
+    java.lang.String TENNIS_LONGITUDE -> TENNIS_LONGITUDE
+    java.lang.String TENNIS_SUBCOURTS -> TENNIS_SUBCOURTS
+    java.lang.String OCCUPIED -> OCCUPIED
+    java.lang.String TENNIS_FACILITY_TYPE -> TENNIS_FACILITY_TYPE
+    java.lang.String TENNIS_NAME -> TENNIS_NAME
+    java.lang.String MESSAGE_COUNT -> MESSAGE_COUNT
+com.mewannaplay.providers.ProviderContract$TennisCourtsDetails -> com.mewannaplay.providers.ProviderContract$TennisCourtsDetails:
+    android.net.Uri CONTENT_URI -> CONTENT_URI
+    java.lang.String TENNIS_COURTS_CONTENT_TYPE -> TENNIS_COURTS_CONTENT_TYPE
+    java.lang.String TENNIS_COURT_ID -> TENNIS_COURT_ID
+    java.lang.String TENNIS_LATITUDE -> TENNIS_LATITUDE
+    java.lang.String TENNIS_LONGITUDE -> TENNIS_LONGITUDE
+    java.lang.String TENNIS_SUBCOURTS -> TENNIS_SUBCOURTS
+    java.lang.String OCCUPIED -> OCCUPIED
+    java.lang.String FACILITY_TYPE -> FACILITY_TYPE
+    java.lang.String TENNIS_NAME -> TENNIS_NAME
+    java.lang.String MESSAGE_COUNT -> MESSAGE_COUNT
+    java.lang.String CITY -> CITY
+    java.lang.String STATE -> STATE
+    java.lang.String ABBREVIATION -> ABBREVIATION
+    java.lang.String PHONE -> PHONE
+    java.lang.String ZIPCODE -> ZIPCODE
+com.mewannaplay.providers.TennisCourtProvider -> com.mewannaplay.providers.TennisCourtProvider:
+    java.lang.String TAG -> TAG
+    android.content.UriMatcher sUriMatcher -> sUriMatcher
+    java.util.HashMap tennisCourtProjectMap -> tennisCourtProjectMap
+    com.mewannaplay.providers.DatabaseHelper dbHelper -> dbHelper
+    int TENNISCOURTS -> TENNISCOURTS
+    int TENNISCOURTSDETAILS -> TENNISCOURTSDETAILS
+    int TENNISCOURTSDETAILS_ID -> TENNISCOURTSDETAILS_ID
+    int MESSAGES -> MESSAGES
+    int CITIES -> CITIES
+    int ACTIVITY -> ACTIVITY
+    int AMENITY -> AMENITY
+    61:87:int delete(android.net.Uri,java.lang.String,java.lang.String[]) -> delete
+    92:97:java.lang.String getType(android.net.Uri) -> getType
+    103:145:android.net.Uri insert(android.net.Uri,android.content.ContentValues) -> insert
+    152:309:int bulkInsert(android.net.Uri,android.content.ContentValues[]) -> bulkInsert
+    314:315:boolean onCreate() -> onCreate
+    323:359:android.database.Cursor query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String) -> query
+    368:381:int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[]) -> update
+    389:501:void bulkUpdateTennisCourts(com.google.gson.stream.JsonReader) -> bulkUpdateTennisCourts
+    508:676:void bullkInsertCourts(com.google.gson.stream.JsonReader) -> bullkInsertCourts
+com.mewannaplay.syncadapter.SyncAdapter -> com.mewannaplay.syncadapter.SyncAdapter:
+    java.lang.String TAG -> a
+    java.lang.String SYNC_FINISHED_ACTION -> SYNC_FINISHED_ACTION
+    java.lang.String SYNC_ERROR -> SYNC_ERROR
+    java.lang.String SYNC_IN_PROGRESS -> SYNC_IN_PROGRESS
+    java.lang.String MESSAGE -> MESSAGE
+    java.lang.String PROGRESS -> PROGRESS
+    java.lang.String OPERATION -> OPERATION
+    java.lang.String ACKNOWLEDGEMENT_NEEDED -> ACKNOWLEDGEMENT_NEEDED
+    int GET_ALL_COURTS -> GET_ALL_COURTS
+    int GET_COURT_DETAILS -> GET_COURT_DETAILS
+    int GET_COURT_MESSAGES -> GET_COURT_MESSAGES
+    int POST_MESSAGE -> POST_MESSAGE
+    int MARK_COURT_OCCUPIED -> MARK_COURT_OCCUPIED
+    int GET_ALL_CITIES -> GET_ALL_CITIES
+    int DELETE_MESSAGE -> DELETE_MESSAGE
+    int GET_OCCUPIED_COURT_AND_POSTED_MSG -> GET_OCCUPIED_COURT_AND_POSTED_MSG
+    int GET_COURT_MESSAGE_BY_ID -> GET_COURT_MESSAGE_BY_ID
+    int GET_ALL_COURTS_STATS -> GET_ALL_COURTS_STATS
+    java.lang.String COURT_ID -> COURT_ID
+    java.lang.String MESSAGE_ID -> MESSAGE_ID
+    java.lang.String PARTNER_FOUND -> PARTNER_FOUND
+    java.lang.String MESSAGE_OBJECT_KEY -> MESSAGE_OBJECT_KEY
+    113:209:void onPerformSync(android.accounts.Account,android.os.Bundle,java.lang.String,android.content.ContentProviderClient,android.content.SyncResult) -> onPerformSync
+    216:216:void onSyncCanceled() -> onSyncCanceled
+    226:266:void getOccupiedCourtAndPostedMsg() -> a
+    269:273:void markCourtOccupied(int) -> a
+    278:331:void getAllCourts() -> b
+    337:351:void getAllCourtStats() -> c
+    355:378:void getCourtDetails(int) -> getCourtDetails
+    383:402:void getCourtMessages(int) -> getCourtMessages
+    409:426:void getCourtMessageByTennisCourtId(int) -> b
+    432:457:void getAllCities() -> getAllCities
+    462:465:void postMessage(int,org.json.JSONObject) -> postMessage
+    469:478:void deleteMessage(int,int,boolean) -> deleteMessage
+    481:488:android.os.Bundle getAllCourtsBundle() -> getAllCourtsBundle
+    492:502:android.os.Bundle getAllCourtsDetailBundle(int) -> getAllCourtsDetailBundle
+    507:515:android.os.Bundle getMessagePostedByUserBundle(int) -> getMessagePostedByUserBundle
+    521:530:android.os.Bundle getAllMessagesBundle(int) -> getAllMessagesBundle
+    537:540:android.os.Bundle getOccupiedCourtAndPostedMsgBundle() -> getOccupiedCourtAndPostedMsgBundle
+    545:552:android.os.Bundle getAllCitiesBundle() -> getAllCitiesBundle
+    556:566:android.os.Bundle getPostMessageBundle(int,java.lang.String) -> getPostMessageBundle
+    570:580:android.os.Bundle getDeleteMessageBundle(int,int,boolean) -> getDeleteMessageBundle
+    584:592:android.os.Bundle getMarkOccupiedBundle(int) -> getMarkOccupiedBundle
+    596:599:android.os.Bundle getAllCourtsStatsBundle() -> getAllCourtsStatsBundle
+com.mewannaplay.syncadapter.SyncService -> com.mewannaplay.syncadapter.SyncService:
+    java.lang.Object sSyncAdapterLock -> a
+    com.mewannaplay.syncadapter.SyncAdapter sSyncAdapter -> b
+    39:44:void onCreate() -> onCreate
+    51:51:android.os.IBinder onBind(android.content.Intent) -> onBind
+com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay -> com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay:
+    com.google.android.maps.MapView mapView -> b
+    com.readystatesoftware.mapviewballoons.BalloonOverlayView balloonView -> c
+    android.view.View clickRegion -> d
+    int viewOffset -> e
+    com.google.android.maps.MapController mc -> a
+    75:76:void setBalloonBottomOffset(int) -> setBalloonBottomOffset
+    86:86:boolean onBalloonTap(int) -> onBalloonTap
+    99:136:boolean onTap(int) -> onTap
+    143:146:void hideBalloon() -> a
+    156:162:void hideOtherBalloons(java.util.List) -> a
+    174:211:void setBalloonTouchListener(int) -> a
+com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay$1 -> com.readystatesoftware.mapviewballoons.b:
+    com.readystatesoftware.mapviewballoons.BalloonItemizedOverlay this$0 -> a
+    int val$thisIndex -> b
+    179:197:boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+com.readystatesoftware.mapviewballoons.BalloonOverlayView -> com.readystatesoftware.mapviewballoons.BalloonOverlayView:
+    android.widget.LinearLayout layout -> a
+    android.widget.TextView title -> b
+    android.widget.TextView snippet -> c
+    96:110:void setData(com.google.android.maps.OverlayItem) -> setData
+    48:48:android.widget.LinearLayout access$0(com.readystatesoftware.mapviewballoons.BalloonOverlayView) -> a
+com.readystatesoftware.mapviewballoons.BalloonOverlayView$1 -> com.readystatesoftware.mapviewballoons.a:
+    com.readystatesoftware.mapviewballoons.BalloonOverlayView this$0 -> a
+    76:77:void onClick(android.view.View) -> onClick
