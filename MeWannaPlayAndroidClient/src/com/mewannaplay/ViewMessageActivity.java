@@ -41,13 +41,13 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		int messageId = this.getIntent().getExtras()
 				.getInt(SyncAdapter.MESSAGE_ID);
 		if (messageId <= 0) {
-			Log.e(TAG, " Message Id not specified");
+			// Log.e(TAG, " Message Id not specified");
 			this.finish();
 			return;
 		}
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		if (courtId <= 0) {
-			Log.e(TAG, " courtId not specified");
+			// Log.e(TAG, " courtId not specified");
 			this.finish();
 			return;
 		}
@@ -107,7 +107,7 @@ public class ViewMessageActivity extends Activity implements OnClickListener {
 		Cursor cursor = getContentResolver().query(Messages.CONTENT_URI, null,
 				" _id = ?", new String[] { messageId + "" }, null);
 		if (cursor.getCount() == 0) {
-			Log.e(TAG, " Court message not found");
+			// Log.e(TAG, " Court message not found");
 			this.finish();
 			return;
 		}

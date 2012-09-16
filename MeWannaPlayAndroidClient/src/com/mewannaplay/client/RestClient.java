@@ -105,7 +105,7 @@ public class RestClient {
 
             {
 
-                    Log.e(TAG, " Server response not recevieved for URL "+url);
+                    // Log.e(TAG, " Server response not recevieved for URL "+url);
 
                     throw new IOException("Server response not recevieved!");
 
@@ -128,7 +128,7 @@ public class RestClient {
 
         	catch (Exception e) {
 
-        		Log.e(TAG,"Conversion error for URL - "+url+e.getMessage());
+        		// Log.e(TAG,"Conversion error for URL - "+url+e.getMessage());
 
                 throw new IOException(displayableError ? e.getMessage() : "Our apologies - something went wrong.Please try again");
 
@@ -201,7 +201,7 @@ public class RestClient {
                String contentEncoding = conn.getContentEncoding();
               
                if (contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
-                       Log.d(TAG, " response is in gzip");
+                       // Log.d(TAG, " response is in gzip");
                        inputStream = new GZIPInputStream(inputStream);
                }
                
@@ -210,14 +210,14 @@ public class RestClient {
         	   }
         	   catch (Throwable t)
         	   {
-        		   Log.e(TAG,"Exception in RestClient "+t.getMessage());
+        		   // Log.e(TAG,"Exception in RestClient "+t.getMessage());
         		   throw new IOException("Exception in RestClient "+t.getMessage());
         	   }
         	   finally
         	   {
         		  if (conn != null)
         			  cookieManager.storeCookies(conn);
-        		   Log.d(TAG," Done for request "+url+" response code is "+responseCode+" Message is "+message);
+        		   // Log.d(TAG," Done for request "+url+" response code is "+responseCode+" Message is "+message);
         	   }
 
         }
@@ -241,7 +241,7 @@ public class RestClient {
         		
                 if (loggedIn) {
 
-                        Log.e(TAG, " Already logged in. Logging out");
+                        // Log.e(TAG, " Already logged in. Logging out");
                         logout();
 
                 } else {
@@ -256,16 +256,16 @@ public class RestClient {
                                         AuthenticatorActivity.encryptPassword(password));
                         restClient = new RestClient(Constants.LOGIN);
                         restClient.execute(RequestMethods.POST, user.toJSONObject());
-                        Log.d(TAG, username + " logged in successfully");
+                        // Log.d(TAG, username + " logged in successfully");
                         loggedIn = true;
                 } catch (JSONException e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new Exception("Failed to login");
                 } catch (JsonSyntaxException e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new Exception("Failed to login");
                 } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw e;
                 } finally {
                         if (!loggedIn)
@@ -275,15 +275,15 @@ public class RestClient {
         }
 
         public static void logout() {
-                Log.d(TAG, "Doing logout...");
+                // Log.d(TAG, "Doing logout...");
                 if (!loggedIn)
-                        Log.e(TAG, "Logout called when user not logged in");
+                        // Log.e(TAG, "Logout called when user not logged in");
 
                 try {
                         RestClient restClient = new RestClient(Constants.LOGOUT);
                         restClient.execute(RequestMethods.POST, null);
                 } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                 } finally {
                 		MapViewActivity.setCourtMarkedOccupied(-1);
                 		MapViewActivity.setCourtPostedMessageOn(-1);
@@ -296,8 +296,8 @@ public class RestClient {
         public static void registerNewUser(String userName, String password,
                         String email) throws Exception{
                 if (loggedIn) {
-                        Log.e(TAG,
-                                        " Already logged in! and creating a new user... Logging out");
+                        // Log.e(TAG,
+                         //               " Already logged in! and creating a new user... Logging out");
                         logout();
 
                 } else {
@@ -312,16 +312,16 @@ public class RestClient {
                                         AuthenticatorActivity.encryptPassword(password), email);
                         RestClient restClient = new RestClient(Constants.ADD_USER);
                         restClient.execute(RequestMethods.POST, user.toJSONObject());
-                        Log.d(TAG, userName + " registered successfully");
+                        // Log.d(TAG, userName + " registered successfully");
                 
                 } catch (JSONException e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new Exception("Failed to login");
                 } catch (JsonSyntaxException e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new Exception("Failed to login");
                 } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw e;
                 } 
         }

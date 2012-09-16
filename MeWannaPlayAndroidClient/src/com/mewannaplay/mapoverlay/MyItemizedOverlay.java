@@ -93,7 +93,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 //	@Override
 /*	public boolean onTouchEvent(MotionEvent event, MapView mapView) {
 		
-	   Log.d(TAG, " onTouchEvent "+event.getAction()) ;
+	   // Log.d(TAG, " onTouchEvent "+event.getAction()) ;
 		if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE)
 	        {
 	            
@@ -115,7 +115,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 			super.draw(canvas, mapView, shadow);
 			return;
 		}
-		Log.d(TAG," Map found to be moving? "+isMapMoving);
+		// Log.d(TAG," Map found to be moving? "+isMapMoving);
 
 		
 			currLatLon = mapView.getProjection().fromPixels(0, 0);
@@ -124,20 +124,20 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 			if (currLatLon.equals(lastLatLon)) {
 				if (!isMapMoving)
 				{
-					Log.d(TAG, " Map not moving");
+					// Log.d(TAG, " Map not moving");
 					
 				}
 				else
 				{
 				isMapMoving = false;
-				Log.d(TAG, " Map stopped moving");
-				Log.d(TAG," ---------- in draw of overlay");
+				// Log.d(TAG, " Map stopped moving");
+				// Log.d(TAG," ---------- in draw of overlay");
 				getTennisCourtsInView(mapView);
 				}
 				
 				
 			} else { //started moving
-				Log.d(TAG, " Map still moving "+lastLatLon+" "+currLatLon);
+				// Log.d(TAG, " Map still moving "+lastLatLon+" "+currLatLon);
 				lastLatLon = currLatLon;
 				isMapMoving = true;
 				return;
@@ -162,7 +162,7 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		String bottomLeftY = Double.toString((mapView.getMapCenter()
 				.getLatitudeE6() + mapView.getLatitudeSpan() / 2) / 1e6);
 
-//		Log.d(TAG, " Left: " + topLeftX + "," + topLeftY + " Bottom: "
+//		// Log.d(TAG, " Left: " + topLeftX + "," + topLeftY + " Bottom: "
 //				+ bottomRightX + "," + bottomLeftY);
 		
 		Cursor cursor = c
@@ -177,13 +177,13 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 		List<TennisCourtOverlayItemAdapter> newListOfOverlays = new ArrayList<TennisCourtOverlayItemAdapter>();
 		if (cursor.moveToFirst()) {
 			while (cursor.isAfterLast() == false) {
-				//Log.d(TAG, cursor.getString(cursor.getColumnIndex("name")));
+				//// Log.d(TAG, cursor.getString(cursor.getColumnIndex("name")));
 
 				double latitude = cursor.getDouble(cursor
 						.getColumnIndex("latitude"));
 				double longitude = cursor.getDouble(cursor
 						.getColumnIndex("longitude"));
-//				Log.d(TAG, " Latitude: " + latitude + " Longitude: "
+//				// Log.d(TAG, " Latitude: " + latitude + " Longitude: "
 //						+ longitude);
 
 				int id = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -212,9 +212,9 @@ public class MyItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 				cursor.moveToNext();
 			}
 			addOverlays(newListOfOverlays);
-			Log.d(TAG, "total courts added = "+m_overlays.size());
+			// Log.d(TAG, "total courts added = "+m_overlays.size());
 		} else
-			Log.e(TAG, "cursor for tennis courts found to be empty");
+			// Log.e(TAG, "cursor for tennis courts found to be empty");
 		}
 		finally
 		{

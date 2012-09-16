@@ -32,7 +32,7 @@ public class GetPostedMessageAsyncTask extends BasicAsyncTask {
 
         @Override
         protected void parseResponse(JSONObject jsonObject) throws IOException {
-                Log.d(TAG, " in getCourtMessageByTennisCourtId...");
+                // Log.d(TAG, " in getCourtMessageByTennisCourtId...");
    
         ContentValues contentValue = new ContentValues();
         try {
@@ -40,10 +40,10 @@ public class GetPostedMessageAsyncTask extends BasicAsyncTask {
                         contentValue = message.toContentValue();
         }
          catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new IOException(" Conversion error ");
                 }
-                        Log.d(TAG, "now calling bulk insert for this message");
+                        // Log.d(TAG, "now calling bulk insert for this message");
                         ownerAcitivty
                                         .getContentResolver()
                                         .bulkInsert(ProviderContract.Messages.CONTENT_URI,

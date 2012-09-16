@@ -118,7 +118,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         int operationRequested = extras.getInt(OPERATION); //what operation is requested?
         boolean ackNeeded = extras.getBoolean(ACKNOWLEDGEMENT_NEEDED, true); //Is acknowledgment requested for this operation?
         
-        Log.d(TAG,"in onPerform sync doing "+operationRequested);
+        // Log.d(TAG,"in onPerform sync doing "+operationRequested);
         try
         {
                 switch (operationRequested) {
@@ -162,24 +162,24 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 ///{
                                         //this.setName("getAllCourtStatsThread");
                                         //try {
-                                                //Log.d(TAG, "spawning of thread for getAllCourtStats");
+                                                //// Log.d(TAG, "spawning of thread for getAllCourtStats");
                     
                 	
                 	if (RestClient.isLoggedIn()) // This is not an anonymous user
                     	{
-                    		Log.d(TAG, " Doing message and court occupied");
+                    		// Log.d(TAG, " Doing message and court occupied");
                     		long currentTime = System.currentTimeMillis();
                     		getOccupiedCourtAndPostedMsg();   
                     		int totalTime = (int)((System.currentTimeMillis() - currentTime)/1000);
-                    		Log.d(TAG, " -------------------- It took "+totalTime+" to do getoccupiedcourtandpostedmessage");
+                    		// Log.d(TAG, " -------------------- It took "+totalTime+" to do getoccupiedcourtandpostedmessage");
                     	}
                 		long currentTime = System.currentTimeMillis();
                         getAllCourtStats();
                         int totalTime = (int)((System.currentTimeMillis() - currentTime)/1000);
-                		Log.d(TAG, " -------------------- It took "+totalTime+" to do getAllCourtStats");
+                		// Log.d(TAG, " -------------------- It took "+totalTime+" to do getAllCourtStats");
                                                 
                                 //      } catch (IOException e) {
-                                        //      Log.e(TAG, "error while doing getcourtstats");
+                                        //      // Log.e(TAG, "error while doing getcourtstats");
                                 //      }
                         //      }
                         //}.start();
@@ -192,7 +192,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         {
                 // syncResult.stats.numParseExceptions++; //DO NOT record error..syncadapter otherwise keeps retrying which we dont want.
                  isError = true;
-                 Log.e(TAG,"Exception for opertaion "+operationRequested);
+                 // Log.e(TAG,"Exception for opertaion "+operationRequested);
         }
         finally
         {
@@ -211,7 +211,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         
         @Override
         public void onSyncCanceled() {
-                Log.e(TAG, "CANCELLED!");
+                // Log.e(TAG, "CANCELLED!");
                 
         };
 
@@ -222,24 +222,24 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         //      public void run()
                 
         //      {
-                Log.d(TAG," getting occupied court id and posted message id");
+                // Log.d(TAG," getting occupied court id and posted message id");
                 RestClient restClient = new RestClient(
                                 Constants.GET_OCCUPIED_COURT_AND_POSTED_MSG);
                 JSONObject jsonObject = null;
                 try {
                         jsonObject = restClient.execute();
                 } catch (IOException e1) {
-                        Log.e(TAG,e1.getMessage());
+                        // Log.e(TAG,e1.getMessage());
                 }
 
                 try {
                         String tennisCourtId = jsonObject.getString("occupied_courtid");
                         int tenniscourtid = Integer.parseInt(tennisCourtId);
-                        Log.d(TAG, "Setting occupied court to "+tenniscourtid);
+                        // Log.d(TAG, "Setting occupied court to "+tenniscourtid);
                         MapViewActivity.setCourtMarkedOccupied(tenniscourtid);
                 } catch (JSONException e) {
-                        Log.e(TAG, " Conversion error while retreiving tenniscourtid from "
-                                        + jsonObject.toString());
+                        // Log.e(TAG, " Conversion error while retreiving tenniscourtid from "
+                        //                + jsonObject.toString());
                         MapViewActivity.setCourtMarkedOccupied(-1);
                 } catch (NumberFormatException e) {
                         // User has not marked any court occupied
@@ -249,11 +249,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 try {
                         String messageId = jsonObject.getString("postedmessage_courtid");
                         int message = Integer.parseInt(messageId);
-                        Log.d(TAG, "Setting posted message id to "+message);
+                        // Log.d(TAG, "Setting posted message id to "+message);
                         MapViewActivity.setCourtPostedMessageOn(message);
                 } catch (JSONException e) {
-                        Log.e(TAG, " Conversion error while retreiving message id from "
-                                        + jsonObject.toString());
+                        // Log.e(TAG, " Conversion error while retreiving message id from "
+                       //                 + jsonObject.toString());
                         MapViewActivity.setCourtPostedMessageOn(-1);
                 } catch (NumberFormatException e) {
                         // User has not posted any message
@@ -303,7 +303,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 tcp.bullkInsertCourts(jsonReader);
                                 
                         } catch (Exception e) {
-                                Log.e(TAG, e.getMessage());
+                                // Log.e(TAG, e.getMessage());
                                 throw new IOException(" Conversion error ");
                         }
                         
@@ -314,7 +314,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 tennisCourts = TennisCourt.fromJSONObjectArray(restClient
                                                 .execute());
                         } catch (Exception e) {
-                                Log.e(TAG, e.getMessage());
+                                // Log.e(TAG, e.getMessage());
                                 throw new IOException(" Conversion error ");
                         }
 
@@ -344,7 +344,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 tcp.bulkUpdateTennisCourts(restClient.excuteGetAndReturnStream()); 
 
                         } catch (Exception e) {
-                                Log.e(TAG, " Exception while doing get all court stats "+e.getMessage());
+                                // Log.e(TAG, " Exception while doing get all court stats "+e.getMessage());
                                 throw new IOException(" Conversion error ");
                         }
         
@@ -372,14 +372,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         .bulkInsert(ProviderContract.Amenity.CONTENT_URI,
                                         tdc.contentValuesForAmenity());
                 } catch (Exception e) {
-                        Log.e(TAG, " getCourtDetails "+e.getMessage());
+                        // Log.e(TAG, " getCourtDetails "+e.getMessage());
                         throw new IOException(" Conversion error ");
                 }
         }
 
         public void getCourtMessages(int courtId) throws IOException {
 
-                Log.d(TAG, " in getCourtMessages...");
+                // Log.d(TAG, " in getCourtMessages...");
                 ContentValues[] contentValues = null;
                 RestClient restClient = new RestClient(
                                 Constants.GET_TENNISCOURT_MESSAGES + courtId);
@@ -391,10 +391,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 contentValues[i++] = message.toContentValue();
                         }
                 } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new IOException(" Conversion error ");
                 }
-                Log.d(TAG, "now calling bulk insert for messages");
+                // Log.d(TAG, "now calling bulk insert for messages");
                 this.getContext()
                                 .getContentResolver()
                                 .bulkInsert(ProviderContract.Messages.CONTENT_URI,
@@ -405,7 +405,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
    /* Very similar to getCourtMessages except only the message posted by this user is retrieved
     */
         private void getCourtMessageByTennisCourtId(int courtId) throws IOException {
-        Log.d(TAG, " in getCourtMessageByTennisCourtId...");
+        // Log.d(TAG, " in getCourtMessageByTennisCourtId...");
         RestClient restClient = new RestClient(
                                 Constants.GET_TENNISCOURT_MESSAGE_BY_COURTID + courtId);
         ContentValues contentValue = new ContentValues();
@@ -414,10 +414,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         contentValue = message.toContentValue();
         }
          catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        // Log.e(TAG, e.getMessage());
                         throw new IOException(" Conversion error ");
                 }
-                        Log.d(TAG, "now calling bulk insert for this message");
+                        // Log.d(TAG, "now calling bulk insert for this message");
                         this.getContext()
                                         .getContentResolver()
                                         .bulkInsert(ProviderContract.Messages.CONTENT_URI,
@@ -436,7 +436,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                 cities = City.fromJSONObjectArray(restClient
                                                 .execute());
                         } catch (Exception e) {
-                                Log.e(TAG, e.getMessage());
+                                // Log.e(TAG, e.getMessage());
                                 throw new IOException(" Conversion error ");
                         }
 
