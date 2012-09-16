@@ -132,7 +132,7 @@ public class TennisCourtProvider extends ContentProvider {
 				return ContentUris.withAppendedId(uri,contentValues.getAsInteger("_id"));
 			}catch (SQLException e)
 			{
-				Log.e(TAG,"Failed to insert row into " + uri+ " "+ e.getMessage());
+				// Log.e(TAG,"Failed to insert row into " + uri+ " "+ e.getMessage());
 				return null;
 			}
 			finally {
@@ -181,7 +181,7 @@ public class TennisCourtProvider extends ContentProvider {
 					count++;
 				}
 
-				Log.d(TAG, " inserted " + count + " tenniscourts");
+				// Log.d(TAG, " inserted " + count + " tenniscourts");
 
 				break;
 			case TENNISCOURTSDETAILS:
@@ -220,7 +220,7 @@ public class TennisCourtProvider extends ContentProvider {
 				sql = "insert OR REPLACE into "
 						+ MESSAGES_TABLE_NAME
 						+ "(_id, text,user, level, scheduled_time,contact_info, contact_type, players_needed, time_posted, user_name) values (?,?,?,?,?,?,?,?,?,?)";
-				Log.d(TAG, "executing to SQL "+sql);
+				// Log.d(TAG, "executing to SQL "+sql);
 				insert = db.compileStatement(sql);
 
 				for (ContentValues contentValues : values) {
@@ -243,7 +243,7 @@ public class TennisCourtProvider extends ContentProvider {
 					insert.executeInsert();
 					count++;
 				}
-				Log.d(TAG, " inserted "+count+" messages");
+				// Log.d(TAG, " inserted "+count+" messages");
 				break;
 			case CITIES:
 
@@ -439,8 +439,8 @@ public class TennisCourtProvider extends ContentProvider {
 
 						}
 						jsonReader.endObject();
-						if (!values.getAsString("message_count").equals("0") || !values.getAsString("occupied").equals("0"))
-							Log.d(TAG,tennisId +" "+values.toString());
+						//if (!values.getAsString("message_count").equals("0") || !values.getAsString("occupied").equals("0"))
+							// Log.d(TAG,tennisId +" "+values.toString());
 						if (!tennisId.equals("-1") && !tennisId.trim().equals(""))
 						{
 							count = count + db.update(TENNIS_COURT_TABLE_NAME, values, "  _id = ? ", new String[]{ tennisId}); //Update database
@@ -464,7 +464,7 @@ public class TennisCourtProvider extends ContentProvider {
 												TennisCourt tc = temp.getTennisCourt();
 												if (tc != null)
 												{
-													Log.d(TAG, " found match in current overlays "+tc.getName()+" message count = "+values.getAsInteger("message_count")+" occupied = "+values.getAsInteger("occupied"));
+													// Log.d(TAG, " found match in current overlays "+tc.getName()+" message count = "+values.getAsInteger("message_count")+" occupied = "+values.getAsInteger("occupied"));
 													tc.setMessageCount(values.getAsInteger("message_count"));
 													tc.setOccupied(values.getAsInteger("occupied"));
 												}
@@ -478,7 +478,7 @@ public class TennisCourtProvider extends ContentProvider {
 							}
 							catch(Throwable t)
 							{
-								Log.d(TAG,t.getMessage());
+								// Log.d(TAG,t.getMessage());
 							}
 						}
 					}
@@ -492,7 +492,7 @@ public class TennisCourtProvider extends ContentProvider {
 		}
 		finally
 		{
-			Log.d(TAG, " updated  " + count + " tenniscourts");
+			// Log.d(TAG, " updated  " + count + " tenniscourts");
 			
 			if (jsonReader != null)
 				jsonReader.close();
@@ -655,7 +655,7 @@ public class TennisCourtProvider extends ContentProvider {
 			jsonReader.endObject();
 			db.setTransactionSuccessful();
 		} finally {
-			Log.d(TAG, " inserted  " + count + " tenniscourts");
+			// Log.d(TAG, " inserted  " + count + " tenniscourts");
 			 i.putExtra(SyncAdapter.MESSAGE, String.format(message,count));
 			 this.getContext().sendBroadcast(i);
 			 

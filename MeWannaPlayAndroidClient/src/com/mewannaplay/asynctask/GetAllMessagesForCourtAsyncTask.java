@@ -42,12 +42,12 @@ public class GetAllMessagesForCourtAsyncTask extends BasicAsyncTask {
 			for (Message message : messages) {
 				contentValues[i++] = message.toContentValue();
 			}
-			Log.d(TAG, "now calling bulk insert for messages");
+			// Log.d(TAG, "now calling bulk insert for messages");
 			ownerAcitivty.getContentResolver().bulkInsert(
 					ProviderContract.Messages.CONTENT_URI, contentValues);
 
 		} catch (Exception e) {
-			Log.e(TAG, e.getMessage());
+			// Log.e(TAG, e.getMessage());
 			throw new IOException(" Conversion error ");
 		}
 

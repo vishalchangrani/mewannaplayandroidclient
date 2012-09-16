@@ -183,7 +183,7 @@ public class Message {
 			return finalJsonObject;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			Log.e(this.getClass().toString(), e.getMessage());
+			// Log.e(this.getClass().toString(), e.getMessage());
 			return null;
 		}
 	}

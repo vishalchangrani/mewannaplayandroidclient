@@ -31,26 +31,26 @@ public class AuthenticationService extends Service {
 
     @Override
     public void onCreate() {
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG, "MeWannaPlay sync adapter Authentication Service started.");
-        }
+       // if (// Log.isLoggable(TAG, // Log.VERBOSE)) {
+            // Log.v(TAG, "MeWannaPlay sync adapter Authentication Service started.");
+       // }
         mAuthenticator = new Authenticator(this);
     }
 
     @Override
     public void onDestroy() {
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG, "MeWannaPlay sync adapter Authentication Service stopped.");
-        }
+      //  if (// Log.isLoggable(TAG, // Log.VERBOSE)) {
+            // Log.v(TAG, "MeWannaPlay sync adapter Authentication Service stopped.");
+       // }
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(TAG,
-                "getBinder()...  returning the AccountAuthenticator binder for intent "
-                    + intent);
-        }
+       // if (// Log.isLoggable(TAG, // Log.VERBOSE)) {
+            // Log.v(TAG,
+         //       "getBinder()...  returning the AccountAuthenticator binder for intent "
+          //          + intent);
+       // }
         return mAuthenticator.getIBinder();
     }
 }

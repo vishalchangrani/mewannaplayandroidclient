@@ -111,10 +111,10 @@ TextView usertext,passtext;
 	@Override
 	public void onCreate(Bundle icicle) {
 
-		Log.i(TAG, "onCreate(" + icicle + ")");
+		// Log.i(TAG, "onCreate(" + icicle + ")");
 		super.onCreate(icicle);
 		mAccountManager = AccountManager.get(this);
-		Log.i(TAG, "loading data from Intent");
+		// Log.i(TAG, "loading data from Intent");
 		final Intent intent = getIntent();
 		mUsername = intent.getStringExtra(PARAM_USERNAME);
 		mPassword = intent.getStringExtra(PARAM_PASSWORD);
@@ -122,7 +122,7 @@ TextView usertext,passtext;
 		mRequestNewAccount = mUsername == null;
 		mConfirmCredentials = intent.getBooleanExtra(PARAM_CONFIRM_CREDENTIALS,
 				false);
-		Log.i(TAG, "    request new: " + mRequestNewAccount);
+		// Log.i(TAG, "    request new: " + mRequestNewAccount);
 		requestWindowFeature(Window.FEATURE_LEFT_ICON);
 		setContentView(R.layout.login_activity);
 		connection = new ConnectivityReceiver(this);
@@ -190,7 +190,7 @@ TextView usertext,passtext;
 		dialog.setCancelable(true);
 		dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 			public void onCancel(DialogInterface dialog) {
-				Log.i(TAG, "user cancelling authentication");
+				// Log.i(TAG, "user cancelling authentication");
 				if (mAuthTask != null) {
 					mAuthTask.cancel(true);
 				}
@@ -240,7 +240,7 @@ TextView usertext,passtext;
 	
 
 	public void handleAnnonymousLogin(View view) {
-		Log.i(TAG, "handleAnnonymousLogin");
+		// Log.i(TAG, "handleAnnonymousLogin");
 		Account[] accounts = mAccountManager
 				.getAccountsByType(Constants.ACCOUNT_TYPE);
 		boolean alreadyAdded = false;
@@ -280,7 +280,7 @@ TextView usertext,passtext;
 	 *            the confirmCredentials result.
 	 */
 	private void finishConfirmCredentials(boolean result) {
-		Log.i(TAG, "finishConfirmCredentials()");
+		// Log.i(TAG, "finishConfirmCredentials()");
 		final Account account = new Account(mUsername, Constants.ACCOUNT_TYPE);
 		mAccountManager.setPassword(account, mPassword);
 		final Intent intent = new Intent();
@@ -302,7 +302,7 @@ TextView usertext,passtext;
 	 */
 	private void finishLogin() {
 
-		Log.i(TAG, "finishLogin()");
+		// Log.i(TAG, "finishLogin()");
 		Account[] accounts = mAccountManager
 				.getAccountsByType(Constants.ACCOUNT_TYPE);
 		final Account accountToAdd = new Account(mUsername,
@@ -343,7 +343,7 @@ TextView usertext,passtext;
 	}
 
 	private void finishLoginWithFailure() {
-		Log.e(TAG, "finishLoginWithFailure()");
+		// Log.e(TAG, "finishLoginWithFailure()");
 		Account[] accounts = mAccountManager
 				.getAccountsByType(Constants.ACCOUNT_TYPE);
 
@@ -372,7 +372,7 @@ TextView usertext,passtext;
 
 		String error = mAuthTask.getError();
 		boolean success = error.trim().equals("");
-		Log.i(TAG, "onAuthenticationResult(" + success + ")");
+		// Log.i(TAG, "onAuthenticationResult(" + success + ")");
 
 		// Our task is complete, so clear it out
 		mAuthTask = null;
@@ -387,7 +387,7 @@ TextView usertext,passtext;
 				finishConfirmCredentials(success);
 			}
 		} else {
-			Log.e(TAG, "onAuthenticationResult: failed to authenticate");
+			// Log.e(TAG, "onAuthenticationResult: failed to authenticate");
 			if(connection.hasConnection()){
 			if (mRequestNewAccount) {
 				// "Please enter a valid username/password.
@@ -469,9 +469,9 @@ TextView usertext,passtext;
 				error = "";
 				return null;
 			} catch (Exception ex) {
-				Log.e(TAG,
-						"UserLoginTask.doInBackground: failed to authenticate");
-				Log.i(TAG, ex.toString());
+				// Log.e(TAG,
+				//		"UserLoginTask.doInBackground: failed to authenticate");
+				// Log.i(TAG, ex.toString());
 				error = ex.toString();
 				return null;
 			}

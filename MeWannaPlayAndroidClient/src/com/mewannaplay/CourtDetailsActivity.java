@@ -85,7 +85,7 @@ LinearLayout yellolayout;
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		// Log.i("account", loggedinaccount.name);
+		// // Log.i("account", loggedinaccount.name);
 		courtId = this.getIntent().getExtras().getInt(SyncAdapter.COURT_ID);
 		markid = this.getIntent().getExtras().getInt("mark");
 		postid = this.getIntent().getExtras().getInt("post");
@@ -131,8 +131,8 @@ LinearLayout yellolayout;
 				TennisCourtsDetails.CONTENT_URI, null, " _id = ?",
 				new String[] { courtId + "" }, null);
 		if (cursor.getCount() == 0) {
-			Log.e(TAG, " cursor for courtId " + courtId
-					+ " was empty in tenniscourtdetails table");
+			// Log.e(TAG, " cursor for courtId " + courtId
+			//		+ " was empty in tenniscourtdetails table");
 			cursor.close();
 			this.finish();
 			return;
@@ -157,7 +157,7 @@ LinearLayout yellolayout;
 				null, null); // clean message table
 		// have cached it
 		if (tennisCourtDetails == null) {
-			Log.e(TAG, "courtdetails object null!");
+			// Log.e(TAG, "courtdetails object null!");
 			this.finish();
 		}
 
@@ -189,7 +189,7 @@ LinearLayout yellolayout;
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2,
 					long rowId) {
-				Log.d(TAG, "selected " + rowId);
+				// Log.d(TAG, "selected " + rowId);
 				viewMessage(rowId);
 			}
 
@@ -213,14 +213,14 @@ LinearLayout yellolayout;
 
 		@Override
 		public void onChange(boolean selfChange) {
-			Log.d(TAG, "onChange for message");
+			// Log.d(TAG, "onChange for message");
 			super.onChange(selfChange);
 			CourtDetailsActivity.this.runOnUiThread(new Runnable() {
 
 				@Override
 				public void run() {
 					emptymessage.setText("No Messages to display");
-					Log.d(TAG, "In observer for messages");
+					// Log.d(TAG, "In observer for messages");
 					cursorAdapter.notifyDataSetChanged();
 				}
 
@@ -259,7 +259,7 @@ LinearLayout yellolayout;
 	
 	private void startBackgroundRefresh()
 	{
-		Log.d(TAG, "Starting bckground refresh for messages for court "+courtId);
+		// Log.d(TAG, "Starting bckground refresh for messages for court "+courtId);
 		ContentResolver.addPeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
 				SyncAdapter.getAllMessagesBundle(courtId), 2 * 60);
@@ -267,7 +267,7 @@ LinearLayout yellolayout;
 	
 	private void stopBackGroudRefresh()
 	{
-		Log.d(TAG, "Stopping bckground refresh for messages for court "+courtId);
+		// Log.d(TAG, "Stopping bckground refresh for messages for court "+courtId);
 		ContentResolver.removePeriodicSync(MapViewActivity.getAccount(this),
 				ProviderContract.AUTHORITY,
 				SyncAdapter.getAllMessagesBundle(courtId));
@@ -610,7 +610,7 @@ LinearLayout yellolayout;
 	}
 
 	public void onPostExecuteMarkCourtOccupiedTask(boolean error) {
-		Log.d(TAG, "mark occupied done");
+		// Log.d(TAG, "mark occupied done");
 
 		if (error) {
 
@@ -658,7 +658,7 @@ LinearLayout yellolayout;
 
 	/*
 	 * @Override public void onReceiveResult(int resultCode, Bundle
-	 * resultBundle) { Log.d(TAG, " onRecvResult ");
+	 * resultBundle) { // Log.d(TAG, " onRecvResult ");
 	 * 
 	 * }
 	 */
@@ -697,7 +697,7 @@ LinearLayout yellolayout;
 				((TextView) view.findViewById(R.id.scheduled_time))
 						.setText(scheduledDateOnlyTime);
 			} catch (ParseException e) {
-				Log.e(TAG, e.getMessage());
+				// Log.e(TAG, e.getMessage());
 			}
 
 			// 2
@@ -735,7 +735,7 @@ LinearLayout yellolayout;
 				((TextView) view.findViewById(R.id.time_posted))
 						.setText(timepostedAgo);
 			} catch (ParseException e) {
-				Log.e(TAG, e.getMessage());
+				// Log.e(TAG, e.getMessage());
 			}
 
 			// 7

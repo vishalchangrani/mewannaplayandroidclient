@@ -64,7 +64,7 @@ class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle addAccount(AccountAuthenticatorResponse response, String accountType,
             String authTokenType, String[] requiredFeatures, Bundle options) {
-        Log.v(TAG, "addAccount()");
+        // Log.v(TAG, "addAccount()");
         final Intent intent = new Intent(mContext, AuthenticatorActivity.class);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
@@ -75,23 +75,23 @@ class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle confirmCredentials(
             AccountAuthenticatorResponse response, Account account, Bundle options) {
-        Log.v(TAG, "confirmCredentials()");
+        // Log.v(TAG, "confirmCredentials()");
         return null;
     }
 
     @Override
     public Bundle editProperties(AccountAuthenticatorResponse response, String accountType) {
-        Log.v(TAG, "editProperties()");
+        // Log.v(TAG, "editProperties()");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account,
             String authTokenType, Bundle loginOptions) throws NetworkErrorException {
-        Log.v(TAG, "getAuthToken()");
+        // Log.v(TAG, "getAuthToken()");
         if (account.name.equals(Constants.ANONYMOUS_USER))
         {
-        	Log.e(TAG, " getAuthToken called for Anonymous user");
+        	// Log.e(TAG, " getAuthToken called for Anonymous user");
         	return null;
         }
 
@@ -139,7 +139,7 @@ class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public String getAuthTokenLabel(String authTokenType) {
         // null means we don't support multiple authToken types
-        Log.v(TAG, "getAuthTokenLabel()");
+        // Log.v(TAG, "getAuthTokenLabel()");
         return null;
     }
 
@@ -149,7 +149,7 @@ class Authenticator extends AbstractAccountAuthenticator {
         // This call is used to query whether the Authenticator supports
         // specific features. We don't expect to get called, so we always
         // return false (no) for any queries.
-        Log.v(TAG, "hasFeatures()");
+        // Log.v(TAG, "hasFeatures()");
         final Bundle result = new Bundle();
         result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
         return result;
@@ -158,7 +158,7 @@ class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle updateCredentials(AccountAuthenticatorResponse response, Account account,
             String authTokenType, Bundle loginOptions) {
-        Log.v(TAG, "updateCredentials()");
+        // Log.v(TAG, "updateCredentials()");
         return null;
     }
 }

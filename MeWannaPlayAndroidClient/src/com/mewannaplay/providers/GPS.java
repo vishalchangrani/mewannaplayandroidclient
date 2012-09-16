@@ -66,7 +66,7 @@ public double getLongitude(){
 		if (location != null) {
 			latitude =  (location.getLatitude() );
 			longitude =  (location.getLongitude() );
-			//Log.i("LOGLATshow", "" + (int) (location.getLatitude() ));
+			//// Log.i("LOGLATshow", "" + (int) (location.getLatitude() ));
 		}
 		
 
@@ -85,7 +85,7 @@ public double getLongitude(){
 		public void onLocationChanged(Location location) {
 			latitude =  (location.getLatitude() );
 			longitude =  (location.getLongitude() );
-			Log.i("LOGLAT", "" + (int) (location.getLatitude()));
+			// Log.i("LOGLAT", "" + (int) (location.getLatitude()));
 
 		}
 
@@ -108,11 +108,11 @@ public double getLongitude(){
 //		HttpRetriever agent = new HttpRetriever();
 //		String request = GOOGLE_GEOCODER + lat + ","
 //				+ longi + "&sensor=true";
-//		// Log.d("GeoCoder", request);
+//		// // Log.d("GeoCoder", request);
 //		String response = agent.retrieve(request);
 //		String formattedAddress = "";
 //		if (response != null) {
-//			Log.d("GeoCoder", response);
+//			// Log.d("GeoCoder", response);
 //			try {
 //				JSONObject parentObject = new JSONObject(response);
 //				JSONArray arrayOfAddressResults = parentObject
@@ -134,7 +134,7 @@ public double getLongitude(){
 //
 //		}
 //
-//		// Log.d("GeoCoder", response);
+//		// // Log.d("GeoCoder", response);
 //		return formattedAddress;
 //	}
 //	

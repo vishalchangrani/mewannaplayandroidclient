@@ -151,7 +151,7 @@ public class SplashScreenActivity extends Activity {
 							DialogInterface dialog,
 							int id) {
 
-							Log.d(TAG, " Turning on master auto-sync");
+							// Log.d(TAG, " Turning on master auto-sync");
 							ContentResolver.setMasterSyncAutomatically(true);
 							dialog.dismiss();
 							continueToApp();
@@ -201,7 +201,7 @@ public class SplashScreenActivity extends Activity {
 				.get(SplashScreenActivity.this);
 		Account[] accounts = mAccountManager
 				.getAccountsByType(Constants.ACCOUNT_TYPE);
-		Log.d(TAG, "Accounts found: " + accounts.length);
+		// Log.d(TAG, "Accounts found: " + accounts.length);
 
 		// If no accounts defined yet or the only account is
 		// that of

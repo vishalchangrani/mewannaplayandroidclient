@@ -186,7 +186,7 @@ public class ScrollLayout extends LinearLayout {
         mCenterView.setVals(mLabeler.getElem(currentTime));
         
         
-        Log.v(TAG, "mCenter: " + mCenterView.getTimeText() + " minInterval " + minuteInterval);
+        // Log.v(TAG, "mCenter: " + mCenterView.getTimeText() + " minInterval " + minuteInterval);
 
         // TODO: Do I need to use endTime, or can I just use the point time?
         for (int i = centerIndex + 1; i < childCount; i++) {
@@ -279,7 +279,7 @@ public class ScrollLayout extends LinearLayout {
         TimeView currelem = (TimeView)getChildAt(pos);
         if (loops>2 || currelem.getStartTime() <= time && currelem.getEndTime() >= time) {
             if (loops>2) {
-                Log.d(TAG,String.format("time: %d, start: %d, end: %d", time, currelem.getStartTime(), currelem.getEndTime()));
+                // Log.d(TAG,String.format("time: %d, start: %d, end: %d", time, currelem.getStartTime(), currelem.getEndTime()));
                 return;
             }
             double center = getWidth()/2.0;
@@ -329,7 +329,7 @@ public class ScrollLayout extends LinearLayout {
      * @param notify if false, the listeners won't be called
      */
     protected void reScrollTo(int x, int y, boolean notify) {
-    	if (notify) Log.d(TAG,String.format("scroll to " + x));
+    	//if (notify) // Log.d(TAG,String.format("scroll to " + x));
     	int scrollX = getScrollX();
     	int scrollDiff = x - mLastScroll;
     	
@@ -397,8 +397,8 @@ public class ScrollLayout extends LinearLayout {
             int left = (getChildCount()/2)*objWidth-scrollX;
             double f = (center-left)/objWidth;
             currentTime = (long)(mCenterView.getStartTime()+(mCenterView.getEndTime()-mCenterView.getStartTime())*f);
-            if (notify) Log.d(TAG,String.format("real time " + currentTime));
-            if (notify) Log.d(TAG,String.format(""));
+          //  if (notify) // Log.d(TAG,String.format("real time " + currentTime));
+          //  if (notify) // Log.d(TAG,String.format(""));
             listener.onScroll(currentTime);
         };
         mLastScroll = x;

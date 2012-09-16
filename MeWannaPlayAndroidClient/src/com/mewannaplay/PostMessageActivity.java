@@ -208,7 +208,7 @@ rgmail.setTypeface(normal);
 
 
 		public void onPostExecutePostMessageTask(boolean error) {
-			Log.d(TAG, "post message done");
+			// Log.d(TAG, "post message done");
 
 
 			if (error) {

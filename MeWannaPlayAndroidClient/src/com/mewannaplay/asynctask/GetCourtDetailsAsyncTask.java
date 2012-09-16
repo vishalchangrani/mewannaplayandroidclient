@@ -66,7 +66,7 @@ public class GetCourtDetailsAsyncTask extends BasicAsyncTask {
                         .bulkInsert(ProviderContract.Amenity.CONTENT_URI,
                                         tdc.contentValuesForAmenity());
                 } catch (Exception e) {
-                        Log.e(TAG, " getCourtDetails "+e.getMessage());
+                        // Log.e(TAG, " getCourtDetails "+e.getMessage());
                         throw new IOException(" Conversion error ");
                 }
                 

@@ -117,7 +117,7 @@ public class NewUserRegisterationActivity extends Activity {
 	        dialog.setCancelable(true);
 	        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 	            public void onCancel(DialogInterface dialog) {
-	                Log.i(TAG, "user cancelling authentication");
+	              //  ;// Log.i(TAG, "user cancelling authentication");
 	                if (newUserRegisterationTask != null) {
 	                	newUserRegisterationTask.cancel(true);
 	                }
@@ -151,8 +151,8 @@ public class NewUserRegisterationActivity extends Activity {
 	            	error = "";
 	            	return null;
 	            } catch (Exception ex) {
-	                Log.e(TAG, "NewUserRegisterTask.doInBackground: failed to register user");
-	                Log.i(TAG, ex.toString());
+	                //;// Log.e(TAG, "NewUserRegisterTask.doInBackground: failed to register user");
+	                ;// Log.i(TAG, ex.toString());
 	                error = ex.getMessage();
 	                return null;
 	            }
@@ -170,7 +170,7 @@ public class NewUserRegisterationActivity extends Activity {
 	    {
 	        String error = newUserRegisterationTask.getError();
 	    	boolean success =  error.trim().equals("");
-	        Log.i(TAG, "onRegisterationResult(" + success + ")");
+	        ;// Log.i(TAG, "onRegisterationResult(" + success + ")");
 
 	        // Our task is complete, so clear it out
 	        newUserRegisterationTask = null;
@@ -185,12 +185,12 @@ public class NewUserRegisterationActivity extends Activity {
 	        	resultIntent.putExtra(AuthenticatorActivity.PARAM_USERNAME, userName);
 	        	resultIntent.putExtra(AuthenticatorActivity.PARAM_PASSWORD, password);
 	        	
-	        	Log.d(TAG, "onRegisterationResult: Created user "+userName+" successfully");
+	        	;// Log.d(TAG, "onRegisterationResult: Created user "+userName+" successfully");
 	        	mProgressDialog.setMessage("Welcome to MeWannaPlay "+userName);
 	        	try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					Log.e(TAG,e.getMessage());
+					;// Log.e(TAG,e.getMessage());
 				}
 	        	finally
 	        	{
@@ -201,7 +201,7 @@ public class NewUserRegisterationActivity extends Activity {
 	        } else {
 	        	resultCode = Activity.RESULT_CANCELED;
 	        	hideProgress();
-	        	Log.e(TAG, "onRegisterationResult: failed to create user");
+	        	;// Log.e(TAG, "onRegisterationResult: failed to create user");
 	            errorMessage.setTextColor(Color.RED);
 	            errorMessage.setText(error);
 	            return;

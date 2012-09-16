@@ -99,21 +99,21 @@ public abstract class BasicAsyncTask extends AsyncTask<Void, Void, Boolean>  {
     @Override
     protected void onPostExecute(Boolean result) {
        super.onPostExecute(result);
-       Log.d(TAG," executing onPostExecute for server url - "+SERVER_URL+" result is "+result);
+       // Log.d(TAG," executing onPostExecute for server url - "+SERVER_URL+" result is "+result);
        if (progressDialog != null)
     	   progressDialog.dismiss();
     }
 
     @Override
     protected Boolean doInBackground(Void... v) {
-       Log.d(TAG, " executing asynctask for server url -"+SERVER_URL);
+       // Log.d(TAG, " executing asynctask for server url -"+SERVER_URL);
        JSONObject response = null;
        try {
         if (running)
         {
                         if (isInDatabase())
                         {
-                                Log.d(TAG, " Found in database");
+                                // Log.d(TAG, " Found in database");
                                 return false;
                         }
         }

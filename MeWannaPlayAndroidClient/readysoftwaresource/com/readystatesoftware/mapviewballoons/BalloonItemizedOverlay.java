@@ -201,7 +201,7 @@ public abstract class BalloonItemizedOverlay<Item> extends ItemizedOverlay<Overl
 			});
 			
 		} catch (SecurityException e) {
-			Log.e("BalloonItemizedOverlay", "setBalloonTouchListener reflection SecurityException");
+			// Log.e("BalloonItemizedOverlay", "setBalloonTouchListener reflection SecurityException");
 			return;
 		} catch (NoSuchMethodException e) {
 			// method not overridden - do nothing

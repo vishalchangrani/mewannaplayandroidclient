@@ -111,14 +111,14 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 // the app calls the getallcourts and getallcity methods
                 
                 int totalRunsSoFar = sharedPrefs.getInt("TOTALRUN", 0);
-                Log.d(TAG, " Total runs so far -" + totalRunsSoFar);
+                // Log.d(TAG, " Total runs so far -" + totalRunsSoFar);
                 initCurrentLocationOverlay();
                 if (totalRunsSoFar == 0) // Total runs rolls over to 0 after every fifth
                                                                         // run...so it goes from 0,1,2,3,4 and then
                                                                         // to 0 again
                 {
 
-                        Log.d(TAG, " Fetching courts ..");
+                        // Log.d(TAG, " Fetching courts ..");
                         progressDialog = ProgressDialog.show(MapViewActivity.this, "Updating courts",
                                         "Fetching courts...", true, false);
                         progressDialog.show();
@@ -131,7 +131,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                         SyncAdapter.getAllCourtsBundle());
 
                 } else {
-                        Log.d(TAG, " Skipping fetch courts");
+                        // Log.d(TAG, " Skipping fetch courts");
                         incrementRunCount();
 
                         final MapView mapView = (MapView) findViewById(R.id.mapview);
@@ -243,7 +243,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 super.onResume();
                 
                 
-                Log.i(TAG, "Resuming GPS update requests");
+                // Log.i(TAG, "Resuming GPS update requests");
                 // myLocationOverlay.enableCompass();
                 if (!myLocationOverlay.enableMyLocation() && currentCity == null) {
                         Toast.makeText(this, "Current location unavialable", Toast.LENGTH_SHORT)
@@ -268,12 +268,12 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                         return;// First time when the activity starts we have no courts
                                         // fetched yet...hence dont start background refresh yet.
 
-                Log.d(TAG, "STARTING background refresh----");
+                // Log.d(TAG, "STARTING background refresh----");
                 // Start the two background periodic refresh
                 // 1.
                 // Kickoff continuous refresh for court statistics which keep changing
                 // (this includes message count and occupied count)
-                Log.d(TAG, " Adding continous refresh for court statistics");
+                // Log.d(TAG, " Adding continous refresh for court statistics");
                 ContentResolver.setSyncAutomatically(MapViewActivity.getAccount(this),
                                 ProviderContract.AUTHORITY, true);
 
@@ -291,7 +291,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 // message id posted by user (if user not anonymous)
                /* if (RestClient.isLoggedIn()) // This is not an anonymous user
                 {
-                        Log.d(TAG, " Adding continous refresh for message and court occupied");
+                        // Log.d(TAG, " Adding continous refresh for message and court occupied");
                         // Periodically update the two flags courtMarkedOccupied and
                         // courtPostedMessageOn
                         // Set to 10 second period for development BUT in production this
@@ -304,7 +304,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
         private void stopBackGroundRefresh() {
                 
-                Log.d(TAG, "STOPPING background refresh -------");
+                // Log.d(TAG, "STOPPING background refresh -------");
                 ContentResolver.cancelSync(null, ProviderContract.AUTHORITY);// cancel
                                                                                                                                                 // all
                                                                                                                                                 // syncs
@@ -345,8 +345,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                         loggedInUserAccount = accounts[0];
                                 }
 
-                        } else
-                                Log.e(TAG, "No account found");
+                        } //else
+                                // Log.e(TAG, "No account found");
 
                 }
                 return loggedInUserAccount;
@@ -360,7 +360,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                        Log.d(TAG, "Sync finished, should refresh nao!!");
+                        // Log.d(TAG, "Sync finished, should refresh nao!!");
 
                         if (intent.getExtras().getInt(SyncAdapter.OPERATION) != SyncAdapter.GET_ALL_COURTS)
                                 return;
@@ -479,7 +479,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
         public void getTennisCourtDetails(int id,
                         Location locationOfSelectedTennisCourt) {
 
-                Log.d(TAG, " --> Requesting fetch for " + id);
+                // Log.d(TAG, " --> Requesting fetch for " + id);
                 
                 new GetCourtDetailsAsyncTask(this, id, locationOfSelectedTennisCourt).execute(null);
         }
@@ -560,14 +560,14 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                         List<TennisCourtOverlayItemAdapter> newListOfOverlays = new ArrayList<TennisCourtOverlayItemAdapter>();
                         if (cursor.moveToFirst()) {
                                 while (cursor.isAfterLast() == false) {
-                                        // Log.d(TAG,
+                                        // // Log.d(TAG,
                                         // cursor.getString(cursor.getColumnIndex("name")));
 
                                         double latitude = cursor.getDouble(cursor
                                                         .getColumnIndex("latitude"));
                                         double longitude = cursor.getDouble(cursor
                                                         .getColumnIndex("longitude"));
-                                        // Log.d(TAG, " Latitude: " + latitude + " Longitude: "
+                                        // // Log.d(TAG, " Latitude: " + latitude + " Longitude: "
                                         // + longitude);
 
                                         if (location != null) {
@@ -609,9 +609,9 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                 }
 
                                 myItemizedOverlay.addOverlays(newListOfOverlays);
-                                Log.d(TAG, "total courts added = " + myItemizedOverlay.size());
-                        } else
-                                Log.e(TAG, "cursor for tennis courts found to be empty");
+                                // Log.d(TAG, "total courts added = " + myItemizedOverlay.size());
+                        }// else
+                                // Log.e(TAG, "cursor for tennis courts found to be empty");
                 } finally {
                         cursor.close();
                 }
@@ -653,8 +653,8 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                 if (currentCity != null) {
 
                         // redrawMarkers();
-                        Log.d(TAG,
-                                        " Adding all tenniscourts for the state to which this city belongs to as overlays on the map");
+                        // Log.d(TAG,
+                         //               " Adding all tenniscourts for the state to which this city belongs to as overlays on the map");
                         if (myItemizedOverlay != null)
                         	myItemizedOverlay.clear();
                         getAllTennisCourts(currentCity);
@@ -816,7 +816,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
 
         public void onPartnerFound(View v) {
                 if (getCourtPostedMessageOn() < 0) {
-                        Log.e(TAG, " Court id is invalid " + getCourtPostedMessageOn());
+                        // Log.e(TAG, " Court id is invalid " + getCourtPostedMessageOn());
                         return;
                 }
         
@@ -863,7 +863,7 @@ public class MapViewActivity extends MapActivity implements OnClickListener {
                                                 Messages.CONTENT_URI, new String[] { "_id" }, null,
                                                 null, " _id LIMIT 1");
                                 if (cursor.getCount() == 0) {
-                                        Log.e(TAG, " Court message not found");
+                                        // Log.e(TAG, " Court message not found");
                                         return;
                                 }
                                 cursor.moveToFirst();
