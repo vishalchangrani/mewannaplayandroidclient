@@ -31,6 +31,7 @@ public class Constants {
     
     public static final String ANONYMOUS_USER = "anonymous";
     
+    public static final String FORGOT_PASSWORD_URL = "http://mewannaplay.com/forgotpassword";
     public static final String BASE_URL =
             "http://api.mewannaplay.com/v1/";
     public static final String GET_ALL_TENNISCOURTS =
