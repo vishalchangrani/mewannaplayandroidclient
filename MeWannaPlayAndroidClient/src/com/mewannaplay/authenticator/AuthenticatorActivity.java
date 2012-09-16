@@ -158,7 +158,7 @@ TextView usertext,passtext;
 
 	}
 	public void onForgotusername(View v) {
-		Uri uri = Uri.parse("http://mewannaplay.com");
+		Uri uri = Uri.parse(Constants.FORGOT_PASSWORD_URL);
 		 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		 startActivity(intent);
 
