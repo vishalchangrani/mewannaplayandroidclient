@@ -225,14 +225,15 @@ public void viewcontact(View v) {
         if (!viewcontact.getText().toString().contentEquals("")) {
 
                 if (viewcontact.getText().toString().matches("[0-9]+")) {
+                        Intent dial = new Intent();
+            			dial.setAction("android.intent.action.DIAL");
 
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:"
-                                        + viewcontact.getText().toString().trim()));
-                        startActivity(callIntent);
+            			dial.setData(Uri.parse("tel:"
+            					+ viewcontact.getText().toString().trim()));
+            			startActivity(dial);
 
                 }
-                if (validator.validate(viewcontact.getText().toString())) {
+                else if (validator.validate(viewcontact.getText().toString())) {
 
                         String[] emailaddress = { viewcontact.getText().toString() };
                         Intent emailintent = new Intent(
