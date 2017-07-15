@@ -9,6 +9,8 @@ Android play store: https://play.google.com/store/apps/details?id=com.mewannapla
 
 Video explaining the idea - YouTube: https://youtu.be/gsLCA9sBLdA or video file: https://drive.google.com/open?id=0B5rg4TfABKDJajduMmJvR1NpTzQ
 
+Screenshots:
+
 ![screen shot 1](https://github.com/vishalchangrani/mewannaplayandroidclient/blob/master/screenshots/1.jpg)
 
 ![screen shot 2](https://github.com/vishalchangrani/mewannaplayandroidclient/blob/master/screenshots/2.jpg)
